@@ -2,7 +2,6 @@
 " ==============
 "    VIM-PLUG
 " ==============
-" :help Plug
 " :PlugInstall
 call plug#begin('~/.vim/plugged')
 
@@ -29,11 +28,10 @@ call plug#begin('~/.vim/plugged')
 	Plug 'tpope/vim-repeat'
 call plug#end()
 
-" ==========================
-"    GENERAL VIM SETTINGS
-" ==========================
+" ======================
+"    GENERAL SETTINGS
+" ======================
 set nocompatible   " Enable user .vimrc file
-set nobackup       " No backup file (defaults to .filename~)
 set history=50     " Save 50 command lines of history
 set laststatus=2   " Always display status line
 
@@ -43,6 +41,11 @@ let g:mapleader="\<space>"
 
 " --- Quick Command Line Mode ---
 nnoremap <Enter> :
+
+
+" --- Backups ---
+set nobackup                " No backup file (defaults to .filename~)
+set directory=~/.vim/.swp// " Swap file directory
 
 
 " ====================
