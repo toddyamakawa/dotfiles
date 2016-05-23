@@ -123,9 +123,6 @@ nnoremap <Leader>q :q!<Enter>
 nnoremap <Leader>x :x!<Enter>
 nnoremap <Leader>z :x!<Enter>
 
-
-
-
 set nowrap        " Don't wrap long lines
 set scrolloff=4   " Scroll before cursor hits screen boundaries
 set showmatch     " Show matching parantheses
@@ -134,16 +131,10 @@ set bs=2              " allow backspacing over everything in insert mode
 set viminfo='20,\"50  " read/write a .viminfo file, don't store more than 50 lines of registers
 set ruler             " show the cursor position all the time
 
-
-
-
 " Automatically source .vimrc on save
 "autocmd BufWritePost $MYVIMRC source $MYVIMRC
 "set visualbell
 "set noerrorbells
-
-
-" =================
 "    VISUAL MODE
 " =================
 " Enter block visual mode with 'vv'
@@ -184,8 +175,6 @@ nmap gV `[v`]
 
 " Quickly replay a macro
 nnoremap Q @q
-
-
 
 
 
