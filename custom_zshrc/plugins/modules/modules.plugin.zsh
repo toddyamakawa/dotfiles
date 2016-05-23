@@ -1,6 +1,6 @@
 
-interactive?() { [[ -n $PROMPT ]]; }
-mload() { interactive? && module load $@; }
+alias interactive\?='[[ -n $PROMPT ]]'
+function mload() { interactive? && module load $@; }
 alias munload='module unload'
 alias mlist='module list'
 
@@ -22,4 +22,7 @@ mload meld/meld/1.5.3
 mload tct/tcl/8.6.1
 mload xclip/xclip/0.12
 mload adobe/acrobat/8.1.3
+
+#alias mgrep='module avail 2>&1 | awk '"'"'BEGIN {RS="[ \t\n]+"} {print}'"'"' | grep'
+#alias module_reload='eval "$(egrep ^module ~/.bashrc)"'
 

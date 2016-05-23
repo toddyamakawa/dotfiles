@@ -27,5 +27,5 @@ PROMPT+="\$(prompt_permission) "
 PROMPT+="%(?.$prompt_pass.$prompt_fail)"
 PROMPT+="%{$fg_bold[blue]%}]\$%{$reset_color%} "
 
-RPROMPT=""
+RPROMPT="[zsh]"
 
