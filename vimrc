@@ -2,6 +2,7 @@
 " ==============
 "    VIM-PLUG
 " ==============
+" :help Plug
 " :PlugInstall
 call plug#begin('~/.vim/plugged')
 
