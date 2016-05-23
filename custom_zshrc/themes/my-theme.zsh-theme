@@ -1,5 +1,5 @@
-
-# vi: syntax=sh
+#
+# vi: syntax=zsh
 
 # Evaluate $PROMPT
 setopt PROMPT_SUBST
@@ -27,5 +27,21 @@ PROMPT+="\$(prompt_permission) "
 PROMPT+="%(?.$prompt_pass.$prompt_fail)"
 PROMPT+="%{$fg_bold[blue]%}]\$%{$reset_color%} "
 
-RPROMPT="[zsh]"
+
+# Redraw prompt on terminal resize
+function TRAPWINCH() {
+  zle && zle reset-prompt
+}
+
+function zle-keymap-select() { zle reset-prompt; }
+zle -N zle-keymap-select
+zle -N edit-command-line
+
+MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[red]%}<<%{$reset_color%}"
+
+function vi_mode_prompt_info() {
+	echo "${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
+}
+
+RPROMPT='[zsh]$(vi_mode_prompt_info)'
 

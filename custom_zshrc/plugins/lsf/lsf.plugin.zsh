@@ -18,7 +18,10 @@ alias bs64='my_bsub -M 65536000'
 alias bs80='my_bsub -M 81920000'
 alias bs128='my_bsub -M 131072000'
 alias bs256='my_bsub -M 262144000'
+
+alias bszsh='bs16 -Is -XF zsh'
 alias bsbash='bs16 -Is -XF bash'
+alias bsxterm='bs16 -XF xterm'
 
 # --- bkill ---
 alias bskill='awk '"'"'/^[0-9]/ {print $1}'"'"' | xargs bkill'
@@ -26,8 +29,11 @@ alias bskill='awk '"'"'/^[0-9]/ {print $1}'"'"' | xargs bkill'
 # --- bjobs ---
 alias bjobsf='bjobs -o "jobid:8 user:8 stat:5 project:9 run_time:-20 cmd"'
 alias bemu='bjobsf -q emulation -u all'
-bpwd() {
+function bpwd() {
 	bjobs -UF $1 | sed -n 's/.*Execution CWD <\(.*\)>.*/\1/p'
+}
+function bnotify() {
+	bs1 -w 'ended('$1')' -o /dev/null "sleep 60 && bjobs -UF $1 | mail -s 'Job <$1> completed' todd.yamakawa@arm.com"
 }
 
 # --- bwhat ---

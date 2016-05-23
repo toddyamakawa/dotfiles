@@ -1,14 +1,17 @@
 
 # --- Modules ---
-mload mentor/veloce/3.0.1.9
-mload mentor/tbx/2.4.4.9
+alias velload='mload mentor/veloce/3.0.1.9'
+alias tbxload='mload mentor/tbx/2.4.4.9'
+alias visload='addpath /arm/projectscratch/pd/svos/tools/visualizer_beta5 && velload'
+velload
+tbxload
 
 # --- Information ---
 alias veluse='velec -usagestat'
 alias velres='cat /arm/cluster/nahpc/conf/veloce-scheduler.cfg'
 alias velavail='velec -availableres'
 alias velstat='velec -getdesigninfo $(readlink -f .)'
-velinfo() {
+function velinfo() {
 	awk 'BEGIN {estimated_freq = 0}
 	/NUMBER OF CRYSTALS IN DESIGN/ {crystals = $NF}
 	/AVAILABLE NUMBER OF CRYSTALS/ {max_crystals = $NF}
@@ -38,7 +41,7 @@ alias velunlock='velcomp -unlock_project'
 # --- CUi ---
 alias velcui='CUi_analyzer veloce.log -extract'
 
-vel_export_debug() {
+function vel_export_debug() {
 	mkdir debug
 	tmp=$(mktemp -d)
 	output=$tmp/debug_info.tar.gz

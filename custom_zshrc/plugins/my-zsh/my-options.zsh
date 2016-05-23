@@ -1,6 +1,14 @@
 
 # `man zshoptions`
 
+# --- Permissions ---
+# rw-rw-r-- files
+# rwxrwxr-x directories
+umask 002
+# rw-r--r-- files
+# rwxr-xr-x directories
+#umask 022
+
 # --- Changing Directory ---
 # `dir` -> `cd dir`
 setopt AUTO_CD
