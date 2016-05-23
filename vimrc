@@ -8,7 +8,6 @@ call plug#begin('~/.vim/plugged')
 	" --- Color Schemes ---
 	Plug 'nanotech/jellybeans.vim'
 	Plug 'tomasr/molokai'
-	Plug 'mswift42/vim-themes'
 
 	" Change surroundings
 	" :help surround
@@ -58,9 +57,6 @@ set encoding=utf-8             " Set character encoding to UTF-8
 set guifont=consolas           " Favorite font
 colorscheme jellybeans         " Favorite colorscheme
 "colorscheme molokai
-"colorscheme madrid
-"colorscheme foggy-night
-"colorscheme soft-charcoal
 
 "let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 "let &t_EI = "\<Esc>]50;CursorShape=0\x7"
