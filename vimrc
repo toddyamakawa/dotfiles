@@ -87,6 +87,8 @@ set listchars=tab:+-,extends:\|
 " Highlight column 81 and trailing whitespace
 autocmd BufRead * match SpellBad /\%81v.\|\s\+$/
 
+" Disable comment formatting
+autocmd BufNewFile,BufRead * set formatoptions-=cro
 
 " Toggle with <Leader>n
 nnoremap <Leader>n :set number! relativenumber! list!<CR>
@@ -131,14 +133,12 @@ nnoremap <S-Tab> <<
 " Replace indentation spaces with tabs
 "nnoremap <Leader><Tab> :%s:^ \+:\=repeat("\t",strlen(submatch(0))/2):<Enter>
 
-
-
 " =======================
 "    GENERAL SHORTCUTS
 " =======================
 
 " Automatically reload file
-set autoread
+"set autoread
 
 " --- Save/Quit Shortcuts ---
 nnoremap <F5> :edit<Enter>
@@ -147,6 +147,12 @@ nnoremap <Leader>w :w!<Enter>
 nnoremap <Leader>q :q!<Enter>
 nnoremap <Leader>x :x!<Enter>
 nnoremap <Leader>z :x!<Enter>
+
+" Remap 'Undo' to 'U'
+nnoremap U <C-r>
+
+" Quickly replay a macro
+nnoremap Q @q
 
 set bs=2              " allow backspacing over everything in insert mode
 set viminfo='20,\"50  " read/write a .viminfo file, don't store more than 50 lines of registers
@@ -171,24 +177,17 @@ nnoremap vv <C-v>
 
 " --- NERDTree ---
 let g:NERDTreeDirArrows=0
-map <Leader>f :NERDTreeToggle<CR>
+nnoremap <Leader>f :NERDTreeToggle<CR>
 
 " --- TagBar ---
-map <Leader>t :TagbarToggle<CR>
+nnoremap <Leader>t :TagbarToggle<CR>
 
 " --- Fugitive ---
-map <Leader>gh :help fugitive<Enter>
-map <Leader>gs :Gstatus<Enter>
-map <Leader>gp :Gpull
-map <Leader>gl :Glog
-
-
-
-
-" Remap 'Undo' to 'U'
-nnoremap U <C-r>
-
-
+nnoremap <Leader>gh :help fugitive<Enter>
+nnoremap <Leader>gs :Gstatus<Enter>
+nnoremap <Leader>gp :Gpull
+nnoremap <Leader>gl :Glog
+nnoremap <Leader>gd :Gvdiff<Enter>
 
 
 " ===============
@@ -211,10 +210,13 @@ vnoremap <silent> p p`]
 " Higlight last inserted text
 nmap gV `[v`]
 
-" Quickly replay a macro
-nnoremap Q @q
+" ================
+"    NAVIGATION
+" ================
 
-
+" --- Buffer Shortcuts ---
+nnoremap > :bnext<Enter>
+nnoremap < :bprev<Enter>
 
 " --- Screen Shortcuts ---
 nnoremap <Leader>h <C-w>h
@@ -222,24 +224,43 @@ nnoremap <Leader>j <C-w>j
 nnoremap <Leader>k <C-w>k
 nnoremap <Leader>l <C-w>l
 
-" --- Navigation ---
-"map <up> <nop>
-"map <down> <nop>
-"map <left> <nop>
-"map <right> <nop>
-"imap <up> <nop>
-"imap <down> <nop>
-"imap <left> <nop>
-"imap <right> <nop>
+
+" ==============
+"    MOVEMENT
+" ==============
+
+" Start of line
+nnoremap H ^
+vnoremap H ^
+
+" End of line
+nnoremap L $
+vnoremap L $
 
 " Move one line for wrapped text
 nnoremap j gj
 nnoremap k gk
 
-nnoremap <C-j> <C-d>
-nnoremap <C-k> <C-u>
-nnoremap H ^
-nnoremap L $
+" Mark with M
+nnoremap M m
+" Jump to mark with m
+nnoremap m '
+
+" Repeat latest f, t, F or T in opposite direction
+" Opposite direction of ;
+nnoremap : ,
+vnoremap : ,
+
+" Stop using arrow keys
+"map <Up> <nop>
+"map <Down> <nop>
+"map <Left> <nop>
+"map <Right> <nop>
+"imap <Up> <nop>
+"imap <Down> <nop>
+"imap <Left> <nop>
+"imap <Right> <nop>
+
 
 " --- Exit Insert Mode ---
 inoremap jj <Esc>
@@ -275,5 +296,4 @@ nnoremap ge /\<error\>\\|\<fatal\><Enter>
 
 " --- Help ---
 cabbrev help vert help
-
 
