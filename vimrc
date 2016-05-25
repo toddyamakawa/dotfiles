@@ -9,22 +9,36 @@ call plug#begin('~/.vim/plugged')
 	Plug 'nanotech/jellybeans.vim'
 	Plug 'tomasr/molokai'
 
-	" Change surroundings
+	" --- vim-surround ---
 	" :help surround
 	Plug 'tpope/vim-surround'
 
-	" File system navigation
+	" --- File Explorer ---
 	" help :NERDTree
 	Plug 'scrooloose/nerdtree'
 
-	"Plug 'vim-airline/vim-airline'
-
-	" Change surroundings
+	" --- Ctag Browser ---
 	" :help tagbar
 	Plug 'majutsushi/tagbar'
 
+	" --- vim-repeat ---
 	" Support repeat for plugin commands
 	Plug 'tpope/vim-repeat'
+
+	" --- Git ---
+	" :help fugitive
+	Plug 'tpope/vim-fugitive'
+
+	" --- Buffer List ---
+	Plug 'ap/vim-buftabline'
+
+	" --- Experimental Plugins ---
+	" Plugins to experiment with
+	" :help airline
+	"Plug 'vim-airline/vim-airline'
+	" :help ctrlspace
+	"Plug 'vim-ctrlspace/vim-ctrlspace'
+
 call plug#end()
 
 " ======================
@@ -40,7 +54,6 @@ let g:mapleader="\<space>"
 
 " --- Quick Command Line Mode ---
 nnoremap <Enter> :
-
 
 " --- Backups ---
 set nobackup                " No backup file (defaults to .filename~)
@@ -61,6 +74,25 @@ colorscheme jellybeans         " Favorite colorscheme
 "let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 "let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
+" --- Display Settings ---
+set list           " Enable list mode
+set number         " Show line number
+set relativenumber " Show relative line number
+set showmatch      " Show matching parantheses
+
+" Show tab characters
+" Show last column
+set listchars=tab:+-,extends:\|
+
+" Highlight column 81 and trailing whitespace
+autocmd BufRead * match SpellBad /\%81v.\|\s\+$/
+
+
+" Toggle with <Leader>n
+nnoremap <Leader>n :set number! relativenumber! list!<CR>
+" Toggle expand tab
+nnoremap <Leader><Tab> :set expandtab!<CR>
+
 " --- Indentation Settings ---
 set noexpandtab     " Use tabs instead of spaces
 "set expandtab      " Use spaces instead of tabs
@@ -71,8 +103,12 @@ set autoindent      " Use auto-indenting
 set nocindent       " Don't use C style indenting
 
 " --- Wrap Settings ---
-set textwidth=0
-set wrapmargin=0
+set nowrap       " Disable wrap
+set textwidth=0  " Disable maximum inserted text width
+set wrapmargin=0 " Wrap margin
+
+set scrolloff=4   " Lines above and below cursor
+set sidescroll=1  " Horizontal number of columns to scroll
 
 " --- Syntax Highlighting for Other File Types ---
 autocmd BufNewFile,BufRead *.pl set expandtab
@@ -97,17 +133,6 @@ nnoremap <S-Tab> <<
 
 
 
-" --- Line Numbering and Whitespace---
-" Show line number and relative line number
-set number relativenumber list
-" Show tab characters, show trailing spaces
-set listchars=tab:+-,trail:_
-" Toggle with <Leader>n
-nnoremap <Leader>n :set number! relativenumber! list!<CR>
-" Toggle expand tab
-nnoremap <Leader><Tab> :set expandtab!<CR>
-
-
 " =======================
 "    GENERAL SHORTCUTS
 " =======================
@@ -123,29 +148,42 @@ nnoremap <Leader>q :q!<Enter>
 nnoremap <Leader>x :x!<Enter>
 nnoremap <Leader>z :x!<Enter>
 
-set nowrap        " Don't wrap long lines
-set scrolloff=4   " Scroll before cursor hits screen boundaries
-set showmatch     " Show matching parantheses
-
 set bs=2              " allow backspacing over everything in insert mode
 set viminfo='20,\"50  " read/write a .viminfo file, don't store more than 50 lines of registers
 set ruler             " show the cursor position all the time
 
 " Automatically source .vimrc on save
 "autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
 "set visualbell
 "set noerrorbells
+
+" =================
 "    VISUAL MODE
 " =================
 " Enter block visual mode with 'vv'
 nnoremap vv <C-v>
 
 
+" =============
+"    PLUGINS
+" =============
+
 " --- NERDTree ---
 let g:NERDTreeDirArrows=0
 map <Leader>f :NERDTreeToggle<CR>
+
+" --- TagBar ---
 map <Leader>t :TagbarToggle<CR>
-"map <C-f> :NERDTree<CR>
+
+" --- Fugitive ---
+map <Leader>gh :help fugitive<Enter>
+map <Leader>gs :Gstatus<Enter>
+map <Leader>gp :Gpull
+map <Leader>gl :Glog
+
+
+
 
 " Remap 'Undo' to 'U'
 nnoremap U <C-r>
@@ -208,8 +246,12 @@ inoremap jj <Esc>
 inoremap kk <Esc>
 
 " --- Search/Replace/Delete ---
-set ignorecase   " Ignore case for searching
-set smartcase    " Ignore case if all lowercase, case-sensitive otherwise
+
+" Default case-insensitive search
+nnoremap / /\c
+
+"set ignorecase   " Ignore case for searching
+"set smartcase    " Ignore case if all lowercase, case-sensitive otherwise
 set hlsearch     " Highlight search matches
 set incsearch    " Show matches while typing
 
