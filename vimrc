@@ -118,6 +118,10 @@ autocmd BufNewFile,BufRead *.qel,*.veloce,*.do set syntax=tcl
 autocmd BufNewFile,BufRead *.v,*.sv,*.svh,*.svrb,*.tdf set syntax=verilog tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd BufNewFile,BufRead Makefile set noexpandtab
 
+" --- Read PDF Files ---
+autocmd BufReadPre *.pdf set ro
+autocmd BufReadPost *.pdf silent %!pdftotext -layout -nopgbrk -eol unix -q "%" -
+
 " --- Indentation Shortcuts ---
 " Format file with indentation
 nnoremap == gg=G
@@ -161,12 +165,19 @@ set ruler             " show the cursor position all the time
 " Automatically source .vimrc on save
 "autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
+" --- .vimrc ---
+" Edit .vimrc
+nnoremap <Leader>vi :e $MYVIMRC<Enter>
+" Source .vimrc
+nnoremap <Leader>vs :source $MYVIMRC<Enter>
+
 "set visualbell
 "set noerrorbells
 
 " =================
 "    VISUAL MODE
 " =================
+
 " Enter block visual mode with 'vv'
 nnoremap vv <C-v>
 
@@ -210,6 +221,7 @@ vnoremap <silent> p p`]
 " Higlight last inserted text
 nmap gV `[v`]
 
+
 " ================
 "    NAVIGATION
 " ================
@@ -217,6 +229,9 @@ nmap gV `[v`]
 " --- Buffer Shortcuts ---
 nnoremap > :bnext<Enter>
 nnoremap < :bprev<Enter>
+nnoremap <Leader>bn :bnext<Enter>
+nnoremap <Leader>bp :bprev<Enter>
+nnoremap <Leader>bd :bdelete<Enter>
 
 " --- Screen Shortcuts ---
 nnoremap <Leader>h <C-w>h
