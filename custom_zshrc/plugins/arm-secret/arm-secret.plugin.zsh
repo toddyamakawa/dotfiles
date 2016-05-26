@@ -8,6 +8,11 @@ alias euhpc='sitename | \grep -q euhpc'
 
 alias getquota=/usr/local/bin/getquota
 
+# --- Environment Variables ---
+euhpc && export LSB_DEFAULTPROJECT=PJ01384
+nahpc && export LSB_DEFAULTPROJECT=PJ01384DEFAULT
+
+# --- Disassemble ---
 disass() {
 	local file=$1
 	module load arm/rvct_aarch64

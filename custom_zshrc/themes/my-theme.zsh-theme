@@ -1,12 +1,14 @@
-#
+
 # vi: syntax=zsh
 
 # Evaluate $PROMPT
 setopt PROMPT_SUBST
 
+# Pass/Fail string
 prompt_pass="%{$fg_bold[green]%}:)"
 prompt_fail="%{$fg_bold[red]%}:("
 
+# Prompt string generators
 prompt_host() { [[ -n $LSB_BATCH_JID ]] && echo "@%{$fg[yellow]%}$LSB_BATCH_JID" || echo "@%m"; }
 prompt_path() {
 	local p=${PWD##*/}
@@ -20,13 +22,13 @@ prompt_permission() {
 	echo $u$g$a[-1]
 }
 
+# Set prompt
 PROMPT="%{$fg_bold[blue]%}[%n"
 PROMPT+="$(prompt_host) "
 PROMPT+="\$(prompt_path) "
 PROMPT+="\$(prompt_permission) "
 PROMPT+="%(?.$prompt_pass.$prompt_fail)"
 PROMPT+="%{$fg_bold[blue]%}]\$%{$reset_color%} "
-
 
 # Redraw prompt on terminal resize
 function TRAPWINCH() {
