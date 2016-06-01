@@ -1,7 +1,6 @@
 
 local here=${0:h}
 
-
 # --- Path ---
 function addpath() { export PATH=$PATH:$1; }
 
@@ -23,8 +22,14 @@ alias vzshrc='vi ~/.zshrc'
 
 # --- General ---
 alias a='alias'
+alias ag='alias | grep'
 alias h='history'
+alias hg='history | grep'
 alias which=type
+
+alias cd='cd -P'
+alias pwd='pwd -P'
+alias mkdir='mkdir -pv'
 
 alias findn='find . -name'
 
@@ -42,6 +47,12 @@ alias lns='ln -s'
 
 alias catn='cat -n'
 alias tailf='tail -n 100 -f'
+
+alias echo='echo -e'
+
+alias .tar='tar xf'
+alias .tar.bz2='tar xjf'
+alias .tar.gz='tar xzf'
 
 function calc() { bc -l <<< "$@"; }
 
@@ -61,7 +72,6 @@ function rmrf() {
 		rm -rf deleting.$f.$$ &
 	done
 }
-
 
 # --- Source Files ---
 source $here/my-options.zsh

@@ -1,5 +1,5 @@
 
 # --- VNC ---
-alias vnc='ps -ef | awk '"'"'{print $11, $1}'"'"' | grep `hostname`: | sed "s/`hostname`://g" | sort -n'
-alias newvnc='vncserver -geometry 1920x1015'
+alias vncls='ps -ef | sed -n '"'"'s/^\(\w\+\).*Xvnc\s\+:\([0-9]\+\).*$/\2 \1/gp'"'"' | sort -n'
+alias vncnew='vncserver -geometry 1920x1015'
 

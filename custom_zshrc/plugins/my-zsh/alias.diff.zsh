@@ -10,4 +10,5 @@ mload tkdiff/tkdiff/4.2
 
 # --- colordiff ---
 mload colordiff && alias diff='colordiff'
+alias colordiff='colordiff -w'
 
