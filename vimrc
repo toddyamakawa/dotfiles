@@ -87,6 +87,9 @@ set listchars=tab:+-,extends:\|
 " Highlight column 81 and trailing whitespace
 autocmd BufRead * match SpellBad /\%81v.\|\s\+$/
 
+" Highlight every 3rd digit of numbers
+autocmd BufRead * 2match Delimiter /\d\ze\%(\d\d\%(\d\{3}\)*\)\>/
+
 " Disable comment formatting
 autocmd BufNewFile,BufRead * set formatoptions-=cro
 
@@ -285,6 +288,17 @@ inoremap kk <Esc>
 
 " Default case-insensitive search
 nnoremap / /\c
+nnoremap / /\c
+
+" Case-sensitive search
+nnoremap // /
+vnoremap // /
+
+" Center search
+nnoremap n nzz
+vnoremap n nzz
+nnoremap N Nzz
+vnoremap N Nzz
 
 "set ignorecase   " Ignore case for searching
 "set smartcase    " Ignore case if all lowercase, case-sensitive otherwise
@@ -303,11 +317,17 @@ nnoremap d/ :g//d<Enter>
 " Replace matching words
 nnoremap c/ :%s///g<Left><Left>
 
-" Delete trailing whitespace
-nnoremap <Leader>$ :%s/\s\+$//
-
 " Search for errors
 nnoremap ge /\<error\>\\|\<fatal\><Enter>
+
+" --- Delete Patterns ---
+" Delete trailing whitespace
+nnoremap <Leader>d$ :%s/\s\+$//g<Enter>
+" Delete non-ASCII characters
+nnoremap <Leader>dx :%s/[^\x00-\x7F]//g<Enter>
+" Delete carriage returns
+nnoremap <Leader>d<Enter> :%s/\r//g<Enter>
+
 
 " --- Help ---
 cabbrev help vert help
