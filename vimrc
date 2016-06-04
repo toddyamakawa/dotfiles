@@ -1,50 +1,60 @@
 
-" ==============
-"    VIM-PLUG
-" ==============
-" :PlugInstall
-call plug#begin('~/.vim/plugged')
+" ============
+"    VUNDLE
+" ============
+
+" --- Setup Vundle ---
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+
+" --- Plugins ---
+call vundle#begin()
+	Plugin 'VundleVim/Vundle.vim'
 
 	" --- Color Schemes ---
-	Plug 'nanotech/jellybeans.vim'
-	Plug 'tomasr/molokai'
+	Plugin 'nanotech/jellybeans.vim'
+	Plugin 'tomasr/molokai'
+	Plugin 'antlypls/vim-colors-codeschool'
 
 	" --- vim-surround ---
 	" :help surround
-	Plug 'tpope/vim-surround'
+	Plugin 'tpope/vim-surround'
 
 	" --- File Explorer ---
 	" help :NERDTree
-	Plug 'scrooloose/nerdtree'
+	Plugin 'scrooloose/nerdtree'
 
 	" --- Ctag Browser ---
 	" :help tagbar
-	Plug 'majutsushi/tagbar'
+	Plugin 'majutsushi/tagbar'
 
 	" --- vim-repeat ---
 	" Support repeat for plugin commands
-	Plug 'tpope/vim-repeat'
+	Plugin 'tpope/vim-repeat'
 
 	" --- Git ---
 	" :help fugitive
-	Plug 'tpope/vim-fugitive'
+	Plugin 'tpope/vim-fugitive'
 
 	" --- Buffer List ---
-	Plug 'ap/vim-buftabline'
+	Plugin 'ap/vim-buftabline'
 
 	" --- Experimental Plugins ---
 	" Plugins to experiment with
 	" :help airline
-	"Plug 'vim-airline/vim-airline'
+	"Plugin 'vim-airline/vim-airline'
 	" :help ctrlspace
-	"Plug 'vim-ctrlspace/vim-ctrlspace'
+	"Plugin 'vim-ctrlspace/vim-ctrlspace'
 
-call plug#end()
+" --- End of Vundle ---
+call vundle#end()
+filetype plugin indent on
+
 
 " ======================
 "    GENERAL SETTINGS
 " ======================
-set nocompatible   " Enable user .vimrc file
 set history=50     " Save 50 command lines of history
 set laststatus=2   " Always display status line
 
@@ -69,6 +79,7 @@ set t_Co=256                   " Terminal supports 256 colors
 set encoding=utf-8             " Set character encoding to UTF-8
 set guifont=consolas           " Favorite font
 colorscheme jellybeans         " Favorite colorscheme
+"colorscheme codeschool
 "colorscheme molokai
 
 "let &t_SI = "\<Esc>]50;CursorShape=1\x7"

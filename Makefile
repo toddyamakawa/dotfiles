@@ -6,18 +6,20 @@ exists = $(shell [[ -e $@ ]] && echo 1 || echo 0)
 
 links: $(dotfiles)
 
-install: oh-my-zsh vim-plug
+install: oh-my-zsh vundle
 
+# --- oh-my-zsh ---
 oh-my-zsh: ~/.oh-my-zsh/oh-my-zsh.sh
-
-vim-plug: ~/.vim/autoload/plug.vim
-
 ~/.oh-my-zsh/oh-my-zsh.sh:
 	sh -c $(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)
 
-~/.vim/autoload/plug.vim:
-	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# --- Vundle ---
+# vim plugin manager
+vundle: ~/.vim/bundle/Vundle.vim
+	vim +PluginInstall +qall
+~/.vim/bundle/Vundle.vim:
+	git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
 
 %:
 	@if [[ -e $(@:.%=%) ]]; then \
