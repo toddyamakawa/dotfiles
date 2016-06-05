@@ -2,6 +2,7 @@
 " ============
 "    VUNDLE
 " ============
+" :PluginInstall
 
 " --- Setup Vundle ---
 set nocompatible
@@ -17,17 +18,23 @@ call vundle#begin()
 	Plugin 'tomasr/molokai'
 	Plugin 'antlypls/vim-colors-codeschool'
 
-	" --- vim-surround ---
-	" :help surround
-	Plugin 'tpope/vim-surround'
+	" --- vim-tmux-navigator ---
+	Plugin 'christoomey/vim-tmux-navigator'
 
 	" --- File Explorer ---
 	" help :NERDTree
 	Plugin 'scrooloose/nerdtree'
 
+	" --- Buffer List ---
+	Plugin 'ap/vim-buftabline'
+
 	" --- Ctag Browser ---
 	" :help tagbar
 	Plugin 'majutsushi/tagbar'
+
+	" --- vim-surround ---
+	" :help surround
+	Plugin 'tpope/vim-surround'
 
 	" --- vim-repeat ---
 	" Support repeat for plugin commands
@@ -36,9 +43,6 @@ call vundle#begin()
 	" --- Git ---
 	" :help fugitive
 	Plugin 'tpope/vim-fugitive'
-
-	" --- Buffer List ---
-	Plugin 'ap/vim-buftabline'
 
 	" --- Experimental Plugins ---
 	" Plugins to experiment with
@@ -78,9 +82,10 @@ syntax on                      " Enable syntax highlighting
 set t_Co=256                   " Terminal supports 256 colors
 set encoding=utf-8             " Set character encoding to UTF-8
 set guifont=consolas           " Favorite font
-colorscheme jellybeans         " Favorite colorscheme
-"colorscheme codeschool
-"colorscheme molokai
+
+silent! colorscheme jellybeans " Favorite colorscheme
+"silent! colorscheme codeschool
+"silent! colorscheme molokai
 
 "let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 "let &t_EI = "\<Esc>]50;CursorShape=0\x7"
@@ -248,10 +253,17 @@ nnoremap <Leader>bp :bprev<Enter>
 nnoremap <Leader>bd :bdelete<Enter>
 
 " --- Screen Shortcuts ---
-nnoremap <Leader>h <C-w>h
-nnoremap <Leader>j <C-w>j
-nnoremap <Leader>k <C-w>k
-nnoremap <Leader>l <C-w>l
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <Leader>h :TmuxNavigateLeft<cr>
+nnoremap <silent> <Leader>j :TmuxNavigateDown<cr>
+nnoremap <silent> <Leader>k :TmuxNavigateUp<cr>
+nnoremap <silent> <Leader>l :TmuxNavigateRight<cr>
+nnoremap <silent> <Leader>- :TmuxNavigatePrevious<cr>
+nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+"nnoremap <silent> M-- :TmuxNavigatePrevious<cr>
 
 
 " ==============
