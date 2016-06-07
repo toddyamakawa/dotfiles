@@ -6,6 +6,7 @@ mload gnu/tmux/2.1
 alias tmux='tmux -2'
 alias tnew='tmux new -s'
 alias topen='tmux attach -t'
+alias tsession='tmux switch-client -t'
 alias tlist='tmux ls'
 alias tls='tlist'
 alias tkeys='tmux list-keys'
