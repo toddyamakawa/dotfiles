@@ -1,4 +1,6 @@
 
+local here=${0:h}
+
 # --- Modules ---
 mload arm/clusterfg/1.0
 mload arm/cluster/2.0
@@ -24,13 +26,16 @@ alias bsxterm='bs16 -XF xterm'
 alias bskill='awk '"'"'/^[0-9]/ {print $1}'"'"' | xargs bkill'
 
 # --- bjobs ---
+alias bawk='awk '"'"'BEGIN{RS=", +|;?\n"}{$1=$1;print}'"'"''
+function bjobsu() { bjobs -UF $@ | bawk; }
 alias bjobsf='bjobs -o "jobid:8 user:8 stat:5 project:9 run_time:-20 cmd"'
 alias bemu='bjobsf -q emulation -u all'
 function bpwd() {
 	bjobs -UF $1 | sed -n 's/.*Execution CWD <\(.*\)>.*/\1/p'
 }
+alias -g bjobmail="$here/bjobmail.sh"
 function bnotify() {
-	bs1 -w 'ended('$1')' -o /dev/null "sleep 60 && bjobs -UF $1 | mail -s 'Job <$1> completed' todd.yamakawa@arm.com"
+	bs1 -w 'ended('$1')' -o /dev/null bjobmail $1
 }
 
 # --- bwhat ---
