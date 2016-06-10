@@ -8,21 +8,26 @@ alias svnload1811='mload apache/subversion/1.8.11'
 # --- Default SVN ---
 svnload1811
 
+# --- Find SVN Version ---
 function svnver() {
 	local version prev_version versions
-	#local versions=$(module avail */subversion 2>&1 | \grep subversion)
-	#local versions=$(mgrep */subversion | awk1)
-	versions='tigris/subversion/1.6.2'
-	versions+=' apache/subversion/1.7.3'
-	versions+=' apache/subversion/1.8.11'
+	versions=('tigris/subversion/1.6.2')
+	versions+='apache/subversion/1.7.3'
+	versions+='apache/subversion/1.8.11'
 	for version in $versions; do
-		module unload $prev_version
-		prev_version=$version
-		module load $version &>/dev/null || continue
-		svn info &>/dev/null || continue
+		mrun - +core +$version svn info &> /dev/null || continue
 		echo $version
 	done
 }
 
+# --- Load SVN Version ---
 alias svnload='mload $(svnver | head -n 1)'
+
+# --- Quick Checkout ---
+function svnco() {
+	local temp=$(mktemp -d)/${1##*/}
+	svn checkout -q $1 $temp
+	[[ -n $2 ]] && dest=$2 || dest='.'
+	mv $temp $dest
+}
 
