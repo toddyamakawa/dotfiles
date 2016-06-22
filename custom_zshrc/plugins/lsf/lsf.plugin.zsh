@@ -2,7 +2,7 @@
 local here=${0:h}
 
 # --- Modules ---
-mload arm/clusterfg/1.0
+#mload arm/clusterfg/1.0
 mload arm/cluster/2.0
 
 # --- bsub ---
@@ -25,16 +25,31 @@ alias bsxterm='bs16 -XF xterm'
 # --- bkill ---
 alias bskill='awk '"'"'/^[0-9]/ {print $1}'"'"' | xargs bkill'
 
+
 # --- bjobs ---
+
+# Format output
 alias bawk='awk '"'"'BEGIN{RS=", +|;?\n"}{$1=$1;print}'"'"''
 function bjobsu() { bjobs -UF $@ | bawk; }
 alias bjobsf='bjobs -o "jobid:8 user:8 stat:5 project:9 run_time:-20 cmd"'
 alias bemu='bjobsf -q emulation -u all'
-function bpwd() {
-	bjobs -UF $1 | sed -n 's/.*Execution CWD <\(.*\)>.*/\1/p'
-}
+
+# Specific fields
+alias bcommands='bjobs -o "jobid:8 stat:5 cmd"'
+alias bcmd='bjobs -o "jobid:8 stat:5 cmd"'
+alias bpwd='bjobs -o "jobid:8 stat:5 sub_cwd"'
+alias bapp='bjobs -o "jobid:8 stat:5 app"'
+alias bdep='bjobs -o "jobid:8 stat:5 dependency"'
+
+# Specific values
+alias -g qemu='-q emulation'
+alias -g qemur='-q emulation -r'
+alias -g qemup='-q emulation -p'
+
+# Mail notification
 alias -g bjobmail="$here/bjobmail.sh"
 function bnotify() {
+	bcommands | grep -Eq "bjobmail.*$1" && return 1
 	bs1 -w 'ended('$1')' -o /dev/null bjobmail $1
 }
 
@@ -42,7 +57,8 @@ function bnotify() {
 alias bproj='bwhat -p'
 
 # --- bmod ---
-alias bmem='bmod -app HIGH-MEM'
 alias bmodw='bmod -W'
 alias bmodm='bmod -M'
+alias bmod_appn='bmod -appn'
+alias bmod_highmem='bmod -app HIGH-MEM'
 
