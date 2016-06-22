@@ -1,14 +1,18 @@
 
 # --- meld ---
-mload meld/meld/1.5.3
-#mload meld/meld/1.8.2
-#mload meld/meld/1.8.4
-#mload meld/meld/3.12.3
+MODULE_MELD=meld/meld/1.5.3
+#MODULE_MELD=meld/meld/1.8.2
+#MODULE_MELD=meld/meld/1.8.4
+#MODULE_MELD=meld/meld/3.12.3
 
 # --- tkdiff ---
-mload tkdiff/tkdiff/4.2
+MODULE_TKDIFF=tkdiff/tkdiff/4.2
 
 # --- colordiff ---
-mload colordiff && alias diff='colordiff'
+MODULE_COLORDIFF=colordiff
+alias diff='colordiff'
 alias colordiff='colordiff -w'
+
+# --- Load Modules ---
+module load $MODULE_MELD $MODULE_TKDIFF $MODULE_COLORDIFF
 
