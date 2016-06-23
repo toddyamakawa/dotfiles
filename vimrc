@@ -2,21 +2,38 @@
 " ============
 "    VUNDLE
 " ============
+
+" --- Install ---
+" :source %
 " :PluginInstall
 
-" --- Setup Vundle ---
+" --- List ---
+" :PluginList
+
+" --- Setup ---
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 
-" --- Plugins ---
+" --- Vundle Begin ---
 call vundle#begin()
 	Plugin 'VundleVim/Vundle.vim'
 
+	" ===============
+	"    INTERFACE
+	" ===============
+
 	" --- Color Schemes ---
+	"Plugin 'qualiabyte/vim-colorstepper'
 	Plugin 'nanotech/jellybeans.vim'
 	Plugin 'tomasr/molokai'
 	Plugin 'antlypls/vim-colors-codeschool'
+
+	Plugin 'yggdroot/indentline'
+
+	" =================
+	"    INTEGRATION
+	" =================
 
 	" --- vim-tmux-navigator ---
 	Plugin 'christoomey/vim-tmux-navigator'
@@ -32,17 +49,30 @@ call vundle#begin()
 	" :help tagbar
 	Plugin 'majutsushi/tagbar'
 
+	" --- Git ---
+	" :help fugitive
+	Plugin 'tpope/vim-fugitive'
+
+
+	" ==============
+	"    COMMANDS
+	" ==============
+
 	" --- vim-surround ---
 	" :help surround
 	Plugin 'tpope/vim-surround'
+
+	" --- vim-speeddating ---
+	" :help speeddating
+	Plugin 'tpope/vim-speeddating'
 
 	" --- vim-repeat ---
 	" Support repeat for plugin commands
 	Plugin 'tpope/vim-repeat'
 
-	" --- Git ---
-	" :help fugitive
-	Plugin 'tpope/vim-fugitive'
+	" --- CamelCaseMotion ---
+	" Support CamelCase motions
+	Plugin 'bkad/CamelCaseMotion'
 
 	" --- Experimental Plugins ---
 	" Plugins to experiment with
@@ -51,10 +81,24 @@ call vundle#begin()
 	" :help ctrlspace
 	"Plugin 'vim-ctrlspace/vim-ctrlspace'
 
-" --- End of Vundle ---
+" --- Vundle End ---
 call vundle#end()
 filetype plugin indent on
 
+"let g:tagbar_type_systemverilog= {
+"    \ 'ctagstype' : 'systemverilog',
+"    \ 'kinds'     : [
+"        \'c:classes',
+"        \'t:tasks',
+"        \'f:functions',
+"        \'m:modules',
+"        \'i:interfaces',
+"        \'v:variables',
+"        \'d:defines',
+"        \'e:typedefs',
+"        \'a:parameters'
+"  \]
+"\}
 
 " ======================
 "    GENERAL SETTINGS
@@ -80,12 +124,25 @@ set directory=~/.vim/.swp// " Swap file directory
 runtime ~/.vim                 " Pointer to .vim directory
 syntax on                      " Enable syntax highlighting
 set t_Co=256                   " Terminal supports 256 colors
-set encoding=utf-8             " Set character encoding to UTF-8
+set encoding=utf-8             " Set Vim character encoding to UTF-8
+set termencoding=utf-8
+set fileencoding=utf-8
+scriptencoding utf-8           " Specify script character encoding to UTF-8
 set guifont=consolas           " Favorite font
 
+
+" --- Color Schemes - --
 silent! colorscheme jellybeans " Favorite colorscheme
 "silent! colorscheme codeschool
 "silent! colorscheme molokai
+
+" Cycle through color schemes
+"nnoremap <F6> <Plug>ColorstepPrev
+"nnoremap <F7> <Plug>ColorstepNext
+"map <Leader>cp <Plug>ColorstepPrev
+"map <Leader>cn <Plug>ColorstepNext
+"map <Leader>cs <Plug>ColorstepReload
+
 
 "let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 "let &t_EI = "\<Esc>]50;CursorShape=0\x7"
@@ -95,10 +152,14 @@ set list           " Enable list mode
 set number         " Show line number
 set relativenumber " Show relative line number
 set showmatch      " Show matching parantheses
+set cursorline     " Highlight current line
 
 " Show tab characters
 " Show last column
-set listchars=tab:+-,extends:\|
+set listchars=tab:\|-,extends:\|
+
+" Show spaces for indentation
+let g:indentLine_char = '|'
 
 " Highlight column 81 and trailing whitespace
 autocmd BufRead * match SpellBad /\%81v.\|\s\+$/
@@ -109,10 +170,12 @@ autocmd BufRead * 2match Delimiter /\d\ze\%(\d\d\%(\d\{3}\)*\)\>/
 " Disable comment formatting
 autocmd BufNewFile,BufRead * set formatoptions-=cro
 
-" Toggle with <Leader>n
+" Toggle list/number with <Leader>n
 nnoremap <Leader>n :set number! relativenumber! list!<CR>
 " Toggle expand tab
 nnoremap <Leader><Tab> :set expandtab!<CR>
+" Toggle wrap
+nnoremap <Leader>sw :set wrap!<CR>
 
 " --- Indentation Settings ---
 set noexpandtab     " Use tabs instead of spaces
@@ -132,8 +195,9 @@ set scrolloff=4   " Lines above and below cursor
 set sidescroll=1  " Horizontal number of columns to scroll
 
 " --- Syntax Highlighting for Other File Types ---
+autocmd BufNewFile,BufRead *.py set tabstop=4 noexpandtab
 autocmd BufNewFile,BufRead *.pl set expandtab
-autocmd BufNewFile,BufRead *.qel,*.veloce,*.do set syntax=tcl
+autocmd BufNewFile,BufRead *.qel,*.veloce,*.do,*.utf set syntax=tcl
 autocmd BufNewFile,BufRead *.v,*.sv,*.svh,*.svrb,*.tdf set syntax=verilog tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd BufNewFile,BufRead Makefile set noexpandtab
 
@@ -253,6 +317,7 @@ nnoremap <Leader>bp :bprev<Enter>
 nnoremap <Leader>bd :bdelete<Enter>
 
 " --- Screen Shortcuts ---
+" vim-tmux-navigator shortcuts
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <Leader>h :TmuxNavigateLeft<cr>
 nnoremap <silent> <Leader>j :TmuxNavigateDown<cr>
@@ -263,12 +328,31 @@ nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-"nnoremap <silent> M-- :TmuxNavigatePrevious<cr>
+"nnoremap <silent> <M--> :TmuxNavigatePrevious<cr>
+
+" Resize windows evenly
+nnoremap <Leader>= <C-w>=
 
 
 " ==============
 "    MOVEMENT
 " ==============
+
+" --- CamelCaseMotion Plugin ---
+"map <silent> w <Plug>CamelCaseMotion_w
+"map <silent> b <Plug>CamelCaseMotion_b
+"map <silent> e <Plug>CamelCaseMotion_e
+"map <silent> ge <Plug>CamelCaseMotion_ge
+"sunmap w
+"sunmap b
+"sunmap e
+"sunmap ge
+"omap <silent> iw <Plug>CamelCaseMotion_iw
+"xmap <silent> iw <Plug>CamelCaseMotion_iw
+"omap <silent> ib <Plug>CamelCaseMotion_ib
+"xmap <silent> ib <Plug>CamelCaseMotion_ib
+"omap <silent> ie <Plug>CamelCaseMotion_ie
+"xmap <silent> ie <Plug>CamelCaseMotion_ie
 
 " Start of line
 nnoremap H ^
@@ -310,12 +394,12 @@ inoremap kk <Esc>
 " --- Search/Replace/Delete ---
 
 " Default case-insensitive search
-nnoremap / /\c
-nnoremap / /\c
+nnoremap / :set ignorecase<Enter>/
+vnoremap / :set ignorecase<Enter>/
 
 " Case-sensitive search
-nnoremap // /
-vnoremap // /
+nnoremap // :set noignorecase<Enter>/
+vnoremap // :set noignorecase<Enter>/
 
 " Center search
 nnoremap n nzz
