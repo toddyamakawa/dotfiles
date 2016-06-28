@@ -16,6 +16,8 @@ setopt AUTO_CD
 setopt AUTO_PUSHD
 # `cd symlink/..` -> `cd /symlink/physical/path/..`
 setopt CHASE_DOTS
+# Do not search ~users
+unsetopt CDABLE_VARS
 # `cd symlink && pwd` ->  `echo /physical/path/to/symlink`
 setopt CHASE_LINKS
 # Do not push duplicate directories

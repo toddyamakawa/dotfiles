@@ -23,14 +23,18 @@ alias vzshrc='vi ~/.zshrc'
 # --- General ---
 alias a='alias'
 alias ag='alias | grep'
-alias h='history'
-alias hg='history | grep'
-alias which=type
+alias which='whence -c'
+
+alias d='dirs -v'
+function c() { cd -$1; }
 
 alias cd='cd -P'
 alias pwd='pwd -P'
+alias cdpwd='cd $(pwd)'
 alias mkdir='mkdir -pv'
+alias cdtemp='cd $(mktemp -d)'
 
+alias find='find -O3'
 alias findn='find . -name'
 
 alias hostname='hostname --long'
@@ -41,6 +45,7 @@ alias nowrap="printf '\033[?7l'"
 alias tab2="expand -t2"
 alias tab4="expand -t4"
 alias tab8="expand -t8"
+alias cutw='cut -c 1-$COLUMNS'
 alias xterm='xterm -fg white -bg black -fa consolas -fs 10'
 
 alias lns='ln -s'
@@ -53,6 +58,7 @@ alias echo='echo -e'
 alias .tar='tar xf'
 alias .tar.bz2='tar xjf'
 alias .tar.gz='tar xzf'
+
 
 alias ls='ls -h --color'
 alias ll='ls -lrth'
@@ -74,13 +80,13 @@ alias find5='ls5 | grep -i'
 alias find6='ls6 | grep -i'
 
 alias df='df -h'
-alias du='du -h'
+alias du='du -ch'
 alias du1='du --max-depth=1'
 alias du2='du --max-depth=2'
 alias du3='du --max-depth=3'
 
 alias less='less -r'
-alias vless="col -b | vim -c 'set ts=8 nomod nolist noma' -"
+alias vless="col -b | vim -c 'set ts=8 nomod nolist' -"
 
 alias license='lmstat -a'
 
