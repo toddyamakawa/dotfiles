@@ -53,6 +53,8 @@ call vundle#begin()
 	" :help fugitive
 	Plugin 'tpope/vim-fugitive'
 
+	" --- matchit ---
+	Plugin 'tmhedberg/matchit'
 
 	" ==============
 	"    COMMANDS
@@ -400,12 +402,6 @@ vnoremap / :set ignorecase<Enter>/
 " Case-sensitive search
 nnoremap // :set noignorecase<Enter>/
 vnoremap // :set noignorecase<Enter>/
-
-" Center search
-nnoremap n nzz
-vnoremap n nzz
-nnoremap N Nzz
-vnoremap N Nzz
 
 "set ignorecase   " Ignore case for searching
 "set smartcase    " Ignore case if all lowercase, case-sensitive otherwise
