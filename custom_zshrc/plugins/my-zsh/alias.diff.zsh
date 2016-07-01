@@ -14,5 +14,5 @@ alias diff='colordiff'
 alias colordiff='colordiff -w'
 
 # --- Load Modules ---
-module load $MODULE_MELD $MODULE_TKDIFF $MODULE_COLORDIFF
+mload $MODULE_MELD $MODULE_TKDIFF $MODULE_COLORDIFF
 

@@ -1,6 +1,7 @@
 
 # --- grep ---
-alias grep='grep --color=always'
+# oh-my-zsh already aliases grep
+#alias grep='grep --color=always'
 alias g='grep'
 alias gi='grep -i'
 alias gn='grep -n'

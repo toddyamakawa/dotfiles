@@ -1,10 +1,9 @@
 
 # --- Modules ---
-alias velload='mload mentor/veloce/3.0.1.9'
+#alias velload='mload mentor/veloce/3.0.1.8'
+alias velload='mload mentor/veloce/3.16.1.2'
 alias tbxload='mload mentor/tbx/2.4.4.9'
-alias visload='addpath /arm/projectscratch/pd/svos/tools/visualizer_beta5 && velload'
-velload
-tbxload
+alias visload='mload mentor/questavdbg/10.5b'
 
 # --- Information ---
 alias veluse='velec -usagestat'
@@ -33,13 +32,14 @@ alias velsub2='bs32 -q emulation -a veloce2 -oo output.log'
 
 # --- Velview ---
 alias velwave='bs8 -I velview -tracedir veloce.wave/waves.stw'
+alias viswave='vis -tracedir veloce.wave/waves.stw -designfile hw/veloce.med/visualizer.out/design.bin'
 
 # --- Project ---
 alias vellock='velcomp -lock_project'
 alias velunlock='velcomp -unlock_project'
-
-# --- CUi ---
 alias velcui='CUi_analyzer veloce.log -extract'
+alias veltask='velcomp -task'
+alias veldesign.bin='velunlock && veltask visualizer && vellock'
 
 function vel_export_debug() {
 	mkdir debug
@@ -50,5 +50,5 @@ function vel_export_debug() {
 }
 
 alias vel2fsdb="echo '******************************' > sigs && \
-bs8 -o wave.%J.log ecf2wave -tracedir veloce.wave/waves.stw -siglist sigs -fsdb -distribute -merge_fsdbs"
+bs32 -o wave.%J.log ecf2wave -tracedir veloce.wave/waves.stw -siglist sigs -fsdb -distribute -merge_fsdbs"
 
