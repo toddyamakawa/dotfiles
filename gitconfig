@@ -1,0 +1,44 @@
+[user]
+	name = Todd Yamakawa
+	email = todd.yamakawa@arm.com
+[core]
+	editor = vim
+	#pager = vim -
+	#pager = col -b | vim -c 'set ft=man ts=8 nomod nonu nolist noma' -
+[sendemail]
+	suppress-cc = all
+[alias]
+	alias = !git config -l | grep alias | cut -c 7-
+	amend = commit --amend
+	au = add -u
+	bd = branch -d
+	bl = branch -vv -a
+	bname = rev-parse --abbrev-ref HEAD
+	bpush = !git push --set-upstream origin $(git bname)
+	br = branch
+	bu = branch -u
+	bv = branch -vv
+	ci = commit
+	cm = commit -m
+	co = checkout
+	cob = checkout -b
+	diffs = diff --staged
+	format-patch-1 = format-patch HEAD~1
+	info = remote show origin
+	ls = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\"
+	ll = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --numstat
+	meld = difftool -t meld
+	melds = difftool -t meld --staged
+	msquash = merge --squash --no-commit
+	publish = push origin master:refs/publish/master
+	rv = remote -vv
+	file = "!f() { git difftool $1{,^} -- $2; }; f"
+	sha = "!f() { git diff --numstat $1{^,}; }; f"
+	stat = status
+	unstage = reset HEAD
+	undo-merge = reset --hard ORIG_HEAD
+	url = remote get-url origin
+	vi = config --global -e
+	vimdiff = difftool -t vimdiff
+	vimdiffs = difftool -t vimdiff --staged
+
