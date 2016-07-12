@@ -24,6 +24,8 @@ alias vzshrc='vi ~/.zshrc'
 alias a='alias'
 alias ag='alias | grep'
 alias which='whence -c'
+alias func='print -l ${(ok)functions}'
+alias funcg='print -l ${(ok)functions} | grep'
 
 alias d='dirs -v'
 function c() { cd -$1; }
@@ -36,6 +38,8 @@ alias cdtemp='cd $(mktemp -d)'
 
 alias find='find -O3'
 alias findn='find . -name'
+
+alias sortn='sort -n'
 
 alias hostname='hostname --long'
 
