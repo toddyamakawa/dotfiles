@@ -29,7 +29,9 @@ call vundle#begin()
 	Plugin 'tomasr/molokai'
 	Plugin 'antlypls/vim-colors-codeschool'
 
+	" --- Indentation ---
 	Plugin 'yggdroot/indentline'
+	"Plugin 'nathanaelkane/vim-indent-guides.git'
 
 	" =================
 	"    INTEGRATION
@@ -82,6 +84,8 @@ call vundle#begin()
 	"Plugin 'vim-airline/vim-airline'
 	" :help ctrlspace
 	"Plugin 'vim-ctrlspace/vim-ctrlspace'
+
+	"Plugin 'nachumk/systemverilog.vim'
 
 " --- Vundle End ---
 call vundle#end()
@@ -200,7 +204,9 @@ set sidescroll=1  " Horizontal number of columns to scroll
 autocmd BufNewFile,BufRead *.py set tabstop=4 noexpandtab
 autocmd BufNewFile,BufRead *.pl set expandtab
 autocmd BufNewFile,BufRead *.qel,*.veloce,*.do,*.utf set syntax=tcl
-autocmd BufNewFile,BufRead *.v,*.sv,*.svh,*.svrb,*.tdf set syntax=verilog tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+autocmd BufNewFile,BufRead *.v,*.sv,*.svh,*.svrb,*.tdf set filetype=verilog syntax=verilog tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+autocmd BufNewFile,BufRead *.yaml,*.yml set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+"autocmd BufNewFile,BufRead *.v,*.sv,*.svh,*.svrb,*.tdf set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd BufNewFile,BufRead Makefile set noexpandtab
 
 " --- Read PDF Files ---
@@ -266,6 +272,13 @@ nnoremap <Leader>vs :source $MYVIMRC<Enter>
 " Enter block visual mode with 'vv'
 nnoremap vv <C-v>
 
+
+" =============
+"    VIMDIFF
+" =============
+
+" Update
+nnoremap du :diffupdate<Enter>
 
 " =============
 "    PLUGINS
@@ -431,7 +444,30 @@ nnoremap <Leader>dx :%s/[^\x00-\x7F]//g<Enter>
 " Delete carriage returns
 nnoremap <Leader>d<Enter> :%s/\r//g<Enter>
 
-
 " --- Help ---
 cabbrev help vert help
+
+"filetype plugin on
+"let b:match_ignorecase=0
+"let b:match_words=
+"  \ '\<begin\>:\<end\>,' .
+"  \ '\<if\>:\<else\>,' .
+"  \ '\<module\>:\<endmodule\>,' .
+"  \ '\<class\>:\<endclass\>,' .
+"  \ '\<program\>:\<endprogram\>,' .
+"  \ '\<clocking\>:\<endclocking\>,' .
+"  \ '\<property\>:\<endproperty\>,' .
+"  \ '\<sequence\>:\<endsequence\>,' .
+"  \ '\<package\>:\<endpackage\>,' .
+"  \ '\<covergroup\>:\<endgroup\>,' .
+"  \ '\<primitive\>:\<endprimitive\>,' .
+"  \ '\<specify\>:\<endspecify\>,' .
+"  \ '\<generate\>:\<endgenerate\>,' .
+"  \ '\<interface\>:\<endinterface\>,' .
+"  \ '\<function\>:\<endfunction\>,' .
+"  \ '\<task\>:\<endtask\>,' .
+"  \ '\<case\>\|\<casex\>\|\<casez\>:\<endcase\>,' .
+"  \ '\<fork\>:\<join\>\|\<join_any\>\|\<join_none\>,' .
+"  \ '`ifdef\>:`else\>:`endif\>,' .
+"  \ '`ifndef\>:`else\>:`endif\>,'
 

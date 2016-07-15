@@ -8,8 +8,12 @@ bindkey -v
 # =================
 
 # Ctrl-j and Ctrl-k to search history
+# search-history-forward
+# search-history-backward
 bindkey -M viins '^J' down-line-or-search
 bindkey -M viins '^K' up-line-or-search
+#bindkey -M viins '^J' down-line-or-history
+#bindkey -M viins '^K' up-line-or-history
 
 # jj or kk to enter command mode
 bindkey -M viins 'jj' vi-cmd-mode

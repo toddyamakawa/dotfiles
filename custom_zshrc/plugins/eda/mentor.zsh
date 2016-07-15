@@ -1,9 +1,11 @@
 
 # --- Modules ---
-#alias velload='mload mentor/veloce/3.0.1.8'
-alias velload='mload mentor/veloce/3.16.1.2'
+alias velload3018='mload mentor/veloce/3.0.1.8'
+alias velload31612='mload mentor/veloce/3.16.1.2'
+alias velload31614='mload mentor/veloce/3.16.1.4'
+alias velload='velload31614'
 alias tbxload='mload mentor/tbx/2.4.4.9'
-alias visload='mload mentor/questavdbg/10.5b'
+alias visload='mload mentor/questavdbg/10.5b_1'
 
 # --- Information ---
 alias veluse='velec -usagestat'

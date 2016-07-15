@@ -13,7 +13,7 @@ euhpc && export LSB_DEFAULTPROJECT=PJ01384
 nahpc && export LSB_DEFAULTPROJECT=PJ01384DEFAULT
 
 # --- Disassemble ---
-disass() {
+function disass() {
 	local file=$1
 	module load arm/rvct_aarch64
 	bs1 -oo $file.disass fromelf -a -c --text $file
@@ -29,15 +29,21 @@ alias new_porter='git clone ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter &
 # --- SVOS ---
 alias tterminate='touch .TERMINATE'
 alias uart='tailx uart.output'
-alias tarmac_uart="awk '/S:007ff8/ {num=strtonum(\"0x\"substr(\$6,7,2)); printf(\"%c\", num)}'"
-alias tarmac_uart_ts="awk '{print} /S:007ff8/ {num=strtonum(\"0x\"substr(\$6,7,2)); printf(\"UART %c\\n\", num)}'"
+alias tarmac_uart="awk '/S:007ff80000/ {num=strtonum(\"0x\"substr(\$6,7,2)); printf(\"%c\", num)}'"
+alias tarmac_uart_ts="awk '{print} /S:007ff80000/ {num=strtonum(\"0x\"substr(\$6,7,2)); printf(\"UART %c\\n\", num)}'"
 alias asp_result='echo PASS: RESULT: \"SVOS TEST COMPELTE\" >> RESULT'
+function tarmac_arg() {
+	tclsh <(echo 'source arg.tcl; puts "-tracestart $tarmac(start) -traceend $tarmac(end)"')
+}
+
 
 # --- Git Repos ---
 alias new_asp='git clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/asp'
+alias new_kiwi='git clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/kiwi'
 alias new_kvs='git clone login8.nahpc.arm.com:/projects/pd/svos/git/kvs'
 alias new_gem='git clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/gem'
 alias new_ruby='git clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/ruby'
+alias new_ambaviz='git clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/ambaviz'
 
 # --- Mail ---
 function mailme {
