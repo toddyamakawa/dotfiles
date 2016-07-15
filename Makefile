@@ -1,21 +1,25 @@
 
+# --- Ignore Files ---
 ignore = Makefile README.md
 
+# --- Get Files/Directories ---
 dirs = $(wildcard */)
 dirs := $(dirs:%/=%)
+files = $(filter-out $(dirs), $(wildcard *))
+links = $(addprefix $(HOME)/., $(filter-out $(ignore), $(wildcard *)))
 
-files = $(filter-out $(dirs) $(ignore), $(wildcard *))
-
-links = $(addprefix $(HOME)/., $(files))
-
+# --- Symbolic Links ---
 links: $(links)
+$(links):
+	ln -fs $(PWD)/$(@:$(HOME)/.%=%) $(@)
 
-install: oh-my-zsh vundle
+install: zsh vundle
 
 # --- oh-my-zsh ---
+zsh: oh-my-zsh
 oh-my-zsh: $(HOME)/.oh-my-zsh/oh-my-zsh.sh
 $(HOME)/.oh-my-zsh/oh-my-zsh.sh:
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # --- Vundle ---
 # vim plugin manager
@@ -24,13 +28,7 @@ vundle: $(HOME)/.vim/bundle/Vundle.vim
 $(HOME)/.vim/bundle/Vundle.vim:
 	git clone https://github.com/VundleVim/Vundle.vim.git $(HOME)/.vim/bundle/Vundle.vim
 
-vimcolors:
-	mkdir -p $(HOME)/.vim/colors
-	ln -s $(wildcard $(HOME)/.vim/bundle/*/colors/*.vim) $(HOME)/.vim/colors
-
-$(links):
-	ln -fsT $(PWD)/$(@:$(HOME)/.%=%) $(@)
-
+# --- Clean ---
 clean:
 	rm $(links)
 
