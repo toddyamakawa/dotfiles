@@ -1,4 +1,8 @@
 
+# --- Module ---
+# Ignore module if not defined
+which module > /dev/null || function module(){}
+
 # --- Aliases ---
 alias interactive\?='[[ -n $PROMPT ]]'
 alias munload='module unload'
