@@ -1,12 +1,18 @@
+
+# vi: syntax=gitconfig
+
 [user]
 	name = Todd Yamakawa
 	email = todd.yamakawa@arm.com
+
 [core]
 	editor = vim
 	#pager = vim -
 	#pager = col -b | vim -c 'set ft=man ts=8 nomod nonu nolist noma' -
+
 [sendemail]
 	suppress-cc = all
+
 [alias]
 	alias = !git config -l | grep alias | cut -c 7-
 	amend = commit --amend
@@ -41,4 +47,14 @@
 	vi = config --global -e
 	vimdiff = difftool -t vimdiff
 	vimdiffs = difftool -t vimdiff --staged
+
+	# --- Git Repositories ---
+	newpi = clone https://github.com/toddyamakawa/pi
+	newdotfiles = clone https://github.com/toddyamakawa/dotfiles
+	newasp = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/asp
+	newkiwi = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/kiwi
+	newkvs = clone login8.nahpc.arm.com:/projects/pd/svos/git/kvs
+	newgem = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/gem
+	newruby = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/ruby
+	newambaviz = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/ambaviz
 

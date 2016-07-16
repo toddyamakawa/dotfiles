@@ -36,15 +36,6 @@ function tarmac_arg() {
 	tclsh <(echo 'source arg.tcl; puts "-tracestart $tarmac(start) -traceend $tarmac(end)"')
 }
 
-
-# --- Git Repos ---
-alias new_asp='git clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/asp'
-alias new_kiwi='git clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/kiwi'
-alias new_kvs='git clone login8.nahpc.arm.com:/projects/pd/svos/git/kvs'
-alias new_gem='git clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/gem'
-alias new_ruby='git clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/ruby'
-alias new_ambaviz='git clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/ambaviz'
-
 # --- Mail ---
 function mailme {
 	mail -s "\"$@\"" $(whoami)@arm.com
