@@ -6,7 +6,7 @@ DISABLE_AUTO_TITLE=true
 COMPLETION_WAITING_DOTS="true"
 ZSH_CUSTOM=$HOME/.custom_zshrc
 ZSH_THEME="my-theme"
-plugins=(arm-secret modules my-zsh lsf tmux eda vi)
+plugins=(modules my-zsh lsf tmux vi)
 
 #function source() {
 #	local start=$(date +%s%N)
