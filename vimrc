@@ -55,6 +55,10 @@ call vundle#begin()
 	" :help fugitive
 	Plugin 'tpope/vim-fugitive'
 
+	" --- vim-manpager ---
+	" export MANPAGER="vim -c MANPAGER -"
+	Plugin 'lambdalisue/vim-manpager'
+
 	" --- matchit ---
 	Plugin 'tmhedberg/matchit'
 
