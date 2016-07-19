@@ -10,6 +10,7 @@ alias tmux='tmux -2'
 # List Sessions
 alias tlist='tmux ls'
 alias tls='tmux ls'
+alias tll="tmux list-windows -a -F '#{session_name} #{window_index} #{window_name} #{pane_current_path}'"
 # Attach Session
 alias ta='tmux attach'
 # New session
@@ -25,7 +26,6 @@ alias tsl='tmux switch-client -l'
 # List Keys
 alias tkeys='tmux list-keys'
 alias tkeysvi='tmux list-keys -t vi-copy'
-
 
 # --- Functions ---
 
