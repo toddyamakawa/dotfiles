@@ -7,8 +7,8 @@ COMPLETION_WAITING_DOTS="true"
 ZSH_CUSTOM=$HOME/.custom_zshrc
 ZSH_THEME="my-theme"
 
-plugins=(modules my-zsh lsf tmux vi)
-hostname --long | grep -q 'arm\.com' && plugins=(arm-secret modules my-zsh lsf tmux eda vi)
+plugins=(modules my-zsh magic-enter tmux vi)
+hostname --long | grep -q 'arm\.com' && plugins=(arm-secret modules my-zsh lsf magic-enter tmux eda vi)
 
 #function source() {
 #	local start=$(date +%s%N)
