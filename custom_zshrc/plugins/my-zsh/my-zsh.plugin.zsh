@@ -118,5 +118,5 @@ function rmrf() {
 # --- Source Files ---
 source $here/my-env.zsh
 source $here/my-options.zsh
-source_files $here/alias.*.zsh
+source_files $here/alias/*.zsh
 
