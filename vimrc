@@ -33,6 +33,9 @@ call vundle#begin()
 	Plugin 'yggdroot/indentline'
 	"Plugin 'nathanaelkane/vim-indent-guides.git'
 
+	" --- .tmux.conf Syntax ---
+	Plugin 'keith/tmux.vim'
+
 	" =================
 	"    INTEGRATION
 	" =================
