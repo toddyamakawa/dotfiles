@@ -18,7 +18,9 @@ function echo_eval() {
 
 # --- zsh ---
 alias zshrc='source ~/.zshrc'
-alias vzshrc='vi ~/.zshrc'
+
+# --- General ---
+alias now='date +%y%m%d-%H%M%S'
 
 # --- General ---
 alias a='alias'
