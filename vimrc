@@ -211,7 +211,7 @@ autocmd BufNewFile,BufRead *.qel,*.veloce,*.do,*.utf set syntax=tcl
 autocmd BufNewFile,BufRead *.v,*.sv,*.svh,*.svrb,*.tdf set filetype=verilog syntax=verilog tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd BufNewFile,BufRead *.yaml,*.yml set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 "autocmd BufNewFile,BufRead *.v,*.sv,*.svh,*.svrb,*.tdf set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-autocmd BufNewFile,BufRead Makefile set noexpandtab
+autocmd BufNewFile,BufRead Makefile set noexpandtab modelines=0
 
 " --- Read PDF Files ---
 autocmd BufReadPre *.pdf set ro
