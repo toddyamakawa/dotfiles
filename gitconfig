@@ -30,6 +30,7 @@
 	cob = checkout -b
 	diffs = diff --staged
 	format-patch-1 = format-patch HEAD~1
+	hub = "!f() { git clone https://github.com/$1/$2; }; f"
 	info = remote show origin
 	ls = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\"
 	ll = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --numstat
