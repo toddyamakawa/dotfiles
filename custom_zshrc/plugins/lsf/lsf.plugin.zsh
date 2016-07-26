@@ -25,6 +25,8 @@ alias bsxterm='bs16 -XF xterm'
 # --- bkill ---
 alias bskill='awk '"'"'/^[0-9]/ {print $1}'"'"' | xargs bkill'
 
+# --- bhosts ---
+alias bavail='bhosts | awk '"'"'($2="ok"){print $4-$5, $1}'"'"' | sort -n'
 
 # --- bjobs ---
 
