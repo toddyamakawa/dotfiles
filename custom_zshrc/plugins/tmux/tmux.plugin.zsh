@@ -8,9 +8,9 @@ mload gnu/tmux/2.1
 alias tmux='tmux -2'
 
 # List Sessions
-alias tlist='tmux ls'
-alias tls='tmux ls'
-alias tll="tmux list-windows -a -F '#{session_name} #{window_index} #{window_name} #{pane_current_path}'"
+alias tls="tmux list-sessions -F '#{session_id} [#{session_windows} windows] #{session_name}'"
+alias tll="tmux list-windows -a -F '#{session_id} #{session_name}:#{window_index} #{window_name} #{pane_current_path}'"
+alias tpanes="tmux list-panes -a -F '#{pane_id} #{session_name}:#{window_index}.#{pane_index} #{window_name} #{pane_current_path}'"
 # Attach Session
 alias ta='tmux attach'
 # New session
