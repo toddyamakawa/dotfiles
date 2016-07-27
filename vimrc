@@ -58,6 +58,9 @@ call vundle#begin()
 	" :help fugitive
 	Plugin 'tpope/vim-fugitive'
 
+	" :help gitgutter
+	Plugin 'airblade/vim-gitgutter'
+
 	" --- vim-manpager ---
 	" export MANPAGER="vim -c MANPAGER -"
 	Plugin 'lambdalisue/vim-manpager'
@@ -93,6 +96,7 @@ call vundle#begin()
 	"Plugin 'vim-ctrlspace/vim-ctrlspace'
 
 	"Plugin 'nachumk/systemverilog.vim'
+
 
 " --- Vundle End ---
 call vundle#end()
@@ -304,6 +308,9 @@ nnoremap <Leader>gs :Gstatus<Enter>
 nnoremap <Leader>gp :Gpull
 nnoremap <Leader>gl :Glog
 nnoremap <Leader>gd :Gvdiff<Enter>
+
+" --- GitGutter ---
+nnoremap <Leader>gg :GitGutterToggle<Enter>
 
 
 " ===============
