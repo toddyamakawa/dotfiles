@@ -20,6 +20,9 @@ alias tpanes="tmux list-panes -a -F '#{pane_id} #{session_name}:#{window_index}.
 
 alias tsave="tmux list-panes -a -F '#{session_name} #{window_index} #{window_name} #{pane_current_path} #{window_layout}'"
 
+# Show Environment
+alias tenv='tmux show-environment'
+
 # Attach Session
 alias ta='tmux attach'
 # New Session
