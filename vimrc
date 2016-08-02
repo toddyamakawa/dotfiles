@@ -66,7 +66,11 @@ call vundle#begin()
 	Plugin 'lambdalisue/vim-manpager'
 
 	" --- matchit ---
+	" :help matchit
 	Plugin 'tmhedberg/matchit'
+
+	" --- Comments ---
+	Plugin 'scrooloose/nerdcommenter'
 
 	" ==============
 	"    COMMANDS
@@ -312,22 +316,28 @@ nnoremap <Leader>gd :Gvdiff<Enter>
 " --- GitGutter ---
 nnoremap <Leader>gg :GitGutterToggle<Enter>
 
+" --- NERDCommenter ---
+nmap # <Plug>NERDCommenterToggle
+xmap # <Plug>NERDCommenterToggle
+
 
 " ===============
 "    CLIPBOARD
 " ===============
 
+" --- Set Clipboard ---
 "set clipboard=xterm_clipboard
+set clipboard=unnamed
 
 " --- System Clipboard ---
 " <Space>p to paste system clipboard
-nnoremap <Leader>p "*p
+"nnoremap <Leader>p "*p
 " <Space>y to copy to system clipboard
-vnoremap <Leader>y "+y
+"vnoremap <Leader>y "+y
 
 
-nnoremap <silent> p p`]
-vnoremap <silent> p p`]
+"nnoremap <silent> p p`]
+"vnoremap <silent> p p`]
 "vnoremap <silent> y y`]
 
 " Higlight last inserted text
