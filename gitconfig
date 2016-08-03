@@ -28,6 +28,7 @@
 	cm = commit -m
 	co = checkout
 	cob = checkout -b
+	cot = checkout --track
 	diffs = diff --staged
 	format-patch-1 = format-patch HEAD~1
 	hub = "!f() { git clone https://github.com/$1/$2; }; f"
@@ -37,7 +38,9 @@
 	meld = difftool -t meld
 	melds = difftool -t meld --staged
 	msquash = merge --squash --no-commit
+	pop = stash pop
 	publish = push origin master:refs/publish/master
+	pullr = pull --rebase
 	rv = remote -vv
 	file = "!f() { git difftool $1{,^} -- $2; }; f"
 	sha = "!f() { git diff --numstat $1{^,}; }; f"
