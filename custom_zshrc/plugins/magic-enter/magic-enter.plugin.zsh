@@ -8,7 +8,7 @@ zle -N magic-enter
 function magic-enter() {
 	set-title-buffer
 	[[ -f ~/.DISPLAY ]] && export DISPLAY=$(cat ~/.DISPLAY)
-	[[ -n $TMUX ]] && tmux set-environment DISPLAY $DISPLAY
+	[[ -f ${TMUX%%,*} ]] && tmux set-environment DISPLAY $DISPLAY
 	[[ -z $BUFFER ]] && zle clear-screen || zle accept-line
 }
 
