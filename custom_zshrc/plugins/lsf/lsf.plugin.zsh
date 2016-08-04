@@ -55,6 +55,9 @@ function bnotify() {
 	bs1 -w 'ended('$1')' -o /dev/null bjobmail $1
 }
 
+# --- bshares ---
+alias bpriority='bshares -q PD | grep $LSB_DEFAULTPROJECT | sort -n -k 3 -r'
+
 # --- bwhat ---
 alias bproj='bwhat -p'
 
