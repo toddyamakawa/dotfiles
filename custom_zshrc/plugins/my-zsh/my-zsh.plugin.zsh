@@ -93,6 +93,7 @@ alias du3='du --max-depth=3'
 
 alias less='less -r'
 alias vless="col -b | vim -c 'set ts=8 nomod nolist' -"
+alias vman='vim -c MANPAGER -'
 
 alias license='lmstat -a'
 
