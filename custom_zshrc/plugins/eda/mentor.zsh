@@ -5,7 +5,7 @@ alias velload31612='mload mentor/veloce/3.16.1.2'
 alias velload31614='mload mentor/veloce/3.16.1.4'
 alias velload='velload31614'
 alias tbxload='mload mentor/tbx/2.4.4.9'
-alias visload='mload mentor/questavdbg/10.5b_1'
+alias visload='mload mentor/questavdbg/10.5c'
 
 # --- Information ---
 alias veluse='velec -usagestat'
