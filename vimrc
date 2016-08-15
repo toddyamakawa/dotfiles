@@ -236,9 +236,9 @@ vnoremap <Tab> >gv
 " Press <Shift-Tab> in visual mode to unindent
 vnoremap <S-Tab> <gv
 " <Tab> in normal mode to indent
-nnoremap <Tab> >>
+nnoremap <Tab> :call TabQuickFix('next')<Enter>
 " <Shift-Tab> in normal mode to unindent
-nnoremap <S-Tab> <<
+nnoremap <S-Tab> :call TabQuickFix('prev')<Enter>
 
 " Replace indentation spaces with tabs
 "nnoremap <Leader><Tab> :%s:^ \+:\=repeat("\t",strlen(submatch(0))/2):<Enter>
@@ -307,11 +307,12 @@ nnoremap <Leader>f :NERDTreeToggle<CR>
 nnoremap <Leader>t :TagbarToggle<CR>
 
 " --- Fugitive ---
-nnoremap <Leader>gh :help fugitive<Enter>
-nnoremap <Leader>gs :Gstatus<Enter>
-nnoremap <Leader>gp :Gpull
-nnoremap <Leader>gl :Glog
+nnoremap <Leader>gb :Gblame<Enter>
 nnoremap <Leader>gd :Gvdiff<Enter>
+nnoremap <Leader>gh :help fugitive<Enter>
+nnoremap <Leader>gl :Glog
+nnoremap <Leader>gp :Gpull
+nnoremap <Leader>gs :Gstatus<Enter>
 
 " --- GitGutter ---
 nnoremap <Leader>gg :GitGutterToggle<Enter>
@@ -354,6 +355,23 @@ nnoremap < :bprev<Enter>
 nnoremap <Leader>bn :bnext<Enter>
 nnoremap <Leader>bp :bprev<Enter>
 nnoremap <Leader>bd :bdelete<Enter>
+
+" --- QuickFix Shortcuts ---
+function TabQuickFix(dir)
+	if bufname("%") =~ '^fugitive://'
+		if a:dir == 'next'
+			cnext
+		elseif a:dir == 'prev'
+			cprev
+		endif
+	else
+		if a:dir == 'next'
+			normal! >>
+		elseif a:dir == 'prev'
+			normal! <<
+		endif
+	endif
+endfunction
 
 " --- Screen Shortcuts ---
 " vim-tmux-navigator shortcuts
