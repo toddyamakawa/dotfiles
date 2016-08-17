@@ -47,9 +47,13 @@ function prompt_path() {
 # --- Permission ---
 function prompt_permission() {
 	local a=$(stat -c %a .)
-	[[ $(whoami) == $(stat -c %U .) ]] && u=$blue_bold$a[-3] || u=$red_bold$a[-3]
-	groups | grep -q $(stat -c %G .) && g=$blue_bold$a[-2] || g=$red_bold$a[-2]
-	echo $u$g$blue_bold$a[-1]
+	local u=$blue_bold$a[-3]
+	local g=$blue_bold$a[-2]
+	local o=$blue_bold$a[-1]
+	[[ $(whoami) == $(stat -c %U .) ]] || u=$red_bold$a[-3]
+	groups | grep -q $(stat -c %G .) || g=$red_bold$a[-2]
+	[[ $(whoami) == $(stat -c %G .) ]] && g=$magenta_bold$a[-2]
+	echo $u$g$o
 }
 
 # --- Vi-Mode $ ---
