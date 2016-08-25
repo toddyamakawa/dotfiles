@@ -51,6 +51,14 @@ function vel_export_debug() {
 	mv $output debug
 }
 
+function velcopy_logs() {
+	mkdir -p veloce.log veloce.med/velsyn.out
+	cp $1/compile.log .
+	cp $1/veloce.config .
+	cp $1/veloce.log/compile_velgs_0.log veloce.log/compile_velgs_0.log
+	cp $1/veloce.med/velsyn.out/velsyn.report veloce.med/velsyn.out/velsyn.report
+}
+
 alias vel2fsdb="echo '******************************' > sigs && \
 bs32 -o wave.%J.log ecf2wave -tracedir veloce.wave/waves.stw -siglist sigs -fsdb -distribute -merge_fsdbs"
 

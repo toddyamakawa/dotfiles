@@ -1,7 +1,8 @@
 
 local here=${0:h}
 
-source $here/mentor.zsh
+source $here/veloce.zsh
+source $here/questa.zsh
 source $here/synopsys.zsh
 
 
