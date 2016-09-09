@@ -14,7 +14,7 @@ plugins = $(addprefix $(zsh)/, $(wildcard custom/plugins/*/))
 themes = $(zsh)/custom/themes
 
 # --- All ---
-all: zsh vundle links
+all: zsh links vundle
 
 # --- Symbolic Links ---
 links: $(links)
@@ -41,3 +41,6 @@ $(HOME)/.vim/bundle/Vundle.vim:
 # --- Clean ---
 clean:
 	rm $(links)
+	rm $(plugins:%/=%)
+	rm $(themes:%/=%)
+
