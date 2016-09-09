@@ -24,9 +24,9 @@ alias disass_syms='awk '"'"'/^ +\w+$/ {new=$1} /^ +[0-9a-fx]+:/ && new!="" {prin
 export PROJ_HOME=/projects/ssg/pj01384_porter/todyam01/porter
 export WORK_DIR=/arm/projectscratch/ssg/pj01384_porter/todyam01/porter
 #source $PROJ_HOME/logical/shared/tools/bin/porter_rtl_setup_bash
-alias new_porter='git clone ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter && cd porter && git checkout dev'
 
 # --- SVOS ---
+export ARM_IP_LIBRARY=http://cam-svn2.cambridge.arm.com/svn/pdcss/ip/arm_ip_library/
 alias tterminate='touch .TERMINATE'
 alias uart='tailx uart.output'
 alias tarmac_uart="awk '/S:007ff80000/ {num=strtonum(\"0x\"substr(\$6,7,2)); printf(\"%c\", num)}'"

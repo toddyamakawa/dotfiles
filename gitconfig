@@ -41,6 +41,7 @@
 	pop = stash pop
 	publish = push origin master:refs/publish/master
 	pullr = pull --rebase
+	pull-theirs = pull -s recursive -X theirs
 	rv = remote -vv
 	file = "!f() { git difftool $1{,^} -- $2; }; f"
 	sha = "!f() { git diff --numstat $1{^,}; }; f"
@@ -59,6 +60,7 @@
 	newgem = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/gem
 	newruby = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/ruby
 	newambaviz = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/ambaviz
+	newporter = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter
 
 	# --- GitHub Repositories ---
 	newpi = clone https://github.com/toddyamakawa/pi
