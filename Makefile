@@ -9,9 +9,9 @@ files = $(filter-out $(dirs), $(wildcard *))
 links = $(addprefix $(HOME)/., $(filter-out $(ignore), $(wildcard *)))
 
 # --- oh-my-zsh ---
-zsh = $(HOME)/.oh-my-zsh/
+zsh = $(HOME)/.oh-my-zsh
 plugins = $(addprefix $(zsh)/, $(wildcard custom/plugins/*/))
-themes = custom/themes
+themes = $(zsh)/custom/themes
 
 # --- All ---
 all: zsh vundle links
@@ -27,10 +27,8 @@ zsh: $(zsh)/oh-my-zsh.sh plugins themes
 $(zsh)/oh-my-zsh.sh:
 	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 plugins: $(plugins)
-$(plugins):
-	ln -fs $(@:$(zsh)/%=$(PWD)/%) $@
-themes: $(zsh)/$(themes)
-$(zsh)/$(themes):
+themes: $(themes)
+$(plugins) $(themes):
 	ln -fs $(@:$(zsh)/%=$(PWD)/%) $@
 
 # --- Vundle ---
@@ -43,4 +41,3 @@ $(HOME)/.vim/bundle/Vundle.vim:
 # --- Clean ---
 clean:
 	rm $(links)
-
