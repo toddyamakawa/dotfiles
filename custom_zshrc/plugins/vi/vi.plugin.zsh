@@ -1,6 +1,16 @@
 
-# Select keymap vi
+# ===============
+#    VI KEYMAP
+# ===============
 bindkey -v
+
+
+# ==================
+#    ZSH COMMANDS
+# ==================
+alias zkeymaps='bindkey -l'
+alias zkeyscmd='bindkey -M vicmd'
+alias zkeysins='bindkey -M viins'
 
 
 # =================
@@ -23,6 +33,7 @@ bindkey -M viins 'kj' vi-cmd-mode
 
 # FIXME: Ctrl-backspace to delete word backwards
 #bindkey -M viins '^\b' backward-kill-word
+
 
 # ==================
 #    COMMAND MODE
