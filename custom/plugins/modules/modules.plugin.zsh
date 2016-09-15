@@ -1,7 +1,7 @@
 
 # --- Module ---
 # Ignore module if not defined
-which module > /dev/null || function module(){}
+#which module > /dev/null || function module(){}
 
 # --- Aliases ---
 alias interactive\?='[[ -n $PROMPT ]]'

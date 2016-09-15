@@ -6,8 +6,12 @@ DISABLE_AUTO_TITLE=true
 COMPLETION_WAITING_DOTS="true"
 ZSH_THEME="my-theme"
 
-plugins=(modules my-zsh magic-enter xclip tmux vi)
-hostname --long | grep -q 'arm\.com' && plugins=(arm-secret modules my-zsh lsf magic-enter eda xclip tmux vi)
+if [[ $(hostname --long) =~ arm.com$ ]]; then
+	plugins=(arm-secret modules my-zsh lsf magic-enter eda xclip tmux vi)
+else
+	plugins=(modules my-zsh magic-enter xclip tmux vi)
+	function module(){}
+fi
 
 #function source() {
 #	local start=$(date +%s%N)
