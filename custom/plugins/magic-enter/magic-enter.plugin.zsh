@@ -12,9 +12,14 @@ function magic-enter() {
 	[[ -z $BUFFER ]] && zle clear-screen || zle accept-line
 }
 
-# Set title to $BUFFER
+# Set title
+function set-title() {
+	print -Pn "\e]0;$@\a"
+}
+
+# Set title to $TITLE or $BUFFER
 function set-title-buffer() {
-	print -Pn "\e]0;$BUFFER\a"
+	[[ -n $TITLE ]] && set-title $TITLE || set-title $BUFFER
 }
 
 # --- Key Binding ---
