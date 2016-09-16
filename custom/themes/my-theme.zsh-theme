@@ -24,6 +24,9 @@ magenta_bold="%{$fg_bold[magenta]%}"
 black_bold="%{$fg_bold[black]%}"
 white_bold="%{$fg_bold[white]%}"
 
+# --- Reset Color ---
+no_color="%{$reset_color%}"
+
 # =============
 #    $PROMPT
 # =============
@@ -73,7 +76,7 @@ PROMPT+='$(prompt_permission) '
 PROMPT+="%(?.$prompt_pass.$prompt_fail)"
 PROMPT+="${blue_bold}]"
 PROMPT+='$(prompt_vimode)'
-PROMPT+="%{$reset_color%} "
+PROMPT+="${no_color} "
 
 
 # =============
@@ -83,10 +86,15 @@ PROMPT+="%{$reset_color%} "
 function rprompt_git() {
 	git rev-parse --git-dir &> /dev/null || return
 	branch=$(git rev-parse --abbrev-ref HEAD)
-	echo "$branch"
+	git diff-index --quiet HEAD && clean=$green || clean=$red
+	echo "$clean$branch "
 }
 
-RPROMPT='$(rprompt_git)'
+function rprompt_time() {
+	echo "${blue}$(date +%H:%M:%S)${no_color}"
+}
+
+RPROMPT='$(rprompt_git)$(rprompt_time)'
 
 # =====================
 #    PROMPT SETTINGS
