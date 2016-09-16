@@ -83,11 +83,20 @@ PROMPT+="${no_color} "
 #    $RPROMPT
 # =============
 
+function rprompt_git_branch() {
+	local branch=$(git rev-parse --abbrev-ref HEAD)
+	local clean=$green
+	git diff-index --quiet HEAD || clean=$red
+	echo "$clean$branch"
+}
+
 function rprompt_git() {
 	git rev-parse --git-dir &> /dev/null || return
-	branch=$(git rev-parse --abbrev-ref HEAD)
-	git diff-index --quiet HEAD && clean=$green || clean=$red
-	echo "$clean$branch "
+	modified_count=$(git diff --name-only | wc -l)
+	current_sha=$(git rev-parse --short HEAD)
+	upstream_sha=$(git rev-parse --short @{u})
+	ahead="$green+$(git rev-list --count @{u}...)"
+	echo "$(rprompt_git_branch) $ahead "
 }
 
 function rprompt_time() {
