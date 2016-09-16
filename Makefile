@@ -13,6 +13,9 @@ zsh = $(HOME)/.oh-my-zsh
 plugins = $(addprefix $(zsh)/, $(wildcard custom/plugins/*/))
 themes = $(zsh)/custom/themes
 
+# --- powerline ---
+temp := $(shell mktemp -d)
+
 # --- All ---
 all: zsh links vundle
 
@@ -30,6 +33,15 @@ plugins: $(plugins)
 themes: $(themes)
 $(plugins) $(themes):
 	ln -fs $(@:$(zsh)/%=$(PWD)/%) $@
+
+# --- powerline ---
+# Status line plugin for zsh/tmux/vim
+powerline: $(HOME)/.local/bin/powerline $(HOME)/.local/share/fonts
+$(HOME)/.local/bin/powerline:
+	pip install --user git+git://github.com/powerline/powerline
+$(HOME)/.local/share/fonts:
+	git -C $(temp) clone https://github.com/powerline/fonts
+	$(temp)/fonts/install.sh
 
 # --- Vundle ---
 # vim plugin manager
