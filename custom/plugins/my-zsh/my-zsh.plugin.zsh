@@ -18,6 +18,19 @@ function echo_eval() {
 
 # --- zsh ---
 alias zshrc='source ~/.zshrc'
+function zsh-theme() {
+	if [[ -f $ZSH/themes/$1.zsh-theme ]]; then
+		ZSH_THEME=$1
+		zshrc
+	else
+		if [[ -z $1 ]]; then
+			unset ZSH_THEME
+			zshrc
+		else
+			echo "Unable to find theme: $1"
+		fi
+	fi
+}
 
 # --- General ---
 alias now='date +%y%m%d-%H%M%S'
