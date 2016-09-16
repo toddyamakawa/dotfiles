@@ -1,10 +1,6 @@
 
 # vi: syntax=zsh
 
-# =============
-#    $PROMPT
-# =============
-
 # --- Evaluate $PROMPT ---
 setopt PROMPT_SUBST
 
@@ -27,6 +23,10 @@ cyan_bold="%{$fg_bold[cyan]%}"
 magenta_bold="%{$fg_bold[magenta]%}"
 black_bold="%{$fg_bold[black]%}"
 white_bold="%{$fg_bold[white]%}"
+
+# =============
+#    $PROMPT
+# =============
 
 # --- Hostname/JobID ---
 # Return Job ID for interactive LSF shells
@@ -77,11 +77,16 @@ PROMPT+="%{$reset_color%} "
 
 
 # =============
-#    $PROMPT
+#    $RPROMPT
 # =============
 
-RPROMPT=''
+function rprompt_git() {
+	git rev-parse --git-dir &> /dev/null || return
+	branch=$(git rev-parse --abbrev-ref HEAD)
+	echo "$branch"
+}
 
+RPROMPT='$(rprompt_git)'
 
 # =====================
 #    PROMPT SETTINGS
