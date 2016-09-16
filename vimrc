@@ -99,6 +99,8 @@ call vundle#begin()
 	" :help ctrlspace
 	"Plugin 'vim-ctrlspace/vim-ctrlspace'
 
+	"Plugin 'Lokaltog/vim-powerline'
+
 	"Plugin 'nachumk/systemverilog.vim'
 
 
