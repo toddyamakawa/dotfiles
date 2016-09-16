@@ -94,7 +94,7 @@ function rprompt_git_commits() {
 	local ahead=$(git status -sb | sed -n 's/.*ahead \([0-9]\+\).*/\1/p')
 	local behind=$(git status -sb | sed -n 's/.*behind \([0-9]\+\).*/\1/p')
 	local commits=""
-	[[ -n $ahead ]] && commits+="$green+$ahead "
+	[[ -n $ahead ]] && commits+="$yellow+$ahead "
 	[[ -n $behind ]] && commits+="$red-$behind "
 	echo $commits
 }
@@ -104,8 +104,6 @@ function rprompt_git() {
 	modified_count=$(git diff --name-only | wc -l)
 	current_sha=$(git rev-parse --short HEAD)
 	upstream_sha=$(git rev-parse --short @{u})
-	ahead="$green+$(git rev-list --count @{u}..)"
-	behind="$red-$(git rev-list --count @{u}...)"
 	echo "$(rprompt_git_branch) $(rprompt_git_commits)"
 }
 
