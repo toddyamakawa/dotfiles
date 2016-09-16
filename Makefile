@@ -15,6 +15,8 @@ themes = $(zsh)/custom/themes
 
 # --- powerline ---
 temp := $(shell mktemp -d)
+fonts := $(HOME)/.fonts
+fontconfig := $(HOME)/.config/fontconfig/conf.d
 
 # --- All ---
 all: zsh links vundle
@@ -36,12 +38,23 @@ $(plugins) $(themes):
 
 # --- powerline ---
 # Status line plugin for zsh/tmux/vim
-powerline: $(HOME)/.local/bin/powerline $(HOME)/.local/share/fonts
+powerline: $(HOME)/.local/bin/powerline $(HOME)/.local/share/fonts fonts
 $(HOME)/.local/bin/powerline:
 	pip install --user git+git://github.com/powerline/powerline
 $(HOME)/.local/share/fonts:
 	git -C $(temp) clone https://github.com/powerline/fonts
 	$(temp)/fonts/install.sh
+fonts: $(fonts)/PowerlineSymbols.otf $(fontconfig)/10-powerline-symbols.conf
+	fc-cache -vf $(fonts)
+$(fonts)/PowerlineSymbols.otf: $(fonts)
+	wget -P $(fonts) https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+$(fonts):
+	mkdir $(fonts)
+$(fontconfig)/10-powerline-symbols.conf: $(fontconfig)
+	wget -P $(fontconfig) https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+$(fontconfig):
+	mkdir -p $(fontconfig)
+
 
 # --- Vundle ---
 # vim plugin manager
