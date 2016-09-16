@@ -90,13 +90,23 @@ function rprompt_git_branch() {
 	echo "$clean$branch"
 }
 
+function rprompt_git_commits() {
+	local ahead=$(git status -sb | sed -n 's/.*ahead \([0-9]\+\).*/\1/p')
+	local behind=$(git status -sb | sed -n 's/.*behind \([0-9]\+\).*/\1/p')
+	local commits=""
+	[[ -n $ahead ]] && commits+="$green+$ahead "
+	[[ -n $behind ]] && commits+="$red-$behind "
+	echo $commits
+}
+
 function rprompt_git() {
 	git rev-parse --git-dir &> /dev/null || return
 	modified_count=$(git diff --name-only | wc -l)
 	current_sha=$(git rev-parse --short HEAD)
 	upstream_sha=$(git rev-parse --short @{u})
-	ahead="$green+$(git rev-list --count @{u}...)"
-	echo "$(rprompt_git_branch) $ahead "
+	ahead="$green+$(git rev-list --count @{u}..)"
+	behind="$red-$(git rev-list --count @{u}...)"
+	echo "$(rprompt_git_branch) $(rprompt_git_commits)"
 }
 
 function rprompt_time() {
