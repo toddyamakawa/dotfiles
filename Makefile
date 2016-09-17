@@ -10,7 +10,8 @@ links = $(addprefix $(HOME)/., $(filter-out $(ignore), $(wildcard *)))
 
 # --- oh-my-zsh ---
 zsh = $(HOME)/.oh-my-zsh
-plugins = $(addprefix $(zsh)/, $(wildcard custom/plugins/*/))
+plugins := $(wildcard custom/plugins/*/)
+plugins := $(addprefix $(zsh)/, $(plugins:%/=%))
 themes = $(zsh)/custom/themes
 
 # --- powerline ---
