@@ -86,11 +86,14 @@ PROMPT+="${no_color} "
 function rprompt_git_branch() {
 	local branch=$(git rev-parse --abbrev-ref HEAD)
 	local clean=$green
+	git rev-parse @{u} &>/dev/null || clean=$cyan
 	git diff-index --quiet HEAD || clean=$red
 	echo "$clean$branch"
 }
 
 function rprompt_git_commits() {
+	#git ls-remote --exit-code faraway >/dev/null 2>&1 || return
+	git rev-parse @{u} &>/dev/null || return
 	local ahead=$(git status -sb | sed -n 's/.*ahead \([0-9]\+\).*/\1/p')
 	local behind=$(git status -sb | sed -n 's/.*behind \([0-9]\+\).*/\1/p')
 	local commits=""
@@ -100,10 +103,10 @@ function rprompt_git_commits() {
 }
 
 function rprompt_git() {
-	git rev-parse --git-dir &> /dev/null || return
-	modified_count=$(git diff --name-only | wc -l)
-	current_sha=$(git rev-parse --short HEAD)
-	upstream_sha=$(git rev-parse --short @{u})
+	git rev-parse --git-dir &>/dev/null || return
+	#modified_count=$(git diff --name-only | wc -l)
+	#current_sha=$(git rev-parse --short HEAD)
+	#upstream_sha=$(git rev-parse --short @{u})
 	echo "$(rprompt_git_branch) $(rprompt_git_commits)"
 }
 
