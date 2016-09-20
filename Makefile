@@ -17,6 +17,7 @@ themes = $(zsh)/custom/themes
 # --- powerline ---
 temp := $(shell mktemp -d)
 fonts := $(HOME)/.fonts
+fonts_files := $(fonts)/PowerlineSymbols.otf $(fonts)/fonts.dir $(fonts)/fonts.scale
 fontconfig := $(HOME)/.config/fontconfig/conf.d
 
 # --- All ---
@@ -41,14 +42,22 @@ $(plugins) $(themes):
 # Status line plugin for zsh/tmux/vim
 powerline: $(HOME)/.local/bin/powerline $(HOME)/.local/share/fonts fonts
 $(HOME)/.local/bin/powerline:
-	pip install --user git+git://github.com/powerline/powerline
+	#pip install --user git+git://github.com/powerline/powerline
+	#pip install --user powerline-status
 $(HOME)/.local/share/fonts:
 	git -C $(temp) clone https://github.com/powerline/fonts
 	$(temp)/fonts/install.sh
-fonts: $(fonts)/PowerlineSymbols.otf $(fontconfig)/10-powerline-symbols.conf
+
+fonts: $(fonts_files) $(fontconfig)/10-powerline-symbols.conf
+	xset q | grep -q $(fonts) || xset +fp $(fonts)
 	fc-cache -vf $(fonts)
 $(fonts)/PowerlineSymbols.otf: $(fonts)
+	#"$@"
 	wget -P $(fonts) https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+$(fonts)/fonts.dir: $(fonts)
+	mkfontdir $(fonts)
+$(fonts)/fonts.scale: $(fonts)
+	mkfontscale $(fonts)
 $(fonts):
 	mkdir $(fonts)
 $(fontconfig)/10-powerline-symbols.conf: $(fontconfig)
