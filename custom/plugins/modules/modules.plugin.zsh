@@ -14,6 +14,8 @@ function mload() { interactive? && module load $@; }
 # --- Load Essentials ---
 mload core util swdev eda
 mload git/git/2.7.0 vim/vim/7.4
+module load mosh/mosh/1.2.4
+export LC_ALL='en_US.UTF-8'
 
 # --- Scripting languages ---
 alias rubyload='mload ruby/ruby/2.2.1'
