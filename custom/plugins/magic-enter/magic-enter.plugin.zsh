@@ -31,6 +31,10 @@ function set-title-buffer() {
 # Set title to $TITLE or $BUFFER
 function set-display() {
 	[[ -f ~/.DISPLAY ]] && export DISPLAY=$(cat ~/.DISPLAY)
+	if [[ $VNCDISPLAY == 1 ]]; then
+		port=$(echo $VNCDESKTOP | awk 'match($1, /.*(:[0-9]+)/, groups) {print groups[1]}')
+		DISPLAY=$port.0
+	fi
 	[[ -f ${TMUX%%,*} ]] && tmux set-environment DISPLAY $DISPLAY
 }
 
