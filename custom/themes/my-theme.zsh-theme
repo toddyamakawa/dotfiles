@@ -110,11 +110,12 @@ function rprompt_git() {
 	echo "$(rprompt_git_branch) $(rprompt_git_commits)"
 }
 
-function rprompt_time() {
-	echo "${blue}$(date +%H:%M:%S)${no_color}"
+function rprompt_elapsed_time() {
+	#echo "${blue}$(date +%H:%M:%S)${no_color}"
+	echo "${blue}$SECONDS${no_color}"
 }
 
-RPROMPT='$(rprompt_git)$(rprompt_time)'
+RPROMPT='$(rprompt_git)$(rprompt_elapsed_time)'
 
 # =====================
 #    PROMPT SETTINGS
