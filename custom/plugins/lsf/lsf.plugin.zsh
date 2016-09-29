@@ -1,10 +1,6 @@
 
 local here=${0:h}
 
-# --- Modules ---
-#mload arm/clusterfg/1.0
-mload arm/cluster/2.0
-
 # --- bsub ---
 alias my_bsub="bsub -W 96:00 -Jd sysbench-2.x-run_veloce_tbx -R 'select[rhe6 && x86_64 && os64]'"
 alias bs1='my_bsub -M 1024000'

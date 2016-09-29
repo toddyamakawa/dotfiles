@@ -10,11 +10,11 @@ ZSH_THEME_DEFAULT="my-theme"
 [[ -z $ZSH_THEME ]] && ZSH_THEME=$ZSH_THEME_DEFAULT
 
 if [[ $(hostname --long) =~ arm.com$ ]]; then
-	plugins=(arm-secret modules my-zsh lsf magic-enter eda xclip tmux vi)
+	plugins=(arm-secret lsf eda)
 else
-	plugins=(modules my-zsh magic-enter xclip tmux vi)
 	function module(){}
 fi
+plugins+=(modules my-zsh magic-enter xclip tmux vi)
 
 #function source() {
 #	local start=$(date +%s%N)

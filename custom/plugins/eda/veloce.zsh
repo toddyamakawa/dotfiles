@@ -3,7 +3,9 @@
 alias velload3018='mload mentor/veloce/3.0.1.8'
 alias velload31612='mload mentor/veloce/3.16.1.2'
 alias velload31614='mload mentor/veloce/3.16.1.4'
-alias velload='velload31614'
+alias velload31615='mload mentor/veloce/3.16.1.5_patched'
+alias velload31616='mload mentor/veloce/3.16.1.6'
+alias velload='velload31616'
 alias tbxload='mload mentor/tbx/2.4.4.9'
 alias visload='mload mentor/questavdbg/10.5c'
 

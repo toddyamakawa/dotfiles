@@ -5,6 +5,3 @@ source $here/veloce.zsh
 source $here/questa.zsh
 source $here/synopsys.zsh
 
-
-
-

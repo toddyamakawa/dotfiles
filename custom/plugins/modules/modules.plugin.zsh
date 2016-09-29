@@ -13,6 +13,7 @@ function mload() { interactive? && module load $@; }
 
 # --- Load Essentials ---
 mload core util swdev eda
+mload arm/cluster/2.0 arm/license/production
 mload git/git/2.7.0 vim/vim/8.0.5
 module load mosh/mosh/1.2.4
 
