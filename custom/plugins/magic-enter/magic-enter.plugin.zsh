@@ -2,6 +2,7 @@
 # --- Key Binding ---
 # Beind enter to magic-enter widget
 bindkey -M viins "^M" magic-enter
+bindkey -M vicmd "^M" magic-enter
 
 
 # --- Widget ---
@@ -35,6 +36,6 @@ function set-display() {
 		port=$(echo $VNCDESKTOP | awk 'match($1, /.*(:[0-9]+)/, groups) {print groups[1]}')
 		DISPLAY=$port.0
 	fi
-	[[ -e ${TMUX%%,*} ]] && tmux set-environment DISPLAY $DISPLAY
+	[[ -e ${TMUX%%,*} && -n $DISPLAY ]] && tmux set-environment DISPLAY $DISPLAY
 }
 
