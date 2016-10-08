@@ -3,7 +3,6 @@
 mload gnu/tmux/2.1
 
 
-
 # --- Aliases ---
 
 # Force 256 color support
@@ -38,6 +37,12 @@ alias tsl='tmux switch-client -l'
 # List Keys
 alias tkeys='tmux list-keys'
 alias tkeysvi='tmux list-keys -t vi-copy'
+
+# Buffer
+function tcopy () {
+	tmux set-buffer $($@)
+}
+alias -g tpaste='tmux show-buffer'
 
 
 # --- Functions ---
