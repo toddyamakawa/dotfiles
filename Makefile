@@ -25,8 +25,9 @@ all: zsh links vundle
 
 # --- Symbolic Links ---
 links: $(links)
-$(links):
-	ln -fs $(PWD)/$(@:$(HOME)/.%=%) $(@)
+
+$(HOME)/.%:
+	ln -fs $(PWD)/$* $@
 
 # --- oh-my-zsh ---
 # zsh framework manager
@@ -48,6 +49,8 @@ $(HOME)/.local/share/fonts:
 	git -C $(temp) clone https://github.com/powerline/fonts
 	$(temp)/fonts/install.sh
 
+#fonts: $(fonts)/PowerlineSymbols.otf $(fonts)/fonts.dir $(fonts)/fonts.scale
+blah: $(fonts)/PowerlineSymbols.otf
 fonts: $(fonts_files) $(fontconfig)/10-powerline-symbols.conf
 	xset q | grep -q $(fonts) || xset +fp $(fonts)
 	fc-cache -vf $(fonts)
@@ -58,12 +61,10 @@ $(fonts)/fonts.dir: $(fonts)
 	mkfontdir $(fonts)
 $(fonts)/fonts.scale: $(fonts)
 	mkfontscale $(fonts)
-$(fonts):
-	mkdir $(fonts)
 $(fontconfig)/10-powerline-symbols.conf: $(fontconfig)
 	wget -P $(fontconfig) https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
-$(fontconfig):
-	mkdir -p $(fontconfig)
+$(fonts) $(fontconfig):
+	@mkdir -p $@
 
 
 # --- Vundle ---
