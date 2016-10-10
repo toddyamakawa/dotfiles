@@ -7,6 +7,7 @@ alias nahpc='sitename | \grep -q nahpc'
 alias euhpc='sitename | \grep -q euhpc'
 
 alias getquota=/usr/local/bin/getquota
+alias projinfo='projinfo 2>/dev/null'
 
 # --- Environment Variables ---
 euhpc && [[ -z $LSB_BATCH_JID ]] && export LSB_DEFAULTPROJECT=PJ01384
@@ -26,7 +27,6 @@ export WORK_DIR=/arm/projectscratch/ssg/pj01384_porter/todyam01/porter
 #source $PROJ_HOME/logical/shared/tools/bin/porter_rtl_setup_bash
 
 # --- SVOS ---
-export ARM_IP_LIBRARY=http://cam-svn2.cambridge.arm.com/svn/pdcss/ip/arm_ip_library/
 alias tterminate='touch .TERMINATE'
 alias uart='tailx uart.output'
 alias tarmac_uart="awk '/S:007ff80000/ {num=strtonum(\"0x\"substr(\$6,7,2)); printf(\"%c\", num)}'"
@@ -45,6 +45,12 @@ function asp_run2log() {
 function tarmac_arg() {
 	tclsh <(echo 'source arg.tcl; puts "-tracestart $tarmac(start) -traceend $tarmac(end)"')
 }
+
+# --- Kits ---
+export ARM_IP_LIBRARY=http://cam-svn2.cambridge.arm.com/svn/pdcss/ip/arm_ip_library
+alias svn_ip='svn ls $ARM_IP_LIBRARY'
+alias svn_interconnect='svn ls $ARM_IP_LIBRARY/e_interconnect_f4/tags'
+alias svn_porter='svn ls $ARM_IP_LIBRARY/porter/tags'
 
 # --- Mail ---
 function mailme {
