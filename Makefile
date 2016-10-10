@@ -25,9 +25,7 @@ all: zsh links vundle
 
 # --- Symbolic Links ---
 links: $(links)
-
-$(HOME)/.%:
-	ln -fs $(PWD)/$* $@
+$(HOME)/.%: $(PWD)/%; ln -fs $< $@
 
 # --- oh-my-zsh ---
 # zsh framework manager
