@@ -40,6 +40,7 @@ alias bapp='bjobs -o "jobid:8 stat:5 app"'
 alias bdep='bjobs -o "jobid:8 stat:5 dependency"'
 
 # Specific values
+alias -g uall='-u all'
 alias -g qemu='-q emulation'
 alias -g qemur='-q emulation -r'
 alias -g qemup='-q emulation -p'
@@ -53,6 +54,7 @@ function bnotify() {
 
 # --- bshares ---
 alias bpriority='bshares -q PD | grep $LSB_DEFAULTPROJECT | sort -n -k 3 -r'
+alias bprojstat='bjobs -noheader -u all -P $LSB_DEFAULTPROJECT | awk '"'"'{print $2, $3}'"'"' | sort | uniq -c'
 
 # --- bwhat ---
 alias bproj='bwhat -p'
