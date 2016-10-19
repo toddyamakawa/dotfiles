@@ -55,6 +55,7 @@
 
 	# --- Git Repositories ---
 	newasp = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/asp
+	newiris = clone http://ds-gerrit.euhpc.arm.com:8008/svos/iris
 	newkiwi = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/kiwi
 	newkvs = clone login8.nahpc.arm.com:/projects/pd/svos/git/kvs
 	newgem = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/gem
