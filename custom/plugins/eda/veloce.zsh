@@ -1,6 +1,7 @@
 
 # --- Modules ---
 alias velload3018='mload mentor/veloce/3.0.1.8'
+alias velload31611='mload mentor/veloce/3.16.1.1'
 alias velload31612='mload mentor/veloce/3.16.1.2'
 alias velload31614='mload mentor/veloce/3.16.1.4'
 alias velload31615='mload mentor/veloce/3.16.1.5_patched'
@@ -61,6 +62,9 @@ function velcopy_logs() {
 	cp $1/veloce.med/velsyn.out/velsyn.report veloce.med/velsyn.out/velsyn.report
 }
 
-alias vel2fsdb="echo '******************************' > sigs && \
-bs32 -o wave.%J.log ecf2wave -tracedir veloce.wave/waves.stw -siglist sigs -fsdb -distribute -merge_fsdbs"
+function vel2fsdb() {
+	velload31611
+	echo '******************************' > sigs
+	bs32 -o wave.%J.log ecf2wave -tracedir veloce.wave/waves.stw -siglist sigs -fsdb -distribute -merge_fsdbs
+}
 
