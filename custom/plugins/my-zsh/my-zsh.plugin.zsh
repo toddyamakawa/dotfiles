@@ -47,7 +47,7 @@ function c() { cd -$1; }
 
 alias cd='cd -P'
 alias pwd='pwd -P'
-alias cdpwd='cd $(pwd)'
+alias cdpwd='cd $PWD'
 alias mkdir='mkdir -pv'
 alias cdtemp='cd $(mktemp -d)'
 
@@ -107,6 +107,9 @@ alias du3='du --max-depth=3'
 alias less='less -r'
 
 alias license='lmstat -a'
+
+
+alias weather='curl "wttr.in/austin?u"'
 
 function calc() { bc -l <<< "$@"; }
 
