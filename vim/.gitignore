@@ -1,3 +1,4 @@
 *
-!vundle.vim
 !ftdetect/
+!indent/
+!vundle.vim

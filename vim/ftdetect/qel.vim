@@ -1,1 +1,1 @@
-autocmd BufNewFile,BufRead *.qel set syntax=tcl
+autocmd BufNewFile,BufRead *.qel set filetype=tcl

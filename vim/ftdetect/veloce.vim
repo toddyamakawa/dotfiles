@@ -1,1 +1,1 @@
-autocmd BufNewFile,BufRead *.veloce set syntax=tcl
+autocmd BufNewFile,BufRead *.veloce set filetype=tcl

@@ -1,1 +1,1 @@
-autocmd BufNewFile,BufRead Makefile set noexpandtab modelines=0
+autocmd BufNewFile,BufRead Makefile set modelines=0

@@ -1,1 +1,1 @@
-autocmd BufNewFile,BufRead *.do set syntax=tcl
+autocmd BufNewFile,BufRead *.do set filetype=tcl
