@@ -26,11 +26,6 @@ alias tenv='tmux show-environment'
 alias ta='tmux attach'
 # New Session
 alias tnew='tmux new -s'
-# Open Session
-alias topen='tmux attach -t'
-# Switch Session
-alias tsession='tmux switch-client -t'
-alias ts='tmux switch-client -t'
 # Last Session
 alias tsl='tmux switch-client -l'
 
@@ -44,7 +39,6 @@ function tcopy () {
 }
 alias -g tpaste='tmux show-buffer'
 
-
 # --- Functions ---
 
 # Split Window
@@ -54,4 +48,14 @@ function tsplit() {
 	tmux split-window -dv -l 6
 	tmux split-window -dh
 }
+
+# --- Open/Switch Session ---
+function ts() {
+	[[ -n $TMUX ]] && tmux switch-client -t $1 || tmux attach -t $1
+}
+function _ts() {
+	session=$(tmux list-sessions -F "#{session_name}")
+	_arguments "*:session:(($session))"
+}
+compdef _ts ts
 
