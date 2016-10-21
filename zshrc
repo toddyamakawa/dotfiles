@@ -14,7 +14,7 @@ if [[ $(hostname --long) =~ arm.com$ ]]; then
 else
 	function module(){}
 fi
-plugins+=(modules my-zsh magic-enter xclip tmux vi)
+plugins+=(modules my-zsh magic-enter cd xclip tmux vi)
 
 #function source() {
 #	local start=$(date +%s%N)
