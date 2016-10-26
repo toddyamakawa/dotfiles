@@ -111,8 +111,8 @@ function rprompt_git() {
 }
 
 function rprompt_elapsed_time() {
-	#echo "${blue}$(date +%H:%M:%S)${no_color}"
 	echo "${blue}$SECONDS${no_color}"
+	[[ -n $MAGIC_NOTIFY ]] && [[ $SECONDS -gt 300 ]] && zenity --info --text "DONE\n$MAGIC_ENTER_BUFFER"
 }
 
 RPROMPT='$(rprompt_git)$(rprompt_elapsed_time)'

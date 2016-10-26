@@ -16,6 +16,7 @@ function magic-enter() {
 	SECONDS=0
 	set-title-buffer
 	set-display
+	export MAGIC_ENTER_BUFFER="$BUFFER"
 	[[ -z $BUFFER ]] && zle clear-screen || zle accept-line
 }
 
@@ -38,4 +39,5 @@ function set-display() {
 	fi
 	[[ -e ${TMUX%%,*} && -n $DISPLAY ]] && tmux set-environment DISPLAY $DISPLAY
 }
+
 
