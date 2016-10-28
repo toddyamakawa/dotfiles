@@ -1,6 +1,4 @@
 
-# vim:ft=zsh
-
 prompt_no_bg="%{%k%}"
 prompt_no_fg="%{%f%}"
 
@@ -12,10 +10,10 @@ prompt_no_fg="%{%f%}"
 
 # --- Prompt Background/Foreground ---
 function prompt_bg() {
-	if [[ $CURRENT_BG == 'NONE' || $CURRENT_BG == $1 ]]; then
-		echo -n "%{%K{$1}%}"
-	else
-		echo -n "%{%K{$1}%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+	local bg="%{%K{$1}%}"
+	echo -n ${bg/\%K\{reset\}/%k}
+	if [[ $CURRENT_BG != 'NONE' && $CURRENT_BG != $1 ]]; then
+		echo -n "%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
 	fi
 	CURRENT_BG=$1
 }
@@ -29,55 +27,66 @@ function prompt_fg() {
 function prompt_bg_fg() {
 	prompt_bg $1
 	prompt_fg $2
+	shift 2 && echo -n "$@"
 }
 
-prompt_end() {
-	echo -n "%{%F{$CURRENT_BG}%}$prompt_no_bg$SEGMENT_SEPARATOR"
-	prompt_fg reset
-}
-
-# --- Host/LSF ---
-function prompt_host() {
-	prompt_bg black
-	prompt_fg white "%n@"
-	if [[ -n $LSB_BATCH_JID ]]; then
-		prompt_fg yellow $LSB_BATCH_JID
-	else
-		prompt_fg white "%m"
-	fi
-}
-
-# --- Directory ---
-function prompt_dir() {
-	local p=${PWD/$HOME/\~}
-	prompt_fg default
-	[[ $PWD =~ $(whoami) ]] && prompt_bg blue || prompt_bg cyan
-	echo -n $c${p##*/}
-}
-
-# --- Permission ---
-function prompt_permission() {
-	local a=$(stat -c %a .)
-	local u=$blue_bold$a[-3]
-	local g=$blue_bold$a[-2]
-	local o=$blue_bold$a[-1]
-	[[ $(whoami) == $(stat -c %U .) ]] || u=$red_bold$a[-3]
-	groups | grep -q $(stat -c %G .) || g=$red_bold$a[-2]
-	[[ $(whoami) == $(stat -c %G .) ]] && g=$magenta_bold$a[-2]
-	echo $u$g$o
+function prompt_end() {
+	prompt_bg_fg reset reset
 }
 
 # Status:
 # - was there an error
 # - am I root
 # - are there background jobs?
-prompt_status() {
+function prompt_status() {
 	local symbols
 	symbols=()
 	[[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘"
 	[[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡"
 	[[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
 	[[ -n "$symbols" ]] && prompt_bg_fg black default && echo -n "$symbols"
+}
+
+# --- Host/LSF ---
+# BG Black: Default
+# FG White: Default
+# FG Green: tmux is active
+# FG Yellow: Interactive LSF shell
+function prompt_host() {
+	local fg=white host='%m'
+	[[ -n $LSB_BATCH_JID ]] && { fg=yellow; host=$LSB_BATCH_JID; }
+	[[ -e ${TMUX%%,*} ]] && fg=green
+	prompt_bg_fg black $fg "%n@$host"
+}
+
+# --- Directory ---
+# BG Blue: Username in path
+# BG Cyan: Username not in path
+function prompt_dir() {
+	local p=${PWD/$HOME/\~}
+	[[ $PWD =~ $(whoami) ]] && prompt_bg blue || prompt_bg cyan
+	permission=$(prompt_permission)
+	echo -n $permission
+	prompt_fg white $c${p##*/}
+}
+
+# --- Permission ---
+function prompt_permission() {
+	local default=black
+	local access=$(stat -c %a .) || return
+	local user=$default group=$default world=$default
+
+	# User permission
+	[[ $(whoami) == $(stat -c %U .) ]] || user=red
+	prompt_fg $user $access[-3]
+
+	# Group permission
+	groups | grep -q $(stat -c %G .) || group=red
+	#[[ $(whoami) == $(stat -c %G .) ]] && group=magenta
+	prompt_fg $group $access[-2]
+
+	# World permission
+	prompt_fg $world "$access[-1] "
 }
 
 ## Main prompt
