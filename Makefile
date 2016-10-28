@@ -17,7 +17,6 @@ themes = $(zsh)/custom/themes
 # --- powerline ---
 temp := $(shell mktemp -d)
 fonts := $(HOME)/.fonts
-fonts_files := $(fonts)/PowerlineSymbols.otf $(fonts)/fonts.dir $(fonts)/fonts.scale
 fontconfig := $(HOME)/.config/fontconfig/conf.d
 
 # --- All ---
@@ -47,22 +46,26 @@ $(HOME)/.local/share/fonts:
 	git -C $(temp) clone https://github.com/powerline/fonts
 	$(temp)/fonts/install.sh
 
+#http://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin
 #fonts: $(fonts)/PowerlineSymbols.otf $(fonts)/fonts.dir $(fonts)/fonts.scale
 blah: $(fonts)/PowerlineSymbols.otf
-fonts: $(fonts_files) $(fontconfig)/10-powerline-symbols.conf
+fonts: $(fonts)/fonts.dir $(fonts)/fonts.scale $(fontconfig)/10-powerline-symbols.conf
 	xset q | grep -q $(fonts) || xset +fp $(fonts)
 	fc-cache -vf $(fonts)
-$(fonts)/PowerlineSymbols.otf: $(fonts)
-	#"$@"
-	wget -P $(fonts) https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
-$(fonts)/fonts.dir: $(fonts)
+$(fonts)/fonts.dir: $(fonts)/PowerlineSymbols.otf
 	mkfontdir $(fonts)
-$(fonts)/fonts.scale: $(fonts)
+$(fonts)/fonts.scale: $(fonts)/PowerlineSymbols.otf
 	mkfontscale $(fonts)
-$(fontconfig)/10-powerline-symbols.conf: $(fontconfig)
+$(fonts)/PowerlineSymbols.otf:
+	@mkdir -p $(fonts)
+	@wget -P $(fonts) https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+$(fontconfig)/10-powerline-symbols.conf:
+	mkdir -p $(fontconfig)
 	wget -P $(fontconfig) https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
-$(fonts) $(fontconfig):
-	@mkdir -p $@
+
+#wget https://github.com/Lokaltog/powerline/raw/develop/font/10-powerline-symbols.conf
+#fc-cache -vf ~/.fonts
+#mkdir -p ~/.config/fontconfig/conf.d/ && mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
 
 
 # --- Vundle ---
