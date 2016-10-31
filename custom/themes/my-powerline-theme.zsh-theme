@@ -1,12 +1,28 @@
 
-prompt_no_bg="%{%k%}"
-prompt_no_fg="%{%f%}"
+# =====================
+#    PROMPT SETTINGS
+# =====================
+
+# Redraw prompt on terminal resize
+function TRAPWINCH() {
+  zle && zle reset-prompt
+}
+
+# Redraw prompt on keymap select
+function zle-keymap-select() { zle reset-prompt; }
+zle -N zle-keymap-select
+zle -N edit-command-line
 
 # Special Powerline characters
 () {
 	local LC_ALL="" LC_CTYPE="en_US.UTF-8"
 	SEGMENT_SEPARATOR=$'\ue0b0'
 }
+
+
+# =============
+#    $PROMPT
+# =============
 
 # --- Prompt Background/Foreground ---
 function prompt_bg() {
@@ -31,7 +47,9 @@ function prompt_bg_fg() {
 }
 
 function prompt_end() {
-	prompt_bg_fg reset reset
+	#[[ $KEYMAP == vicmd ]] && echo "$cyan_bold\$" || echo "$blue_bold\$"
+	#prompt_bg_fg reset reset
+	[[ $KEYMAP == vicmd ]] && prompt_bg_fg black white || prompt_bg_fg reset reset
 }
 
 # Status:
@@ -63,16 +81,16 @@ function prompt_host() {
 # BG Blue: Username in path
 # BG Cyan: Username not in path
 function prompt_dir() {
-	local p=${PWD/$HOME/\~}
-	[[ $PWD =~ $(whoami) ]] && prompt_bg blue || prompt_bg cyan
+	local p=${PWD/$HOME/\~} bg=blue
+	[[ $PWD =~ $(whoami) ]] || bg=cyan
 	permission=$(prompt_permission)
-	echo -n $permission
-	prompt_fg white $c${p##*/}
+	[[ -n $permission ]] || bg=red
+	prompt_bg_fg $bg white $permission$c${p##*/}
 }
 
 # --- Permission ---
 function prompt_permission() {
-	local default=black
+	local default=white
 	local access=$(stat -c %a .) || return
 	local user=$default group=$default world=$default
 
