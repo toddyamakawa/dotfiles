@@ -16,7 +16,8 @@ zle -N edit-command-line
 # Special Powerline characters
 () {
 	local LC_ALL="" LC_CTYPE="en_US.UTF-8"
-	SEGMENT_SEPARATOR=$'\ue0b0'
+	PROMPT_SEPARATOR=$'\ue0b0'
+	RPROMPT_SEPARATOR=$'\ue0b2'
 }
 
 
@@ -24,31 +25,32 @@ zle -N edit-command-line
 #    $PROMPT
 # =============
 
-# --- Prompt Background/Foreground ---
+# --- Prompt Background ---
 function prompt_bg() {
 	local bg="%{%K{$1}%}"
 	echo -n ${bg/\%K\{reset\}/%k}
-	if [[ $CURRENT_BG != 'NONE' && $CURRENT_BG != $1 ]]; then
-		echo -n "%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+	if [[ $PROMPT_BG != 'NONE' && $PROMPT_BG != $1 ]]; then
+		echo -n "%F{$PROMPT_BG}%}$PROMPT_SEPARATOR"
 	fi
-	CURRENT_BG=$1
+	PROMPT_BG=$1
 }
 
+# --- Prompt Foreground ---
 function prompt_fg() {
 	local fg="%{%F{$1}%}"
 	echo -n ${fg/\%F\{reset\}/%f}
 	shift && echo -n "$@"
 }
 
+# --- Prompt Background/Foreground ---
 function prompt_bg_fg() {
 	prompt_bg $1
 	prompt_fg $2
 	shift 2 && echo -n "$@"
 }
 
+# --- Prompt End ---
 function prompt_end() {
-	#[[ $KEYMAP == vicmd ]] && echo "$cyan_bold\$" || echo "$blue_bold\$"
-	#prompt_bg_fg reset reset
 	[[ $KEYMAP == vicmd ]] && prompt_bg_fg black white || prompt_bg_fg reset reset
 }
 
@@ -107,10 +109,10 @@ function prompt_permission() {
 	prompt_fg $world "$access[-1] "
 }
 
-## Main prompt
+# --- Build Prompt ---
 build_prompt() {
 	RETVAL=$?
-	CURRENT_BG='NONE'
+	PROMPT_BG='NONE'
 	prompt_status
 	prompt_host
 	prompt_dir
@@ -118,4 +120,63 @@ build_prompt() {
 }
 
 PROMPT='$(build_prompt)'
+
+
+# =============
+#    $RPROMPT
+# =============
+
+# --- Right Prompt Background ---
+function rprompt_bg() {
+	local bg="%{%K{$1}%}"
+	if [[ $RPROMPT_BG != 'NONE' && $RPROMPT_BG != $1 ]]; then
+		echo -n "%F{$1}%}$RPROMPT_SEPARATOR"
+	fi
+	echo -n ${bg/\%K\{reset\}/%k}
+	RPROMPT_BG=$1
+}
+
+# --- Right Prompt Foreground ---
+function rprompt_fg() {
+	local fg="%{%F{$1}%}"
+	echo -n ${fg/\%F\{reset\}/%f}
+	shift && echo -n "$@"
+}
+
+# --- Right Prompt Background/Foreground ---
+function rprompt_bg_fg() {
+	rprompt_bg $1
+	rprompt_fg $2
+	shift 2 && echo -n "$@"
+}
+
+#function rprompt_elapsed_time() {
+#	echo "${blue}$SECONDS${no_color}"
+#	[[ -n $MAGIC_NOTIFY ]] && [[ $SECONDS -gt 300 ]] && zenity --info --text "DONE\n$MAGIC_ENTER_BUFFER"
+#}
+
+function rprompt_git() {
+	rprompt_bg_fg blue white git
+}
+
+function rprompt_time() {
+	local s=$SECONDS
+	#local p=${PWD/$HOME/\~} bg=blue
+	#[[ $PWD =~ $(whoami) ]] || bg=cyan
+	#permission=$(prompt_permission)
+	#[[ -n $permission ]] || bg=red
+	#prompt_bg_fg $bg white $permission$c${p##*/}
+	rprompt_bg_fg black white $s
+}
+
+# --- Build Right Prompt ---
+build_rprompt() {
+	#RPROMNPT_BG='NONE'
+	RPROMNPT_BG=$PROMPT_BG
+	#rprompt_git
+	rprompt_time
+}
+
+RPROMPT='$(build_rprompt)'
+#RPROMPT=''
 
