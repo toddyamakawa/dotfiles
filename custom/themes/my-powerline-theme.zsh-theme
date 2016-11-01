@@ -129,19 +129,12 @@ PROMPT='$(build_prompt)'
 # --- Right Prompt Background ---
 function rprompt_bg() {
 	local bg="%{%K{$1}%}"
-	if [[ $RPROMPT_BG != 'NONE' && $RPROMPT_BG != $1 ]]; then
-		echo -n "%F{$1}%}$RPROMPT_SEPARATOR"
-	fi
+	echo -n "%F{$1}%}$RPROMPT_SEPARATOR"
 	echo -n ${bg/\%K\{reset\}/%k}
-	RPROMPT_BG=$1
 }
 
 # --- Right Prompt Foreground ---
-function rprompt_fg() {
-	local fg="%{%F{$1}%}"
-	echo -n ${fg/\%F\{reset\}/%f}
-	shift && echo -n "$@"
-}
+function rprompt_fg() { prompt_fg $@; }
 
 # --- Right Prompt Background/Foreground ---
 function rprompt_bg_fg() {
@@ -150,30 +143,45 @@ function rprompt_bg_fg() {
 	shift 2 && echo -n "$@"
 }
 
+function rprompt_git_branch() {
+	local fg=green
+	local branch=$(git rev-parse --abbrev-ref HEAD)
+	git rev-parse @{u} &>/dev/null || fg=cyan
+	git diff-index --quiet HEAD || fg=red
+	rprompt_bg_fg black $fg $branch
+}
+
+function rprompt_git_commits() {
+	git rev-parse @{u} &>/dev/null || return
+	local stat
+	stat=$(git status -sb)
+	local ahead=$(echo $stat | sed -n 's/.*ahead \([0-9]\+\).*/\1/p')
+	local behind=$(echo $stat | sed -n 's/.*behind \([0-9]\+\).*/\1/p')
+	[[ -n $ahead ]] && rprompt_fg yellow " +$ahead"
+	[[ -n $behind ]] && rprompt_fg red " -$behind"
+}
+
+function rprompt_git() {
+	git rev-parse --git-dir &>/dev/null || return
+	rprompt_git_branch
+	rprompt_git_commits
+}
+
 #function rprompt_elapsed_time() {
 #	echo "${blue}$SECONDS${no_color}"
 #	[[ -n $MAGIC_NOTIFY ]] && [[ $SECONDS -gt 300 ]] && zenity --info --text "DONE\n$MAGIC_ENTER_BUFFER"
 #}
 
-function rprompt_git() {
-	rprompt_bg_fg blue white git
-}
-
 function rprompt_time() {
-	local s=$SECONDS
-	#local p=${PWD/$HOME/\~} bg=blue
-	#[[ $PWD =~ $(whoami) ]] || bg=cyan
-	#permission=$(prompt_permission)
-	#[[ -n $permission ]] || bg=red
-	#prompt_bg_fg $bg white $permission$c${p##*/}
-	rprompt_bg_fg black white $s
+	local sec=$SECONDS
+	rprompt_bg_fg blue white $sec
 }
 
 # --- Build Right Prompt ---
 build_rprompt() {
 	#RPROMNPT_BG='NONE'
 	RPROMNPT_BG=$PROMPT_BG
-	#rprompt_git
+	rprompt_git
 	rprompt_time
 }
 
