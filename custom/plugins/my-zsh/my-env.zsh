@@ -1,9 +1,7 @@
 
 # --- Environment Variables ---
 export TERM=xterm-256color
-export EDITOR=vim
 export PAGER='less -r'
-export MANPAGER="vim -c MANPAGER -"
 unset LESS
 
 # Print colors
