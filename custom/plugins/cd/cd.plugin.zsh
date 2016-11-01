@@ -1,6 +1,6 @@
 
 # --- CDPATH ---
-export CDPATH="..:../..:$HOME/.links:$HOME"
+export CDPATH=".:..:../..:$HOME/.links:$HOME"
 
 # --- Directory Stat ---
 alias d='dirs -v'
