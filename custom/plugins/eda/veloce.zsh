@@ -8,7 +8,7 @@ alias velload31615='mload mentor/veloce/3.16.1.5_patched'
 alias velload31616='mload mentor/veloce/3.16.1.6'
 alias velload='velload31616'
 alias tbxload='mload mentor/tbx/2.4.4.9'
-alias visload='mload mentor/questavdbg/10.5c'
+alias visload='mload mentor/questavdbg/10.5c_2'
 
 # --- Information ---
 alias veluse='velec -usagestat'
@@ -37,7 +37,7 @@ alias velsub2='bs32 -q emulation -a veloce2 -oo output.log'
 
 # --- Velview ---
 alias velwave='bs8 -I velview -tracedir veloce.wave/waves.stw'
-alias viswave='vis -tracedir veloce.wave/waves.stw -designfile hw/veloce.med/visualizer.out/design.bin'
+alias viswave='vis -tracedir veloce.wave/waves.stw -designfile hw/veloce.med/visualizer.out/design.bin -fullt1t2'
 
 # --- Project ---
 alias vellock='velcomp -lock_project'
