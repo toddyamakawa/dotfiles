@@ -2,3 +2,4 @@
 !ftdetect/
 !indent/
 !vundle.vim
+!template
