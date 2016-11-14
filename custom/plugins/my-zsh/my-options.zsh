@@ -39,8 +39,10 @@ setopt COMPLETE_IN_WORD
 setopt EXTENDED_GLOB
 # Case-insensitive matching
 unsetopt CASE_GLOB
-setopt CSH_NULL_GLOB
-setopt NULL_GLOB
+# Report errors if no matches
+unsetopt CSH_NULL_GLOB
+# Report errors if no matches
+unsetopt NULL_GLOB
 
 # --- History Options ---
 # Append parallel zsh sessions

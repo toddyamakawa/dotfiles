@@ -62,11 +62,19 @@ alias cutw='cut -c 1-$COLUMNS'
 alias xterm='xterm -fg white -bg black -fa consolas -fs 10'
 
 alias lns='ln -s'
+alias lnsf='ln -sf'
 
 alias catn='cat -n'
 alias tailf='tail -n 100 -f'
 
+# --- echo ---
 alias echo='echo -e'
+
+function powerline_check() {
+	echo "Symbols: \ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699"
+	echo "fc-list: $(fc-list | grep -i powerline)"
+	echo "xlsfonts: $(xlsfonts | grep -i powerline)"
+}
 
 alias .tar='tar xf'
 alias .tar.bz2='tar xjf'
@@ -128,4 +136,3 @@ function rmrf() {
 source $here/my-env.zsh
 source $here/my-options.zsh
 source_files $here/alias/*.zsh
-

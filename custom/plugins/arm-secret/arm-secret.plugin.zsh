@@ -1,5 +1,5 @@
 
-export DEPOT_SETUP_ROOT=/home/todyam01/.setup.zshrc/
+export DEPOT_SETUP_ROOT=/home/todyam01/.setup.zshrc
 source $DEPOT_SETUP_ROOT/init/zsh
 
 alias sitename='hostname -f | \grep -o ..hpc'
@@ -48,6 +48,7 @@ function tarmac_arg() {
 
 # --- Kits ---
 export ARM_IP_LIBRARY=http://cam-svn2.cambridge.arm.com/svn/pdcss/ip/arm_ip_library
+export ARM_IP_WAREHOUSE=/arm/warehouse/ARM_IP
 alias svn_ip='svn ls $ARM_IP_LIBRARY'
 alias svn_interconnect='svn ls $ARM_IP_LIBRARY/e_interconnect_f4/tags'
 alias svn_porter='svn ls $ARM_IP_LIBRARY/porter/tags'
