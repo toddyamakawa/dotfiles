@@ -152,11 +152,14 @@ function rprompt_git_branch() {
 }
 
 function rprompt_git_commits() {
+
+	# Return if detached state
 	git rev-parse @{u} &>/dev/null || return
+
 	local stat
 	stat=$(git status -sb)
-	local ahead=$(echo $stat | sed -n 's/.*ahead \([0-9]\+\).*/\1/p')
-	local behind=$(echo $stat | sed -n 's/.*behind \([0-9]\+\).*/\1/p')
+	local ahead=$(echo $stat | sed -n '1s/.*ahead \([0-9]\+\).*/\1/p')
+	local behind=$(echo $stat | sed -n '1s/.*behind \([0-9]\+\).*/\1/p')
 	[[ -n $ahead ]] && rprompt_fg yellow " +$ahead"
 	[[ -n $behind ]] && rprompt_fg red " -$behind"
 }
@@ -177,6 +180,21 @@ function rprompt_time() {
 	rprompt_bg_fg blue white $sec
 }
 
+# --- Right Prompt Background ---
+function rprompt_bg() {
+	local bg="%{%K{$1}%}"
+	echo -n "%F{$1}%}$RPROMPT_SEPARATOR"
+	echo -n ${bg/\%K\{reset\}/%k}
+}
+
+# --- Right Prompt Foreground ---
+function rprompt_fg() { prompt_fg $@; }
+
+# --- Right Prompt End ---
+function rprompt_end() {
+	#[[ $KEYMAP == vicmd ]] && prompt_bg_fg black white || prompt_bg_fg reset reset
+}
+
 # --- Build Right Prompt ---
 build_rprompt() {
 	#RPROMNPT_BG='NONE'
@@ -186,5 +204,4 @@ build_rprompt() {
 }
 
 RPROMPT='$(build_rprompt)'
-#RPROMPT=''
 
