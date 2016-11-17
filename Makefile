@@ -36,6 +36,13 @@ themes: $(themes)
 $(plugins) $(themes):
 	ln -fs $(@:$(zsh)/%=$(PWD)/%) $@
 
+# --- fzf ---
+fzf: $(HOME)/.fzf
+	$(HOME)/.fzf/install --no-key-bindings --no-completion --no-update-rc
+	#$(HOME)/.fzf/install --no-key-bindings --completion --no-update-rc
+$(HOME)/.fzf:
+	git clone --depth 1 https://github.com/junegunn/fzf.git $(HOME)/.fzf
+
 # --- Powerline Font ---
 fonts: $(fonts)/fonts.dir $(fonts)/fonts.scale $(fontconfig)/10-powerline-symbols.conf
 	xset q | grep -q $(fonts) || xset +fp $(fonts)
