@@ -62,6 +62,7 @@
 	newruby = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/ruby
 	newambaviz = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/ambaviz
 	newporter = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter
+	newares = clone -b releases/DM18p2 ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
 
 	# --- GitHub Repositories ---
 	newpi = clone https://github.com/toddyamakawa/pi
