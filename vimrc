@@ -1,20 +1,8 @@
 
+" ============
+"    VUNDLE
+" ============
 runtime vundle.vim
-
-"let g:tagbar_type_systemverilog= {
-"    \ 'ctagstype' : 'systemverilog',
-"    \ 'kinds'     : [
-"        \'c:classes',
-"        \'t:tasks',
-"        \'f:functions',
-"        \'m:modules',
-"        \'i:interfaces',
-"        \'v:variables',
-"        \'d:defines',
-"        \'e:typedefs',
-"        \'a:parameters'
-"  \]
-"\}
 
 " ======================
 "    GENERAL SETTINGS
@@ -132,6 +120,9 @@ nnoremap <S-Tab> :call TabQuickFix('prev')<Enter>
 " Automatically reload file
 "set autoread
 
+" Backspace anything
+set backspace=start,indent,eol
+
 " --- Save/Quit Shortcuts ---
 nnoremap <F5> :edit<Enter>
 nnoremap <S-F5> :edit!<Enter>
@@ -146,9 +137,8 @@ nnoremap U <C-r>
 " Quickly replay a macro
 nnoremap Q @q
 
-set bs=2              " allow backspacing over everything in insert mode
-set viminfo='20,\"50  " read/write a .viminfo file, don't store more than 50 lines of registers
-set ruler             " show the cursor position all the time
+set viminfo='20,\"50 " read/write a .viminfo file, don't store more than 50 lines of registers
+set ruler            " show the cursor position all the time
 
 " Automatically source .vimrc on save
 "autocmd BufWritePost $MYVIMRC source $MYVIMRC
@@ -263,11 +253,15 @@ nnoremap <silent> <Leader>j :TmuxNavigateDown<cr>
 nnoremap <silent> <Leader>k :TmuxNavigateUp<cr>
 nnoremap <silent> <Leader>l :TmuxNavigateRight<cr>
 nnoremap <silent> <Leader>- :TmuxNavigatePrevious<cr>
+
+execute "set <M-h>=\<Esc>h"
+execute "set <M-j>=\<Esc>j"
+execute "set <M-k>=\<Esc>k"
+execute "set <M-l>=\<Esc>l"
 nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-"nnoremap <silent> <M--> :TmuxNavigatePrevious<cr>
 
 " Resize windows evenly
 nnoremap <Leader>= <C-w>=
@@ -315,6 +309,9 @@ nnoremap m '
 nnoremap : ,
 vnoremap : ,
 
+" Disable lookup
+map K <nop>
+
 " Stop using arrow keys
 "map <Up> <nop>
 "map <Down> <nop>
@@ -340,7 +337,7 @@ vnoremap / :set ignorecase<Enter>/
 nnoremap // :set noignorecase<Enter>/
 vnoremap // :set noignorecase<Enter>/
 
-"set ignorecase   " Ignore case for searching
+set ignorecase   " Ignore case for searching
 "set smartcase    " Ignore case if all lowercase, case-sensitive otherwise
 set hlsearch     " Highlight search matches
 set incsearch    " Show matches while typing
@@ -370,28 +367,4 @@ nnoremap <Leader>d<Enter> :%s/\r//g<Enter>
 
 " --- Help ---
 cabbrev help vert help
-
-"filetype plugin on
-"let b:match_ignorecase=0
-"let b:match_words=
-"  \ '\<begin\>:\<end\>,' .
-"  \ '\<if\>:\<else\>,' .
-"  \ '\<module\>:\<endmodule\>,' .
-"  \ '\<class\>:\<endclass\>,' .
-"  \ '\<program\>:\<endprogram\>,' .
-"  \ '\<clocking\>:\<endclocking\>,' .
-"  \ '\<property\>:\<endproperty\>,' .
-"  \ '\<sequence\>:\<endsequence\>,' .
-"  \ '\<package\>:\<endpackage\>,' .
-"  \ '\<covergroup\>:\<endgroup\>,' .
-"  \ '\<primitive\>:\<endprimitive\>,' .
-"  \ '\<specify\>:\<endspecify\>,' .
-"  \ '\<generate\>:\<endgenerate\>,' .
-"  \ '\<interface\>:\<endinterface\>,' .
-"  \ '\<function\>:\<endfunction\>,' .
-"  \ '\<task\>:\<endtask\>,' .
-"  \ '\<case\>\|\<casex\>\|\<casez\>:\<endcase\>,' .
-"  \ '\<fork\>:\<join\>\|\<join_any\>\|\<join_none\>,' .
-"  \ '`ifdef\>:`else\>:`endif\>,' .
-"  \ '`ifndef\>:`else\>:`endif\>,'
 
