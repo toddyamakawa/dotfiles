@@ -43,6 +43,12 @@ fzf: $(HOME)/.fzf
 $(HOME)/.fzf:
 	git clone --depth 1 https://github.com/junegunn/fzf.git $(HOME)/.fzf
 
+# --- ack ---
+ack: $(HOME)/bin/ack
+$(HOME)/bin/ack:
+	wget -O $@ http://beyondgrep.com/ack-2.14-single-file
+	chmod 755 $@
+
 # --- Powerline Font ---
 fonts: $(fonts)/fonts.dir $(fonts)/fonts.scale $(fontconfig)/10-powerline-symbols.conf
 	xset q | grep -q $(fonts) || xset +fp $(fonts)
