@@ -46,8 +46,8 @@ $(HOME)/.fzf:
 # --- ack ---
 ack: $(HOME)/bin/ack
 $(HOME)/bin/ack:
-	wget -O $@ http://beyondgrep.com/ack-2.14-single-file
-	chmod 755 $@
+	@wget -O $@ http://beyondgrep.com/ack-2.14-single-file
+	@chmod 755 $@
 
 # --- Powerline Font ---
 fonts: $(fonts)/fonts.dir $(fonts)/fonts.scale $(fontconfig)/10-powerline-symbols.conf
@@ -58,11 +58,11 @@ $(fonts)/fonts.dir: $(fonts)/PowerlineSymbols.otf
 $(fonts)/fonts.scale: $(fonts)/PowerlineSymbols.otf
 	mkfontscale $(fonts)
 $(fonts)/PowerlineSymbols.otf:
-	@mkdir -p $(fonts)
-	@wget -P $(fonts) https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+	@mkdir -p $(@D)
+	@wget -O $@ https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
 $(fontconfig)/10-powerline-symbols.conf:
-	mkdir -p $(fontconfig)
-	wget -P $(fontconfig) https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+	@mkdir -p $(@D)
+	@wget -O $@ https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
 
 # --- Vundle ---
 # vim plugin manager
