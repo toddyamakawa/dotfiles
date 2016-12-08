@@ -20,21 +20,26 @@ fonts := $(HOME)/.fonts
 fontconfig := $(HOME)/.config/fontconfig/conf.d
 
 # --- All ---
-all: zsh links vundle
+all: links zshrc vundle fzf ack
 
 # --- Symbolic Links ---
 links: $(links)
 $(HOME)/.%: $(PWD)/%; ln -fs $< $@
 
 # --- oh-my-zsh ---
-# zsh framework manager
-zsh: $(zsh)/oh-my-zsh.sh plugins themes
+zshrc: $(zsh)/oh-my-zsh.sh plugins themes
 $(zsh)/oh-my-zsh.sh:
 	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 plugins: $(plugins)
 themes: $(themes)
 $(plugins) $(themes):
 	ln -fs $(@:$(zsh)/%=$(PWD)/%) $@
+
+# --- ack ---
+ack: $(HOME)/bin/ack
+$(HOME)/bin/ack:
+	@wget -O $@ http://beyondgrep.com/ack-2.14-single-file
+	@chmod 755 $@
 
 # --- fzf ---
 fzf: $(HOME)/.fzf
@@ -43,11 +48,12 @@ fzf: $(HOME)/.fzf
 $(HOME)/.fzf:
 	git clone --depth 1 https://github.com/junegunn/fzf.git $(HOME)/.fzf
 
-# --- ack ---
-ack: $(HOME)/bin/ack
-$(HOME)/bin/ack:
-	@wget -O $@ http://beyondgrep.com/ack-2.14-single-file
-	@chmod 755 $@
+# --- Vundle ---
+# vim plugin manager
+vundle: $(HOME)/.vim/bundle/Vundle.vim
+	vim +PluginInstall +qall
+$(HOME)/.vim/bundle/Vundle.vim:
+	git clone https://github.com/VundleVim/Vundle.vim.git $@
 
 # --- Powerline Font ---
 fonts: $(fonts)/fonts.dir $(fonts)/fonts.scale $(fontconfig)/10-powerline-symbols.conf
@@ -63,13 +69,6 @@ $(fonts)/PowerlineSymbols.otf:
 $(fontconfig)/10-powerline-symbols.conf:
 	@mkdir -p $(@D)
 	@wget -O $@ https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
-
-# --- Vundle ---
-# vim plugin manager
-vundle: $(HOME)/.vim/bundle/Vundle.vim
-	vim +PluginInstall +qall
-$(HOME)/.vim/bundle/Vundle.vim:
-	git clone https://github.com/VundleVim/Vundle.vim.git $(HOME)/.vim/bundle/Vundle.vim
 
 # --- Clean ---
 clean:
