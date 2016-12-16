@@ -288,12 +288,12 @@ nnoremap <Leader>= <C-w>=
 "xmap <silent> ie <Plug>CamelCaseMotion_ie
 
 " Start of line
-nnoremap H ^
-vnoremap H ^
+noremap H ^
+noremap H ^
 
 " End of line
-nnoremap L $
-vnoremap L $
+noremap L $
+noremap L $
 
 " Move one line for wrapped text
 nnoremap j gj
