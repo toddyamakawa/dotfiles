@@ -72,6 +72,10 @@ call vundle#begin()
 	" --- Comments ---
 	Plugin 'scrooloose/nerdcommenter'
 
+	" --- Search ---
+	" Automatically clears search highlight
+	Plugin 'junegunn/vim-slash'
+
 	" ==============
 	"    COMMANDS
 	" ==============
