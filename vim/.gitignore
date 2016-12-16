@@ -1,5 +1,6 @@
 *
 !ftdetect/
+!ftplugin/
 !indent/
 !vundle.vim
 !template
