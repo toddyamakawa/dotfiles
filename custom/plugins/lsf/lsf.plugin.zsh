@@ -44,6 +44,7 @@ alias -g uall='-u all'
 alias -g qemu='-q emulation'
 alias -g qemur='-q emulation -r'
 alias -g qemup='-q emulation -p'
+alias -g poddjob='-P ODDJOB'
 
 # Mail notification
 alias -g bjobmail="$here/bjobmail.sh"
@@ -60,6 +61,9 @@ alias bprojstat='bjobs -noheader -u all -P $LSB_DEFAULTPROJECT | awk '"'"'{print
 alias bproj='bwhat -p'
 
 # --- bmod ---
+function bmod() {
+	echo $(unset LSB_DEFAULTPROJECT LSB_DEFAULTAPP; command bmod $@)
+}
 alias bmodw='bmod -W'
 alias bmodm='bmod -M'
 alias bmod_appn='bmod -appn'
