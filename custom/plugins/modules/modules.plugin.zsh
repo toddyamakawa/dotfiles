@@ -23,7 +23,7 @@ export LANGUAGE='en_US.UTF-8'
 
 # --- Scripting languages ---
 alias rubyload='mload ruby/ruby/2.2.1'
-alias pythonload='mload python/python/3.5.1'
+alias pythonload='mload python/python/2.7.8 python/python/3.5.1'
 alias perlload='mload perl/perl/5.12.3'
 alias tclload='mload tct/tcl/8.6.1'
 alias javaload='mload sun/jdk/1.8.0_77'
