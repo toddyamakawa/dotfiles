@@ -16,6 +16,9 @@ function echo_eval() {
 	eval "$@"
 }
 
+
+alias nor="RPROMPT=''"
+
 # --- zsh ---
 alias zshrc='source ~/.zshrc'
 function zsh-theme() {
