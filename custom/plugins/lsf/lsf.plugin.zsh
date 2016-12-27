@@ -62,7 +62,7 @@ alias bproj='bwhat -p'
 
 # --- bmod ---
 function bmod() {
-	echo $(unset LSB_DEFAULTPROJECT LSB_DEFAULTAPP; command bmod $@)
+	echo $(unset LSB_DEFAULTPROJECT LSB_DEFAULTAPP LSB_QUEUE LSB_DEFAULTWORKFLOW ; command bmod $@)
 }
 alias bmodw='bmod -W'
 alias bmodm='bmod -M'
