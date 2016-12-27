@@ -31,6 +31,9 @@ function velinfo() {
 	}' veloce.log/compile_velgs_0.log veloce.med/velsyn.out/velsyn.report
 }
 
+# --- Script ---
+alias velfixjob='/home/lsf/scheduler/bin/velocefixjobs.sh'
+
 # --- LSF ---
 alias velsub='bs32 -q emulation -a veloce -oo output.log'
 alias velsub2='bs32 -q emulation -a veloce2 -oo output.log'
