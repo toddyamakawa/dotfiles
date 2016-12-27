@@ -8,8 +8,13 @@ endif
 
 " --- Keywords ---
 hi def link uart_keywords Keyword
-syn keyword uart_keywords SVOS BOOTEDOK TEST COMPLETE
-syn match uart_keywords /\vCPU\d+/
+syn match uart_keywords /\v.*SVOS.*/
+syn match uart_keywords /\v.*CPU\d+.*/
+
+" --- Errors ---
+hi def link uart_error Error
+syn match uart_error /\v.*<[Pp]anic>.*/
+syn match uart_error /\v.*<[Ff]ault>.*/
 
 " --- Timestamps ---
 " Highlight timestamps as comments
