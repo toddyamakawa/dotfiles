@@ -51,6 +51,10 @@ silent! colorscheme jellybeans " Favorite colorscheme
 "let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 "let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
+"let &t_SI = "\<Esc>[6 q"
+"let &t_SR = "\<Esc>[4 q"
+"let &t_EI = "\<Esc>[2 q"
+
 " --- Display Settings ---
 set list           " Enable list mode
 set number         " Show line number
@@ -69,7 +73,7 @@ let g:indentLine_char = '|'
 autocmd BufRead * match SpellBad /\%81v.\|\s\+$/
 
 " Highlight every 3rd digit of numbers
-autocmd BufRead * 2match Delimiter /\d\ze\%(\d\d\%(\d\{3}\)*\)\>/
+"autocmd BufRead * 2match Delimiter /\d\ze\%(\d\d\%(\d\{3}\)*\)\>/
 
 " Disable comment formatting
 autocmd BufNewFile,BufRead * set formatoptions-=cro
@@ -189,11 +193,6 @@ nnoremap <Leader>gs :Gstatus<Enter>
 " --- GitGutter ---
 nnoremap <Leader>gg :GitGutterToggle<Enter>
 
-" --- NERDCommenter ---
-nmap # <Plug>NERDCommenterToggle
-xmap # <Plug>NERDCommenterToggle
-
-
 " ===============
 "    CLIPBOARD
 " ===============
@@ -258,10 +257,12 @@ execute "set <M-h>=\<Esc>h"
 execute "set <M-j>=\<Esc>j"
 execute "set <M-k>=\<Esc>k"
 execute "set <M-l>=\<Esc>l"
+execute "set <M-->=\<Esc>-"
 nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <M--> :TmuxNavigatePrevious<cr>
 
 " Resize windows evenly
 nnoremap <Leader>= <C-w>=
