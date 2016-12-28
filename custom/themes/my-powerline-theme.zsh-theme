@@ -165,7 +165,17 @@ function rprompt_git_commits() {
 }
 
 function rprompt_git() {
+
+	# Check if Git repo
 	git rev-parse --git-dir &>/dev/null || return
+
+	# Check if blacklist
+	local blacklist url
+	blacklist+=(ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter)
+	url=$(git remote get-url origin)
+	[[ -n ${blacklist[(r)$url]} ]] && return
+
+	# Display branch/commits
 	rprompt_git_branch
 	rprompt_git_commits
 }
