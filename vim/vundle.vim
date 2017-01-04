@@ -36,6 +36,9 @@ call vundle#begin()
 	" --- .tmux.conf Syntax ---
 	Plugin 'keith/tmux.vim'
 
+	" --- ANSI Escape Syntax ---
+	Plugin 'powerman/vim-plugin-AnsiEsc'
+
 	" =================
 	"    INTEGRATION
 	" =================
