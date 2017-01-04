@@ -172,6 +172,7 @@ function rprompt_git() {
 	# Check if blacklist
 	local blacklist url
 	blacklist+=(ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter)
+	blacklist+=(ssh://ds-gerrit.euhpc.arm.com:29418/svos/linux)
 	url=$(git remote get-url origin)
 	[[ -n ${blacklist[(r)$url]} ]] && return
 
