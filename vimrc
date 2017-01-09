@@ -72,8 +72,9 @@ let g:indentLine_char = '|'
 " Highlight column 81 and trailing whitespace
 autocmd BufRead * match SpellBad /\%81v.\|\s\+$/
 
-" Highlight every 3rd digit of numbers
-"autocmd BufRead * 2match Delimiter /\d\ze\%(\d\d\%(\d\{3}\)*\)\>/
+" Highlight most significant digits of large numbers
+" 1 12 123 1234 12345 123456 1234567 12345678 123456789 1234567890
+autocmd BufRead * 2match Delimiter /\v<\zs\d{1,3}\ze(\d{3}){2,}>/
 
 " Disable comment formatting
 autocmd BufNewFile,BufRead * set formatoptions-=cro
@@ -103,8 +104,6 @@ set scrolloff=4   " Lines above and below cursor
 set sidescroll=1  " Horizontal number of columns to scroll
 
 " --- Indentation Shortcuts ---
-" Format file with indentation
-nnoremap == gg=G
 " Press <Tab> in visual mode to indent
 vnoremap <Tab> >gv
 " Press <Shift-Tab> in visual mode to unindent
@@ -258,11 +257,16 @@ execute "set <M-j>=\<Esc>j"
 execute "set <M-k>=\<Esc>k"
 execute "set <M-l>=\<Esc>l"
 execute "set <M-->=\<Esc>-"
-nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <M--> :TmuxNavigatePrevious<cr>
+noremap <silent> <M-h> :TmuxNavigateLeft<cr>
+noremap <silent> <M-j> :TmuxNavigateDown<cr>
+noremap <silent> <M-k> :TmuxNavigateUp<cr>
+noremap <silent> <M-l> :TmuxNavigateRight<cr>
+noremap <silent> <M--> :TmuxNavigatePrevious<cr>
+inoremap <silent> <M-h> <Esc>:TmuxNavigateLeft<cr>a
+inoremap <silent> <M-j> <Esc>:TmuxNavigateDown<cr>a
+inoremap <silent> <M-k> <Esc>:TmuxNavigateUp<cr>a
+inoremap <silent> <M-l> <Esc>:TmuxNavigateRight<cr>a
+inoremap <silent> <M--> <Esc>:TmuxNavigatePrevious<cr>a
 
 " Resize windows evenly
 nnoremap <Leader>= <C-w>=
@@ -290,28 +294,25 @@ nnoremap <Leader>= <C-w>=
 
 " Start of line
 noremap H ^
-noremap H ^
 
 " End of line
 noremap L $
-noremap L $
 
 " Move one line for wrapped text
-nnoremap j gj
-nnoremap k gk
+noremap j gj
+noremap k gk
 
 " Mark with M
-nnoremap M m
+noremap M m
 " Jump to mark with m
-nnoremap m '
+noremap m '
 
 " Repeat latest f, t, F or T in opposite direction
 " Opposite direction of ;
-nnoremap : ,
-vnoremap : ,
+noremap : ,
 
 " Disable lookup
-map K <nop>
+noremap K <nop>
 
 " Stop using arrow keys
 "map <Up> <nop>
