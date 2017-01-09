@@ -1,5 +1,5 @@
 
-# vi: syntax=gitconfig
+# vi: filetype=gitconfig
 
 [user]
 	name = Todd Yamakawa
@@ -14,46 +14,63 @@
 	suppress-cc = all
 
 [alias]
-	alias = !git config -l | grep alias | cut -c 7-
-	amend = commit --amend
+
+	# --- config ---
+	alias = !git config --list | sed -n 's/^alias.//p' | sort
+	vi = config --global -e
+
+	# --- info ---
+	info = remote show origin
+	url = remote get-url origin
+	stat = status
+
+	# --- log ---
+	ls = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\"
+	ll = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --numstat
+
+	# --- add ---
 	au = add -u
+	ours = "!f() { git co --ours $@ && git add $@; }; f"
+	theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+
+	# --- commit ---
+	amend = commit --amend
+	cm = commit -m
+
+	# --- branch ---
 	bd = branch -d
 	bl = branch -vv -a
-	bname = rev-parse --abbrev-ref HEAD
-	bpush = !git push --set-upstream origin $(git bname)
 	br = branch
 	bu = branch -u
 	bv = branch -vv
-	ci = commit
-	cm = commit -m
+
+	# --- diff ---
+	diffs = diff --staged
+	meld = difftool -t meld
+	melds = difftool -t meld --staged
+	vimdiff = difftool -t vimdiff
+	vimdiffs = difftool -t vimdiff --staged
+
+	# --- checkout ---
 	co = checkout
 	cob = checkout -b
 	cot = checkout --track
-	diffs = diff --staged
+
+	bname = rev-parse --abbrev-ref HEAD
+	bpush = !git push --set-upstream origin $(git bname)
 	format-patch-1 = format-patch HEAD~1
 	hub = "!f() { git clone https://github.com/$1/$2; }; f"
-	info = remote show origin
-	ls = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\"
-	ll = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --numstat
-	meld = difftool -t meld
-	melds = difftool -t meld --staged
 	msquash = merge --squash --no-commit
 	pop = stash pop
 	publish = push origin master:refs/publish/master
 	pullr = pull --rebase
 	pull-theirs = pull -s recursive -X theirs
-	rv = remote -vv
 	file = "!f() { git difftool $1{,^} -- $2; }; f"
 	sha = "!f() { git diff --numstat $1{^,}; }; f"
-	stat = status
 	tagn = tag -n
 	tags = log --tags --no-walk --decorate --oneline
 	unstage = reset HEAD
 	undo-merge = reset --hard ORIG_HEAD
-	url = remote get-url origin
-	vi = config --global -e
-	vimdiff = difftool -t vimdiff
-	vimdiffs = difftool -t vimdiff --staged
 
 	# --- Git Repositories ---
 	newasp = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/asp
