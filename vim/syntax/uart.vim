@@ -10,11 +10,14 @@ endif
 hi def link uart_keywords Keyword
 syn match uart_keywords /\v.*SVOS.*/
 syn match uart_keywords /\v.*CPU\d+.*/
+syn match uart_keywords /\v<Payload>.*<launched>/
+syn match uart_keywords /\v<Payload>.*<terminated>/
 
 " --- Errors ---
 hi def link uart_error Error
 syn match uart_error /\v.*<[Pp]anic>.*/
 syn match uart_error /\v.*<[Ff]ault>.*/
+syn match uart_error /\v\c<error>.*/
 
 " --- Timestamps ---
 " Highlight timestamps as comments
