@@ -16,20 +16,23 @@
 [alias]
 
 	# --- config ---
+	a = !git config --list | sed -n 's/^alias.//p' | sort
 	alias = !git config --list | sed -n 's/^alias.//p' | sort
 	vi = config --global -e
 
 	# --- info ---
+	stat = status
 	info = remote show origin
 	url = remote get-url origin
-	stat = status
 
 	# --- log ---
 	ls = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\"
 	ll = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --numstat
+	graph = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --graph
 
 	# --- add ---
 	au = add -u
+	ap = add --patch
 	ours = "!f() { git co --ours $@ && git add $@; }; f"
 	theirs = "!f() { git co --theirs $@ && git add $@; }; f"
 
@@ -38,23 +41,33 @@
 	cm = commit -m
 
 	# --- branch ---
-	bd = branch -d
-	bl = branch -vv -a
 	br = branch
+	bd = branch -d
 	bu = branch -u
 	bv = branch -vv
+	bl = branch -vv -a
 
 	# --- diff ---
 	diffs = diff --staged
-	meld = difftool -t meld
-	melds = difftool -t meld --staged
-	vimdiff = difftool -t vimdiff
-	vimdiffs = difftool -t vimdiff --staged
+	meld = difftool --tool=meld --no-prompt
+	melds = !git meld --staged
+	vimdiff = difftool --tool=vimdiff
+	vimdiffs = !git vimdiff --staged
 
 	# --- checkout ---
 	co = checkout
 	cob = checkout -b
 	cot = checkout --track
+
+	# --- tag ---
+	tagn = tag -n
+	tags = log --tags --no-walk --decorate --oneline
+
+	# --- review ---
+	r = review
+	rl = review --list
+	rd = review --download
+	rx = review --cherrypick
 
 	bname = rev-parse --abbrev-ref HEAD
 	bpush = !git push --set-upstream origin $(git bname)
@@ -67,14 +80,12 @@
 	pull-theirs = pull -s recursive -X theirs
 	file = "!f() { git difftool $1{,^} -- $2; }; f"
 	sha = "!f() { git diff --numstat $1{^,}; }; f"
-	tagn = tag -n
-	tags = log --tags --no-walk --decorate --oneline
 	unstage = reset HEAD
 	undo-merge = reset --hard ORIG_HEAD
 
 	# --- Git Repositories ---
 	newasp = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/asp
-	newiris = "!f() { [[ -n $1 ]] && iris=$1 || iris=iris; git clone ssh://todyam01@ds-gerrit.euhpc.arm.com:29418/svos/iris $iris && scp -p -P 29418 todyam01@ds-gerrit.euhpc.arm.com:hooks/commit-msg $iris/.git/hooks/; }; f"
+	newiris = clone ssh://todyam01@ds-gerrit.euhpc.arm.com:29418/svos/iris
 	newkiwi = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/kiwi
 	newkvs = clone login8.nahpc.arm.com:/projects/pd/svos/git/kvs
 	newgem = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/gem
