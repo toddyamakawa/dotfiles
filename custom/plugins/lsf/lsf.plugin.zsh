@@ -2,20 +2,21 @@
 local here=${0:h}
 
 # --- bsub ---
-alias my_bsub="bsub -W 96:00 -Jd sysbench-2.x-run_veloce_tbx -R 'select[rhe6 && x86_64 && os64]'"
-alias bs1='my_bsub -M 1024000'
-alias bs2='my_bsub -M 2048000'
-alias bs4='my_bsub -M 4096000'
-alias bs8='my_bsub -M 8192000'
-alias bs16='my_bsub -M 16384000'
-alias bs32='my_bsub -M 32768000'
-alias bs64='my_bsub -M 65536000'
-alias bs80='my_bsub -M 81920000'
-alias bs128='my_bsub -M 131072000'
-alias bs256='my_bsub -M 262144000'
+alias bs="bsub -Jd sysbench-2.x-run_veloce_tbx -R 'select[rhe6 && x86_64 && os64]' -W 96:00"
+alias bs1='bs -M 1024000'
+alias bs2='bs -M 2048000'
+alias bs4='bs -M 4096000'
+alias bs8='bs -M 8192000'
+alias bs16='bs -M 16384000'
+alias bs32='bs -M 32768000'
+alias bs64='bs -M 65536000'
+alias bs80='bs -M 81920000'
+alias bs128='bs -M 131072000'
+alias bs256='bs -M 262144000'
 
 alias bszsh='bs16 -Is -XF zsh'
 alias bsbash='bs16 -Is -XF bash'
+alias bsshell='bs16 -Is -XF $SHELL'
 alias bsxterm='bs16 -XF xterm'
 
 # --- bkill ---
@@ -61,10 +62,16 @@ alias bprojstat='bjobs -noheader -u all -P $LSB_DEFAULTPROJECT | awk '"'"'{print
 alias bproj='bwhat -p'
 
 # --- bmod ---
+alias breset='unset LSB_DEFAULTPROJECT LSB_DEFAULTAPP LSB_DEFAULTQUEUE LSB_DEFAULTWORKFLOW'
 function bmod() {
-	echo $(unset LSB_DEFAULTPROJECT LSB_DEFAULTAPP LSB_QUEUE LSB_DEFAULTWORKFLOW ; command bmod $@)
+	echo $(breset; command bmod $@)
 }
-alias bmodw='bmod -W'
+function bmodw() {
+	duration=$1
+	shift
+	bmod -W $duration -We $duration $@
+}
+alias bmodfg='bmod -app FG'
 alias bmodm='bmod -M'
 alias bmod_appn='bmod -appn'
 alias bmod_highmem='bmod -app HIGH-MEM'
