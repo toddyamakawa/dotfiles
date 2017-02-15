@@ -1,0 +1,13 @@
+#compdef cup
+
+function _cup() {
+	local -U dirs
+	dirs=(${(s:/:)PWD})
+	dirs=(${dirs[0,-2]})
+	paths=""
+	for d in $dirs; do
+		paths+="$d:'${PWD%$d/*}$d' "
+	done
+	_arguments "*:dirs:(($paths))"
+}
+

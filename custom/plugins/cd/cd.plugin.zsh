@@ -13,17 +13,9 @@ alias cdtemp='cd $(mktemp -d)'
 
 
 # --- cup ---
-
 # cd 'up'
 function cup() {
 	cd ${PWD%$1/*}/$1
 	pwd
 }
-
-# compdef _cup
-function _cup() {
-	dir=$(pwd | sed 's:/: :g')
-	_arguments "*:dir:(($dir))"
-}
-compdef _cup cup
 
