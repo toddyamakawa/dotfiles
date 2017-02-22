@@ -169,6 +169,9 @@ function rprompt_git() {
 	# Check if Git repo
 	git rev-parse --git-dir &>/dev/null || return
 
+	# Check if remote origin exists
+	git ls-remote --exit-code origin &>/dev/null || return
+
 	# Check if blacklist
 	local blacklist url
 	blacklist+=(ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter)
