@@ -146,12 +146,16 @@ function rprompt_bg_fg() {
 function rprompt_git_branch() {
 	local fg=green
 	local branch=$(git rev-parse --abbrev-ref HEAD)
+
 	git rev-parse @{u} &>/dev/null || fg=cyan
 	git diff-index --quiet HEAD || fg=red
 	rprompt_bg_fg black $fg $branch
 }
 
 function rprompt_git_commits() {
+
+	# Check if remote exists
+	git ls-remote --exit-code @{u} &>/dev/null || return
 
 	# Return if detached state
 	git rev-parse @{u} &>/dev/null || return
@@ -169,14 +173,11 @@ function rprompt_git() {
 	# Check if Git repo
 	git rev-parse --git-dir &>/dev/null || return
 
-	# Check if remote origin exists
-	git ls-remote --exit-code origin &>/dev/null || return
-
 	# Check if blacklist
 	local blacklist url
 	blacklist+=(ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter)
 	blacklist+=(ssh://ds-gerrit.euhpc.arm.com:29418/svos/linux)
-	url=$(git remote get-url origin)
+	url=$(git remote get-url @{u} &>/dev/null)
 	[[ -n ${blacklist[(r)$url]} ]] && return
 
 	# Display branch/commits
