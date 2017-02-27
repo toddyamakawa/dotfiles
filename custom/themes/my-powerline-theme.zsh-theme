@@ -155,7 +155,7 @@ function rprompt_git_branch() {
 function rprompt_git_commits() {
 
 	# Check if remote exists
-	git ls-remote --exit-code @{u} &>/dev/null || return
+	git ls-remote --exit-code &>/dev/null || return
 
 	# Return if detached state
 	git rev-parse @{u} &>/dev/null || return
