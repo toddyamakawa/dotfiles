@@ -34,11 +34,15 @@ alias bjobsf='bjobs -o "jobid:8 user:8 stat:5 project:9 run_time:-20 cmd"'
 alias bemu='bjobsf -q emulation -u all'
 
 # Specific fields
-alias bcommands='bjobs -o "jobid:8 stat:5 cmd"'
-alias bcmd='bjobs -o "jobid:8 stat:5 cmd"'
-alias bpwd='bjobs -o "jobid:8 stat:5 sub_cwd"'
-alias bapp='bjobs -o "jobid:8 stat:5 app"'
-alias bdep='bjobs -o "jobid:8 stat:5 dependency"'
+function bprint() {
+	local format=$1
+	shift
+	eval bjobs -o "'jobid:8 stat:5 $format'" $@
+}
+alias bcmd='bprint cmd'
+alias bpwd='bprint sub_cwd'
+alias bapp='bprint app'
+alias bdep='bprint dependency'
 
 # Specific values
 alias -g uall='-u all'
