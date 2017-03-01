@@ -143,23 +143,7 @@ function rprompt_bg_fg() {
 	shift 2 && echo -n "$@"
 }
 
-function rprompt_git_branch() {
-	local fg=green
-	local branch=$(git rev-parse --abbrev-ref HEAD)
-
-	git rev-parse @{u} &>/dev/null || fg=cyan
-	git diff-index --quiet HEAD || fg=red
-	rprompt_bg_fg black $fg $branch
-}
-
 function rprompt_git_commits() {
-
-	# Check if remote exists
-	git ls-remote --exit-code &>/dev/null || return
-
-	# Return if detached state
-	git rev-parse @{u} &>/dev/null || return
-
 	local stat
 	stat=$(git status -sb)
 	local ahead=$(echo $stat | sed -n '1s/.*ahead \([0-9]\+\).*/\1/p')
@@ -170,18 +154,23 @@ function rprompt_git_commits() {
 
 function rprompt_git() {
 
-	# Check if Git repo
-	git rev-parse --git-dir &>/dev/null || return
+	# Check if Git directory
+	git rev-parse --is-inside-work-tree &>/dev/null || return
 
 	# Check if blacklist
-	local blacklist url
+	local blacklist url=$(git config --get remote.origin.url 2>/dev/null)
 	blacklist+=(ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter)
 	blacklist+=(ssh://ds-gerrit.euhpc.arm.com:29418/svos/linux)
-	url=$(git remote get-url @{u} &>/dev/null)
 	[[ -n ${blacklist[(r)$url]} ]] && return
 
-	# Display branch/commits
-	rprompt_git_branch
+	# Color Git branch name
+	local fg=green branch=$(git rev-parse --abbrev-ref HEAD)
+	git rev-parse @{u} &>/dev/null || fg=cyan
+	git diff-index --quiet HEAD || fg=red
+	rprompt_bg_fg black $fg $branch
+
+	# Get ahead/behind commits
+	[[ -n $url ]] || return
 	rprompt_git_commits
 }
 
