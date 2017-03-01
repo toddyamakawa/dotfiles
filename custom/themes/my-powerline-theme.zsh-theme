@@ -51,7 +51,7 @@ function prompt_bg_fg() {
 
 # --- Prompt End ---
 function prompt_end() {
-	[[ $KEYMAP == vicmd ]] && prompt_bg_fg black white || prompt_bg_fg reset reset
+	prompt_bg_fg reset reset
 }
 
 # Status:
@@ -82,11 +82,14 @@ function prompt_host() {
 # --- Directory ---
 # BG Blue: Username in path
 # BG Cyan: Username not in path
+# BG Red: Bad permissions
+# BG Magenta: vicmd mode
 function prompt_dir() {
 	local p=${PWD/$HOME/\~} bg=blue
 	[[ $PWD =~ $(whoami) ]] || bg=cyan
 	permission=$(prompt_permission)
 	[[ -n $permission ]] || bg=red
+	[[ $KEYMAP == vicmd ]] && bg=magenta
 	prompt_bg_fg $bg white $permission$c${p##*/}
 }
 
