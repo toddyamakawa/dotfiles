@@ -182,9 +182,12 @@ function rprompt_git() {
 #	[[ -n $MAGIC_NOTIFY ]] && [[ $SECONDS -gt 300 ]] && zenity --info --text "DONE\n$MAGIC_ENTER_BUFFER"
 #}
 
+# --- Get Milliseconds ---
+function precmd() { elapsed_ms=$(($(date +%s%3N)-$start_ms)); }
+
+# --- Right Prompt Elapsed Time ---
 function rprompt_time() {
-	local sec=$SECONDS
-	rprompt_bg_fg blue white $sec
+	rprompt_bg_fg blue white $(printf "%0.3f" $(($elapsed_ms/1000.0)))
 }
 
 # --- Right Prompt Background ---
