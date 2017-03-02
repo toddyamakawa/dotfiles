@@ -8,9 +8,11 @@ bindkey -v
 # ==================
 #    ZSH COMMANDS
 # ==================
-alias zkeymaps='bindkey -l'
-alias zkeyscmd='bindkey -M vicmd'
-alias zkeysins='bindkey -M viins'
+function zkeys() {
+	for keymap in $(bindkey -l); do
+		bindkey -M $keymap | awk '{$1="['$keymap'] "$1; print}'
+	done
+}
 
 
 # =================
@@ -18,21 +20,25 @@ alias zkeysins='bindkey -M viins'
 # =================
 
 # Ctrl-j and Ctrl-k to search history
-# search-history-forward
-# search-history-backward
-bindkey -M viins '^J' down-line-or-search
-bindkey -M viins '^K' up-line-or-search
+#bindkey -M viins '^J' down-line-or-search
+#bindkey -M viins '^K' up-line-or-search
 #bindkey -M viins '^J' down-line-or-history
 #bindkey -M viins '^K' up-line-or-history
+bindkey -M viins '^J' history-search-forward
+bindkey -M viins '^K' history-search-backward
+#bindkey -M viins '^J' history-incremental-search-forward
+#bindkey -M viins '^K' history-incremental-search-backward
 
-# jj or kk to enter command mode
-bindkey -M viins 'jj' vi-cmd-mode
-bindkey -M viins 'kk' vi-cmd-mode
+# Hit 'j' and 'k' simultaneously to enter vicmd mode
+export KEYTIMEOUT=2
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M viins 'kj' vi-cmd-mode
 
-# Ctrl-backspace to delete word backwards
-bindkey -M viins '^?' backward-kill-word
+# FIXME: Ctrl-backspace to delete word backwards, doesn't work in gnome-terminal
+#bindkey -M viins '^?' backward-kill-word
+#bindkey -M viins "^?" backward-kill-word
+#bindkey -M viins "^?" backward-kill-word
+#bindkey -M viins '^[^?' backward-kill-word
 
 
 # ==================
