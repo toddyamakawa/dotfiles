@@ -31,8 +31,8 @@ bindkey -M viins 'kk' vi-cmd-mode
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M viins 'kj' vi-cmd-mode
 
-# FIXME: Ctrl-backspace to delete word backwards
-#bindkey -M viins '^\b' backward-kill-word
+# Ctrl-backspace to delete word backwards
+bindkey -M viins '^?' backward-kill-word
 
 
 # ==================
@@ -46,4 +46,13 @@ bindkey -M vicmd 'L' vi-end-of-line
 # Use Vim to edit command line
 autoload -Uz edit-command-line
 bindkey -M vicmd 'v' edit-command-line
+
+
+# =====================
+#    MENU SELCT MODE
+# =====================
+bindkey -M menuselect 'k' up-line-or-history
+bindkey -M menuselect 'j' down-line-or-history
+bindkey -M menuselect 'l' forward-char
+bindkey -M menuselect 'h' backward-char
 
