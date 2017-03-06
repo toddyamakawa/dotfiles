@@ -9,6 +9,9 @@ bindkey -v
 # Turn two-key key-bindings into a chorded key-bindings
 export KEYTIMEOUT=2
 
+# Enable chorded inputs
+export VICHORD=1
+
 
 # ==================
 #    ZSH COMMANDS
@@ -38,7 +41,7 @@ function vi-up-end() {
 
 zle -N vi-xclip-paste
 function vi-xclip-paste() {
-	xclip -o | xargs echo -n
+	BUFFER="$LBUFFER$(xclip -o | xargs echo -n)$RBUFFER"
 }
 
 # =================
