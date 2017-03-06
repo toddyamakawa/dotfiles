@@ -19,9 +19,9 @@ fi
 plugins+=(modules my-zsh magic-enter cd vim xclip tmux vi-mode fzf)
 
 #function source() {
-#	local start=$(date +%s%N)
+#	local start_ms=$(date +%s%3N)
 #	builtin source $1
-#	echo "$(( $(date +%s%N) - $start )) $1"
+#	echo "$(($(date +%s%3N)-$start_ms)) $1"
 #}
 
 source $ZSH/oh-my-zsh.sh
