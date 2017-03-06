@@ -41,7 +41,7 @@ function vi-up-end() {
 
 zle -N vi-xclip-paste
 function vi-xclip-paste() {
-	BUFFER="$LBUFFER$(xclip -o | xargs echo -n)$RBUFFER"
+	LBUFFER="$LBUFFER$(xclip -o | xargs echo -n)"
 }
 
 # =================
