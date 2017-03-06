@@ -17,7 +17,8 @@ function echo_eval() {
 }
 
 
-alias nor="RPROMPT=''"
+#alias nor="RPROMPT=''"
+alias nor="function rprompt_git(){}"
 
 # --- zsh ---
 alias zshrc='source ~/.zshrc'

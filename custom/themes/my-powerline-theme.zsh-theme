@@ -177,13 +177,12 @@ function rprompt_git() {
 	rprompt_git_commits
 }
 
-#function rprompt_elapsed_time() {
-#	echo "${blue}$SECONDS${no_color}"
-#	[[ -n $MAGIC_NOTIFY ]] && [[ $SECONDS -gt 300 ]] && zenity --info --text "DONE\n$MAGIC_ENTER_BUFFER"
-#}
-
 # --- Get Milliseconds ---
-function precmd() { elapsed_ms=$(($(date +%s%3N)-$start_ms)); }
+function precmd() {
+	elapsed_ms=$(($(date +%s%3N)-$start_ms))
+	#[[ $elapsed_ms -gt 300000 ]] && zenity --info --text "DONE\n$MAGIC_ENTER_BUFFER"
+	#[[ -n $MAGIC_NOTIFY ]] && [[ $SECONDS -gt 300 ]] && zenity --info --text "DONE\n$MAGIC_ENTER_BUFFER"
+}
 
 # --- Right Prompt Elapsed Time ---
 function rprompt_time() {
@@ -207,8 +206,6 @@ function rprompt_end() {
 
 # --- Build Right Prompt ---
 build_rprompt() {
-	#RPROMNPT_BG='NONE'
-	RPROMNPT_BG=$PROMPT_BG
 	rprompt_git
 	rprompt_time
 }
