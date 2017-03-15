@@ -129,11 +129,19 @@ function setdisp() {
 }
 
 function rmrf() {
-	for f in $@; do
-		f=${f%/}
-		mv $f deleting.$f.$$
-		rm -rf deleting.$f.$$ &
+	local src dest
+	for src in $@; do
+		src=${src%/}
+		dest=$(dirname $src)/deleting.$(basename $src).$$
+		mv $src $dest
+		rm -rf $dest &
 	done
+}
+
+function cp1() {
+	local dir=$1
+	mkdir $(basename $dir)
+	cp $dir/* $(basename $dir)
 }
 
 # --- Source Files ---
