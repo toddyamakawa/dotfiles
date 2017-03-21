@@ -1,6 +1,8 @@
 
 local here=${0:h}
 
+alias bfield="cat $here/fields.txt"
+
 # --- bsub ---
 alias bs="bsub -Jd sysbench-2.x-run_veloce_tbx -R 'select[rhe6 && x86_64 && os64]' -W 96:00"
 alias bs1='bs -M 1024000'
@@ -54,7 +56,7 @@ alias -g poddjob='-P ODDJOB'
 # Mail notification
 alias -g bjobmail="$here/bjobmail.sh"
 function bnotify() {
-	bcommands | grep -Eq "bjobmail.*$1" && return 1
+	bcmd | grep -Eq "bjobmail.*$1" && return 1
 	bs1 -w 'ended('$1')' -o /dev/null bjobmail $1
 }
 
