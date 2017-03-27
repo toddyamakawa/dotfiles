@@ -1,7 +1,7 @@
 
 # --- Environment Variables ---
-export EDITOR=vim
-export MANPAGER="vim -c MANPAGER -"
+#export EDITOR=vim
+#export MANPAGER="vim -c MANPAGER -"
 
 
 # --- Aliases ---

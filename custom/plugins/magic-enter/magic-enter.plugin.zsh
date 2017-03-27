@@ -17,7 +17,8 @@ function magic-enter() {
 	set-title-buffer
 	set-display
 	export MAGIC_ENTER_BUFFER="$BUFFER"
-	[[ -z $BUFFER ]] && zle clear-screen || zle accept-line
+#	[[ -z $BUFFER ]] && zle clear-screen || zle accept-line
+        zle accept-line
 }
 
 # Set title

@@ -2,8 +2,8 @@
 # vi: filetype=gitconfig
 
 [user]
-	name = Todd Yamakawa
-	email = todd.yamakawa@arm.com
+	name = Jimmy Cumming
+	email = jimmy.cumming@arm.com
 
 [core]
 	editor = vim

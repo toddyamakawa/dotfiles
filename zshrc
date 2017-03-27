@@ -1,6 +1,7 @@
 
 # --- oh-my-zsh ---
 export ZSH=$HOME/.oh-my-zsh
+export EDITOR=emacs
 export SHELL=$(builtin which zsh)
 DISABLE_AUTO_TITLE=true
 COMPLETION_WAITING_DOTS="true"
@@ -16,7 +17,7 @@ if [[ $(hostname --long) =~ arm.com$ ]]; then
 else
 	function module(){}
 fi
-plugins+=(modules my-zsh magic-enter cd vim xclip tmux vi-mode awk fzf)
+plugins+=(modules my-zsh magic-enter cd vim xclip tmux awk fzf)
 
 #function source() {
 #	local start_ms=$(date +%s%3N)

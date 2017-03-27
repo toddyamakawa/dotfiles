@@ -1,5 +1,5 @@
 
-export DEPOT_SETUP_ROOT=/home/todyam01/.setup.zshrc
+export DEPOT_SETUP_ROOT=/home/jimcum01/.setup.zshrc
 source $DEPOT_SETUP_ROOT/init/zsh
 
 alias sitename='hostname -f | \grep -o ..hpc'
@@ -22,8 +22,8 @@ function disass() {
 alias disass_syms='awk '"'"'/^ +\w+$/ {new=$1} /^ +[0-9a-fx]+:/ && new!="" {print $1, new; new=""}'"'"''
 
 # --- Porter ---
-export PROJ_HOME=/projects/ssg/pj01384_porter/todyam01/porter
-export WORK_DIR=/arm/projectscratch/ssg/pj01384_porter/todyam01/porter
+export PROJ_HOME=/projects/ssg/pj01384_porter/jimcum01/porter
+export WORK_DIR=/arm/projectscratch/ssg/pj01384_porter/jimcum01/porter
 #source $PROJ_HOME/logical/shared/tools/bin/porter_rtl_setup_bash
 
 # --- SVOS ---

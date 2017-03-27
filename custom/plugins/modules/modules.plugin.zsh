@@ -12,17 +12,18 @@ alias mlist='module list'
 function mload() { interactive? && module load $@; }
 
 # --- Load Essentials ---
-mload core util swdev eda
+mload core util swdev eda google/golang/1.6
 mload arm/cluster/2.0 arm/license/production
 mload git/git/2.7.0 python/git-review_py2.7.8/1.25.0 vim/vim/8.0.5
-module load mosh/mosh/1.2.4
+mload gnu/emacs/24.5
+mload ruby/ruby/2.2.3
 
 export LC_ALL='en_US.UTF-8'
 export LANG='en_US.UTF-8'
 export LANGUAGE='en_US.UTF-8'
 
 # --- Scripting languages ---
-alias rubyload='mload ruby/ruby/2.2.1'
+alias rubyload='mload ruby/ruby/2.2.3'
 alias pythonload='mload python/python/2.7.8 python/python/3.5.1'
 alias perlload='mload perl/perl/5.12.3'
 alias tclload='mload tct/tcl/8.6.1'

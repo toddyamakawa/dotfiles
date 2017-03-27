@@ -86,11 +86,15 @@ function prompt_host() {
 # BG Magenta: vicmd mode
 function prompt_dir() {
 	local p=${PWD/$HOME/\~} bg=blue
+        local gitdir=$(git rev-parse --git-dir)
+        local githead=${gitdir%%.git}
 	[[ $PWD =~ $(whoami) ]] || bg=cyan
 	permission=$(prompt_permission)
 	[[ -n $permission ]] || bg=red
 	[[ $KEYMAP == vicmd ]] && bg=magenta
-	prompt_bg_fg $bg white $permission$c${p##*/}
+        prompt_bg_fg $bg white $permission$c${p##*/}
+
+
 }
 
 # --- Permission ---
