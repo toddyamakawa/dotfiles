@@ -92,9 +92,16 @@ function prompt_dir() {
 	permission=$(prompt_permission)
 	[[ -n $permission ]] || bg=red
 	[[ $KEYMAP == vicmd ]] && bg=magenta
-        prompt_bg_fg $bg white $permission$c${p##*/}
+	prompt_bg_fg $bg white $permission${p##*/}
+	#prompt_bg_fg $bg white $permission$(prompt_gitdir)
+}
 
-
+# --- Git Directory ---
+function prompt_gitdir() {
+	local gitdir=$(git rev-parse --git-dir 2>/dev/null)
+	gitdir=$(readlink -f $gitdir 2>/dev/null)
+	local githead=$(dirname ${gitdir%.git} 2>/dev/null)
+	echo ${PWD##$githead/}
 }
 
 # --- Permission ---
