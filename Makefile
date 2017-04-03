@@ -1,6 +1,6 @@
 
 # --- Ignore Files ---
-ignore = Makefile README.md custom
+ignore = Makefile README.md custom setup
 
 # --- Get Files/Directories ---
 dirs = $(wildcard */)
@@ -38,6 +38,7 @@ $(plugins) $(themes):
 # --- ack ---
 ack: $(HOME)/bin/ack
 $(HOME)/bin/ack:
+	@mkdir $(HOME)/bin
 	@wget -O $@ http://beyondgrep.com/ack-2.14-single-file
 	@chmod 755 $@
 
