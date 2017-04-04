@@ -24,6 +24,15 @@ plugins+=(modules my-zsh magic-enter cd vim xclip tmux awk fzf)
 #	builtin source $1
 #	echo "$(($(date +%s%3N)-$start_ms)) $1"
 #}
+#alias pastebin='echo "paste_text=$(cat -)" | curl -X POST --netrc-file ~/.netrc -s --data-binary @- http://p.arm.com | grep -o "http[^\"]*"'
+#alias pastebin='awk '"'"'BEGIN{print "paste_text=$("} {print} END{print ")"}'"'"' | curl -X POST --netrc-file ~/.netrc -s --data-binary @- http://p.arm.com | grep -o "http[^\"]*" | xclip && xclip -o'
+
+function pastebin() {
+    local input="paste_text=$(xargs echo)"
+    echo $input
+    echo $input |sed 's/\x1b\[[0-9;]*m//g'| curl -s -X POST --netrc-file ~/.netrc --data-binary @- http://p.arm.com | grep -o "http[^\"]*" | xclip && xclip -o
+}
+
 
 source $ZSH/oh-my-zsh.sh
 

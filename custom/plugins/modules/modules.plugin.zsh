@@ -17,6 +17,7 @@ mload arm/cluster/2.0 arm/license/production
 mload git/git/2.7.0 python/git-review_py2.7.8/1.25.0 vim/vim/8.0.5
 mload gnu/emacs/24.5
 mload ruby/ruby/2.2.3
+mload haxx/curl/7.48.0
 
 export LC_ALL='en_US.UTF-8'
 export LANG='en_US.UTF-8'
