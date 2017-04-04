@@ -46,6 +46,12 @@ function tarmac_arg() {
 	tclsh <(echo 'source arg.tcl; puts "-tracestart $tarmac(start) -traceend $tarmac(end)"')
 }
 
+# --- Data Sync ---
+function datasync() {
+	module load arm/datasync/2.0
+	command datasync
+}
+
 # --- Kits ---
 export ARM_IP_LIBRARY=http://cam-svn2.cambridge.arm.com/svn/pdcss/ip/arm_ip_library
 export ARM_IP_WAREHOUSE=/arm/warehouse/ARM_IP
