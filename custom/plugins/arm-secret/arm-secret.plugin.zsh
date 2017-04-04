@@ -1,6 +1,6 @@
 
-export DEPOT_SETUP_ROOT=/home/jimcum01/.setup.zshrc
-source $DEPOT_SETUP_ROOT/init/zsh
+local here=${0:h}
+source $here/arm-zsh-setup.zsh
 
 alias sitename='hostname -f | \grep -o ..hpc'
 alias nahpc='sitename | \grep -q nahpc'
@@ -44,6 +44,12 @@ function asp_run2log() {
 
 function tarmac_arg() {
 	tclsh <(echo 'source arg.tcl; puts "-tracestart $tarmac(start) -traceend $tarmac(end)"')
+}
+
+# --- Data Sync ---
+function datasync() {
+	module load arm/datasync/2.0
+	command datasync
 }
 
 # --- Kits ---

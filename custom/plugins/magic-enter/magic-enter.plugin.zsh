@@ -11,9 +11,7 @@ zle -N magic-enter
 
 
 # --- Functions ---
-start_ms=$(date +%s%3N)
 function magic-enter() {
-	start_ms=$(date +%s%3N)
 	set-title-buffer
 	set-display
 	export MAGIC_ENTER_BUFFER="$BUFFER"

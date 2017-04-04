@@ -32,7 +32,7 @@ function velinfo() {
 }
 
 # --- Script ---
-alias velfixjob='/home/lsf/scheduler/bin/velocefixjobs.sh'
+alias velfixjob='/home/lsf/scheduler/bin/velocefixjobs.sh -id'
 
 # --- LSF ---
 alias velsub='bs32 -q emulation -a veloce -oo output.log'
@@ -69,5 +69,11 @@ function vel2fsdb() {
 	velload31611
 	echo '******************************' > sigs
 	bs32 -o wave.%J.log ecf2wave -tracedir veloce.wave/waves.stw -siglist sigs -fsdb -distribute -merge_fsdbs
+}
+
+function visvel() {
+	velload
+	visload
+	vis -veloce
 }
 

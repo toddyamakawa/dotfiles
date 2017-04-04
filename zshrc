@@ -6,6 +6,11 @@ export SHELL=$(builtin which zsh)
 DISABLE_AUTO_TITLE=true
 COMPLETION_WAITING_DOTS="true"
 
+# --- Setup .zcompdump Directory ---
+[[ -z $ZSH_COMPDIR ]] && ZSH_COMPDIR=~/.zcompdir
+mkdir -p $ZSH_COMPDIR
+ZSH_COMPDUMP=$ZSH_COMPDIR/$(hostname --long)
+
 # --- Setup Theme ---
 ZSH_THEME_DEFAULT="my-theme"
 #fc-list | grep -qi powerline && ZSH_THEME_DEFAULT="my-powerline-theme"
@@ -17,7 +22,8 @@ if [[ $(hostname --long) =~ arm.com$ ]]; then
 else
 	function module(){}
 fi
-plugins+=(modules my-zsh magic-enter cd vim xclip tmux awk fzf)
+
+plugins+=(modules my-zsh cd vim xclip tmux awk fzf)
 
 #function source() {
 #	local start_ms=$(date +%s%3N)
