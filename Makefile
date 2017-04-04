@@ -1,6 +1,6 @@
 
 # --- Ignore Files ---
-ignore = Makefile README.md custom setup
+ignore = Makefile README.md custom windows
 
 # --- Get Files/Directories ---
 dirs = $(wildcard */)

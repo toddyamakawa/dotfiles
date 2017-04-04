@@ -1,4 +1,7 @@
 #!sudo /bin/bash
+script=$(readlink -f $0)
+here=$(dirname $script)
+
 apt-get install -y zsh git make
 git clone https://github.com/toddyamakawa/dotfiles $HOME/dotfiles
 make -C $HOME/dotfiles
