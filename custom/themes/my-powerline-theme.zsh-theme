@@ -187,6 +187,8 @@ function rprompt_git() {
 }
 
 # --- Get Milliseconds ---
+start_ms=$(date +%s%3N)
+function preexec() { start_ms=$(date +%s%3N); }
 function precmd() {
 	elapsed_ms=$(($(date +%s%3N)-$start_ms))
 	#[[ $elapsed_ms -gt 300000 ]] && zenity --info --text "DONE\n$MAGIC_ENTER_BUFFER"
