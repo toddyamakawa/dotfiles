@@ -21,6 +21,19 @@ zle -N edit-command-line
 }
 
 
+# ========================
+#    PROMPT PERFORMANCE
+# ========================
+function prompt_performance() {
+	local start_ms=$(date +%s%3N)
+	build_prompt > /dev/null
+	echo "build_prompt: $(($(date +%s%3N)-$start_ms))"
+	start_ms=$(date +%s%3N)
+	build_rprompt > /dev/null
+	echo "build_rprompt: $(($(date +%s%3N)-$start_ms))"
+}
+
+
 # =============
 #    $PROMPT
 # =============
