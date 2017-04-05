@@ -8,6 +8,15 @@ alias euhpc='sitename | \grep -q euhpc'
 
 alias getquota=/usr/local/bin/getquota
 alias projinfo='projinfo 2>/dev/null'
+function armdisk() {
+	mount \
+		| awk '{print "\\\\"$1}' \
+		| sed 's/arm.com:/arm.com/' \
+		| sed 's/armhome/home/' \
+		| sed 's:/:\\:g' \
+		| sed 's:\\ifs::g'
+}
+
 
 # --- Environment Variables ---
 euhpc && [[ -z $LSB_BATCH_JID ]] && export LSB_DEFAULTPROJECT=PJ01384
