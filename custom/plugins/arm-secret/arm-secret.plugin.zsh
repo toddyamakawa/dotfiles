@@ -3,6 +3,7 @@ local here=${0:h}
 source $here/arm-zsh-setup.zsh
 source $here/arm-module-datasync.zsh
 source $here/arm-module-disass.zsh
+source $here/arm-module-socrates.zsh
 
 alias sitename='hostname -f | \grep -o ..hpc'
 alias nahpc='sitename | \grep -q nahpc'
