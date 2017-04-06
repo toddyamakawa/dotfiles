@@ -1,6 +1,8 @@
 
 local here=${0:h}
 source $here/arm-zsh-setup.zsh
+source $here/arm-module-datasync.zsh
+source $here/arm-module-disass.zsh
 
 alias sitename='hostname -f | \grep -o ..hpc'
 alias nahpc='sitename | \grep -q nahpc'
@@ -21,14 +23,6 @@ function armdisk() {
 # --- Environment Variables ---
 euhpc && [[ -z $LSB_BATCH_JID ]] && export LSB_DEFAULTPROJECT=PJ01384
 nahpc && [[ -z $LSB_BATCH_JID ]] && export LSB_DEFAULTPROJECT=PJ01384DEFAULT
-
-# --- Disassemble ---
-function disass() {
-	local file=$1
-	module load arm/rvct_aarch64
-	bs1 -oo $file.disass fromelf -a -c --text $file
-}
-alias disass_syms='awk '"'"'/^ +\w+$/ {new=$1} /^ +[0-9a-fx]+:/ && new!="" {print $1, new; new=""}'"'"''
 
 # --- Porter ---
 export PROJ_HOME=/projects/ssg/pj01384_porter/todyam01/porter
@@ -53,12 +47,6 @@ function asp_run2log() {
 
 function tarmac_arg() {
 	tclsh <(echo 'source arg.tcl; puts "-tracestart $tarmac(start) -traceend $tarmac(end)"')
-}
-
-# --- Data Sync ---
-function datasync() {
-	module load arm/datasync/2.0
-	command datasync
 }
 
 # --- Kits ---
