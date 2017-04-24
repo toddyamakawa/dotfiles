@@ -13,11 +13,10 @@ alias getquota=/usr/local/bin/getquota
 alias projinfo='projinfo 2>/dev/null'
 function armdisk() {
 	mount \
-		| awk '{print "\\\\"$1}' \
-		| sed 's/arm.com:/arm.com/' \
-		| sed 's/armhome/home/' \
-		| sed 's:/:\\:g' \
-		| sed 's:\\ifs::g'
+		| perl -pe 's/^(\S+arm.com):(\S+).*/\\\\\1\2/' \
+		| sed -e 's/armhome/home/' \
+		-e 's:/:\\:g' \
+		-e 's:\\ifs::g'
 }
 
 
