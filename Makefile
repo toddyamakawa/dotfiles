@@ -44,10 +44,11 @@ $(HOME)/bin/ack:
 
 # --- fzf ---
 fzf: $(HOME)/.fzf
-	$(HOME)/.fzf/install --no-key-bindings --no-completion --no-update-rc
-	#$(HOME)/.fzf/install --no-key-bindings --completion --no-update-rc
 $(HOME)/.fzf:
 	git clone --depth 1 https://github.com/junegunn/fzf.git $(HOME)/.fzf
+$(HOME)/.fzf.zsh:
+	$(HOME)/.fzf/install --no-key-bindings --no-completion --no-update-rc
+	#$(HOME)/.fzf/install --no-key-bindings --completion --no-update-rc
 
 # --- Vundle ---
 # vim plugin manager
