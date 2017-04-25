@@ -1,7 +1,7 @@
 
-# --- grep ---
 # oh-my-zsh already aliases grep
-#alias grep='grep --color=always'
+# grep: aliased to grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}
+
 alias g='grep'
 alias gi='grep -i'
 alias gn='grep -n'
