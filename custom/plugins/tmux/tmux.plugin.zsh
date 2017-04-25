@@ -1,12 +1,12 @@
 
 # --- Module Load ---
-mload gnu/tmux/2.1
+mload gnu/tmux/2.3
 
 
 # --- Aliases ---
 
 # Force 256 color support
-alias tmux='tmux -2'
+#alias tmux='tmux -2'
 
 # Print Information
 alias tprint='tmux display-message -p'
