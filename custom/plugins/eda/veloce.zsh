@@ -6,13 +6,13 @@ alias velload31612='mload mentor/veloce/3.16.1.2'
 alias velload31614='mload mentor/veloce/3.16.1.4'
 alias velload31615='mload mentor/veloce/3.16.1.5_patched'
 alias velload31616='mload mentor/veloce/3.16.1.6'
-alias velload='velload31616'
+alias velload31617='mload mentor/veloce/3.16.1.7'
+alias velload='velload31617'
 alias tbxload='mload mentor/tbx/2.4.4.9'
 alias visload='mload mentor/questavdbg/10.5c_2'
 
 # --- Information ---
 alias veluse='velec -usagestat'
-alias velres='cat /arm/cluster/nahpc/conf/veloce-scheduler.cfg'
 alias velavail='velec -availableres'
 alias velstat='velec -getdesigninfo $(readlink -f .)'
 function velinfo() {
@@ -30,13 +30,6 @@ function velinfo() {
 		print "Degradation: "100*(estimated_freq-compile_freq)/estimated_freq"%"
 	}' veloce.log/compile_velgs_0.log veloce.med/velsyn.out/velsyn.report
 }
-
-# --- Script ---
-alias velfixjob='/home/lsf/scheduler/bin/velocefixjobs.sh -id'
-
-# --- LSF ---
-alias velsub='bs32 -q emulation -a veloce -oo output.log'
-alias velsub2='bs32 -q emulation -a veloce2 -oo output.log'
 
 # --- Velview ---
 alias velwave='bs8 -I velview -tracedir veloce.wave/waves.stw'
