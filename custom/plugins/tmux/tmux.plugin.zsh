@@ -10,8 +10,9 @@ mload gnu/tmux/2.3
 # Force 256 color support
 #alias tmux='tmux -2'
 
-# Backup tmux session
+# Save/Restore Session
 alias tsave="$here/tsave.zsh"
+function trestore() { echo tmux source-file $1; }
 
 # Print Information
 alias tprint='tmux display-message -p'

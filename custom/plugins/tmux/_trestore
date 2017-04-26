@@ -1,0 +1,6 @@
+#compdef trestore
+
+function _trestore() {
+	_arguments "*:backups:(($(ls $HOME/.tmux/backup/*.tmux)))"
+}
+
