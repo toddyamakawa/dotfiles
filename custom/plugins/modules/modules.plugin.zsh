@@ -15,7 +15,6 @@ function mload() { interactive? && module load $@; }
 mload core util swdev eda
 mload arm/cluster/2.0 arm/license/production
 mload git/git/2.7.0 python/git-review_py2.7.8/1.25.0 vim/vim/8.0.5
-module load mosh/mosh/1.2.4
 
 export LC_ALL='en_US.UTF-8'
 export LANG='en_US.UTF-8'

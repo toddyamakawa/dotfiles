@@ -23,6 +23,13 @@ else
 fi
 plugins+=(modules my-zsh magic-enter cd vim xclip tmux vi-mode regex fzf setup)
 
+# --- Source Files ---
+function source_files() {
+	for f in $(command ls $@); do
+		source $f
+	done
+}
+
 #function source() {
 #	local start_ms=$(date +%s%3N)
 #	builtin source $1

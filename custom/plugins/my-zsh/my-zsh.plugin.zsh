@@ -4,13 +4,6 @@ local here=${0:h}
 # --- Path ---
 function addpath() { export PATH=$PATH:$1; }
 
-# --- Source Files ---
-function source_files() {
-	for f in $(\ls $@); do
-		source $f
-	done
-}
-
 function echo_eval() {
 	echo "$@"
 	eval "$@"
