@@ -85,7 +85,7 @@
 
 	# --- Git Repositories ---
 	newasp = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/asp
-	newiris = clone ssh://todyam01@ds-gerrit.euhpc.arm.com:29418/svos/iris
+	newiris = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/iris
 	newkiwi = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/kiwi
 	newkvs = clone login8.nahpc.arm.com:/projects/pd/svos/git/kvs
 	newgem = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/gem
@@ -93,6 +93,7 @@
 	newambaviz = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/ambaviz
 	newporter = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter
 	newares = clone -b releases/DM18p2 ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
+	newunischeduler = clone ssh://ds-gerrit.euhpc.arm.com:29418/toef/unischeduler
 
 	# --- GitHub Repositories ---
 	newpi = clone https://github.com/toddyamakawa/pi
