@@ -17,7 +17,7 @@ xlsfonts | grep -q powerline && ZSH_THEME_DEFAULT="my-powerline-theme"
 [[ -z $ZSH_THEME ]] && ZSH_THEME=$ZSH_THEME_DEFAULT
 
 if [[ $(hostname --long) =~ arm.com$ ]]; then
-	plugins=(arm-secret lsf eda)
+	plugins=(arm lsf eda)
 else
 	function module(){}
 fi
