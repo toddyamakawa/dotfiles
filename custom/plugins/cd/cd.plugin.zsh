@@ -10,6 +10,8 @@ function c() { cd -$1; }
 alias cd='cd -P'
 alias cdpwd='cd $PWD 2>/dev/null || cd $(pwd) 2>/dev/null && pwd'
 alias cdtemp='cd $(mktemp -d)'
+alias cdl='cd $(command ls -t | head -n 1)'
+alias cdgit='cd $(git rev-parse --show-toplevel)'
 
 
 # --- cup ---
