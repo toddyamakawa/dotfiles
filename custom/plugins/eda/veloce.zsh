@@ -9,7 +9,7 @@ alias velload31616='mload mentor/veloce/3.16.1.6'
 alias velload31617='mload mentor/veloce/3.16.1.7'
 alias velload='velload31617'
 alias tbxload='mload mentor/tbx/2.4.4.9'
-alias visload='mload mentor/questavdbg/10.5c_2'
+alias visload='mload mentor/questavdbg/10.6a'
 
 # --- Information ---
 alias veluse='velec -usagestat'
@@ -30,10 +30,6 @@ function velinfo() {
 		print "Degradation: "100*(estimated_freq-compile_freq)/estimated_freq"%"
 	}' veloce.log/compile_velgs_0.log veloce.med/velsyn.out/velsyn.report
 }
-
-# --- Velview ---
-alias velwave='bs8 -I velview -tracedir veloce.wave/waves.stw'
-alias viswave='vis -tracedir veloce.wave/waves.stw -designfile hw/veloce.med/visualizer.out/design.bin -fullt1t2'
 
 # --- Project ---
 alias vellock='velcomp -lock_project'
@@ -69,4 +65,8 @@ function visvel() {
 	visload
 	vis -veloce
 }
+
+alias velwave='velview -tracedir veloce.wave/waves.stw'
+alias vis_open='vis -tracedir veloce.wave/waves.stw -designfile hw/veloce.med/visualizer.out/design.bin -fullt1t2'
+alias vis_nortl='viswave tracedir veloce.wave/waves.stw'
 
