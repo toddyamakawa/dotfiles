@@ -20,3 +20,13 @@ function tarmac_arg() {
 alias tarmac_uart="awk '/S:007ff80000/ {num=strtonum(\"0x\"substr(\$6,7,2)); printf(\"%c\", num)}'"
 alias tarmac_uart_ts="awk '{print} /S:007ff80000/ {num=strtonum(\"0x\"substr(\$6,7,2)); printf(\"UART %c\\n\", num)}'"
 
+# --- Archive ---
+function save_uart() {
+	local asp_work=$1/work
+	for uart_log in $(command ls $asp_work/*/*/log_dir/*/uart.output.ts); do
+		local temp=${uart_log##$asp_work/}
+		local name=${temp//\//:}
+		cp $uart_log $name
+	done
+}
+
