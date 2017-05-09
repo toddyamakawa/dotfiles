@@ -1,12 +1,18 @@
 
+local here=${0:h}
+
 # --- Module Load ---
-mload gnu/tmux/2.1
+mload gnu/tmux/2.3
 
 
 # --- Aliases ---
 
 # Force 256 color support
-alias tmux='tmux -2'
+#alias tmux='tmux -2'
+
+# Save/Restore Session
+alias tsave="$here/tsave.zsh"
+function trestore() { echo tmux source-file $1; }
 
 # Print Information
 alias tprint='tmux display-message -p'
@@ -16,8 +22,6 @@ alias tlayout="tprint '#{window_layout}'"
 alias tls="tmux list-sessions -F '#{session_id} [#{session_windows} windows] #{session_name}'"
 alias tll="tmux list-windows -a -F '#{session_id} #{session_name}:#{window_index} #{window_name} #{pane_current_path}'"
 alias tpanes="tmux list-panes -a -F '#{pane_id} #{session_name}:#{window_index}.#{pane_index} #{window_name} #{pane_current_path}'"
-
-alias tsave="tmux list-panes -a -F '#{session_name} #{window_index} #{window_name} #{pane_current_path} #{window_layout}'"
 
 # Show Environment
 alias tenv='tmux show-environment'

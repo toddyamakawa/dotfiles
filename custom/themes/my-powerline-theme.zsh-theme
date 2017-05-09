@@ -182,11 +182,12 @@ function rprompt_git() {
     # Check if Git directory
     git rev-parse --is-inside-work-tree &>/dev/null || return
 
-    # Check if blacklist
-    local blacklist url=$(git config --get remote.origin.url 2>/dev/null)
-    blacklist+=(ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter)
-    blacklist+=(ssh://ds-gerrit.euhpc.arm.com:29418/svos/linux)
-    [[ -n ${blacklist[(r)$url]} ]] && return
+	# Check if blacklist
+	local blacklist url=$(git config --get remote.origin.url 2>/dev/null)
+	blacklist+=(ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter)
+	blacklist+=(ssh://ds-gerrit.euhpc.arm.com:29418/svos/linux)
+	blacklist+=(ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares)
+	[[ -n ${blacklist[(r)$url]} ]] && return
 
     # Color Git branch name
     local fg=green branch=$(git rev-parse --abbrev-ref HEAD)
@@ -200,7 +201,7 @@ function rprompt_git() {
 }
 
 # --- Get Milliseconds ---
-start_ms=$(date +%s%3N)
+[[ -z $start_ms ]] && start_ms=$(date +%s%3N)
 function preexec() { start_ms=$(date +%s%3N); }
 function precmd() {
     elapsed_ms=$(($(date +%s%3N)-$start_ms))

@@ -1,7 +1,7 @@
 
 local here=${0:h}
 
-alias awkvar="cat $here/variables.txt"
+alias awkvar="cat $here/awk.variables.txt"
 
 # --- awk columns ---
 function awkc() {
@@ -19,7 +19,7 @@ function awkr() {
 }
 #for i in $(seq 1 11); do alias -g row$i="| awkr $i"; done
 
-function regex() {
+function awk_match() {
 	awk 'match($0,/'$1'/, groups) {print groups['${2:-'0'}']}'
 }
 

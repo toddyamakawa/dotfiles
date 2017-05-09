@@ -1,5 +1,6 @@
 
 local here=${0:h}
+source $here/alias.bjobs.zsh
 
 alias bfield="cat $here/fields.txt"
 
@@ -27,24 +28,6 @@ alias bskill='awk '"'"'/^[0-9]/ {print $1}'"'"' | xargs bkill'
 # --- bhosts ---
 alias bavail='bhosts | awk '"'"'($2="ok"){print $4-$5, $1}'"'"' | sort -n'
 
-# --- bjobs ---
-
-# Format output
-alias bawk='awk '"'"'BEGIN{RS=", +|;?\n"}{$1=$1;print}'"'"''
-function bjobsu() { bjobs -UF $@ | bawk; }
-alias bjobsf='bjobs -o "jobid:8 user:8 stat:5 project:9 run_time:-20 cmd"'
-alias bemu='bjobsf -q emulation -u all'
-
-# Specific fields
-function bprint() {
-	local format=$1
-	shift
-	eval bjobs -o "'jobid:8 stat:5 $format'" $@
-}
-alias bcmd='bprint cmd'
-alias bpwd='bprint sub_cwd'
-alias bapp='bprint app'
-alias bdep='bprint dependency'
 
 # Specific values
 alias -g uall='-u all'
@@ -80,5 +63,7 @@ function bmodw() {
 alias bmodfg='bmod -app FG'
 alias bmodm='bmod -M'
 alias bmod_appn='bmod -appn'
-alias bmod_highmem='bmod -app HIGH-MEM'
+#alias bmod_highmem='bmod -app HIGH-MEM'
+alias bmod_highmem='bmod -app RF-SSG-1'
+#alias bmod_highmem='bmod -app RF-SSG-2'
 

@@ -4,13 +4,6 @@ local here=${0:h}
 # --- Path ---
 function addpath() { export PATH=$PATH:$1; }
 
-# --- Source Files ---
-function source_files() {
-	for f in $(\ls $@); do
-		source $f
-	done
-}
-
 function echo_eval() {
 	echo "$@"
 	eval "$@"
@@ -35,6 +28,10 @@ function zsh-theme() {
 		fi
 	fi
 }
+
+# --- stderr ---
+alias -g 2null='2>/dev/null'
+alias -g 2out='2>&1'
 
 # --- General ---
 alias now='date +%y%m%d-%H%M%S'
@@ -110,6 +107,8 @@ alias du1='du --max-depth=1'
 alias du2='du --max-depth=2'
 alias du3='du --max-depth=3'
 
+alias suu='su $(whoami)'
+
 alias less='less -r'
 
 alias license='lmstat -a'
@@ -148,3 +147,4 @@ function cp1() {
 source $here/my-env.zsh
 source $here/my-options.zsh
 source_files $here/alias/*.zsh
+
