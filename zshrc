@@ -42,3 +42,12 @@ function pastebin() {
 
 source $ZSH/oh-my-zsh.sh
 
+alias mongo_haps='/arm/tools/setup/bin/mrun +util +mongodb/mongodb/3.2.1 mongo --authenticationDatabase admin -u haps_user -p h4p3n5t4nc3 armprod/mongodb1.nahpc.arm.com,mongodb2.nahpc.arm.com,mongodb-arb.nahpc.arm.com/haps_nahpc'
+
+# 0 . Enter
+bindkey -s "^[Op" "0"
+bindkey -s "^[Ol" "."
+bindkey -s "^[OM" "^M"
+
+alias -g -- '-velconf'="-conf /home/lsf/scheduler_prod/configs/NAHPCVEL/NAHPCVEL.conf"
+alias -g -- '-zs3conf'="-conf /home/lsf/scheduler_prod/configs/NAHPCPRODZS3/NAHPCPRODZS3.conf"
