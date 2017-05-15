@@ -1,2 +1,4 @@
 *.swp
 .nfs*
+emacs.d/auto-save-list/
+emacs.d/reykjavik-theme
