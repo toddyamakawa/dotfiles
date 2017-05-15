@@ -22,7 +22,7 @@ if [[ $(hostname --long) =~ arm.com$ ]]; then
 else
 	function module(){}
 fi
-plugins+=(modules my-zsh cd vim xclip tmux awk fzf)
+plugins+=(modules my-zsh cd vim xclip tmux awk fzf regex)
 
 # --- Source Files ---
 function source_files() {
@@ -57,3 +57,6 @@ bindkey -s "^[OM" "^M"
 
 alias -g -- '-velconf'="-conf /home/lsf/scheduler_prod/configs/NAHPCVEL/NAHPCVEL.conf"
 alias -g -- '-zs3conf'="-conf /home/lsf/scheduler_prod/configs/NAHPCPRODZS3/NAHPCPRODZS3.conf"
+
+
+alias emacs='emacs -nw'
