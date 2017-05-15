@@ -60,7 +60,7 @@ function bmodw() {
 	shift
 	bmod -W $duration -We $duration $@
 }
-alias bmodfg='bmod -app FG'
+alias bmodfg='bmod -rn -app FG'
 alias bmodm='bmod -M'
 alias bmod_appn='bmod -appn'
 #alias bmod_highmem='bmod -app HIGH-MEM'

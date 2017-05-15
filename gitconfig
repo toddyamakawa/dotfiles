@@ -22,7 +22,9 @@
 
 	# --- info ---
 	stat = status
+	sb = status -sb -uno
 	info = remote show origin
+	top = rev-parse --show-toplevel
 	url = remote get-url origin
 
 	# --- log ---
@@ -63,6 +65,9 @@
 	tagn = tag -n
 	tags = log --tags --no-walk --decorate --oneline
 
+	# --- lock ---
+	unlock = !rm $(git rev-parse --git-dir)/index.lock
+
 	# --- review ---
 	r = review
 	rl = review --list
@@ -95,11 +100,15 @@
 	newiris = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/iris
 	newkiwi = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/kiwi
 	newkvs = clone login8.nahpc.arm.com:/projects/pd/svos/git/kvs
-	newgem = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/gem
+
+	neweda = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/eda
+	newgem = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/gem
 	newruby = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/ruby
-	newambaviz = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/ambaviz
+	newambaviz = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/ambaviz
+
 	newporter = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter
-	newares = clone -b releases/DM18p2 ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
+	newares = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
+
 	newunischeduler = clone ssh://ds-gerrit.euhpc.arm.com:29418/toef/unischeduler
 
 	# --- GitHub Repositories ---
