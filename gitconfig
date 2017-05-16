@@ -6,9 +6,9 @@
 	email = jimmy.cumming@arm.com
 
 [core]
-	editor = vim
-	#pager = vim -
-	#pager = col -b | vim -c 'set ft=man ts=8 nomod nonu nolist noma' -
+	editor = emacs
+	#pager = emacs -
+	#pager = col -b | emacs -c 'set ft=man ts=8 nomod nonu nolist noma' -
 
 [sendemail]
 	suppress-cc = all
