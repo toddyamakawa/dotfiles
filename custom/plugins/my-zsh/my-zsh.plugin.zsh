@@ -66,7 +66,7 @@ alias lns='ln -s'
 alias lnsf='ln -sf'
 
 alias catn='cat -n'
-alias tailf='tail -n 100 -f'
+alias tailf='tail -n 100 -F'
 
 # --- echo ---
 alias echo='echo -e'
@@ -110,9 +110,6 @@ alias du3='du --max-depth=3'
 alias suu='su $(whoami)'
 
 alias less='less -r'
-
-alias license='lmstat -a'
-
 
 alias weather='curl "wttr.in/austin?u"'
 

@@ -34,6 +34,7 @@ function ps_notify() {
 	local regex='($3>'$cpu_percent'&&$5~/-/)'
 	while read line; do
 		pid=$(awk '{print $1}' <(echo $line))
+		echo $line
 		ps_mail $pid
 	done < <(ps -eo $format | awk $regex'{print}')
 }
