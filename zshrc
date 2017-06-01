@@ -60,3 +60,7 @@ alias -g -- '-zs3conf'="-conf /home/lsf/scheduler_prod/configs/NAHPCPRODZS3/NAHP
 
 
 alias emacs='emacs -nw'
+
+
+alias build-sched-fast='/arm/devsys-tools/abs/pbuild --perform build,collect'
+alias build-sched='/arm/devsys-tools/abs/pbuild TOEF:scheduler:0.1 --update-xml --set-state spotless --use-tool=go:go:MODULES:google/golang/1.6'

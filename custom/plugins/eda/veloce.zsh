@@ -14,7 +14,7 @@ alias visload='mload mentor/questavdbg/10.6a'
 # --- Information ---
 alias veluse='velec -usagestat'
 alias velavail='velec -availableres'
-alias velstat='velec -getdesigninfo $(readlink -f .)'
+alias velstats='velec -getdesigninfo $(readlink -f .)'
 function velinfo() {
 	awk 'BEGIN {estimated_freq = 0}
 	/NUMBER OF CRYSTALS IN DESIGN/ {crystals = $NF}
