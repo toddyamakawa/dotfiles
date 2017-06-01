@@ -1,8 +1,6 @@
 
-AG_VERSION := 1.0.2
-
 # --- Ignore Files ---
-ignore = Makefile README.md custom windows
+ignore = Makefile README.md bin custom windows
 
 # --- Get Files/Directories ---
 dirs = $(wildcard */)
@@ -36,30 +34,6 @@ plugins: $(plugins)
 themes: $(themes)
 $(plugins) $(themes):
 	ln -fs $(@:$(zsh)/%=$(PWD)/%) $@
-
-# --- bin ---
-bin: $(HOME)/bin ack ag
-$(HOME)/bin:
-	@mkdir -p $(HOME)/bin
-
-# --- ack ---
-ack: $(HOME)/bin/ack
-$(HOME)/bin/ack:
-	@wget -O $@ http://beyondgrep.com/ack-2.14-single-file
-	@chmod +x $@
-
-# --- ag ---
-ag.tar.gz := the_silver_searcher-$(AG_VERSION).tar.gz
-ag: $(HOME)/bin/ag
-$(HOME)/bin/ag: $(HOME)/.ag/$(ag.tar.gz)
-$(HOME)/.ag/$(ag.tar.gz):
-	@mkdir -p $(@D)
-	@wget -P $(@D) https://geoff.greer.fm/ggreer_gpg_key.asc
-	@wget -P $(@D) https://geoff.greer.fm/ag/releases/$(ag.tar.gz)
-	@wget -P $(@D) https://geoff.greer.fm/ag/releases/$(ag.tar.gz).asc
-	@gpg --import $(@D)/ggreer_gpg_key.asc
-	@gpg --verify $@.asc $@
-	@tar xzf $@ -C $(@D)
 
 # --- fzf ---
 fzf: $(HOME)/.fzf

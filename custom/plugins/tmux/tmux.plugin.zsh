@@ -28,8 +28,7 @@ alias tenv='tmux show-environment'
 
 # Attach Session
 alias ta='tmux attach'
-# New Session
-alias tnew='tmux new -s'
+
 # Last Session
 alias tsl='tmux switch-client -l'
 
@@ -43,6 +42,7 @@ function tcopy () {
 }
 alias -g tpaste='tmux show-buffer'
 
+
 # --- Functions ---
 
 # Split Window
@@ -53,12 +53,19 @@ function tsplit() {
 	tmux split-window -dh
 }
 
+# New Session
+function tnew() {
+	local name="$1"
+	tmux new-session -d -s "$name"
+	ts "$name"
+}
+
 # --- Open/Switch Session ---
 function ts() {
 	[[ -n $TMUX ]] && tmux switch-client -t $1 || tmux attach -t $1
 }
 function _ts() {
-	session=$(tmux list-sessions -F "#{session_name}")
+	session=$(tmux list-sessions -F "#{session_name}':#{session_id} [#{session_windows} windows]#{?session_attached, (attached),}'")
 	_arguments "*:session:(($session))"
 }
 compdef _ts ts
