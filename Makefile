@@ -1,5 +1,6 @@
 
 AG_VERSION := 1.0.2
+BIN := $(HOME)/bin
 
 # --- Ignore Files ---
 ignore = Makefile README.md custom windows
@@ -38,19 +39,19 @@ $(plugins) $(themes):
 	ln -fs $(@:$(zsh)/%=$(PWD)/%) $@
 
 # --- bin ---
-bin: $(HOME)/bin ack ag
-$(HOME)/bin:
-	@mkdir -p $(HOME)/bin
+bin: $(BIN) ack ag ansi
+$(BIN):
+	@mkdir -p $(BIN)
 
 # --- ack ---
-ack: $(HOME)/bin/ack
-$(HOME)/bin/ack:
+ack: $(BIN)/ack
+$(BIN)/ack:
 	@wget -O $@ http://beyondgrep.com/ack-2.14-single-file
 	@chmod +x $@
 
 # --- ag ---
 ag.tar.gz := the_silver_searcher-$(AG_VERSION).tar.gz
-ag: $(HOME)/bin/ag
+ag: $(BIN)/ag
 $(HOME)/bin/ag: $(HOME)/.ag/$(ag.tar.gz)
 $(HOME)/.ag/$(ag.tar.gz):
 	@mkdir -p $(@D)
@@ -60,6 +61,12 @@ $(HOME)/.ag/$(ag.tar.gz):
 	@gpg --import $(@D)/ggreer_gpg_key.asc
 	@gpg --verify $@.asc $@
 	@tar xzf $@ -C $(@D)
+
+# --- ansi ---
+ansi: $(BIN)/ansi
+$(BIN)/ansi:
+	@curl -o $@ -OL git.io/ansi
+	@chmod +x $@
 
 # --- fzf ---
 fzf: $(HOME)/.fzf
