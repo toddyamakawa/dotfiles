@@ -20,11 +20,15 @@ fonts := $(HOME)/.fonts
 fontconfig := $(HOME)/.config/fontconfig/conf.d
 
 # --- All ---
-all: links zshrc vundle fzf ack
+all: links bindir zshrc vundle fzf
 
 # --- Symbolic Links ---
 links: $(links)
 $(HOME)/.%: $(PWD)/%; ln -fs $< $@
+
+# --- bin Directory ---
+bindir:
+	make -C bin all
 
 # --- oh-my-zsh ---
 zshrc: $(zsh)/oh-my-zsh.sh plugins themes
