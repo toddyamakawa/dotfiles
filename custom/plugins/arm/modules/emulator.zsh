@@ -9,8 +9,8 @@ alias velres='cat /arm/cluster/nahpc/conf/veloce-scheduler.cfg'
 # --- Emululation Tools ---
 alias emu='mrun +arm/emutools'
 alias emuhelp='ls -l $(dirname $(emu which emustat))'
-alias velstat='emutools velstat'
-alias zs3stat='emutools zs3stat'
-alias velft='emutools velfasttrack'
-alias zs3ft='emutools zs3fasttrack'
+alias velstat='emu velstat'
+alias zs3stat='emu zs3stat'
+alias velft='emu velfasttrack'
+alias zs3ft='emu zs3fasttrack'
 
