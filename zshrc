@@ -21,7 +21,7 @@ if [[ $(hostname --long) =~ arm.com$ ]]; then
 else
 	function module(){}
 fi
-plugins+=(modules my-zsh magic-enter cd vim xclip tmux vi-mode regex fzf setup)
+plugins+=(modules my-zsh magic-enter cd vim xclip tmux vi-mode regex setup)
 
 # --- Source Files ---
 function source_files() {
