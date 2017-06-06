@@ -1,17 +1,6 @@
 
-# =====================
-#    PROMPT SETTINGS
-# =====================
-
-# Redraw prompt on terminal resize
-function TRAPWINCH() {
-  zle && zle reset-prompt
-}
-
-# Redraw prompt on keymap select
-function zle-keymap-select() { zle reset-prompt; }
-zle -N zle-keymap-select
-zle -N edit-command-line
+local here=${0:h}
+source $here/lib.zsh-theme
 
 # Special Powerline characters
 () {
@@ -24,7 +13,7 @@ zle -N edit-command-line
 # ========================
 #    PROMPT PERFORMANCE
 # ========================
-function prompt_performance() {
+function pperf() {
 	local start_ms=$(date +%s%3N)
 	build_prompt > /dev/null
 	echo "build_prompt: $(($(date +%s%3N)-$start_ms))"
@@ -170,7 +159,7 @@ function rprompt_bg_fg() {
 
 function rprompt_git_commits() {
 	local stat
-	stat=$(git status -sb)
+	stat=$(git status -sb -uno)
 	local ahead=$(echo $stat | sed -n '1s/.*ahead \([0-9]\+\).*/\1/p')
 	local behind=$(echo $stat | sed -n '1s/.*behind \([0-9]\+\).*/\1/p')
 	[[ -n $ahead ]] && rprompt_fg yellow " +$ahead"
@@ -200,18 +189,9 @@ function rprompt_git() {
 	rprompt_git_commits
 }
 
-# --- Get Milliseconds ---
-[[ -z $start_ms ]] && start_ms=$(date +%s%3N)
-function preexec() { start_ms=$(date +%s%3N); }
-function precmd() {
-	elapsed_ms=$(($(date +%s%3N)-$start_ms))
-	#[[ $elapsed_ms -gt 300000 ]] && zenity --info --text "DONE\n$MAGIC_ENTER_BUFFER"
-	#[[ -n $MAGIC_NOTIFY ]] && [[ $SECONDS -gt 300 ]] && zenity --info --text "DONE\n$MAGIC_ENTER_BUFFER"
-}
-
 # --- Right Prompt Elapsed Time ---
 function rprompt_time() {
-	rprompt_bg_fg blue white $(printf "%0.3f" $(($elapsed_ms/1000.0)))
+	rprompt_bg_fg blue white $(elapsed_time)
 }
 
 # --- Right Prompt Background ---
