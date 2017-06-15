@@ -12,7 +12,9 @@ alias tbxload='mload mentor/tbx/2.4.4.9'
 alias visload='mload mentor/questavdbg/10.6a'
 
 # --- Information ---
-alias veluse='velec -usagestat'
+alias veluseofficial='velec -usagestat'
+alias veluse='/home/jimcum01/repos/ruby/bin/veluse.rb'
+
 alias velavail='velec -availableres'
 alias velstats='velec -getdesigninfo $(readlink -f .)'
 function velinfo() {

@@ -13,8 +13,10 @@ alias bcmd='bprint cmd'
 alias bpwd='bprint sub_cwd'
 alias bapp='bprint app'
 alias bdepend='bprint dependency'
-alias bjobsf='bprint "user:8 project:9 run_time:-20 cmd"'
+alias bjobsf='bprint "user:8 project:9 run_time:-20 cmd:20"'
+alias bjobsfall='bprint "user:8 project:9 run_time:-20 cmd"'
 alias bemu='bjobsf -q emulation -u all'
+alias bemu='bjobsfall -q emulation -u all'
 
 # Long output
 alias bawk='awk '"'"'BEGIN{RS=", +|;?\n"}{$1=$1;print}'"'"''
