@@ -14,3 +14,6 @@ function shopt(){}
 source $DEPOT_SETUP_ROOT/init/bash.d/shell-config
 unfunction shopt
 
+# --- mrun ---
+alias mrun=/arm/tools/setup/bin/mrun
+

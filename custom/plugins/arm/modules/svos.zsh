@@ -10,6 +10,7 @@ function asp_run2log() {
 	mv $PWD $newdir
 	cd $newdir
 }
+alias asp_parse_dir="perl -pe 's/\S*asp\/work\/([^\/]+)\/(\d+)\/\w+/\1:\2/'"
 
 # --- arg.tcl ---
 function tarmac_arg() {

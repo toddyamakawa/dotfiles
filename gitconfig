@@ -41,6 +41,7 @@
 	# --- commit ---
 	amend = commit --amend
 	cm = commit -m
+	#cm = "!f() { git commit -m \"$@\"; }; f"
 
 	# --- branch ---
 	br = branch
@@ -111,9 +112,11 @@
 
 	newunischeduler = clone ssh://ds-gerrit.euhpc.arm.com:29418/toef/unischeduler
 
-	# --- GitHub Repositories ---
-	newpi = clone https://github.com/toddyamakawa/pi
+	# --- My GitHub Repositories ---
 	newdotfiles = clone https://github.com/toddyamakawa/dotfiles
 	newmicrobit = clone https://github.com/toddyamakawa/microbit
-	newandroidapps = clone https://github.com/toddyamakawa/androidapps
+	newpi = clone https://github.com/toddyamakawa/pi
+
+	# --- Other GitHub Repositories ---
+	newsedtris = clone https://github.com/uuner/sedtris
 

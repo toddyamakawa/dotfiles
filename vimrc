@@ -338,11 +338,10 @@ vnoremap / :set ignorecase<Enter>/
 " Case-sensitive search
 nnoremap // :set noignorecase<Enter>/
 vnoremap // :set noignorecase<Enter>/
-
-set ignorecase   " Ignore case for searching
-"set smartcase    " Ignore case if all lowercase, case-sensitive otherwise
-set hlsearch     " Highlight search matches
-set incsearch    " Show matches while typing
+"set ignorecase " Ignore case for searching
+"set smartcase  " Ignore case if all lowercase, case-sensitive otherwise
+"set hlsearch   " Highlight search matches (handled by vim-slash plugin)
+set incsearch   " Show matches while typing
 
 " Turn off search highlighting
 nnoremap <Leader>/ :nohlsearch<CR>

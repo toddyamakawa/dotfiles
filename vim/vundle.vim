@@ -37,7 +37,8 @@ call vundle#begin()
 	Plugin 'keith/tmux.vim'
 
 	" --- ANSI Escape Syntax ---
-	Plugin 'powerman/vim-plugin-AnsiEsc'
+	"Plugin 'powerman/vim-plugin-AnsiEsc'
+	"Plugin 'chase/vim-ansible-yaml'
 
 	" =================
 	"    INTEGRATION
@@ -46,11 +47,13 @@ call vundle#begin()
 	" --- vim-tmux-navigator ---
 	Plugin 'christoomey/vim-tmux-navigator'
 
-	" --- File Explorer ---
-	" help :NERDTree
+	" --- NERDTree ---
+	" Filesystem explorer
+	" :help NERDTree
 	Plugin 'scrooloose/nerdtree'
 
-	" --- Buffer List ---
+	" --- vim-buftabline ---
+	" Replaces tabs with buffers
 	Plugin 'ap/vim-buftabline'
 
 	" --- Ctag Browser ---
@@ -64,6 +67,14 @@ call vundle#begin()
 	" :help gitgutter
 	Plugin 'airblade/vim-gitgutter'
 
+	" --- Linter ---
+	" Asynchronous Linting Engine (ALE)
+	" :help ale
+	Plugin 'w0rp/ale'
+
+	" Ruby linter
+	Plugin 'bbatsov/rubocop'
+
 	" --- vim-manpager ---
 	" export MANPAGER="vim -c MANPAGER -"
 	Plugin 'lambdalisue/vim-manpager'
@@ -76,6 +87,8 @@ call vundle#begin()
 	Plugin 'scrooloose/nerdcommenter'
 
 	" --- Search ---
+	" Displays number of times pattern occurs
+	"Plugin 'google/vim-searchindex'
 	" Automatically clears search highlight
 	Plugin 'junegunn/vim-slash'
 
@@ -107,8 +120,6 @@ call vundle#begin()
 	"Plugin 'vim-ctrlspace/vim-ctrlspace'
 
 	"Plugin 'Lokaltog/vim-powerline'
-
-	"Plugin 'nachumk/systemverilog.vim'
 
 " --- Vundle End ---
 call vundle#end()

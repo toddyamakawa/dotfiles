@@ -2,8 +2,10 @@
 AG_VERSION := 1.0.2
 BIN := $(HOME)/bin
 
+targets := ack ag ansi tldr
+
 # --- all ---
-all: $(BIN) ack ag ansi
+all: $(BIN) $(targets)
 
 # --- bin ---
 bin: $(BIN)
@@ -32,7 +34,15 @@ ansi:
 	@curl -o $@ -OL git.io/ansi
 	@chmod +x $@
 
+# --- h.sh ---
+h.sh:
+	@curl -o $@ https://raw.githubusercontent.com/paoloantinori/hhighlighter/master/h.sh
+
+# --- tldr ---
+tldr:
+	@curl -o $@ https://raw.githubusercontent.com/pepa65/tldr-bash-client/master/tldr
+	@chmod +x $@
+
 # --- clean ---
 clean:
-	rm ack ag ansi
-
+	rm $(targets)

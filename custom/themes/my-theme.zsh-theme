@@ -1,5 +1,6 @@
 
-# vi: syntax=zsh
+local here=${0:h}
+source $here/lib.zsh-theme
 
 # --- Evaluate $PROMPT ---
 setopt PROMPT_SUBST
@@ -111,22 +112,9 @@ function rprompt_git() {
 }
 
 function rprompt_elapsed_time() {
-	echo "${blue}$SECONDS${no_color}"
+	echo "${blue}$(elapsed_time)${no_color}"
 	[[ -n $MAGIC_NOTIFY ]] && [[ $SECONDS -gt 300 ]] && zenity --info --text "DONE\n$MAGIC_ENTER_BUFFER"
 }
 
 RPROMPT='$(rprompt_git)$(rprompt_elapsed_time)'
-
-# =====================
-#    PROMPT SETTINGS
-# =====================
-
-# Redraw prompt on terminal resize
-function TRAPWINCH() {
-  zle && zle reset-prompt
-}
-
-function zle-keymap-select() { zle reset-prompt; }
-zle -N zle-keymap-select
-zle -N edit-command-line
 

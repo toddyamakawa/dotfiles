@@ -14,9 +14,9 @@ alias visload='mload mentor/questavdbg/10.6a'
 # --- Information ---
 alias veluseofficial='velec -usagestat'
 alias veluse='/home/jimcum01/repos/ruby/bin/veluse.rb'
-
 alias velavail='velec -availableres'
-alias velstats='velec -getdesigninfo $(readlink -f .)'
+alias veldesign='velec -getdesigninfo $(readlink -f .)'
+
 function velinfo() {
 	awk 'BEGIN {estimated_freq = 0}
 	/NUMBER OF CRYSTALS IN DESIGN/ {crystals = $NF}
