@@ -20,3 +20,8 @@ for arg in "${ARGS[@]}"; do
 	echo "- $arg"
 done
 
+if [[ -d /arm/tools/ ]]; then
+	source /arm/tools/setup/init/bash
+	module load core eda swdev util arm/cluster/2.0
+fi
+
