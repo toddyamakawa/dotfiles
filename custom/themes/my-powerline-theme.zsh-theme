@@ -27,35 +27,6 @@ function pperf() {
 #    $PROMPT
 # =============
 
-# --- Prompt Background ---
-function prompt_bg() {
-	local bg="%{%K{$1}%}"
-	echo -n ${bg/\%K\{reset\}/%k}
-	if [[ $PROMPT_BG != 'NONE' && $PROMPT_BG != $1 ]]; then
-		echo -n "%F{$PROMPT_BG}%}$PROMPT_SEPARATOR"
-	fi
-	PROMPT_BG=$1
-}
-
-# --- Prompt Foreground ---
-function prompt_fg() {
-	local fg="%{%F{$1}%}"
-	echo -n ${fg/\%F\{reset\}/%f}
-	shift && echo -n "$@"
-}
-
-# --- Prompt Background/Foreground ---
-function prompt_bg_fg() {
-	prompt_bg $1
-	prompt_fg $2
-	shift 2 && echo -n "$@"
-}
-
-# --- Prompt End ---
-function prompt_end() {
-	prompt_bg_fg reset reset
-}
-
 # Status:
 # - was there an error
 # - am I root
