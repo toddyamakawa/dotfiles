@@ -1,10 +1,10 @@
 #!/bin/bash
-script=$(readlink -f $0)
+script=$(readlink -f $BASH_SOURCE)
 here=$(dirname $script)
 
 declare -A ARGV
 declare -a ARGS
-while [[ $# -gt 1 ]]; do
+while [[ $# -ge 1 ]]; do
 	arg="$1" && shift
 	case "$arg" in
 		-*) ARGV["$arg"]="$1"; shift;;
