@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 script=$(readlink -f $BASH_SOURCE)
 here=$(dirname $script)
 
