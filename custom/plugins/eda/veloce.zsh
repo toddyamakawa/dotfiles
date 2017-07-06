@@ -7,7 +7,8 @@ alias velload31614='mload mentor/veloce/3.16.1.4'
 alias velload31615='mload mentor/veloce/3.16.1.5_patched'
 alias velload31616='mload mentor/veloce/3.16.1.6'
 alias velload31617='mload mentor/veloce/3.16.1.7'
-alias velload='velload31617'
+alias velload31618='mload mentor/veloce/3.16.1.8'
+alias velload='velload31618'
 alias tbxload='mload mentor/tbx/2.4.4.9'
 alias visload='mload mentor/questavdbg/10.6a'
 
@@ -55,8 +56,10 @@ function velcopy_logs() {
 }
 
 function vel2fsdb() {
-	velload31611
-	echo '******************************' > sigs
+	velload31618
+	export LD_LIBRARY_PATH=/arm/tools/mentor/veloce/3.16.1.3/Veloce_v3.16.1.3/lib/amd64.linux.waveserver/:$LD_LIBRARY_PATH
+	export LD_LIBRARY_PATH=/arm/tools/mentor/veloce/3.16.1.3/Veloce_v3.16.1.0/debussy/share/FsdbWriter/LINUX64:$LD_LIBRARY_PATH
+	echo 'top.*' > sigs
 	bs32 -o wave.%J.log ecf2wave -tracedir veloce.wave/waves.stw -siglist sigs -fsdb -distribute -merge_fsdbs
 }
 
