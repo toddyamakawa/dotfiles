@@ -19,8 +19,13 @@ syn match uart_error /\v.*<[Pp]anic>.*/
 syn match uart_error /\v.*<[Ff]ault>.*/
 syn match uart_error /\v\c<error>.*/
 
+" --- Kernel Debug ---
+hi def link kernel_debug Macro
+syn match kernel_debug /\v.*calling\s+\w+\+.*/
+syn match kernel_debug /\v.*initcall\s+\w+\+.*/
+
 " --- Timestamps ---
-" Highlight timestamps as comments
+" Display timestamps as comments
 hi def link uart_ts Comment
 syn region uart_ts start=/\v^\s*\d/ end=/:/ contains=uart_ts_ms
 " Highlight most significant digits as 'todo'
