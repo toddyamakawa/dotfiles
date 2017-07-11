@@ -1,5 +1,4 @@
 
-" vi: filetype=vim
 " :help group
 
 " --- Start Syntax ---
@@ -35,8 +34,8 @@ hi def link uart_ts_ms Todo
 syn match uart_ts_ms /\v^\s*\d{,3}\ze(\d{3})+:/ contained
 
 " --- Hexadecimal ---
-hi def link uart_number Type
-syn match uart_number /\v<\d+>/
+hi def link uart_number Number
+syn match uart_number /\v<[-.:0-9]+>/
 syn match uart_number /\v<0x[0-9a-fA-F]+>/
 
 " --- Strings ---
