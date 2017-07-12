@@ -5,7 +5,7 @@
 
 # --- Redraw on Resize ---
 function TRAPWINCH() {
-  zle && zle reset-prompt
+	zle && zle reset-prompt
 }
 
 # --- Redraw on Keymap Select ---
@@ -14,7 +14,7 @@ zle -N zle-keymap-select
 zle -N edit-command-line
 
 # --- Check Powerline ---
-function _powerline() { xlsfonts |& grep -q powerline; }
+function _powerline() { xlsfonts |& command grep -q powerline; }
 
 
 # ===========
@@ -36,9 +36,9 @@ function precmd() {
 function elapsed_time() { printf "%0.3f" $(($elapsed_ms/1000.0)); }
 
 
-# ==================
-#    COLORIZATION
-# ==================
+# ===========================
+#    LEFT PROMPT FUNCTIONS
+# ===========================
 
 # --- Prompt Background ---
 function prompt_bg() {
@@ -53,15 +53,26 @@ function prompt_bg() {
 # --- Prompt Foreground ---
 function prompt_fg() {
 	local fg="%{%F{$1}%}"
-	echo -n ${fg/\%F\{reset\}/%f}
-	shift && echo -n "$@"
+	shift && echo -n "${fg/\%F\{reset\}/%f}$@"
 }
 
 # --- Prompt Background/Foreground ---
 function prompt_bg_fg() {
 	prompt_bg $1
-	prompt_fg $2
-	shift 2 && echo -n "$@"
+	shift && prompt_fg $@
+}
+
+# --- Prompt Start ---
+function prompt_start() {
+	RETVAL=$?
+	if _powerline; then
+		local LC_ALL="" LC_CTYPE="en_US.UTF-8"
+		PROMPT_SEPARATOR=$'\ue0b0'
+		RPROMPT_SEPARATOR=$'\ue0b2'
+	else
+		PROMPT_SEPARATOR=' '
+		RPROMPT_SEPARATOR=' '
+	fi
 }
 
 # --- Prompt End ---
@@ -69,6 +80,11 @@ function prompt_end() {
 	prompt_bg_fg reset reset
 	_powerline || echo -n "$no_color "
 }
+
+
+# ============================
+#    RIGHT PROMPT FUNCTIONS
+# ============================
 
 # --- Right Prompt Background ---
 function rprompt_bg() {
@@ -83,7 +99,24 @@ function rprompt_fg() { prompt_fg $@; }
 # --- Right Prompt Background/Foreground ---
 function rprompt_bg_fg() {
 	rprompt_bg $1
-	rprompt_fg $2
-	shift 2 && echo -n "$@"
+	shift && rprompt_fg $@
 }
+
+# --- Right Prompt Start ---
+function rprompt_start() {
+	if _powerline; then
+		local LC_ALL="" LC_CTYPE="en_US.UTF-8"
+		PROMPT_SEPARATOR=$'\ue0b0'
+		RPROMPT_SEPARATOR=$'\ue0b2'
+	else
+		PROMPT_SEPARATOR=' '
+		RPROMPT_SEPARATOR=' '
+	fi
+}
+
+# --- Right Prompt End ---
+function rprompt_end() {
+	#[[ $KEYMAP == vicmd ]] && prompt_bg_fg black white || prompt_bg_fg reset reset
+}
+
 

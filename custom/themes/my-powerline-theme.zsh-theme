@@ -2,14 +2,6 @@
 local here=${0:h}
 source $here/lib.zsh-theme
 
-# Special Powerline characters
-() {
-	local LC_ALL="" LC_CTYPE="en_US.UTF-8"
-	PROMPT_SEPARATOR=$'\ue0b0'
-	RPROMPT_SEPARATOR=$'\ue0b2'
-}
-
-
 # ========================
 #    PROMPT PERFORMANCE
 # ========================
@@ -33,7 +25,6 @@ function pperf() {
 # - are there background jobs?
 function prompt_status() {
 	local symbols
-	symbols=()
 	[[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘"
 	[[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡"
 	[[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
@@ -96,7 +87,7 @@ function prompt_permission() {
 
 # --- Build Prompt ---
 build_prompt() {
-	RETVAL=$?
+	prompt_start
 	PROMPT_BG='NONE'
 	prompt_status
 	prompt_host
@@ -165,23 +156,9 @@ function rprompt_time() {
 	rprompt_bg_fg blue white $(elapsed_time)
 }
 
-# --- Right Prompt Background ---
-function rprompt_bg() {
-	local bg="%{%K{$1}%}"
-	echo -n "%F{$1}%}$RPROMPT_SEPARATOR"
-	echo -n ${bg/\%K\{reset\}/%k}
-}
-
-# --- Right Prompt Foreground ---
-function rprompt_fg() { prompt_fg $@; }
-
-# --- Right Prompt End ---
-function rprompt_end() {
-	#[[ $KEYMAP == vicmd ]] && prompt_bg_fg black white || prompt_bg_fg reset reset
-}
-
 # --- Build Right Prompt ---
 build_rprompt() {
+	rprompt_start
 	rprompt_git
 	rprompt_time
 }
