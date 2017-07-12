@@ -16,7 +16,7 @@ syn region tarmac_ts start=/\v^\s*\d/ end=/tic ES/
 "syn match tarmac_opcode /\v:\zs[0-9a-f0]+\ze\)/
 
 " --- Address ---
-hi def link tarmac_addr Statement
+hi def link tarmac_addr Keyword
 syn match tarmac_addr /\v\(\zs[0-9a-f]+\ze:/
 
 " --- Instructions ---

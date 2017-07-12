@@ -32,6 +32,7 @@ call vundle#begin()
 	" --- Indentation ---
 	Plugin 'yggdroot/indentline'
 	"Plugin 'nathanaelkane/vim-indent-guides.git'
+	Plugin 'tpope/vim-sleuth'
 
 	" --- .tmux.conf Syntax ---
 	Plugin 'keith/tmux.vim'
@@ -123,5 +124,7 @@ call vundle#begin()
 
 " --- Vundle End ---
 call vundle#end()
-filetype plugin indent on
+
+filetype indent off
+filetype plugin on
 
