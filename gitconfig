@@ -23,6 +23,7 @@
 	# --- info ---
 	stat = status
 	sb = status -sb -uno
+	shown = show --numstat
 	info = remote show origin
 	top = rev-parse --show-toplevel
 	url = remote get-url origin
@@ -49,6 +50,8 @@
 	bu = branch -u
 	bv = branch -vv
 	bl = branch -vv -a
+	bname = rev-parse --abbrev-ref HEAD
+	bpush = !git push --set-upstream origin $(git bname)
 
 	# --- diff ---
 	diffn = diff --numstat
@@ -78,16 +81,16 @@
 	rx = review --cherrypick
 	draft = review --draft
 
+	# --- rebase ---
 	ri = rebase --interactive
+	rc = rebase --continue
+	pullr = pull --rebase
 
-	bname = rev-parse --abbrev-ref HEAD
-	bpush = !git push --set-upstream origin $(git bname)
 	format-patch-1 = format-patch HEAD~1
 	hub = "!f() { git clone https://github.com/$1/$2; }; f"
 	msquash = merge --squash --no-commit
 	pop = stash pop
 	publish = push origin master:refs/publish/master
-	pullr = pull --rebase
 	pull-theirs = pull -s recursive -X theirs
 	file = "!f() { git difftool $1{,^} -- $2; }; f"
 	sha = "!f() { git diff --numstat $1{^,}; }; f"
