@@ -59,7 +59,7 @@ function vel2fsdb() {
 	velload31618
 	export LD_LIBRARY_PATH=/arm/tools/mentor/veloce/3.16.1.3/Veloce_v3.16.1.3/lib/amd64.linux.waveserver/:$LD_LIBRARY_PATH
 	export LD_LIBRARY_PATH=/arm/tools/mentor/veloce/3.16.1.3/Veloce_v3.16.1.0/debussy/share/FsdbWriter/LINUX64:$LD_LIBRARY_PATH
-	echo 'top.*' > sigs
+	echo '****************************' > sigs
 	bs32 -o wave.%J.log ecf2wave -tracedir veloce.wave/waves.stw -siglist sigs -fsdb -distribute -merge_fsdbs
 }
 

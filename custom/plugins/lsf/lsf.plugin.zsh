@@ -17,10 +17,10 @@ alias bs80='bs -M 81920000'
 alias bs128='bs -M 131072000'
 alias bs256='bs -M 262144000'
 
-alias bszsh='bs16 -Is -XF zsh'
-alias bsbash='bs16 -Is -XF bash'
-alias bsshell='bs16 -Is -XF $SHELL'
-alias bsxterm='bs16 -XF xterm'
+alias bszsh='bs16 -rn -app FG -Is -XF zsh'
+alias bsbash='bs16 -rn -app FG -Is -XF bash'
+alias bsshell='bs16 -rn -app FG -Is -XF $SHELL'
+alias bsxterm='bs16 -rn -app FG -XF xterm'
 
 # --- bkill ---
 alias bskill='awk '"'"'/^[0-9]/ {print $1}'"'"' | xargs bkill'
@@ -32,8 +32,7 @@ alias bavail='bhosts | awk '"'"'($2="ok"){print $4-$5, $1}'"'"' | sort -n'
 # Specific values
 alias -g uall='-u all'
 alias -g qemu='-q emulation'
-alias -g qemur='-q emulation -r'
-alias -g qemup='-q emulation -p'
+alias -g pdefault='-P $LSB_DEFAULTPROJECT'
 alias -g poddjob='-P ODDJOB'
 
 # Mail notification
