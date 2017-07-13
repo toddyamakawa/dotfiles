@@ -1,5 +1,2 @@
-" Disable softtabstop
-set softtabstop=0
-
-" Use tabstop value
-set shiftwidth=0
+" Disable softtabstop and use tabstop value
+autocmd BufRead * set softtabstop=0 shiftwidth=0
