@@ -93,8 +93,6 @@ nnoremap <Leader>sw :set wrap!<CR>
 set noexpandtab     " Use tabs instead of spaces
 "set expandtab      " Use spaces instead of tabs
 set tabstop=4       " Display tabs as 4 columns
-set softtabstop=4   " Set tab to 4 columns
-set shiftwidth=4    " Set tab to 4 columns
 set autoindent      " Use auto-indenting
 set nocindent       " Don't use C style indenting
 
