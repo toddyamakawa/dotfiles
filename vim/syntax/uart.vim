@@ -6,6 +6,11 @@ if exists("b:current_syntax")
 	finish
 endif
 
+" --- Hexadecimal ---
+hi def link uart_number Number
+syn match uart_number /\v<[-.:0-9]+>/
+syn match uart_number /\v<0x[0-9a-fA-F]+>/
+
 " --- Keywords ---
 hi def link uart_keywords Keyword
 syn match uart_keywords /\v.*SVOS.*/
@@ -28,15 +33,10 @@ syn match uart_kernel_debug /\v.*initcall\s+\w+\+.*/
 " --- Timestamps ---
 " Display timestamps as comments
 hi def link uart_ts Comment
-syn region uart_ts start=/\v^\s*\d/ end=/:/ contains=uart_ts_ms
+syn match uart_ts /\v^\s*\d+:/ contains=uart_ts_ms
 " Highlight most significant digits as 'todo'
 hi def link uart_ts_ms Todo
 syn match uart_ts_ms /\v^\s*\d{,3}\ze(\d{3})+:/ contained
-
-" --- Hexadecimal ---
-hi def link uart_number Number
-syn match uart_number /\v<[-.:0-9]+>/
-syn match uart_number /\v<0x[0-9a-fA-F]+>/
 
 " --- Strings ---
 hi def link uart_string String
