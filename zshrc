@@ -18,17 +18,18 @@ xlsfonts | grep -q powerline && ZSH_THEME_DEFAULT="my-powerline-theme"
 [[ -z $ZSH_THEME ]] && ZSH_THEME=$ZSH_THEME_DEFAULT
 
 if [[ $(hostname --long) =~ arm.com$ ]]; then
-	plugins=(arm lsf eda)
+    plugins=(arm lsf eda)
 else
-	function module(){}
+    function module(){}
 fi
+
 plugins+=(modules my-zsh magic-enter cd vim xclip tmux regex setup)
 
 # --- Source Files ---
 function source_files() {
-	for f in $(command ls $@); do
-		source $f
-	done
+    for f in $(command ls $@); do
+	source $f
+    done
 }
 
 #function source() {

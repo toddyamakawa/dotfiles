@@ -9,9 +9,6 @@ bindkey -v
 # Turn two-key key-bindings into a chorded key-bindings
 export KEYTIMEOUT=2
 
-# Enable chorded inputs
-export VICHORD=1
-
 
 # ==================
 #    ZSH COMMANDS
@@ -41,8 +38,10 @@ function vi-up-end() {
 
 zle -N vi-xclip-paste
 function vi-xclip-paste() {
-	LBUFFER="$LBUFFER$(xclip -o | xargs echo -n)"
+	#[[ -e ${TMUX%%,*} ]] && tmux show-buffer | xclip
+	LBUFFER="$LBUFFER$(xclip -o)"
 }
+
 
 # =================
 #    INSERT MODE
@@ -69,6 +68,9 @@ bindkey -M viins 'hk' vi-up-begin
 # [k+l] to go up and to the end of the line
 bindkey -M viins 'kl' vi-up-end
 bindkey -M viins 'lk' vi-up-end
+
+# [Alt-p] to paste
+bindkey -M viins '^[p' vi-xclip-paste
 
 # [o+p] to paste
 bindkey -M viins 'op' vi-xclip-paste

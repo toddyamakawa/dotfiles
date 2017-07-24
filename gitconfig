@@ -23,6 +23,7 @@
 	# --- info ---
 	stat = status
 	sb = status -sb -uno
+	shown = show --numstat
 	info = remote show origin
 	top = rev-parse --show-toplevel
 	url = remote get-url origin
@@ -49,11 +50,15 @@
 	bu = branch -u
 	bv = branch -vv
 	bl = branch -vv -a
+	bname = rev-parse --abbrev-ref HEAD
+	bpush = !git push --set-upstream origin $(git bname)
 
 	# --- diff ---
+	diffn = diff --numstat
 	diffs = diff --staged
 	meld = difftool --tool=meld --no-prompt
-	melds = !git meld --staged
+	melda = !git meld --dir-diff
+	melds = !git melda --staged
 	vimdiff = difftool --tool=vimdiff
 	vimdiffs = !git vimdiff --staged
 
@@ -74,29 +79,29 @@
 	rl = review --list
 	rd = review --download
 	rx = review --cherrypick
+	draft = review --draft
 
-	bname = rev-parse --abbrev-ref HEAD
-	bpush = !git push --set-upstream origin $(git bname)
+	# --- rebase ---
+	ri = rebase --interactive
+	rc = rebase --continue
+	pullr = pull --rebase
+
 	format-patch-1 = format-patch HEAD~1
 	hub = "!f() { git clone https://github.com/$1/$2; }; f"
 	msquash = merge --squash --no-commit
 	pop = stash pop
 	publish = push origin master:refs/publish/master
-	pullr = pull --rebase
 	pull-theirs = pull -s recursive -X theirs
 	file = "!f() { git difftool $1{,^} -- $2; }; f"
 	sha = "!f() { git diff --numstat $1{^,}; }; f"
 	unstage = reset HEAD
 	undo-merge = reset --hard ORIG_HEAD
 
-
-
         # -- Fix permissions
         permission-reset = !git diff -p -R --no-color | grep -E '^(diff|(old|new) mode)' --color=never | git apply
+	ignore = update-index --assume-unchanged *
 
-
-
-	# --- Git Repositories ---
+        # --- Git Repositories ---
 	newasp = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/asp
 	newiris = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/iris
 	newkiwi = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/kiwi

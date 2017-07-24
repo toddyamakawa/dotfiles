@@ -1,4 +1,3 @@
-#!/bin/zsh
 
 export DEPOT_SETUP_ROOT=/arm/tools/setup
 
@@ -15,5 +14,4 @@ source $DEPOT_SETUP_ROOT/init/bash.d/shell-config
 unfunction shopt
 
 # --- mrun ---
-alias mrun=/arm/tools/setup/bin/mrun
-
+alias -g mrun=/arm/tools/setup/bin/mrun

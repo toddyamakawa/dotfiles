@@ -17,9 +17,13 @@ let g:mapleader="\<space>"
 " --- Quick Command Line Mode ---
 nnoremap <Enter> :
 
-" --- Backups ---
+" --- Backup ---
 set nobackup                " No backup file (defaults to .filename~)
 set directory=~/.vim/.swp// " Swap file directory
+
+" --- Undo ---
+set undofile               " Enable undo file
+set undodir=~/.vim/.undo// " Undo file directory
 
 
 " ====================
@@ -62,9 +66,8 @@ set relativenumber " Show relative line number
 set showmatch      " Show matching parantheses
 set cursorline     " Highlight current line
 
-" Show tab characters
-" Show last column
-set listchars=tab:\|-,extends:\|
+" Show tab characters and off-screen text indicator
+set listchars=tab:▸-,precedes:<,extends:>
 
 " Show spaces for indentation
 let g:indentLine_char = '|'
@@ -90,8 +93,6 @@ nnoremap <Leader>sw :set wrap!<CR>
 set noexpandtab     " Use tabs instead of spaces
 "set expandtab      " Use spaces instead of tabs
 set tabstop=4       " Display tabs as 4 columns
-set softtabstop=4   " Set tab to 4 columns
-set shiftwidth=4    " Set tab to 4 columns
 set autoindent      " Use auto-indenting
 set nocindent       " Don't use C style indenting
 

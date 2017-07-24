@@ -31,3 +31,8 @@ function save_uart() {
 	done
 }
 
+
+# --- Register Parser ---
+alias archex_reg='mrun +sun/jdk/1.8.0_77 java -jar /arm/ref/pd/SVOS/tools/register_parser.jar'
+
+

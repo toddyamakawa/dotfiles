@@ -7,7 +7,8 @@ alias velload31614='mload mentor/veloce/3.16.1.4'
 alias velload31615='mload mentor/veloce/3.16.1.5_patched'
 alias velload31616='mload mentor/veloce/3.16.1.6'
 alias velload31617='mload mentor/veloce/3.16.1.7'
-alias velload='velload31617'
+alias velload31618='mload mentor/veloce/3.16.1.8'
+alias velload='velload31618'
 alias tbxload='mload mentor/tbx/2.4.4.9'
 alias visload='mload mentor/questavdbg/10.6a'
 
@@ -18,7 +19,7 @@ alias velavail='velec -availableres'
 alias veldesign='velec -getdesigninfo $(readlink -f .)'
 
 function velinfo() {
-	awk 'BEGIN {estimated_freq = 0}
+    awk 'BEGIN {estimated_freq = 0}
 	/NUMBER OF CRYSTALS IN DESIGN/ {crystals = $NF}
 	/AVAILABLE NUMBER OF CRYSTALS/ {max_crystals = $NF}
 	/NUMBER OF ARRAY BOARDS/ {boards = $NF}
@@ -41,31 +42,33 @@ alias veltask='velcomp -task'
 alias veldesign.bin='velunlock && veltask visualizer && vellock'
 
 function vel_export_debug() {
-	mkdir debug
-	tmp=$(mktemp -d)
-	output=$tmp/debug_info.tar.gz
-	$VMW_HOME/tbx/bin/export_debug_info.csh -dir_path $PWD -o $output
-	mv $output debug
+    mkdir debug
+    tmp=$(mktemp -d)
+    output=$tmp/debug_info.tar.gz
+    $VMW_HOME/tbx/bin/export_debug_info.csh -dir_path $PWD -o $output
+    mv $output debug
 }
 
 function velcopy_logs() {
-	mkdir -p veloce.log veloce.med/velsyn.out
-	cp $1/compile.log .
-	cp $1/veloce.config .
-	cp $1/veloce.log/compile_velgs_0.log veloce.log/compile_velgs_0.log
-	cp $1/veloce.med/velsyn.out/velsyn.report veloce.med/velsyn.out/velsyn.report
+    mkdir -p veloce.log veloce.med/velsyn.out
+    cp $1/compile.log .
+    cp $1/veloce.config .
+    cp $1/veloce.log/compile_velgs_0.log veloce.log/compile_velgs_0.log
+    cp $1/veloce.med/velsyn.out/velsyn.report veloce.med/velsyn.out/velsyn.report
 }
 
 function vel2fsdb() {
-	velload31611
-	echo '******************************' > sigs
-	bs32 -o wave.%J.log ecf2wave -tracedir veloce.wave/waves.stw -siglist sigs -fsdb -distribute -merge_fsdbs
+    velload31618
+    export LD_LIBRARY_PATH=/arm/tools/mentor/veloce/3.16.1.3/Veloce_v3.16.1.3/lib/amd64.linux.waveserver/:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=/arm/tools/mentor/veloce/3.16.1.3/Veloce_v3.16.1.0/debussy/share/FsdbWriter/LINUX64:$LD_LIBRARY_PATH
+    echo '****************************' > sigs
+    bs32 -o wave.%J.log ecf2wave -tracedir veloce.wave/waves.stw -siglist sigs -fsdb -distribute -merge_fsdbs
 }
 
 function visvel() {
-	velload
-	visload
-	vis -veloce
+    velload
+    visload
+    vis -veloce
 }
 
 alias velwave='velview -tracedir veloce.wave/waves.stw'
