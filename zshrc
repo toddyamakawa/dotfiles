@@ -22,7 +22,7 @@ if [[ $(hostname --long) =~ arm.com$ ]]; then
 else
 	function module(){}
 fi
-plugins+=(modules my-zsh cd vim xclip tmux regex setup)
+plugins+=(modules my-zsh magic-enter cd vim xclip tmux regex setup)
 
 # --- Source Files ---
 function source_files() {
@@ -61,6 +61,9 @@ alias -g -- '-zs3conf'="-conf /home/lsf/scheduler_prod/configs/NAHPCPRODZS3/NAHP
 
 alias emacs='emacs -nw'
 
+set-display
 
 alias build-sched-fast='/arm/devsys-tools/abs/pbuild --perform build,collect'
 alias build-sched='/arm/devsys-tools/abs/pbuild TOEF:scheduler:0.1 --update-xml --set-state spotless --use-tool=go:go:MODULES:google/golang/1.6'
+alias pretty-json='ruby -e "require '\''json'\''; puts (JSON.pretty_generate JSON.parse(STDIN.read))"'
+#alias pretty-json='ruby -e "require '\''yaml'\''; puts YAML.load(STDIN.read).to_json"'

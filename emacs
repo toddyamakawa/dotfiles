@@ -1,7 +1,7 @@
 
 ;; (add-to-list 'load-path "/home/jimcum01/.emacs.d/")
 
-;;to make it work like regular backspace is backwards and del is forward 
+;;to make it work like regular backspace is backwards and del is forward
 ;;(normal-erase-is-backspace-mode 1)
 (global-set-key [(control h)] 'delete-backward-char)
 
@@ -88,7 +88,7 @@
 (global-font-lock-mode t)
 ;;(setq x-alt-keysym 'meta)
 (setq-default indent-tabs-mode nil)
-(setq tab-width 2) 
+(setq tab-width 2)
 
 (put 'downcase-region 'disabled nil)
 
@@ -143,6 +143,8 @@
                                         ; Godef jump key binding
   (local-set-key (kbd "M-.") 'godef-jump)
   (local-set-key (kbd "M-*") 'pop-tag-mark)
+  (setq tab-width 2)
+
   )
 (add-hook 'go-mode-hook 'my-go-mode-hook)
 
