@@ -2,7 +2,7 @@
 local here=${0:h}
 
 # --- Module Load ---
-mload gnu/tmux/2.3
+mload gnu/tmux/2.5
 
 
 # --- Aliases ---
