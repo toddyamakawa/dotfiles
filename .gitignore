@@ -1,3 +1,4 @@
 *.swp
 .nfs*
 emacs.d/auto-save-list/
+tmux/plugins/*

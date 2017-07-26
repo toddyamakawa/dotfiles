@@ -1,8 +1,4 @@
-
-# --- Ignore Files ---
-ignore = Makefile README.md bin custom windows
-
-# --- Get Files/Directories ---
+# --- Ignore Files --- ignore = Makefile README.md bin custom windows # --- Get Files/Directories ---
 dirs = $(wildcard */)
 dirs := $(dirs:%/=%)
 files = $(filter-out $(dirs), $(wildcard *))
@@ -68,6 +64,14 @@ $(fonts)/PowerlineSymbols.otf:
 $(fontconfig)/10-powerline-symbols.conf:
 	@mkdir -p $(@D)
 	@wget -O $@ https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+
+# --- Tmux Plugins ---
+# vim plugin manager
+tpm: $(HOME)/.tmux/plugins/tpm
+$(HOME)/.tmux/plugins/tpm:
+	@mkdir -p $(HOME)/.tmux/plugins
+	git clone https://github.com/tmux-plugins/tpm $@
+
 
 # --- Clean ---
 clean:
