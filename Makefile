@@ -54,6 +54,12 @@ vundle: $(HOME)/.vim/bundle/Vundle.vim
 $(HOME)/.vim/bundle/Vundle.vim:
 	git clone https://github.com/VundleVim/Vundle.vim.git $@
 
+# --- tpm ---
+# tmux plugin manager
+tpm: $(HOME)/.tmux/plugins/tpm
+$(HOME)/.tmux/plugins/tpm:
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 # --- Powerline Font ---
 fonts: $(fonts)/fonts.dir $(fonts)/fonts.scale $(fontconfig)/10-powerline-symbols.conf
 	xset q | grep -q $(fonts) || xset +fp $(fonts)
