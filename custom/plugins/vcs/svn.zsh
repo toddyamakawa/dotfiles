@@ -33,3 +33,5 @@ function svnco() {
 	mv $temp $dest
 }
 
+alias -g -- -nox='--ignore-externals'
+
