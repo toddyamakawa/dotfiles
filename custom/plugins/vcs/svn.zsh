@@ -25,6 +25,24 @@ function svnver() {
 # --- Load SVN Version ---
 alias svnload='mload $(svnver | head -n 1)'
 
+# --- Aliases ---
+alias sstat='svn stat --ignore-externals'
+alias scm='svn commit -m'
+alias smerge='svn update --ignore-externals && svnr merge'
+alias sswitch='svnr switch'
+
+# --- Global Aliases ---
+alias -g -- -nox='--ignore-externals'
+
+# --- SVN Command using Relative Path ---
+function svnr() {
+	local root=$(svn info | awk '/^Repository Root:/{print $NF}')
+	local cmd=$1 relative=$2
+	[[ -n $relative ]] && shift 2 || shift
+	echo svn $cmd $root/$relative $@
+	svn $cmd $root/$relative $@
+}
+
 # --- Quick Checkout ---
 function svnco() {
 	local temp=$(mktemp -d)/$(basename $1)
@@ -32,20 +50,4 @@ function svnco() {
 	[[ -n $2 ]] && dest=$2 || dest='.'
 	mv $temp $dest
 }
-
-# --- Merge with Relative Path ---
-function smerge() {
-	local root=$(svn info | awk '/^Repository Root:/{print $NF}')
-	svn update --ignore-externals
-	echo svn merge $root/$1
-	svn merge $root/$1
-}
-
-# --- Commit with Message ---
-function scm() {
-	svn commit -m "$@"
-}
-
-# --- Aliases ---
-alias -g -- -nox='--ignore-externals'
 
