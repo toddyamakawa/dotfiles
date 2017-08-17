@@ -33,5 +33,19 @@ function svnco() {
 	mv $temp $dest
 }
 
+# --- Merge with Relative Path ---
+function smerge() {
+	local root=$(svn info | awk '/^Repository Root:/{print $NF}')
+	svn update --ignore-externals
+	echo svn merge $root/$1
+	svn merge $root/$1
+}
+
+# --- Commit with Message ---
+function scm() {
+	svn commit -m "$@"
+}
+
+# --- Aliases ---
 alias -g -- -nox='--ignore-externals'
 
