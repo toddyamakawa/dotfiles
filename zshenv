@@ -1,9 +1,4 @@
 
-# --- Set Language ---
-export LC_ALL='en_US.UTF-8'
-export LANG='en_US.UTF-8'
-export LANGUAGE='en_US.UTF-8'
-
 # --- Set Environment Variables ---
 export DISPLAY_orig="$DISPLAY"
 export PAGER='less -r'
@@ -14,5 +9,6 @@ unset LESS
 
 # --- Terminal Line Settings ---
 # Disable XON/XOFF flow control
+# Fixes Ctrl-s causing Vim to hang
 stty -ixon
 
