@@ -16,11 +16,6 @@ mload core util swdev eda
 mload arm/cluster/2.0 arm/license/production
 mload git/git/2.7.0 python/git-review_py2.7.8/1.25.0 vim/vim/8.0.5
 
-# --- Set Language ---
-export LC_ALL='en_US.UTF-8'
-export LANG='en_US.UTF-8'
-export LANGUAGE='en_US.UTF-8'
-
 # --- Scripting Languages ---
 alias rubyload='mload ruby/ruby/2.2.3 ruby/gems/2.6.11'
 alias pythonload='mload python/python/2.7.8 python/python/3.5.1'
