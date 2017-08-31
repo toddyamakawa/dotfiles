@@ -72,15 +72,18 @@ set listchars=tab:▸-,precedes:<,extends:>
 " Show spaces for indentation
 let g:indentLine_char = '|'
 
-" Highlight column 81 and trailing whitespace
-autocmd BufRead * match SpellBad /\%81v.\|\s\+$/
-
 " Highlight most significant digits of large numbers
 " 1 12 123 1234 12345 123456 1234567 12345678 123456789 1234567890
-autocmd BufRead * 2match Delimiter /\v<\zs\d{1,3}\ze(\d{3}){2,}>/
+autocmd BufRead * match Delimiter /\v<\zs\d{1,3}\ze(\d{3}){2,}>/
+
+" Highlight column 81 and trailing whitespace
+autocmd BufRead * 2match SpellBad /\%81v.\|\s\+$/
 
 " Disable comment formatting
 autocmd BufNewFile,BufRead * set formatoptions-=cro
+
+" Automatically add +x permissions
+autocmd BufWritePost * if getline(1) =~ "^#!.*/bin/" | silent execute "!chmod +x %" | endif
 
 " Toggle list/number with <Leader>n
 nnoremap <Leader>n :set number! relativenumber! list!<CR>
@@ -223,9 +226,7 @@ nmap gV `[v`]
 " --- Buffer Shortcuts ---
 nnoremap > :bnext<Enter>
 nnoremap < :bprev<Enter>
-nnoremap <Leader>bn :bnext<Enter>
-nnoremap <Leader>bp :bprev<Enter>
-nnoremap <Leader>bd :bdelete<Enter>
+nnoremap <BS> <C-^>
 
 " --- QuickFix Shortcuts ---
 function TabQuickFix(dir)
