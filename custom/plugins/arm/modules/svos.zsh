@@ -35,4 +35,12 @@ function save_uart() {
 # --- Register Parser ---
 alias archex_reg='mrun +sun/jdk/1.8.0_77 java -jar /arm/ref/pd/SVOS/tools/register_parser.jar'
 
+# --- New Weekly ---
+function newweek() {
+	local lastweek=$(($(date +%y%U)-1)).txt
+	local thisweek=$(($(date +%y%U))).txt
+	[[ -f $thisweek ]] && return 1
+	cp $lastweek $thisweek
+}
+
 
