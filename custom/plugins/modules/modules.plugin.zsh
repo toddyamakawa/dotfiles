@@ -1,4 +1,6 @@
 
+local here=${0:h}
+
 # --- Module ---
 # Ignore module if not defined
 #which module > /dev/null || function module(){}
@@ -12,9 +14,7 @@ alias mlist='module list'
 function mload() { interactive? && module load $@; }
 
 # --- Load Essentials ---
-mload core util swdev eda
-mload arm/cluster/2.0 arm/license/production
-mload git/git/2.7.0 python/git-review_py2.7.8/1.25.0 vim/vim/8.0.5
+mload $here/modulefile
 
 # --- Scripting Languages ---
 alias rubyload='mload ruby/ruby/2.2.3 ruby/gems/2.6.11'
