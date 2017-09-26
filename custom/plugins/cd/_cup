@@ -2,11 +2,11 @@
 
 function _cup() {
 	local -U dirs
+	local paths
 	dirs=(${(s:/:)PWD})
 	dirs=(${dirs[0,-2]})
-	paths=""
 	for d in $dirs; do
-		paths+="$d:'${PWD%$d/*}$d' "
+		paths+="$d:'${PWD%/$d/*}/$d' "
 	done
 	_arguments "*:dirs:(($paths))"
 }
