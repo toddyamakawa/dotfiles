@@ -14,8 +14,10 @@ set laststatus=2   " Always display status line
 let mapleader="\<space>"
 let g:mapleader="\<space>"
 
-" --- Quick Command Line Mode ---
+" --- Command Line ---
 nnoremap <Enter> :
+autocmd CmdwinEnter * nnoremap <buffer> <Enter> <Enter>
+autocmd CmdwinEnter * nnoremap <buffer> q :q<Enter>
 
 " --- Backup ---
 set nobackup                " No backup file (defaults to .filename~)
