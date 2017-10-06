@@ -31,6 +31,15 @@ function save_uart() {
 	done
 }
 
+# --- KVS Reference Path ---
+function kvs_info() {
+	local ref=/arm/ref/pd/SVOS/projects/porter/mscp
+	local config=${PWD##*/build_}
+	config=${config%_kit_infra*}
+	local root=$(svn info .. | awk '/Root Path:/{print $NF}')
+	local tag=$(basename $(svn info $root | awk '/^URL:/{print $NF}'))
+	echo $ref/$config/$tag
+}
 
 # --- Register Parser ---
 alias archex_reg='mrun +sun/jdk/1.8.0_77 java -jar /arm/ref/pd/SVOS/tools/register_parser.jar'
@@ -43,4 +52,5 @@ function newweek() {
 	cp $lastweek $thisweek
 }
 
+alias ares_disasm='/arm/devsys-tools/warehouse/PerformanceModeling/EBM/master/$(/arm/devsys-tools/abs/detag PerformanceModeling:EBM:master::trunk)/Linux/x86_64/gcc-4.9.2/rel_int/bin/ares_disasm'
 
