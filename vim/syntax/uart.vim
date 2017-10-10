@@ -27,8 +27,8 @@ syn match uart_error /\v\c<error>.*/
 
 " --- Kernel Debug ---
 hi def link uart_kernel_debug Macro
-syn match uart_kernel_debug /\v.*calling\s+\w+\+.*/
-syn match uart_kernel_debug /\v.*initcall\s+\w+\+.*/
+syn match uart_kernel_debug /\v.*\zscalling\s+\w+\+.*/
+syn match uart_kernel_debug /\v.*\zsinitcall\s+\w+\+.*/
 
 " --- Timestamps ---
 " Display timestamps as comments
