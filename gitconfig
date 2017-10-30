@@ -6,7 +6,7 @@
 	email = jimmy.cumming@arm.com
 
 [core]
-	editor = emacs
+	editor = emacs -nw
 	#pager = emacs -
 	#pager = col -b | emacs -c 'set ft=man ts=8 nomod nonu nolist noma' -
 
@@ -14,6 +14,8 @@
 	suppress-cc = all
 
 [alias]
+	# --- git ---
+	git = !exec git
 
 	# --- config ---
 	a = !git config --list | sed -n 's/^alias.//p' | sort
@@ -46,8 +48,8 @@
 
 	# --- branch ---
 	br = branch
-	bd = branch -d
-	bu = branch -u
+	bco = "!f() { git checkout --track origin/$1 -b $1; }; f"
+	bd = branch -d --force
 	bv = branch -vv
 	bl = branch -vv -a
 	bname = rev-parse --abbrev-ref HEAD
@@ -65,6 +67,8 @@
 	# --- checkout ---
 	co = checkout
 	cob = checkout -b
+	cobt = checkout -b --track
+	cop = checkout --patch
 	cot = checkout --track
 
 	# --- tag ---
@@ -74,6 +78,9 @@
 	# --- lock ---
 	unlock = !rm $(git rev-parse --git-dir)/index.lock
 
+	# --- merge ---
+	ma = merge --abort
+
 	# --- review ---
 	r = review
 	rl = review --list
@@ -82,8 +89,11 @@
 	draft = review --draft
 
 	# --- rebase ---
-	ri = rebase --interactive
+	rb = rebase
+	ra = rebase --abort
 	rc = rebase --continue
+	ri = rebase --interactive
+	rs = rebase --skip
 	pullr = pull --rebase
 
 	format-patch-1 = format-patch HEAD~1
@@ -109,6 +119,7 @@
 
 	neweda = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/eda
 	newgem = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/gem
+	newwrappers = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/wrappers
 	newruby = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/ruby
 	newambaviz = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/ambaviz
 

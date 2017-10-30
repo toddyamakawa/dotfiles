@@ -1,0 +1,47 @@
+#%Module
+# vi: syntax=tcl
+
+module-whatis "modulefile to setup ARM environment"
+
+# --- Packages ---
+package require arm
+package require arm::modules::tool
+
+# --- Module Parameters ---
+set Vendor_Tag  ARM
+set Tool_Tag    ARM
+set Version_Tag 1.0.0
+set ModulesCurrentModulefile [info script]
+
+# --- Load Once Function ---
+proc load-once {module} {
+	if {![is-loaded $module]} { module load $module }
+}
+
+# --- Initialize Environment ---
+initSet
+
+	# Append Path
+	append-path PATH $::env(HOME)/bin
+
+	# ARM Modules
+	load-once core
+	load-once util
+	load-once swdev
+	load-once eda
+        load-once google/golang/1.6
+	load-once arm/cluster/2.0
+	load-once arm/license/production
+
+	# Useful modules
+	load-once gnu/gawk/4.1.1
+	load-once greer/silversearcher/1.0.2
+
+	# Tools
+	load-once git/git/2.9.3
+	load-once python/git-review_py2.7.8/1.25.0
+	load-once vim/vim/8.0.5
+        load-once gnu/emacs/24.5
+
+exitSet
+

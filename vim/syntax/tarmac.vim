@@ -19,6 +19,10 @@ syn region tarmac_ts start=/\v^\s*\d/ end=/tic ES/
 hi def link tarmac_addr Keyword
 syn match tarmac_addr /\v\(\zs[0-9a-f]+\ze:/
 
+" --- Errors ---
+hi def link tarmac_error Error
+syn match tarmac_error /\v.*<Synchronous>.*/
+
 " --- Instructions ---
 hi def link tarmac_instr Operator
 syn keyword tarmac_instr ADC ADCS ADD ADDS ADR ADRP AND ANDS ASR ASR ASRV AT

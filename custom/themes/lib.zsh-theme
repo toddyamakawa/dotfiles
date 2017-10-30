@@ -3,13 +3,12 @@
 #    PROMPT SETTINGS
 # =====================
 
-# Redraw prompt on terminal resize
+# --- Redraw on Resize ---
 function TRAPWINCH() {
-  zle && zle reset-prompt
+	zle && zle reset-prompt
 }
 
 # --- Redraw on Keymap Select ---
-
 function zle-keymap-select() { zle reset-prompt; }
 zle -N zle-keymap-select
 zle -N edit-command-line
@@ -36,13 +35,24 @@ function precmd() {
             DISPLAY=$port.0
         fi
         [[ -e ${TMUX%%,*} && -n $DISPLAY ]] && tmux set-environment DISPLAY $DISPLAY
-	#[[ $elapsed_ms -gt 300000 ]] && zenity --info --text "DONE\n$MAGIC_ENTER_BUFFER"
-	#[[ -n $MAGIC_NOTIFY ]] && [[ $SECONDS -gt 300 ]] && zenity --info --text "DONE\n$MAGIC_ENTER_BUFFER"
+#	[[ -e ${TMUX%%,*} ]] && tmux refresh-client
+	autonotify
 }
 
 # Calculate seconds
 function elapsed_time() { printf "%0.3f" $(($elapsed_ms/1000.0)); }
 
+# Automatic notification
+ZSH_NOTIFY_CMD='^\s*(git|svn)'
+ZSH_NOTIFY_TIME='30000'
+function autonotify() {
+	[[ $elapsed_ms -gt $ZSH_NOTIFY_TIME ]] || return
+	[[ $MAGIC_ENTER_BUFFER =~ $ZSH_NOTIFY_CMD ]] || return
+	zenity --info --text "DONE: $(elapsed_time) seconds\n$MAGIC_ENTER_BUFFER"
+	tmux switch-client -t $(tmux display-message -p '#{session_id}') \; \
+		select-window -t $(tmux display-message -p '#{window_id}') \; \
+		select-pane -t $(tmux display-message -p '#{pane_id}')
+}
 
 # ===========================
 #    LEFT PROMPT FUNCTIONS

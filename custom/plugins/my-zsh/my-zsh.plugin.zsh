@@ -112,6 +112,7 @@ alias suu='su $(whoami)'
 alias less='less -r'
 
 alias weather='curl "wttr.in/austin?u"'
+alias week="date +%U"
 
 function calc() { bc -l <<< "$@"; }
 
@@ -140,8 +141,14 @@ function cp1() {
 	cp $dir/* $(basename $dir)
 }
 
+# --- Colors ---
+function zsh_colors() {
+	for color in RED YELLOW GREEN BLUE CYAN MAGENTA BLACK WHITE; do
+		echo "$fg_bold[${(L)color}]BOLD $fg_no_bold[${(L)color}]$color"
+	done
+}
+
 # --- Source Files ---
-source $here/my-env.zsh
 source $here/my-options.zsh
 source_files $here/alias/*.zsh
 
