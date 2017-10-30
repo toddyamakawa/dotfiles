@@ -29,6 +29,13 @@ function preexec() { start_ms=$(date +%s%3N); }
 function precmd() {
 	elapsed_ms=$(($(date +%s%3N)-$start_ms))
 	[[ -n $TMUX ]] && tmux refresh-client
+        [[ -f ~/.DISPLAY ]] && export DISPLAY=$(cat ~/.DISPLAY)
+        if [[ $VNCDISPLAY = 1 ]]
+        then
+            port=$(echo $VNCDESKTOP | awk 'match($1, /.*(:[0-9]+)/, groups) {print groups[1]}')
+            DISPLAY=$port.0
+        fi
+        [[ -e ${TMUX%%,*} && -n $DISPLAY ]] && tmux set-environment DISPLAY $DISPLAY
 	#[[ $elapsed_ms -gt 300000 ]] && zenity --info --text "DONE\n$MAGIC_ENTER_BUFFER"
 	#[[ -n $MAGIC_NOTIFY ]] && [[ $SECONDS -gt 300 ]] && zenity --info --text "DONE\n$MAGIC_ENTER_BUFFER"
 }
