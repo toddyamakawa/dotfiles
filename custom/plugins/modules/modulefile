@@ -24,7 +24,7 @@ initSet
 	# Append Path
 	append-path PATH $::env(HOME)/bin
 
-	# Essential Modules
+	# ARM Modules
 	load-once core
 	load-once util
 	load-once swdev
@@ -32,7 +32,11 @@ initSet
 	load-once arm/cluster/2.0
 	load-once arm/license/production
 
-	# Specfic Modules
+	# Useful modules
+	load-once gnu/gawk/4.1.1
+	load-once greer/silversearcher/1.0.2
+
+	# Tools
 	load-once git/git/2.9.3
 	load-once python/git-review_py2.7.8/1.25.0
 	load-once vim/vim/8.0.5
