@@ -1,1 +1,1 @@
-autocmd BufNewFile,BufRead *.svrb set filetype=verilog
+autocmd BufNewFile,BufRead *.svrb set filetype=systemverilog
