@@ -32,7 +32,7 @@ call vundle#begin()
 	" --- Indentation ---
 	Plugin 'yggdroot/indentline'
 	"Plugin 'nathanaelkane/vim-indent-guides.git'
-	Plugin 'tpope/vim-sleuth'
+	"Plugin 'tpope/vim-sleuth'
 
 	" --- .tmux.conf Syntax ---
 	Plugin 'keith/tmux.vim'
@@ -44,9 +44,6 @@ call vundle#begin()
 	" =================
 	"    INTEGRATION
 	" =================
-
-	" --- vim-tmux-navigator ---
-	Plugin 'christoomey/vim-tmux-navigator'
 
 	" --- NERDTree ---
 	" Filesystem explorer
@@ -90,6 +87,9 @@ call vundle#begin()
 	" --- Search ---
 	" Displays number of times pattern occurs
 	"Plugin 'google/vim-searchindex'
+
+	" Displays number of times pattern occurs
+	Plugin 'henrik/vim-indexed-search'
 	" Automatically clears search highlight
 	Plugin 'junegunn/vim-slash'
 
@@ -109,10 +109,6 @@ call vundle#begin()
 	" Support repeat for plugin commands
 	Plugin 'tpope/vim-repeat'
 
-	" --- CamelCaseMotion ---
-	" Support CamelCase motions
-	Plugin 'bkad/CamelCaseMotion'
-
 	" --- Experimental Plugins ---
 	" Plugins to experiment with
 	" :help airline
@@ -121,10 +117,10 @@ call vundle#begin()
 	"Plugin 'vim-ctrlspace/vim-ctrlspace'
 
 	"Plugin 'Lokaltog/vim-powerline'
+	Plugin 'verilog_systemverilog.vim'
 
 " --- Vundle End ---
 call vundle#end()
 
-filetype indent off
-filetype plugin on
+filetype indent plugin on
 

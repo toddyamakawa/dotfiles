@@ -24,8 +24,8 @@ set nobackup                " No backup file (defaults to .filename~)
 set directory=~/.vim/.swp// " Swap file directory
 
 " --- Undo ---
-set undofile               " Enable undo file
-set undodir=~/.vim/.undo// " Undo file directory
+"set undofile               " Enable undo file
+"set undodir=~/.vim/.undo// " Undo file directory
 
 
 " ====================
@@ -53,7 +53,6 @@ silent! colorscheme jellybeans " Favorite colorscheme
 "map <Leader>cn <Plug>ColorstepNext
 "map <Leader>cs <Plug>ColorstepReload
 
-
 "let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 "let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
@@ -78,8 +77,14 @@ let g:indentLine_char = '|'
 " 1 12 123 1234 12345 123456 1234567 12345678 123456789 1234567890
 autocmd BufRead * match Delimiter /\v<\zs\d{1,3}\ze(\d{3}){2,}>/
 
+" Change background color beyond column 80
+let &colorcolumn=join(range(81,999),",")
+
 " Highlight column 81 and trailing whitespace
-autocmd BufRead * 2match SpellBad /\%81v.\|\s\+$/
+"autocmd BufRead * 2match SpellBad /\v\%81v.\|\s\+$/
+
+" Highlight trailing whitespace
+autocmd BufRead * 2match SpellBad /\v\s+$/
 
 " Disable comment formatting
 autocmd BufNewFile,BufRead * set formatoptions-=cro
@@ -247,31 +252,6 @@ function TabQuickFix(dir)
 	endif
 endfunction
 
-" --- Screen Shortcuts ---
-" vim-tmux-navigator shortcuts
-let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <Leader>h :TmuxNavigateLeft<cr>
-nnoremap <silent> <Leader>j :TmuxNavigateDown<cr>
-nnoremap <silent> <Leader>k :TmuxNavigateUp<cr>
-nnoremap <silent> <Leader>l :TmuxNavigateRight<cr>
-nnoremap <silent> <Leader>- :TmuxNavigatePrevious<cr>
-
-execute "set <M-h>=\<Esc>h"
-execute "set <M-j>=\<Esc>j"
-execute "set <M-k>=\<Esc>k"
-execute "set <M-l>=\<Esc>l"
-execute "set <M-->=\<Esc>-"
-noremap <silent> <M-h> :TmuxNavigateLeft<cr>
-noremap <silent> <M-j> :TmuxNavigateDown<cr>
-noremap <silent> <M-k> :TmuxNavigateUp<cr>
-noremap <silent> <M-l> :TmuxNavigateRight<cr>
-noremap <silent> <M--> :TmuxNavigatePrevious<cr>
-inoremap <silent> <M-h> <Esc>:TmuxNavigateLeft<cr>a
-inoremap <silent> <M-j> <Esc>:TmuxNavigateDown<cr>a
-inoremap <silent> <M-k> <Esc>:TmuxNavigateUp<cr>a
-inoremap <silent> <M-l> <Esc>:TmuxNavigateRight<cr>a
-inoremap <silent> <M--> <Esc>:TmuxNavigatePrevious<cr>a
-
 " Resize windows evenly
 nnoremap <Leader>= <C-w>=
 
@@ -279,22 +259,6 @@ nnoremap <Leader>= <C-w>=
 " ==============
 "    MOVEMENT
 " ==============
-
-" --- CamelCaseMotion Plugin ---
-"map <silent> w <Plug>CamelCaseMotion_w
-"map <silent> b <Plug>CamelCaseMotion_b
-"map <silent> e <Plug>CamelCaseMotion_e
-"map <silent> ge <Plug>CamelCaseMotion_ge
-"sunmap w
-"sunmap b
-"sunmap e
-"sunmap ge
-"omap <silent> iw <Plug>CamelCaseMotion_iw
-"xmap <silent> iw <Plug>CamelCaseMotion_iw
-"omap <silent> ib <Plug>CamelCaseMotion_ib
-"xmap <silent> ib <Plug>CamelCaseMotion_ib
-"omap <silent> ie <Plug>CamelCaseMotion_ie
-"xmap <silent> ie <Plug>CamelCaseMotion_ie
 
 " Start of line
 noremap H ^
@@ -335,14 +299,15 @@ inoremap kk <Esc>
 
 " --- Search/Replace/Delete ---
 
+let g:indexed_search_mappings = 0
 " Default case-insensitive search
-nnoremap / :set ignorecase<Enter>/
-vnoremap / :set ignorecase<Enter>/
+"nnoremap / :set ignorecase<Enter>/
+"vnoremap / :set ignorecase<Enter>/
 
 " Case-sensitive search
-nnoremap // :set noignorecase<Enter>/
-vnoremap // :set noignorecase<Enter>/
-"set ignorecase " Ignore case for searching
+"nnoremap // :set noignorecase<Enter>/
+"vnoremap // :set noignorecase<Enter>/
+set ignorecase " Ignore case for searching
 "set smartcase  " Ignore case if all lowercase, case-sensitive otherwise
 "set hlsearch   " Highlight search matches (handled by vim-slash plugin)
 set incsearch   " Show matches while typing
