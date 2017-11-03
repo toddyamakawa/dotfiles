@@ -123,10 +123,12 @@
 
 	newporter = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter
 	newares = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
+	newzeus = clone -b zeus/dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares zeus
 
 	newunischeduler = clone ssh://ds-gerrit.euhpc.arm.com:29418/toef/unischeduler
 
 	# --- My GitHub Repositories ---
+	newblog = clone https://github.com/toddyamakawa/blog
 	newdotfiles = clone https://github.com/toddyamakawa/dotfiles
 	newmicrobit = clone https://github.com/toddyamakawa/microbit
 	newpi = clone https://github.com/toddyamakawa/pi
