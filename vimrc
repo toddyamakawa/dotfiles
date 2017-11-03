@@ -230,6 +230,12 @@ nmap gV `[v`]
 "    NAVIGATION
 " ================
 
+" --- Screen Shortcuts ---
+nnoremap <silent> <Leader>h <C-w>h
+nnoremap <silent> <Leader>j <C-w>j
+nnoremap <silent> <Leader>k <C-w>k
+nnoremap <silent> <Leader>l <C-w>l
+
 " --- Buffer Shortcuts ---
 nnoremap > :bnext<Enter>
 nnoremap < :bprev<Enter>
