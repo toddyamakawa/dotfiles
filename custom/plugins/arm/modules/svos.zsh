@@ -35,10 +35,24 @@ function save_uart() {
 function kvs_info() {
 	local ref=/arm/ref/pd/SVOS/projects/porter/mscp
 	local config=${PWD##*/build_}
-	config=${config%_kit_infra*}
+	config=${config%_kit_*}
 	local root=$(svn info .. | awk '/Root Path:/{print $NF}')
 	local tag=$(basename $(svn info $root | awk '/^URL:/{print $NF}'))
 	echo $ref/$config/$tag
+}
+
+# TODO: Clean up function"
+function svos_brodie() {
+	result_type=svos_svos
+	project_name=svos
+	brodie="http://brodie-api.arm.com"
+	result="results/result_type/$result_type/project_name/$project_name"
+	opts=""
+	opts="?page_length=10&page_number=0&order=created_at.desc"
+	url="$brodie/$result$opts"
+	echo $url
+	echo curl -s -su todyam01 -X GET --header "Accept: application/json" "$url"
+	curl -s -su todyam01 -X GET --header "Accept: application/json" "$url"
 }
 
 # --- Register Parser ---
