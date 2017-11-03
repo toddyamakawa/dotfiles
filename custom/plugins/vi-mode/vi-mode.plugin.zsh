@@ -57,24 +57,23 @@ bindkey -M viins '^K' history-search-backward
 #bindkey -M viins '^J' history-incremental-search-forward
 #bindkey -M viins '^K' history-incremental-search-backward
 
+# TODO: Get rid of chorded inputs and find better shortcuts
 # [j+k] to enter vicmd mode
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M viins 'kj' vi-cmd-mode
 
+# TODO: Get rid of chorded inputs and find better shortcuts
 # [k+h] to go up and to the beginning of the line
 bindkey -M viins 'kh' vi-up-begin
 bindkey -M viins 'hk' vi-up-begin
 
+# TODO: Get rid of chorded inputs and find better shortcuts
 # [k+l] to go up and to the end of the line
 bindkey -M viins 'kl' vi-up-end
 bindkey -M viins 'lk' vi-up-end
 
 # [Alt-p] to paste
 bindkey -M viins '^[p' vi-xclip-paste
-
-# [o+p] to paste
-bindkey -M viins 'op' vi-xclip-paste
-bindkey -M viins 'po' vi-xclip-paste
 
 # FIXME: Ctrl-backspace to delete word backwards, doesn't work in gnome-terminal
 #bindkey -M viins '^?' backward-kill-word
