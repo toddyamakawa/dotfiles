@@ -30,6 +30,7 @@ alias sstat='svn stat --ignore-externals'
 alias scm='svn commit -m'
 alias smerge='svn update --ignore-externals && svnr merge'
 alias sswitch='svnr switch'
+alias svn+x='svn propset svn:executable "*"'
 
 # --- Global Aliases ---
 alias -g -- -nox='--ignore-externals'
