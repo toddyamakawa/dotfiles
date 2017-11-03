@@ -3,7 +3,7 @@ local here=${0:h}
 source $here/lib.zsh-theme
 
 # --- Evaluate $PROMPT ---
-setopt PROMPT_SUBST
+#setopt PROMPT_SUBST
 
 # --- Colors ---
 red="%{$fg_no_bold[red]%}"
@@ -32,20 +32,30 @@ no_color="%{$reset_color%}"
 #    $PROMPT
 # =============
 
-# --- Hostname/JobID ---
-# Return Job ID for interactive LSF shells
-# Return hostname otherwise
+# --- Host/LSF ---
+# BG Black: Default
+# FG White: Default
+# FG Green: tmux is active
+# FG Yellow: Interactive LSF shell
 function prompt_host() {
-	[[ -n $LSB_BATCH_JID ]] && echo "@$yellow_bold$LSB_BATCH_JID" || echo "@%m";
+	local fg=white host='%m'
+	[[ -n $LSB_BATCH_JID ]] && { fg=yellow; host=$LSB_BATCH_JID; }
+	#[[ -e ${TMUX%%,*} ]] && fg=green
+	[[ -e ${TMUX%%,*} ]] && fg=green
+	prompt_bg_fg black $fg "%n@$host"
 }
 
 # --- Path ---
 # Use Blue for paths with username
 # Use Cyan for paths without username
 function prompt_path() {
-	local c=$blue_bold p=${PWD/$HOME/\~}
-	[[ $PWD =~ $(whoami) ]] || c=$cyan_bold
-	echo $c${p##*/}
+	local p=${PWD/$HOME/\~} fg=blue
+	[[ $PWD =~ $(whoami) ]] || fg=cyan
+	#permission=$(prompt_permission)
+	#[[ -n $permission ]] || bg=red
+	#[[ $KEYMAP == vicmd ]] && bg=magenta
+	prompt_fg $fg $permission${p##*/}
+
 }
 
 # --- Permission ---
@@ -70,10 +80,9 @@ prompt_pass="$green_bold:)"
 prompt_fail="$red_bold:("
 
 # --- Define $PROMPT ---
-PROMPT="${blue_bold}[%n"
-PROMPT+="$(prompt_host) "
-PROMPT+='$(prompt_path) '
+PROMPT="$(prompt_host) "
 PROMPT+='$(prompt_permission) '
+PROMPT+='$(prompt_path) '
 PROMPT+="%(?.$prompt_pass.$prompt_fail)"
 PROMPT+="${blue_bold}]"
 PROMPT+='$(prompt_vimode)'
