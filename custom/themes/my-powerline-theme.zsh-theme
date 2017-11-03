@@ -134,10 +134,12 @@ function rprompt_git() {
 	git rev-parse --is-inside-work-tree &>/dev/null || return
 
 	# Check if blacklist
-	local blacklist url=$(git config --get remote.origin.url 2>/dev/null)
+	local blacklist url
+	url=$(git config --get remote.origin.url 2>/dev/null) || return
 	blacklist+=(ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter)
 	blacklist+=(ssh://ds-gerrit.euhpc.arm.com:29418/svos/linux)
 	blacklist+=(ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares)
+	blacklist+=(ssh://hw-gerrit.euhpc.arm.com:29418/systems/amis)
 	[[ -n ${blacklist[(r)$url]} ]] && return
 
 	# Color Git branch name
