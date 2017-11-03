@@ -60,6 +60,13 @@ function tnew() {
 	ts "$name"
 }
 
+# TODO: Implement this function
+# Figure out how tmux-fingers seemlessly swaps panes
+# Run command and show result in current pane
+function tcmd() {
+	local cmd="$@"
+}
+
 # --- Open/Switch Session ---
 function ts() {
 	[[ -n $TMUX ]] && tmux switch-client -t $1 || tmux attach -t $1
