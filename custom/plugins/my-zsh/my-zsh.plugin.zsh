@@ -14,7 +14,6 @@ function echo_eval() {
 alias nor="function rprompt_git(){}"
 
 # --- zsh ---
-alias zshrc='source ~/.zshrc'
 function zsh-theme() {
 	if [[ -f $ZSH/themes/$1.zsh-theme ]]; then
 		ZSH_THEME=$1
@@ -33,12 +32,11 @@ function zsh-theme() {
 alias -g 2null='2>/dev/null'
 alias -g 2out='2>&1'
 
-# --- General ---
+# --- Time ---
 alias now='date +%y%m%d-%H%M%S'
+alias week="date +%U"
 
 # --- General ---
-alias a='alias'
-alias ag='alias | grep'
 alias which='whence -c'
 alias func='print -l ${(ok)functions}'
 alias funcg='print -l ${(ok)functions} | grep'
@@ -112,7 +110,6 @@ alias suu='su $(whoami)'
 alias less='less -r'
 
 alias weather='curl "wttr.in/austin?u"'
-alias week="date +%U"
 
 function calc() { bc -l <<< "$@"; }
 
