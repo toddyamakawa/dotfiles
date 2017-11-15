@@ -31,6 +31,18 @@ function save_uart() {
 	done
 }
 
+# --- Archive ---
+function backup_iris() {
+	local new_iris=$1
+	[[ -z $new_iris ]] && { echo "New directory name not specified"; return 1}
+	[[ -f $new_iris || -d $new_iris ]] && { echo "'$new_iris' already exists"; return 1}
+	[[ -d iris ]] || { echo "'iris' directory doesn't exists"; return 1}
+	mv iris $new_iris
+	mkdir iris
+	cd iris
+	ln -s ../$new_iris/* .
+}
+
 # --- KVS Reference Path ---
 function kvs_info() {
 	local ref=/arm/ref/pd/SVOS/projects/porter/mscp
