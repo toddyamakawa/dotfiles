@@ -70,6 +70,8 @@ set cursorline     " Highlight current line
 " Show tab characters and off-screen text indicator
 set listchars=tab:▸-,precedes:<,extends:>
 
+set nrformats-=octal
+
 " Show spaces for indentation
 let g:indentLine_char = '|'
 
@@ -89,8 +91,14 @@ autocmd BufRead * 2match SpellBad /\v\s+$/
 " Disable comment formatting
 autocmd BufNewFile,BufRead * set formatoptions-=cro
 
+" Automatically remove trailing whitespace
+autocmd BufWritePre * %s/\s\+$//e
+
 " Automatically add +x permissions
 autocmd BufWritePost * if getline(1) =~ "^#!.*/bin/" | silent execute "!chmod +x %" | endif
+
+" Disable syntax for large files
+"autocmd BufReadPre * if getfsize(expand("%")) > 10000000 | syntax off | endif
 
 " Toggle list/number with <Leader>n
 nnoremap <Leader>n :set number! relativenumber! list!<CR>
@@ -329,9 +337,6 @@ nnoremap d/ :g//d<Enter>
 
 " Replace matching words
 nnoremap c/ :%s///g<Left><Left>
-
-" Search for errors
-nnoremap ge /\<error\>\\|\<fatal\><Enter>
 
 " --- Delete Patterns ---
 " Delete trailing whitespace
