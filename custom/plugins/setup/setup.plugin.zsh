@@ -2,9 +2,14 @@
 # --- .zshrc ---
 zle -N source-zshrc
 function source-zshrc() {
-	# TODO: Figure out how to redraw buffer
 	#local temp_buffer=$BUFFER
 	#BUFFER='sourcing ~/.zshrc file...'
+
+	# TODO: Figure out how to redraw buffer
+	# Attempt 1 failure
+	#zle redisplay
+	#typeset -f zle-line-init >/dev/null && zle zle-line-init
+
 	source ~/.zshrc
 	#BUFFER="$temp_buffer"
 }
