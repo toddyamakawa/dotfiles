@@ -14,6 +14,8 @@ bindkey -M viins '^[[Z' fzf-magic-complete
 bindkey -M viins '^[[Z' fzf-magic-complete
 
 
+# TODO: Write a custom `find` command that searches git files first
+
 # --- Widget ---
 # Create fzf-magic-complete widget
 zle -N fzf-magic-complete
