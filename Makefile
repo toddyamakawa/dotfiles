@@ -1,4 +1,6 @@
 
+ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+
 # --- Ignore Files ---
 ignore = Makefile README.md bin custom windows
 
@@ -22,11 +24,11 @@ fonts := $(HOME)/.fonts
 fontconfig := $(HOME)/.config/fontconfig/conf.d
 
 # --- All ---
-all: links bindir zshrc vundle fzf
+all: links bindir zshrc vundle
 
 # --- Symbolic Links ---
 links: $(links)
-$(HOME)/.%: $(PWD)/%; ln -fs $< $@
+$(HOME)/.%: $(ROOT_DIR)/%; ln -fs $< $@
 
 # --- bin Directory ---
 bindir:
@@ -39,7 +41,7 @@ $(ZSH)/oh-my-zsh.sh:
 plugins: $(plugins)
 themes: $(themes)
 $(plugins) $(themes):
-	ln -fs $(@:$(ZSH)/%=$(PWD)/%) $@
+	ln -fs $(@:$(ZSH)/%=$(ROOT_DIR)/%) $@
 
 # --- Vundle ---
 # vim plugin manager
