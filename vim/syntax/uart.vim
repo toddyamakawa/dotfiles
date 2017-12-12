@@ -16,8 +16,7 @@ hi def link uart_keywords Keyword
 syn match uart_keywords /\v.*SVOS.*/
 syn match uart_keywords /\v.*CPU\d+.*/
 syn match uart_keywords /\v.*Kiwi+.*/
-syn match uart_keywords /\v<Payload>.*<launched>/
-syn match uart_keywords /\v<Payload>.*<terminated>/
+syn match uart_keywords /\v<Payload>.*<(launched|terminated)>( normally)?/
 
 " --- Errors ---
 hi def link uart_error Error
