@@ -23,7 +23,10 @@ function _powerline() { xlsfonts |& command grep -q powerline; }
 
 # Record start time
 [[ -z $start_ms ]] && start_ms=$(date +%s%3N)
-function preexec() { start_ms=$(date +%s%3N); }
+function preexec() {
+	start_ms=$(date +%s%3N);
+	set-display
+}
 
 # Record elapsed time
 function precmd() {
@@ -35,9 +38,19 @@ function precmd() {
 # Calculate seconds
 function elapsed_time() { printf "%0.3f" $(($elapsed_ms/1000.0)); }
 
+# Set env/tmux DISPLAY
+function set-display() {
+	[[ -f ~/.DISPLAY ]] && export DISPLAY=$(cat ~/.DISPLAY)
+	if [[ $VNCDISPLAY == 1 ]]; then
+		port=$(echo $VNCDESKTOP | awk 'match($1, /.*(:[0-9]+)/, groups) {print groups[1]}')
+		DISPLAY=$port.0
+	fi
+	[[ -e ${TMUX%%,*} && -n $DISPLAY ]] && tmux set-environment DISPLAY $DISPLAY
+}
+
 # Automatic notification
 ZSH_NOTIFY_CMD='^\s*(git|svn)'
-ZSH_NOTIFY_TIME='30000'
+ZSH_NOTIFY_TIME='300000'
 function autonotify() {
 	[[ $elapsed_ms -gt $ZSH_NOTIFY_TIME ]] || return
 	[[ $MAGIC_ENTER_BUFFER =~ $ZSH_NOTIFY_CMD ]] || return
