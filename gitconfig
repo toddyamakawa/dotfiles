@@ -96,6 +96,11 @@
 	rs = rebase --skip
 	pullr = pull --rebase
 
+	# --- cherry-pick ---
+	cp = cherry-pick
+	cpa = cherry-pick --abort
+	cpc = cherry-pick --continue
+
 	format-patch-1 = format-patch HEAD~1
 	hub = "!f() { git clone https://github.com/$1/$2; }; f"
 	msquash = merge --squash --no-commit
