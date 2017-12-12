@@ -61,6 +61,7 @@ $(.TMUX)/plugins/tpm:
 
 # --- Powerline Font ---
 fonts: $(fonts)/fonts.dir $(fonts)/fonts.scale $(fontconfig)/10-powerline-symbols.conf
+	cp $(fonts)/fonts.scale $(fonts)/fonts.dir
 	xset q | grep -q $(fonts) || xset +fp $(fonts)
 	fc-cache -fv $(fonts)
 $(fonts)/fonts.dir: $(fonts)/PowerlineSymbols.otf
