@@ -58,6 +58,7 @@
 	# --- diff ---
 	diffn = diff --numstat
 	diffs = diff --staged
+	diffsn = diff --staged --numstat
 	meld = difftool --tool=meld --no-prompt
 	melda = !git meld --dir-diff
 	melds = !git melda --staged
