@@ -1,8 +1,12 @@
 
 # --- Set Environment Variables ---
-export DISPLAY_orig="$DISPLAY"
 export PAGER='less -r'
 export TERM=xterm-256color
+
+# --- Setup Display ---
+mkdir -p $HOME/display
+echo $DISPLAY > $HOME/display/$DISPLAY
+export DISPLAY_orig="$DISPLAY"
 
 # --- Terminal Line Settings ---
 # Disable XON/XOFF flow control
