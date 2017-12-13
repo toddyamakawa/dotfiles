@@ -11,5 +11,5 @@ export DISPLAY_orig="$DISPLAY"
 # --- Terminal Line Settings ---
 # Disable XON/XOFF flow control
 # Fixes Ctrl-s causing Vim to hang
-stty -ixon
+stty -ixon 2>/dev/null
 
