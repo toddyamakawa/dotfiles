@@ -42,6 +42,20 @@ function vi-xclip-paste() {
 	LBUFFER="$LBUFFER$(xclip -o)"
 }
 
+zle -N clear-on-empty-buffer
+function clear-on-empty-buffer() {
+	[[ -z $BUFFER ]] && zle clear-screen || zle accept-line
+}
+
+
+# =========================
+#    COMMAND/INSERT MODE
+# =========================
+
+# Clear screen if buffer is empty
+bindkey -M viins "^M" clear-on-empty-buffer
+bindkey -M vicmd "^M" clear-on-empty-buffer
+
 
 # =================
 #    INSERT MODE
