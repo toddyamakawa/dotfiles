@@ -7,6 +7,7 @@ function copy() { eval "$@" | _xclip; }
 function _xclip() {
 	xclip
 	[[ -e ${TMUX%%,*} ]] && tmux set-buffer "$(xclip -o)"
+	return 0
 }
 alias -g _paste='$(xclip -o)'
 alias echop='echo Clipboard: _paste'
