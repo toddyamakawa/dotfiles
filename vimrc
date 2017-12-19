@@ -181,6 +181,9 @@ nnoremap <Leader>vs :source $MYVIMRC<Enter>
 " Enter block visual mode with 'vv'
 nnoremap vv <C-v>
 
+" Exit visual mode with 'q'
+vnoremap q <Esc>
+
 
 " =============
 "    VIMDIFF
