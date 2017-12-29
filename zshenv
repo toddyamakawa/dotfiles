@@ -3,10 +3,10 @@
 export PAGER='less -r'
 export TERM=xterm-256color
 
-# --- Setup Display ---
-mkdir -p $HOME/display
-echo $DISPLAY > $HOME/display/$DISPLAY
+# --- Display Setup ---
+grep $DISPLAY $HOME/.DISPLAY &>/dev/null || echo $DISPLAY >> $HOME/.DISPLAY
 export DISPLAY_orig="$DISPLAY"
+[[ -n $VNCDESKTOP ]] && export DISPLAY_vnc=$DISPLAY
 
 # --- Terminal Line Settings ---
 # Disable XON/XOFF flow control

@@ -1,4 +1,6 @@
 
+source ${0:h}/display.zsh
+
 # =====================
 #    PROMPT SETTINGS
 # =====================
@@ -16,16 +18,6 @@ zle -N edit-command-line
 # --- Check Powerline ---
 function _powerline() { xlsfonts |& command grep -q powerline; }
 
-# --- Set $DISPLAY ---
-function set-display() {
-	[[ -f ~/.DISPLAY ]] && export DISPLAY=$(cat ~/.DISPLAY)
-	if [[ $VNCDISPLAY == 1 ]]; then
-		port=$(echo $VNCDESKTOP | awk 'match($1, /.*(:[0-9]+)/, groups) {print groups[1]}')
-		DISPLAY=$port.0
-	fi
-	[[ -e ${TMUX%%,*} && -n $DISPLAY ]] && tmux set-environment DISPLAY $DISPLAY
-}
-
 # --- Set Title ---
 function set-title() {
 	print -Pn "\e]0;$@\a"
@@ -40,7 +32,7 @@ function set-title() {
 [[ -z $start_ms ]] && start_ms=$(date +%s%3N)
 function preexec() {
 	start_ms=$(date +%s%3N);
-	set-display
+	set-display $(find-display)
 }
 
 # Record elapsed time
