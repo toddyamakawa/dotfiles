@@ -53,7 +53,7 @@ function kvs_info() {
 	echo $ref/$config/$tag
 }
 
-# TODO: Clean up function"
+# TODO: Clean up function
 function svos_brodie() {
 	result_type=svos_svos
 	project_name=svos

@@ -31,6 +31,7 @@ function zsh-theme() {
 # --- stderr ---
 alias -g 2null='2>/dev/null'
 alias -g 2out='2>&1'
+alias -g P='|&'
 
 # --- Time ---
 alias now='date +%y%m%d-%H%M%S'

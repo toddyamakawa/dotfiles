@@ -6,6 +6,7 @@ source $DEPOT_SETUP_ROOT/init/bash.d/modules-init
 
 # --- module autocompletion ---
 #autoload bashcompinit
+#bashcompinit
 #source $DEPOT_SETUP_ROOT/init/bash.d/modules-autocompletion
 
 # --- module autocompletion ---
