@@ -15,22 +15,20 @@ pane_format='#{pane_current_path}'
 prev_session=''
 prev_window=''
 function new_pane() {
-	new_pane="split-window"
-	[[ $2 != $prev_window ]] && { new_pane="new-window -n $3"; prev_window=$2; }
-	[[ $1 != $prev_session ]] && new_pane="new-session -d -s $1"
+	local session=$1 window=$2 name=$3 dir=$4
+	new_pane="    split-window"
+	[[ $window != $prev_window ]] && new_pane="  new-window -n $name"
+	[[ $session != $prev_session ]] && new_pane="new-session -d -s $session -n $name"
+	prev_window=$window
 	prev_session=$session
-	echo $new_pane -c $4
+	echo $new_pane -c $dir
 }
 
 # --- Generate Backup ---
-while read window; do
-	session=$(awk '{print $1}' <(echo $window))
-	index=$(  awk '{print $2}' <(echo $window))
-	name=$(   awk '{print $3}' <(echo $window))
-	layout=$( awk '{print $4}' <(echo $window))
+while read session index name layout; do
 	for dir in $(tmux list-panes -t $session:$index -F $pane_format); do
 		new_pane $session $index $name $dir
 	done
-	echo select-layout $layout
+	echo "    select-layout $layout"
 done < <(tmux list-windows -a -F $window_format)
 
