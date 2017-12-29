@@ -69,15 +69,15 @@ function prompt_gitdir() {
 # --- Permission ---
 function prompt_permission() {
 	local default=white
-	local access=$(stat -c %a .) || return
+	local access=$(stat -c %a . 2>/dev/null) || return
 	local user=$default group=$default world=$default
 
 	# User permission
-	[[ $(whoami) == $(stat -c %U .) ]] || user=red
+	[[ $(whoami) == $(stat -c %U . 2>/dev/null) ]] || user=red
 	prompt_fg $user $access[-3]
 
 	# Group permission
-	groups | grep -q $(stat -c %G .) || group=red
+	groups | grep -q $(stat -c %G . 2>/dev/null) || group=red
 	#[[ $(whoami) == $(stat -c %G .) ]] && group=magenta
 	prompt_fg $group $access[-2]
 
