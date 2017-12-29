@@ -65,7 +65,12 @@ set list           " Enable list mode
 set number         " Show line number
 set relativenumber " Show relative line number
 set showmatch      " Show matching parantheses
-set cursorline     " Highlight current line
+
+" Highlight current line
+"TODO: Make CursorLine change color for insert mode
+set cursorline
+"autocmd InsertEnter * highlight CursorLine guifg=something
+"autocmd InsertLeave * highlight CursorLine guifg=something
 
 " Show tab characters and off-screen text indicator
 set listchars=tab:▸-,precedes:<,extends:>
