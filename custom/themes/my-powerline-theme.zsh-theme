@@ -43,21 +43,6 @@ function prompt_host() {
 	prompt_bg_fg black $fg "%n@$host"
 }
 
-# --- Directory ---
-# BG Blue: Username in path
-# BG Cyan: Username not in path
-# BG Red: Bad permissions
-# BG Magenta: vicmd mode
-function prompt_dir() {
-	local p=${PWD/$HOME/\~} bg=blue
-	[[ $PWD =~ $(whoami) ]] || bg=cyan
-	permission=$(prompt_permission)
-	[[ -n $permission ]] || bg=red
-	[[ $KEYMAP == vicmd ]] && bg=magenta
-	prompt_bg_fg $bg white $permission${p##*/}
-	#prompt_bg_fg $bg white $permission$(prompt_gitdir)
-}
-
 # --- Git Directory ---
 function prompt_gitdir() {
 	local gitdir=$(git rev-parse --git-dir 2>/dev/null)
@@ -66,32 +51,13 @@ function prompt_gitdir() {
 	echo ${PWD##$githead/}
 }
 
-# --- Permission ---
-function prompt_permission() {
-	local default=white
-	local access=$(stat -c %a . 2>/dev/null) || return
-	local user=$default group=$default world=$default
-
-	# User permission
-	[[ $(whoami) == $(stat -c %U . 2>/dev/null) ]] || user=red
-	prompt_fg $user $access[-3]
-
-	# Group permission
-	groups | grep -q $(stat -c %G . 2>/dev/null) || group=red
-	#[[ $(whoami) == $(stat -c %G .) ]] && group=magenta
-	prompt_fg $group $access[-2]
-
-	# World permission
-	prompt_fg $world "$access[-1] "
-}
-
 # --- Build Prompt ---
 build_prompt() {
 	prompt_start
 	PROMPT_BG='NONE'
 	prompt_status
 	prompt_host
-	prompt_dir
+	_dir-permission
 	prompt_end
 }
 
@@ -111,7 +77,7 @@ function rprompt_git() {
 
 # --- Right Prompt Elapsed Time ---
 function rprompt_time() {
-	rprompt_bg_fg blue white $(elapsed_time)
+	rprompt_bg_fg blue white $(_elapsed-time)
 }
 
 # --- Build Right Prompt ---

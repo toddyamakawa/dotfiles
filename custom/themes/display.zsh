@@ -1,6 +1,6 @@
 
 # --- Find $DISPLAY ---
-function find-display() {
+function _find-display() {
 	[[ -n $DISPLAY_vnc ]] && export DISPLAY_force=$DISPLAY_vnc
 	[[ -n $DISPLAY_force ]] && {echo $DISPLAY_force; return;}
 	[[ -f ~/.DISPLAY ]] && {head -1 ~/.DISPLAY; return;}
@@ -8,7 +8,7 @@ function find-display() {
 }
 
 # --- Set $DISPLAY ---
-function set-display() {
+function _set-display() {
 	local display=$1
 	[[ -z $display ]] && return
 	xdpyinfo -display $display &>/dev/null || return

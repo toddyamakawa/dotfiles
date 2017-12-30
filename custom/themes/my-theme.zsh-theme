@@ -2,47 +2,19 @@
 local here=${0:h}
 source $here/lib.zsh-theme
 
-# --- Evaluate $PROMPT ---
-#setopt PROMPT_SUBST
-
-# --- Colors ---
-red="%{$fg_no_bold[red]%}"
-yellow="%{$fg_no_bold[yellow]%}"
-green="%{$fg_no_bold[green]%}"
-blue="%{$fg_no_bold[blue]%}"
-cyan="%{$fg_no_bold[cyan]%}"
-magenta="%{$fg_no_bold[magenta]%}"
-black="%{$fg_no_bold[black]%}"
-white="%{$fg_no_bold[white]%}"
-
-# --- Bold Colors ---
-red_bold="%{$fg_bold[red]%}"
-yellow_bold="%{$fg_bold[yellow]%}"
-green_bold="%{$fg_bold[green]%}"
-blue_bold="%{$fg_bold[blue]%}"
-cyan_bold="%{$fg_bold[cyan]%}"
-magenta_bold="%{$fg_bold[magenta]%}"
-black_bold="%{$fg_bold[black]%}"
-white_bold="%{$fg_bold[white]%}"
-
-# --- Reset Color ---
-no_color="%{$reset_color%}"
-
 # =============
 #    $PROMPT
 # =============
 
 # --- Host/LSF ---
-# BG Black: Default
 # FG White: Default
 # FG Green: tmux is active
 # FG Yellow: Interactive LSF shell
 function prompt_host() {
 	local fg=white host='%m'
 	[[ -n $LSB_BATCH_JID ]] && { fg=yellow; host=$LSB_BATCH_JID; }
-	#[[ -e ${TMUX%%,*} ]] && fg=green
 	[[ -e ${TMUX%%,*} ]] && fg=green
-	prompt_bg_fg black $fg "%n@$host"
+	prompt_fg $fg "%n@$host"
 }
 
 # --- Path ---
@@ -58,21 +30,22 @@ function prompt_path() {
 
 }
 
-# --- Permission ---
-function prompt_permission() {
-	local a=$(stat -c %a .)
-	local u=$blue_bold$a[-3]
-	local g=$blue_bold$a[-2]
-	local o=$blue_bold$a[-1]
-	[[ $(whoami) == $(stat -c %U .) ]] || u=$red_bold$a[-3]
-	groups | grep -q $(stat -c %G .) || g=$red_bold$a[-2]
-	[[ $(whoami) == $(stat -c %G .) ]] && g=$magenta_bold$a[-2]
-	echo $u$g$o
-}
-
 # --- Vi-Mode $ ---
 function prompt_vimode() {
 	[[ $KEYMAP == vicmd ]] && echo "$cyan_bold\$" || echo "$blue_bold\$"
+}
+
+# --- Build Prompt ---
+build_prompt() {
+	prompt_start
+	PROMPT_BG='NONE'
+
+	#prompt_status
+	prompt_bg black
+	prompt_host
+
+	_dir-permission
+	prompt_end
 }
 
 # --- Pass/Fail Faces ---
@@ -88,42 +61,31 @@ PROMPT+="${blue_bold}]"
 PROMPT+='$(prompt_vimode)'
 PROMPT+="${no_color} "
 
+PROMPT='$(build_prompt)'
+
 
 # =============
 #    $RPROMPT
 # =============
 
-function rprompt_git_branch() {
-	local branch=$(git rev-parse --abbrev-ref HEAD)
-	local clean=$green
-	git rev-parse @{u} &>/dev/null || clean=$cyan
-	git diff-index --quiet HEAD || clean=$red
-	echo "$clean$branch"
-}
-
-function rprompt_git_commits() {
-	#git ls-remote --exit-code faraway >/dev/null 2>&1 || return
-	git rev-parse @{u} &>/dev/null || return
-	local ahead=$(git status -sb | sed -n 's/.*ahead \([0-9]\+\).*/\1/p')
-	local behind=$(git status -sb | sed -n 's/.*behind \([0-9]\+\).*/\1/p')
-	local commits=""
-	[[ -n $ahead ]] && commits+="$yellow+$ahead "
-	[[ -n $behind ]] && commits+="$red-$behind "
-	echo $commits
-}
-
 function rprompt_git() {
-	git rev-parse --git-dir &>/dev/null || return
-	#modified_count=$(git diff --name-only | wc -l)
-	#current_sha=$(git rev-parse --short HEAD)
-	#upstream_sha=$(git rev-parse --short @{u})
-	echo "$(rprompt_git_branch) $(rprompt_git_commits)"
+	_git-check || return
+	_git-blacklist && return
+	_git-branch
+	_git-commits
 }
 
-function rprompt_elapsed_time() {
-	echo "${blue}$(elapsed_time)${no_color}"
-	[[ -n $MAGIC_NOTIFY ]] && [[ $SECONDS -gt 300 ]] && zenity --info --text "DONE\n$MAGIC_ENTER_BUFFER"
+# --- Right Prompt Elapsed Time ---
+function rprompt_time() {
+	rprompt_bg_fg blue white $(_elapsed-time)
 }
 
-RPROMPT='$(rprompt_git)$(rprompt_elapsed_time)'
+# --- Build Right Prompt ---
+build_rprompt() {
+	rprompt_start
+	rprompt_git
+	rprompt_time
+}
+
+RPROMPT='$(build_rprompt)'
 
