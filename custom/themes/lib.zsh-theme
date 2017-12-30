@@ -1,5 +1,9 @@
 
-source ${0:h}/display.zsh
+local here=${0:h}
+source $here/display.zsh
+source $here/git.zsh
+source $here/time.zsh
+
 
 # =====================
 #    PROMPT SETTINGS
@@ -21,41 +25,6 @@ function _powerline() { xlsfonts |& command grep -q powerline; }
 # --- Set Title ---
 function set-title() {
 	print -Pn "\e]0;$@\a"
-}
-
-
-# ===========
-#    TIMER
-# ===========
-
-# Record start time
-[[ -z $start_ms ]] && start_ms=$(date +%s%3N)
-function preexec() {
-	start_ms=$(date +%s%3N);
-	set-display $(find-display)
-}
-
-# Record elapsed time
-function precmd() {
-	elapsed_ms=$(($(date +%s%3N)-$start_ms))
-	[[ -e ${TMUX%%,*} ]] && tmux refresh-client
-	# TODO: Fix MAGIC_ENTER_BUFFER
-	#autonotify
-}
-
-# Calculate seconds
-function elapsed_time() { printf "%0.3f" $(($elapsed_ms/1000.0)); }
-
-# Automatic notification
-ZSH_NOTIFY_CMD='^\s*(git|svn)'
-ZSH_NOTIFY_TIME='300000'
-function autonotify() {
-	[[ $elapsed_ms -gt $ZSH_NOTIFY_TIME ]] || return
-	[[ $MAGIC_ENTER_BUFFER =~ $ZSH_NOTIFY_CMD ]] || return
-	zenity --info --text "DONE: $(elapsed_time) seconds\n$MAGIC_ENTER_BUFFER"
-	tmux switch-client -t $(tmux display-message -p '#{session_id}') \; \
-		select-window -t $(tmux display-message -p '#{window_id}') \; \
-		select-pane -t $(tmux display-message -p '#{pane_id}')
 }
 
 
@@ -141,5 +110,4 @@ function rprompt_start() {
 function rprompt_end() {
 	#[[ $KEYMAP == vicmd ]] && prompt_bg_fg black white || prompt_bg_fg reset reset
 }
-
 

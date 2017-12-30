@@ -102,23 +102,6 @@ PROMPT='$(build_prompt)'
 #    $RPROMPT
 # =============
 
-# --- Right Prompt Background ---
-function rprompt_bg() {
-	local bg="%{%K{$1}%}"
-	echo -n "%F{$1}%}$RPROMPT_SEPARATOR"
-	echo -n ${bg/\%K\{reset\}/%k}
-}
-
-# --- Right Prompt Foreground ---
-function rprompt_fg() { prompt_fg $@; }
-
-# --- Right Prompt Background/Foreground ---
-function rprompt_bg_fg() {
-	rprompt_bg $1
-	rprompt_fg $2
-	shift 2 && echo -n "$@"
-}
-
 function rprompt_git_commits() {
 	local stat
 	stat=$(git status -sb -uno)
