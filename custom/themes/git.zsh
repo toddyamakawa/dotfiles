@@ -37,6 +37,6 @@ function _git-branch() {
 	local fg=green branch=$(git rev-parse --abbrev-ref HEAD)
 	git rev-parse @{u} &>/dev/null || fg=cyan
 	git diff-index --quiet HEAD || fg=red
-	rprompt_bg_fg black $fg $branch
+	rprompt_fg $fg $branch
 }
 

@@ -12,8 +12,6 @@ ZSH_COMPDUMP=$ZSH_COMPDIR/$(hostname --long)
 
 # --- Setup Theme ---
 ZSH_THEME_DEFAULT="my-theme"
-#fc-list | grep -qi powerline && ZSH_THEME_DEFAULT="my-powerline-theme"
-xlsfonts | grep -q powerline && ZSH_THEME_DEFAULT="my-powerline-theme"
 [[ -z $ZSH_THEME ]] && ZSH_THEME=$ZSH_THEME_DEFAULT
 
 if [[ $(hostname --long) =~ arm.com$ ]]; then

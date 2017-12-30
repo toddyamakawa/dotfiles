@@ -6,62 +6,35 @@ source $here/lib.zsh-theme
 #    $PROMPT
 # =============
 
-# --- Host/LSF ---
-# FG White: Default
-# FG Green: tmux is active
-# FG Yellow: Interactive LSF shell
-function prompt_host() {
-	local fg=white host='%m'
-	[[ -n $LSB_BATCH_JID ]] && { fg=yellow; host=$LSB_BATCH_JID; }
-	[[ -e ${TMUX%%,*} ]] && fg=green
-	prompt_fg $fg "%n@$host"
-}
-
-# --- Path ---
-# Use Blue for paths with username
-# Use Cyan for paths without username
-function prompt_path() {
-	local p=${PWD/$HOME/\~} fg=blue
-	[[ $PWD =~ $(whoami) ]] || fg=cyan
-	#permission=$(prompt_permission)
-	#[[ -n $permission ]] || bg=red
-	#[[ $KEYMAP == vicmd ]] && bg=magenta
-	prompt_fg $fg $permission${p##*/}
-
-}
-
-# --- Vi-Mode $ ---
-function prompt_vimode() {
-	[[ $KEYMAP == vicmd ]] && echo "$cyan_bold\$" || echo "$blue_bold\$"
+# Status:
+# - was there an error
+# - am I root
+# - are there background jobs?
+function prompt_status() {
+	local symbols
+	if _powerline; then
+		[[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘"
+		[[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡"
+		[[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
+		[[ -n "$symbols" ]] && prompt_bg_fg black default && echo -n "$symbols"
+	else
+		[[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}X"
+		[[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}Z"
+		[[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}B"
+		[[ -n "$symbols" ]] && prompt_bg_fg black default && echo -n "$symbols"
+	fi
 }
 
 # --- Build Prompt ---
 build_prompt() {
 	prompt_start
 	PROMPT_BG='NONE'
-
-	#prompt_status
 	prompt_bg black
+	prompt_status
 	prompt_host
-
 	_dir-permission
 	prompt_end
 }
-
-# --- Pass/Fail Faces ---
-prompt_pass="$green_bold:)"
-prompt_fail="$red_bold:("
-
-# --- Define $PROMPT ---
-PROMPT="$(prompt_host) "
-PROMPT+='$(prompt_permission) '
-PROMPT+='$(prompt_path) '
-PROMPT+="%(?.$prompt_pass.$prompt_fail)"
-PROMPT+="${blue_bold}]"
-PROMPT+='$(prompt_vimode)'
-PROMPT+="${no_color} "
-
-PROMPT='$(build_prompt)'
 
 
 # =============
@@ -71,6 +44,7 @@ PROMPT='$(build_prompt)'
 function rprompt_git() {
 	_git-check || return
 	_git-blacklist && return
+	rprompt_bg black
 	_git-branch
 	_git-commits
 }
@@ -86,6 +60,4 @@ build_rprompt() {
 	rprompt_git
 	rprompt_time
 }
-
-RPROMPT='$(build_rprompt)'
 

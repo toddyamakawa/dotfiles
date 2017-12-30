@@ -13,6 +13,10 @@ function zle-keymap-select() { zle reset-prompt; }
 zle -N zle-keymap-select
 zle -N edit-command-line
 
+# --- Set $PROMPT and $RPROMPT ---
+PROMPT='$(build_prompt)'
+RPROMPT='$(build_rprompt)'
+
 
 # =========================
 #    POWERLINE FUNCTIONS
