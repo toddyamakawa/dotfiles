@@ -16,8 +16,8 @@ function _git-commits() {
 	stat=$(git status -sb -uno | head -1)
 	ahead=$(echo $stat | sed -n 's/.*ahead \([0-9]\+\).*/ +\1/p')
 	behind=$(echo $stat | sed -n 's/.*behind \([0-9]\+\).*/ -\1/p')
-	rprompt_fg yellow $ahead
-	rprompt_fg red $behind
+	_rprompt-fg yellow $ahead
+	_rprompt-fg red $behind
 }
 
 # --- Check Blacklist ---
@@ -37,6 +37,6 @@ function _git-branch() {
 	local fg=green branch=$(git rev-parse --abbrev-ref HEAD)
 	git rev-parse @{u} &>/dev/null || fg=cyan
 	git diff-index --quiet HEAD || fg=red
-	rprompt_fg $fg $branch
+	_rprompt-fg $fg $branch
 }
 

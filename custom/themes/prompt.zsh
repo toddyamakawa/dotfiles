@@ -31,7 +31,7 @@ function _powerline() { xlsfonts |& command grep -q powerline; }
 # ===========================
 
 # --- Prompt Background ---
-function prompt_bg() {
+function _prompt-bg() {
 	local bg="%{%K{$1}%}"
 	echo -n ${bg/\%K\{reset\}/%k}
 	if [[ $PROMPT_BG != 'NONE' && $PROMPT_BG != $1 ]]; then
@@ -41,19 +41,19 @@ function prompt_bg() {
 }
 
 # --- Prompt Foreground ---
-function prompt_fg() {
+function _prompt-fg() {
 	local fg="%{%F{$1}%}"
 	shift && echo -n "${fg/\%F\{reset\}/%f}$@"
 }
 
 # --- Prompt Background/Foreground ---
-function prompt_bg_fg() {
-	prompt_bg $1
-	shift && prompt_fg $@
+function _prompt-bg-fg() {
+	_prompt-bg $1
+	shift && _prompt-fg $@
 }
 
 # --- Prompt Start ---
-function prompt_start() {
+function _prompt-start() {
 	RETVAL=$?
 	if _powerline; then
 		local LC_ALL="" LC_CTYPE="en_US.UTF-8"
@@ -66,8 +66,8 @@ function prompt_start() {
 }
 
 # --- Prompt End ---
-function prompt_end() {
-	prompt_bg_fg reset reset
+function _prompt-end() {
+	_prompt-bg-fg reset reset
 	_powerline || echo -n "$no_color "
 }
 
@@ -77,23 +77,23 @@ function prompt_end() {
 # ============================
 
 # --- Right Prompt Background ---
-function rprompt_bg() {
+function _rprompt-bg() {
 	local bg="%{%K{$1}%}"
 	echo -n "%F{$1}%}$RPROMPT_SEPARATOR"
 	echo -n ${bg/\%K\{reset\}/%k}
 }
 
 # --- Right Prompt Foreground ---
-function rprompt_fg() { prompt_fg $@; }
+function _rprompt-fg() { _prompt-fg $@; }
 
 # --- Right Prompt Background/Foreground ---
-function rprompt_bg_fg() {
-	rprompt_bg $1
-	shift && rprompt_fg $@
+function _rprompt-bg-fg() {
+	_rprompt-bg $1
+	shift && _rprompt-fg $@
 }
 
 # --- Right Prompt Start ---
-function rprompt_start() {
+function _rprompt-start() {
 	if _powerline; then
 		local LC_ALL="" LC_CTYPE="en_US.UTF-8"
 		PROMPT_SEPARATOR=$'\ue0b0'
@@ -105,7 +105,7 @@ function rprompt_start() {
 }
 
 # --- Right Prompt End ---
-function rprompt_end() {
+function _rprompt-end() {
 	#[[ $KEYMAP == vicmd ]] && prompt_bg_fg black white || prompt_bg_fg reset reset
 }
 

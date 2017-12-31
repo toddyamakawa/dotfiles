@@ -10,8 +10,8 @@ function _dir-permission() {
 	permission=$(_permission-ugo)
 	[[ -n $permission ]] || bg=red
 	[[ $KEYMAP == vicmd ]] && bg=magenta
-	prompt_bg_fg $bg white $permission${p##*/}
-	#prompt_bg_fg $bg white $permission$(prompt_gitdir)
+	_prompt-bg-fg $bg white $permission${p##*/}
+	#_prompt-bg-fg $bg white $permission$(_dir-git)
 }
 
 # --- Permission ---
@@ -22,15 +22,15 @@ function _permission-ugo() {
 
 	# User permission
 	[[ $(whoami) == $(stat -c %U . 2>/dev/null) ]] || user=red
-	prompt_fg $user $access[-3]
+	_prompt-fg $user $access[-3]
 
 	# Group permission
 	groups | grep -q $(stat -c %G . 2>/dev/null) || group=red
 	#[[ $(whoami) == $(stat -c %G .) ]] && group=magenta
-	prompt_fg $group $access[-2]
+	_prompt-fg $group $access[-2]
 
 	# World permission
-	prompt_fg $world "$access[-1] "
+	_prompt-fg $world "$access[-1] "
 }
 
 # --- Relative Git Directory ---

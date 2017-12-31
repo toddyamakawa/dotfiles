@@ -19,7 +19,7 @@ function pperf() {
 }
 
 # --- Set Title ---
-function set-title() {
+function _set-title() {
 	print -Pn "\e]0;$@\a"
 }
 
