@@ -1,4 +1,6 @@
 
+# TODO: Investigate antibody: https://github.com/getantibody/antibody
+
 # --- oh-my-zsh ---
 export ZSH=$HOME/.oh-my-zsh
 export SHELL=$(builtin which zsh)
