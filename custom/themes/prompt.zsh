@@ -23,7 +23,7 @@ RPROMPT='$(build_rprompt)'
 # =========================
 
 # --- Check Powerline ---
-function _powerline() { xlsfonts |& command grep -q powerline; }
+function _powerline() { xlsfonts -fn '*powerline*' 2>/dev/null | command grep -q powerline; }
 
 
 # ===========================
