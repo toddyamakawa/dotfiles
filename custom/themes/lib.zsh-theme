@@ -11,12 +11,16 @@ source $here/time.zsh
 
 # --- Prompt Performance ---
 function pperf() {
+	_perf preexec
+	_perf precmd
+	_perf build_prompt
+	_perf build_rprompt
+}
+
+function _perf() {
 	local start_ms=$(date +%s%3N)
-	build_prompt > /dev/null
-	echo "build_prompt: $(($(date +%s%3N)-$start_ms))"
-	start_ms=$(date +%s%3N)
-	build_rprompt > /dev/null
-	echo "build_rprompt: $(($(date +%s%3N)-$start_ms))"
+	$@ > /dev/null
+	echo "$1: $(($(date +%s%3N)-$start_ms))"
 }
 
 # --- Set Title ---
