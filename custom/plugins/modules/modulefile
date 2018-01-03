@@ -34,6 +34,7 @@ initSet
 
 	# Useful modules
 	load-once gnu/gawk/4.1.1
+	load-once gnu/htop/1.0.1
 	load-once greer/silversearcher/1.0.2
 
 	# Tools
