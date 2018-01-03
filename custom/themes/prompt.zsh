@@ -23,8 +23,10 @@ RPROMPT='$(build_rprompt)'
 # =========================
 
 # --- Check Powerline ---
-function _powerline() { xlsfonts -fn '*powerline*' 2>/dev/null | command grep -q powerline; }
-
+function _set-powerline() {
+	export POWERLINE=$(xlsfonts -fn '*powerline*' 2>/dev/null | command grep powerline)
+}
+_set-powerline
 
 # ===========================
 #    LEFT PROMPT FUNCTIONS
@@ -55,7 +57,7 @@ function _prompt-bg-fg() {
 # --- Prompt Start ---
 function _prompt-start() {
 	RETVAL=$?
-	if _powerline; then
+	if [[ -n $POWERLINE ]]; then
 		local LC_ALL="" LC_CTYPE="en_US.UTF-8"
 		PROMPT_SEPARATOR=$'\ue0b0'
 		RPROMPT_SEPARATOR=$'\ue0b2'
@@ -68,7 +70,7 @@ function _prompt-start() {
 # --- Prompt End ---
 function _prompt-end() {
 	_prompt-bg-fg reset reset
-	_powerline || echo -n "$no_color "
+	[[ -n $POWERLINE ]] || echo -n "$no_color "
 }
 
 
@@ -94,7 +96,7 @@ function _rprompt-bg-fg() {
 
 # --- Right Prompt Start ---
 function _rprompt-start() {
-	if _powerline; then
+	if [[ -n $POWERLINE ]]; then
 		local LC_ALL="" LC_CTYPE="en_US.UTF-8"
 		PROMPT_SEPARATOR=$'\ue0b0'
 		RPROMPT_SEPARATOR=$'\ue0b2'

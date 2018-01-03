@@ -12,7 +12,7 @@ source $here/lib.zsh-theme
 # - are there background jobs?
 function _prompt-status() {
 	local symbols
-	if _powerline; then
+	if [[ -n $POWERLINE ]]; then
 		[[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘"
 		[[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡"
 		[[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
