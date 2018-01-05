@@ -2,6 +2,7 @@
 local here=${0:h}
 
 alias awkvar="cat $here/awk.variables.txt"
+alias awk.ts="$here/timestamp.awk"
 
 # --- awk columns ---
 function awkc() {
