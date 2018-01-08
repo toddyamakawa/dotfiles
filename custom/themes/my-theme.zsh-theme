@@ -2,6 +2,8 @@
 local here=${0:h}
 source $here/lib.zsh-theme
 
+alias nor="function _rprompt-git(){}"
+
 # =============
 #    $PROMPT
 # =============

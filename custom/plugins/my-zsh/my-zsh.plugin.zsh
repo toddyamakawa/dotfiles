@@ -10,9 +10,6 @@ function echo_eval() {
 }
 
 
-#alias nor="RPROMPT=''"
-alias nor="function rprompt_git(){}"
-
 # --- zsh ---
 function zsh-theme() {
 	if [[ -f $ZSH/themes/$1.zsh-theme ]]; then
