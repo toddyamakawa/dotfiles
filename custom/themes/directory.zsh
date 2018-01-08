@@ -25,8 +25,7 @@ function _permission-ugo() {
 	_prompt-fg $user $access[-3]
 
 	# Group permission
-	groups | grep -q $(stat -c %G . 2>/dev/null) || group=red
-	#[[ $(whoami) == $(stat -c %G .) ]] && group=magenta
+	[[ $(groups) =~ $(stat -c %G . 2>&1) ]] || group=red
 	_prompt-fg $group $access[-2]
 
 	# World permission
