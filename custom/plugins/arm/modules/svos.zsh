@@ -11,6 +11,8 @@ function asp_run2log() {
 	cd $newdir
 }
 alias asp_parse_dir="perl -pe 's/\S*asp\/work\/([^\/]+)\/(\d+)\/\w+/\1:\2/'"
+alias json2cfg='$(git rev-parse --show-toplevel)/misc/json2cfg.rb'
+alias zshasp='source $(git rev-parse --show-toplevel)/misc/zsh_completion'
 
 # --- arg.tcl ---
 function tarmac_arg() {
