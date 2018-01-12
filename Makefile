@@ -53,9 +53,9 @@ $(HOME)/.vim/bundle/Vundle.vim:
 # --- tpm ---
 # tmux plugin manager
 tpm: $(.TMUX) $(.TMUX)/plugins/tpm
-	tmux run-shell $(.TMUX)/plugins/tpm/bindings/clean_plugins
-	tmux run-shell $(.TMUX)/plugins/tpm/bindings/install_plugins
-	tmux run-shell $(.TMUX)/plugins/tpm/bindings/update_plugins
+	tmux run-shell $(.TMUX)/plugins/tpm/bin/clean_plugins
+	tmux run-shell $(.TMUX)/plugins/tpm/bin/install_plugins
+	tmux run-shell '$(.TMUX)/plugins/tpm/bin/update_plugins all'
 $(.TMUX)/plugins/tpm:
 	git clone https://github.com/tmux-plugins/tpm $(.TMUX)/plugins/tpm
 
