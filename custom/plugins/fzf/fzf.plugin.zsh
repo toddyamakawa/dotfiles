@@ -1,6 +1,8 @@
 
 # --- Source ---
 source ~/.fzf.zsh
+local fzfpath=$(git -C $(dirname $(which fzf)) rev-parse --show-toplevel)
+source $fzfpath/shell/key-bindings.zsh
 
 
 # --- Key Bindings ---
