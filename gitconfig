@@ -88,6 +88,7 @@
 	rl = review --list
 	rd = review --download
 	rx = review --cherrypick
+	ry = review --yes
 	draft = review --draft
 
 	# --- rebase ---
@@ -113,6 +114,7 @@
 	sha = "!f() { git diff --numstat $1{^,}; }; f"
 	unstage = reset HEAD
 	undo-merge = reset --hard ORIG_HEAD
+	hard-reset = reset --hard origin/master
 
 	ignore = update-index --assume-unchanged *
 
