@@ -13,7 +13,7 @@ function _git-url() {
 function _git-commits() {
 	local stat ahead behind
 	_git-url > /dev/null || return
-	stat=$(git status -sb -uno | head -1)
+	stat=$(git status -sb -uno 2>/dev/null | head -1)
 	ahead=$(echo $stat | sed -n 's/.*ahead \([0-9]\+\).*/ +\1/p')
 	behind=$(echo $stat | sed -n 's/.*behind \([0-9]\+\).*/ -\1/p')
 	_rprompt-fg yellow $ahead
@@ -36,7 +36,7 @@ function _git-blacklist() {
 function _git-branch() {
 	local fg=green branch=$(git rev-parse --abbrev-ref HEAD)
 	git rev-parse @{u} &>/dev/null || fg=cyan
-	git diff-index --quiet HEAD || fg=red
+	git diff-index --quiet HEAD 2>/dev/null || fg=red
 	_rprompt-fg $fg $branch
 }
 
