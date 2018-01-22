@@ -18,7 +18,6 @@ alias vdiff='vimdiff'
 # Text files
 alias -s err=vim
 alias -s log=vim
-alias -s md=vim
 alias -s output=vim
 alias -s ts=vim
 alias -s txt=vim

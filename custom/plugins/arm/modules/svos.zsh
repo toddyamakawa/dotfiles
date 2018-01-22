@@ -19,6 +19,12 @@ function tarmac_arg() {
 	tclsh <(echo 'source arg.tcl; puts "-tracestart $tarmac(start) -traceend $tarmac(end)"')
 }
 
+# --- View Markdown Files ---
+alias -s md=mk
+function mk() {
+	/arm/ref/pd/SVOS/tools/mk/bin/mk "$@" | less -FRX
+}
+
 # --- Tarmac ---
 alias tarmac_uart="awk '/S:007ff80000/ {num=strtonum(\"0x\"substr(\$6,7,2)); printf(\"%c\", num)}'"
 alias tarmac_uart_ts="awk '{print} /S:007ff80000/ {num=strtonum(\"0x\"substr(\$6,7,2)); printf(\"UART %c\\n\", num)}'"
@@ -79,6 +85,7 @@ function newweek() {
 	[[ -f $thisweek ]] && return 1
 	cp $lastweek $thisweek
 }
+
 
 alias ares_disasm='/arm/devsys-tools/warehouse/PerformanceModeling/EBM/master/$(/arm/devsys-tools/abs/detag PerformanceModeling:EBM:master::trunk)/Linux/x86_64/gcc-4.9.2/rel_int/bin/ares_disasm'
 
