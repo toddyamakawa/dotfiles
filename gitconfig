@@ -27,6 +27,7 @@
 	stat = status
 	sb = status -sb -uno
 	shown = show --numstat
+	showw = show --ignore-all-space --ignore-blank-lines
 	info = remote show origin
 	top = rev-parse --show-toplevel
 	url = remote get-url origin
