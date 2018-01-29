@@ -61,6 +61,9 @@ bindkey -M vicmd "^M" clear-on-empty-buffer
 #    INSERT MODE
 # =================
 
+# Ctrl-f to enter vicmd mode
+bindkey -M viins '^F' vi-cmd-mode
+
 # Ctrl-j and Ctrl-k to search history
 #bindkey -M viins '^J' down-line-or-search
 #bindkey -M viins '^K' up-line-or-search
@@ -70,21 +73,6 @@ bindkey -M viins '^J' history-search-forward
 bindkey -M viins '^K' history-search-backward
 #bindkey -M viins '^J' history-incremental-search-forward
 #bindkey -M viins '^K' history-incremental-search-backward
-
-# TODO: Get rid of chorded inputs and find better shortcuts
-# [j+k] to enter vicmd mode
-bindkey -M viins 'jk' vi-cmd-mode
-bindkey -M viins 'kj' vi-cmd-mode
-
-# TODO: Get rid of chorded inputs and find better shortcuts
-# [k+h] to go up and to the beginning of the line
-bindkey -M viins 'kh' vi-up-begin
-bindkey -M viins 'hk' vi-up-begin
-
-# TODO: Get rid of chorded inputs and find better shortcuts
-# [k+l] to go up and to the end of the line
-bindkey -M viins 'kl' vi-up-end
-bindkey -M viins 'lk' vi-up-end
 
 # [Alt-p] to paste
 bindkey -M viins '^[p' vi-xclip-paste
