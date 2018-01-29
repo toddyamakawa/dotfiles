@@ -15,31 +15,32 @@ set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 
-" --- Vundle Begin ---
-call vundle#begin()
-	Plugin 'VundleVim/Vundle.vim'
+" --- vim-plug Begin ---
+call plug#begin('~/.vim/plugged')
+
+	Plug 'VundleVim/Vundle.vim'
 
 	" ===============
 	"    INTERFACE
 	" ===============
 
 	" --- Color Schemes ---
-	"Plugin 'qualiabyte/vim-colorstepper'
-	Plugin 'nanotech/jellybeans.vim'
-	Plugin 'tomasr/molokai'
-	Plugin 'antlypls/vim-colors-codeschool'
+	"Plug 'qualiabyte/vim-colorstepper'
+	Plug 'nanotech/jellybeans.vim'
+	Plug 'tomasr/molokai'
+	Plug 'antlypls/vim-colors-codeschool'
 
 	" --- Indentation ---
-	Plugin 'yggdroot/indentline'
-	"Plugin 'nathanaelkane/vim-indent-guides.git'
-	"Plugin 'tpope/vim-sleuth'
+	Plug 'yggdroot/indentline'
+	"Plug 'nathanaelkane/vim-indent-guides.git'
+	"Plug 'tpope/vim-sleuth'
 
 	" --- .tmux.conf Syntax ---
-	Plugin 'keith/tmux.vim'
+	Plug 'keith/tmux.vim'
 
 	" --- ANSI Escape Syntax ---
-	"Plugin 'powerman/vim-plugin-AnsiEsc'
-	"Plugin 'chase/vim-ansible-yaml'
+	"Plug 'powerman/vim-Plug-AnsiEsc'
+	"Plug 'chase/vim-ansible-yaml'
 
 	" =================
 	"    INTEGRATION
@@ -48,50 +49,52 @@ call vundle#begin()
 	" --- NERDTree ---
 	" Filesystem explorer
 	" :help NERDTree
-	Plugin 'scrooloose/nerdtree'
+	Plug 'scrooloose/nerdtree'
 
 	" --- vim-buftabline ---
 	" Replaces tabs with buffers
-	Plugin 'ap/vim-buftabline'
+	Plug 'ap/vim-buftabline'
 
 	" --- Ctag Browser ---
 	" :help tagbar
-	Plugin 'majutsushi/tagbar'
+	Plug 'majutsushi/tagbar'
 
 	" --- Git ---
 	" :help fugitive
-	Plugin 'tpope/vim-fugitive'
+	Plug 'tpope/vim-fugitive'
 
 	" :help gitgutter
-	Plugin 'airblade/vim-gitgutter'
+	Plug 'airblade/vim-gitgutter'
 
 	" --- Linter ---
 	" Asynchronous Linting Engine (ALE)
 	" :help ale
-	Plugin 'w0rp/ale'
+	Plug 'w0rp/ale'
 
 	" Ruby linter
-	Plugin 'bbatsov/rubocop'
+	Plug 'bbatsov/rubocop'
 
 	" --- vim-manpager ---
 	" export MANPAGER="vim -c MANPAGER -"
-	Plugin 'lambdalisue/vim-manpager'
+	Plug 'lambdalisue/vim-manpager'
 
 	" --- matchit ---
 	" :help matchit
-	Plugin 'tmhedberg/matchit'
+	Plug 'tmhedberg/matchit'
 
 	" --- Comments ---
-	Plugin 'scrooloose/nerdcommenter'
+	Plug 'scrooloose/nerdcommenter'
 
 	" --- Search ---
 	" Displays number of times pattern occurs
-	"Plugin 'google/vim-searchindex'
+	"Plug 'google/vim-searchindex'
 
 	" Displays number of times pattern occurs
-	Plugin 'henrik/vim-indexed-search'
+	Plug 'henrik/vim-indexed-search'
 	" Automatically clears search highlight
-	Plugin 'junegunn/vim-slash'
+	Plug 'junegunn/vim-slash'
+
+	Plug 'vim-scripts/AnsiEsc.vim'
 
 	" ==============
 	"    COMMANDS
@@ -99,28 +102,28 @@ call vundle#begin()
 
 	" --- vim-surround ---
 	" :help surround
-	Plugin 'tpope/vim-surround'
+	Plug 'tpope/vim-surround'
 
 	" --- vim-speeddating ---
 	" :help speeddating
-	Plugin 'tpope/vim-speeddating'
+	Plug 'tpope/vim-speeddating'
 
 	" --- vim-repeat ---
-	" Support repeat for plugin commands
-	Plugin 'tpope/vim-repeat'
+	" Support repeat for Plug commands
+	Plug 'tpope/vim-repeat'
 
 	" --- Experimental Plugins ---
 	" Plugins to experiment with
 	" :help airline
-	"Plugin 'vim-airline/vim-airline'
+	"Plug 'vim-airline/vim-airline'
 	" :help ctrlspace
-	"Plugin 'vim-ctrlspace/vim-ctrlspace'
+	"Plug 'vim-ctrlspace/vim-ctrlspace'
 
-	"Plugin 'Lokaltog/vim-powerline'
-	Plugin 'verilog_systemverilog.vim'
+	"Plug 'Lokaltog/vim-powerline'
+	"Plug 'verilog_systemverilog.vim'
 
-" --- Vundle End ---
-call vundle#end()
+" --- vim-plug End ---
+call plug#end()
 
 filetype indent plugin on
 

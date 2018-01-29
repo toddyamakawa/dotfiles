@@ -1,8 +1,9 @@
 
-" ============
-"    VUNDLE
-" ============
-runtime vundle.vim
+" ==============
+"    VIM-PLUG
+" ==============
+runtime vim-plug.vim
+
 
 " ======================
 "    GENERAL SETTINGS

@@ -17,6 +17,7 @@ plugins := $(addprefix $(ZSH)/, $(plugins:%/=%))
 themes = $(ZSH)/custom/themes
 
 .TMUX = $(HOME)/.tmux
+.VIM = $(HOME)/.vim
 
 # --- powerline ---
 temp := $(shell mktemp -d)
@@ -24,7 +25,7 @@ fonts := $(HOME)/.fonts
 fontconfig := $(HOME)/.config/fontconfig/conf.d
 
 # --- All ---
-all: links bindir zshrc vundle
+all: links bindir zshrc vim-plug
 
 # --- Symbolic Links ---
 links: $(links)
@@ -43,12 +44,12 @@ themes: $(themes)
 $(plugins) $(themes):
 	ln -fs $(@:$(ZSH)/%=$(ROOT_DIR)/%) $@
 
-# --- Vundle ---
+# --- vim-plug ---
 # vim plugin manager
-vundle: $(HOME)/.vim/bundle/Vundle.vim
-	vim +PluginInstall +qall
-$(HOME)/.vim/bundle/Vundle.vim:
-	git clone https://github.com/VundleVim/Vundle.vim.git $@
+vim-plug: $(.VIM)/autoload/plug.vim
+	vim +PlugInstall +qall
+$(.VIM)/autoload/plug.vim: $(.VIM)
+	curl -fLo $@ --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # --- tpm ---
 # tmux plugin manager
