@@ -1,129 +1,104 @@
 
-" ============
-"    VUNDLE
-" ============
+" ===============
+"    INTERFACE
+" ===============
 
-" --- Install ---
-" :source %
-" :PluginInstall
+" --- Color Schemes ---
+"Plug 'qualiabyte/vim-colorstepper'
+Plug 'nanotech/jellybeans.vim'
+Plug 'tomasr/molokai'
+Plug 'antlypls/vim-colors-codeschool'
 
-" --- List ---
-" :PluginList
+" --- Indentation ---
+Plug 'yggdroot/indentline'
+"Plug 'nathanaelkane/vim-indent-guides.git'
+"Plug 'tpope/vim-sleuth'
 
-" --- Setup ---
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
+" --- .tmux.conf Syntax ---
+Plug 'keith/tmux.vim'
 
-" --- vim-plug Begin ---
-call plug#begin('~/.vim/plugged')
+" --- ANSI Escape Syntax ---
+"Plug 'powerman/vim-Plug-AnsiEsc'
+"Plug 'chase/vim-ansible-yaml'
 
-	Plug 'VundleVim/Vundle.vim'
+" =================
+"    INTEGRATION
+" =================
 
-	" ===============
-	"    INTERFACE
-	" ===============
+" --- NERDTree ---
+" Filesystem explorer
+" :help NERDTree
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
-	" --- Color Schemes ---
-	"Plug 'qualiabyte/vim-colorstepper'
-	Plug 'nanotech/jellybeans.vim'
-	Plug 'tomasr/molokai'
-	Plug 'antlypls/vim-colors-codeschool'
+" --- vim-buftabline ---
+" Replaces tabs with buffers
+Plug 'ap/vim-buftabline'
 
-	" --- Indentation ---
-	Plug 'yggdroot/indentline'
-	"Plug 'nathanaelkane/vim-indent-guides.git'
-	"Plug 'tpope/vim-sleuth'
+" --- Ctag Browser ---
+" :help tagbar
+Plug 'majutsushi/tagbar'
 
-	" --- .tmux.conf Syntax ---
-	Plug 'keith/tmux.vim'
+" --- Git ---
+" :help fugitive
+Plug 'tpope/vim-fugitive'
 
-	" --- ANSI Escape Syntax ---
-	"Plug 'powerman/vim-Plug-AnsiEsc'
-	"Plug 'chase/vim-ansible-yaml'
+" :help gitgutter
+Plug 'airblade/vim-gitgutter'
 
-	" =================
-	"    INTEGRATION
-	" =================
+" --- Linter ---
+" Asynchronous Linting Engine (ALE)
+" :help ale
+Plug 'w0rp/ale'
 
-	" --- NERDTree ---
-	" Filesystem explorer
-	" :help NERDTree
-	Plug 'scrooloose/nerdtree'
+" Ruby linter
+Plug 'bbatsov/rubocop'
 
-	" --- vim-buftabline ---
-	" Replaces tabs with buffers
-	Plug 'ap/vim-buftabline'
+" --- vim-manpager ---
+" export MANPAGER="vim -c MANPAGER -"
+Plug 'lambdalisue/vim-manpager'
 
-	" --- Ctag Browser ---
-	" :help tagbar
-	Plug 'majutsushi/tagbar'
+" --- matchit ---
+" :help matchit
+Plug 'tmhedberg/matchit'
 
-	" --- Git ---
-	" :help fugitive
-	Plug 'tpope/vim-fugitive'
+" --- Comments ---
+Plug 'scrooloose/nerdcommenter'
 
-	" :help gitgutter
-	Plug 'airblade/vim-gitgutter'
+" --- Search ---
+" Displays number of times pattern occurs
+"Plug 'google/vim-searchindex'
 
-	" --- Linter ---
-	" Asynchronous Linting Engine (ALE)
-	" :help ale
-	Plug 'w0rp/ale'
+" Displays number of times pattern occurs
+Plug 'henrik/vim-indexed-search'
+" Automatically clears search highlight
+Plug 'junegunn/vim-slash'
 
-	" Ruby linter
-	Plug 'bbatsov/rubocop'
+Plug 'vim-scripts/AnsiEsc.vim', { 'on': 'AnsiEsc' }
+cabbrev ansi AnsiEsc
 
-	" --- vim-manpager ---
-	" export MANPAGER="vim -c MANPAGER -"
-	Plug 'lambdalisue/vim-manpager'
+" ==============
+"    COMMANDS
+" ==============
 
-	" --- matchit ---
-	" :help matchit
-	Plug 'tmhedberg/matchit'
+" --- vim-surround ---
+" :help surround
+Plug 'tpope/vim-surround'
 
-	" --- Comments ---
-	Plug 'scrooloose/nerdcommenter'
+" --- vim-speeddating ---
+" :help speeddating
+Plug 'tpope/vim-speeddating'
 
-	" --- Search ---
-	" Displays number of times pattern occurs
-	"Plug 'google/vim-searchindex'
+" --- vim-repeat ---
+" Support repeat for Plug commands
+Plug 'tpope/vim-repeat'
 
-	" Displays number of times pattern occurs
-	Plug 'henrik/vim-indexed-search'
-	" Automatically clears search highlight
-	Plug 'junegunn/vim-slash'
+" --- Experimental Plugins ---
+" Plugins to experiment with
+" :help airline
+"Plug 'vim-airline/vim-airline'
+" :help ctrlspace
+"Plug 'vim-ctrlspace/vim-ctrlspace'
 
-	Plug 'vim-scripts/AnsiEsc.vim'
-
-	" ==============
-	"    COMMANDS
-	" ==============
-
-	" --- vim-surround ---
-	" :help surround
-	Plug 'tpope/vim-surround'
-
-	" --- vim-speeddating ---
-	" :help speeddating
-	Plug 'tpope/vim-speeddating'
-
-	" --- vim-repeat ---
-	" Support repeat for Plug commands
-	Plug 'tpope/vim-repeat'
-
-	" --- Experimental Plugins ---
-	" Plugins to experiment with
-	" :help airline
-	"Plug 'vim-airline/vim-airline'
-	" :help ctrlspace
-	"Plug 'vim-ctrlspace/vim-ctrlspace'
-
-	"Plug 'Lokaltog/vim-powerline'
-	"Plug 'verilog_systemverilog.vim'
-
-" --- vim-plug End ---
-call plug#end()
-
-filetype indent plugin on
+"Plug 'Lokaltog/vim-powerline'
+"Plug 'verilog_systemverilog.vim'
 

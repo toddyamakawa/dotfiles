@@ -2,7 +2,21 @@
 " ==============
 "    VIM-PLUG
 " ==============
-runtime vim-plug.vim
+
+" --- Install ---
+" :PlugInstall
+
+" --- Setup ---
+set nocompatible
+filetype off
+
+" --- Vim Plugins ---
+call plug#begin('~/.vim/vim-plug')
+	source ~/.vim/plug.vim
+call plug#end()
+
+" --- Enable Plugins ---
+filetype indent plugin on
 
 
 " ======================
