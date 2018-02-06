@@ -15,7 +15,17 @@ set ModulesCurrentModulefile [info script]
 
 # --- Load Once Function ---
 proc load-once {module} {
-	if {![is-loaded $module]} { module load $module }
+	global env
+	set loaded 0
+	set module [regsub {(.*/.*)/.*} $module {\1}]
+
+	foreach mod [split $env(LOADEDMODULES) ":"] {
+		if { [regsub {(.*/.*)/.*} $mod {\1}] == $module } {
+			set loaded 1
+		}
+	}
+
+	if {!$loaded} { module load $module }
 }
 
 # --- Initialize Environment ---
@@ -36,11 +46,17 @@ initSet
 	load-once gnu/gawk/4.1.1
 	load-once gnu/htop/1.0.1
 	load-once greer/silversearcher/1.0.2
+	load-once mosh/mosh/1.2.4
 
 	# Tools
 	load-once git/git/2.9.3
 	load-once python/git-review_py2.7.8/1.25.0
 	load-once vim/vim/8.0.5
+
+	# Scripting Modules
+	load-once perl/perl/5.12.3
+	load-once python/python/2.7.8
+	load-once python/python/3.5.1'
 
 exitSet
 
