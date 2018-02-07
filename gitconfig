@@ -34,7 +34,7 @@
 	ls = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\"
 	ll = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --numstat
 	graph = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --graph
-
+        olog = log --oneline --decorate --graph --all
 	# --- add ---
 	au = add -u
 	ap = add --patch

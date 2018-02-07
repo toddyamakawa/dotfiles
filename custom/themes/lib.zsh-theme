@@ -14,7 +14,8 @@ zle -N zle-keymap-select
 zle -N edit-command-line
 
 # --- Check Powerline ---
-function _powerline() { xlsfonts |& command grep -q powerline; }
+function _powerline() { echo powerline |& command grep -q powerline; }
+#function _powerline() { xlsfonts |& command grep -q powerline; }
 
 # ===========
 #    TIMER
