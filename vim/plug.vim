@@ -11,6 +11,10 @@ Plug 'antlypls/vim-colors-codeschool'
 
 " --- Indentation ---
 Plug 'yggdroot/indentline'
+
+" Reset IndentLines when tabstop changes
+autocmd OptionSet tabstop IndentLinesReset
+
 "Plug 'nathanaelkane/vim-indent-guides.git'
 "Plug 'tpope/vim-sleuth'
 
@@ -18,8 +22,9 @@ Plug 'yggdroot/indentline'
 Plug 'keith/tmux.vim'
 
 " --- ANSI Escape Syntax ---
-"Plug 'powerman/vim-Plug-AnsiEsc'
-"Plug 'chase/vim-ansible-yaml'
+Plug 'vim-scripts/AnsiEsc.vim', { 'on': 'AnsiEsc' }
+cabbrev ansi AnsiEsc
+
 
 " =================
 "    INTEGRATION
@@ -70,11 +75,12 @@ Plug 'scrooloose/nerdcommenter'
 
 " Displays number of times pattern occurs
 Plug 'henrik/vim-indexed-search'
+
 " Automatically clears search highlight
 Plug 'junegunn/vim-slash'
+noremap <silent> <Plug>(slash-after) :<C-u>ShowSearchIndex<CR>
+xunmap <Plug>(slash-after)
 
-Plug 'vim-scripts/AnsiEsc.vim', { 'on': 'AnsiEsc' }
-cabbrev ansi AnsiEsc
 
 " ==============
 "    COMMANDS
@@ -92,7 +98,11 @@ Plug 'tpope/vim-speeddating'
 " Support repeat for Plug commands
 Plug 'tpope/vim-repeat'
 
-" --- Experimental Plugins ---
+
+" ==========================
+"    EXPERIMENTAL PLUGINS
+" ==========================
+
 " Plugins to experiment with
 " :help airline
 "Plug 'vim-airline/vim-airline'
@@ -101,4 +111,6 @@ Plug 'tpope/vim-repeat'
 
 "Plug 'Lokaltog/vim-powerline'
 "Plug 'verilog_systemverilog.vim'
+
+"Plug 'tpope/vim-dispatch'
 
