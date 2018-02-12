@@ -124,7 +124,9 @@
 	newiris = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/iris
 	newkiwi = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/kiwi
 	newkvs = clone login8.nahpc.arm.com:/projects/pd/svos/git/kvs
-	newyak = clone git@git.research.arm.com:svos/yak.git
+	newmsys = clone ssh://git@git.research.arm.com/svos/msys
+	newscp = clone ssh://git@git.research.arm.com/svos/scp_boot
+	newyak = clone ssh://git@git.research.arm.com/svos/yak
 
 	neweda = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/eda
 	newgem = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/gem
