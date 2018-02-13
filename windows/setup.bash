@@ -1,4 +1,4 @@
-#!sudo /usr/bin/env bash
+#!/usr/bin/sudo /bin/bash
 script=$(readlink -f $0)
 here=$(dirname $script)
 
