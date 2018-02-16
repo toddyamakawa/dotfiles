@@ -17,10 +17,10 @@ set ModulesCurrentModulefile [info script]
 proc load-once {module} {
 	global env
 	set loaded 0
-	set module [regsub {(.*/.*)/.*} $module {\1}]
+	set module_base [regsub {(.*/.*)/.*} $module {\1}]
 
 	foreach mod [split $env(LOADEDMODULES) ":"] {
-		if { [regsub {(.*/.*)/.*} $mod {\1}] == $module } {
+		if { [regsub {(.*/.*)/.*} $mod {\1}] == $module_base } {
 			set loaded 1
 		}
 	}
@@ -39,7 +39,7 @@ initSet
 	load-once util
 	load-once swdev
 	load-once eda
-	load-once arm/cluster/2.0
+	load-once arm/cluster
 	load-once arm/license/production
 
 	# Useful modules
