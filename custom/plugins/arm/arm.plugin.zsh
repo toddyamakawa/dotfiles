@@ -54,3 +54,5 @@ function pastebin() {
 	#'awk '"'"'BEGIN{print "paste_text=$("} {print} END{print ")"}'"'"' | curl -X POST --netrc-file ~/.netrc -s --data-binary @- http://p.arm.com | grep -o "http[^\"]*" | xclip && xclip -o'
 }
 
+alias ldaparm='ldapsearch -LLL -h universe.arm.com -x -W -D uid=$USER,ou=people,dc=arm,dc=com -b ou=people,dc=arm,dc=com'
+
