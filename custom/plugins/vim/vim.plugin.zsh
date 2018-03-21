@@ -12,7 +12,6 @@ alias vmin='vim --noplugin'
 alias vnone='vim -u NONE'
 alias vdiff='vimdiff'
 
-
 # --- Suffix Aliases ---
 
 # Text files
@@ -49,6 +48,9 @@ alias -s svh=vim
 
 
 # --- Functions ---
+function vhelp() {
+	vim +"help $@ | only"
+}
 
 # TODO: Clean up this function
 function vimswp() {
