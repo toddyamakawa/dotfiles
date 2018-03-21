@@ -2,6 +2,7 @@
 # --- Global Aliases ---
 alias -g -- '-velconf'='-conf /home/lsf/scheduler_prod/configs/NAHPCVEL/NAHPCVEL.conf'
 alias -g -- '-zs3conf'='-conf /home/lsf/scheduler_prod/configs/NAHPCPRODZS3/NAHPCPRODZS3.conf'
+alias -g -- '-stratoconf'='-conf /home/lsf/scheduler_prod/configs/NAHPCPRODSTR0/NAHPCPRODSTR0.conf'
 
 # --- Veloce ---
 alias velres='cat /arm/cluster/nahpc/conf/veloce-scheduler.cfg'

@@ -19,8 +19,9 @@ function armdisk() {
 }
 
 # --- Environment Variables ---
-euhpc && [[ -z $LSB_BATCH_JID ]] && export LSB_DEFAULTPROJECT=PJ01384
-nahpc && [[ -z $LSB_BATCH_JID ]] && export LSB_DEFAULTPROJECT=PJ01384DEFAULT
+#euhpc && [[ -z $LSB_BATCH_JID ]] && export LSB_DEFAULTPROJECT=PJ01384
+#nahpc && [[ -z $LSB_BATCH_JID ]] && export LSB_DEFAULTPROJECT=PJ01384DEFAULT
+export LSB_DEFAULTPROJECT=PJ02911HIGH
 #nahpc && module load mosh/mosh/1.2.4
 
 # --- Porter ---
@@ -55,4 +56,5 @@ function pastebin() {
 }
 
 alias ldaparm='ldapsearch -LLL -h universe.arm.com -x -W -D uid=$USER,ou=people,dc=arm,dc=com -b ou=people,dc=arm,dc=com'
+alias ldaparm2="ldapsearch -x -h universe.arm.com -b ou=people,dc=arm,dc=com uid='*'"
 
