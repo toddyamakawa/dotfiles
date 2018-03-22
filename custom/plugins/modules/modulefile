@@ -49,7 +49,7 @@ initSet
 	load-once mosh/mosh/1.2.4
 
 	# Tools
-	load-once git/git/2.9.3
+	load-once git/git/2.16.1
 	load-once python/git-review_py2.7.8/1.25.0
 	load-once vim/vim/8.0.5
 
