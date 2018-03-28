@@ -1,0 +1,28 @@
+
+# vi: syntax=readline
+
+set bell-style none
+set print-completions-horizontally on
+set completion-ignore-case on
+set completion-prefix-display-length 1
+set mark-directories on
+set mark-symlinked-directories on
+set page-completions off
+set show-all-if-ambiguous on
+
+set keymap vi-command
+	"gg": beginning-of-history
+	"G": end-of-history
+	"H": beginning-of-line
+	"L": end-of-line
+	"\C-j": history-search-forward
+	"\C-k": history-search-backward
+
+set keymap vi-insert
+	"\C-j": history-search-forward
+	"\C-k": history-search-backward
+	"\C-\b": backward-kill-word
+	# TODO: Figure out how to kill words
+	#"\C-?": backward-kill-word
+	#"\C-H": backward-kill-word
+
