@@ -1,4 +1,4 @@
 
 # --- Modules ---
-alias questaload='mload mentor/questasim/10.5c'
+alias questaload='mload mentor/questasim/10.7_1'
 
