@@ -1,11 +1,2 @@
-*
-!.gitignore
-!after/*
-!ftdetect/*
-!ftplugin/*
-!indent/*
-!my-plugins/*
-!plug.vim
-!syntax/*
-!template/*
-!vim-plug/*
+autoload
+vim-plug
