@@ -95,30 +95,40 @@ set nrformats-=octal
 " Show spaces for indentation
 let g:indentLine_char = '|'
 
-" Highlight most significant digits of large numbers
-" 1 12 123 1234 12345 123456 1234567 12345678 123456789 1234567890
-autocmd BufRead * match Delimiter /\v<\zs\d{1,3}\ze(\d{3}){2,}>/
-
 " Change background color beyond column 80
 let &colorcolumn=join(range(81,999),",")
+highlight ColorColumn guibg=#000000 ctermbg=16
 
-" Highlight column 81 and trailing whitespace
-"autocmd BufRead * 2match SpellBad /\v\%81v.\|\s\+$/
 
-" Highlight trailing whitespace
-autocmd BufRead * 2match SpellBad /\v\s+$/
+" --- autocmd Group for All Files ---
+augroup ALL
 
-" Disable comment formatting
-autocmd BufNewFile,BufRead * set formatoptions-=cro
+	" Highlight most significant digits of large numbers
+	" 1 12 123 1234 12345 123456 1234567 12345678 123456789 1234567890
+	"hi def link big_num Delimiter
+	"syn match big_num /\v<\zs\d{1,3}\ze(\d{3}){2,}>/
+	autocmd BufRead * match Delimiter /\v<\zs\d{1,3}\ze(\d{3}){2,}>/
 
-" Automatically remove trailing whitespace
-autocmd BufWritePre * %s/\s\+$//e
+	" Highlight column 81 and trailing whitespace
+	"autocmd BufRead * 2match SpellBad /\v\%81v.\|\s\+$/
 
-" Automatically add +x permissions
-autocmd BufWritePost * if getline(1) =~ "^#!.*/bin/" | silent execute "!chmod +x %" | endif
+	" Highlight trailing whitespace
+	autocmd BufRead * 2match SpellBad /\v\s+$/
 
-" Disable syntax for large files
-"autocmd BufReadPre * if getfsize(expand("%")) > 10000000 | syntax off | endif
+	" Disable comment formatting
+	autocmd BufNewFile,BufRead * set formatoptions-=cro
+
+	" Automatically remove trailing whitespace
+	autocmd BufWritePre * %s/\s\+$//e
+
+	" Automatically add +x permissions
+	autocmd BufWritePost * if getline(1) =~ "^#!.*/bin/" | silent execute "!chmod +x %" | endif
+
+	" Disable syntax for large files
+	"autocmd BufReadPre * if getfsize(expand("%")) > 10000000 | syntax off | endif
+
+augroup END
+
 
 " Toggle list/number with <Leader>n
 nnoremap <Leader>n :set number! relativenumber! list!<CR>
