@@ -80,6 +80,8 @@ set list           " Enable list mode
 set number         " Show line number
 set relativenumber " Show relative line number
 set showmatch      " Show matching parantheses
+set foldcolumn=3   " Show columns for folds
+
 
 " Highlight current line
 "TODO: Make CursorLine change color for insert mode
@@ -359,8 +361,9 @@ set ignorecase " Ignore case for searching
 "set hlsearch   " Highlight search matches (handled by vim-slash plugin)
 set incsearch   " Show matches while typing
 
+" TODO: Delete this
 " Turn off search highlighting
-nnoremap <Leader>/ :nohlsearch<CR>
+"nnoremap <Leader>/ :nohlsearch<CR>
 
 " Search for higlighted text
 vnoremap * y/<C-R>"<CR>
@@ -370,6 +373,9 @@ nnoremap d/ :g//d<Enter>
 
 " Replace matching words
 nnoremap c/ :%s///g<Left><Left>
+
+" Split up shell command into multiple lines
+nnoremap <Leader>\ :s/\v\s+-/ \\\r\t-/g<Enter>
 
 " --- Delete Patterns ---
 " Delete trailing whitespace
