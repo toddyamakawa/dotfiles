@@ -78,6 +78,11 @@ function svos_brodie() {
 # --- Register Parser ---
 alias archex_reg='mrun +sun/jdk/1.8.0_77 java -jar /arm/ref/pd/SVOS/tools/register_parser.jar'
 
+# --- Current Week ---
+function weekly() {
+	ruby -e 'puts Time.now.strftime("%g%V")'
+}
+
 # --- New Weekly ---
 function newweek() {
 	local lastweek=$(($(date +%y%U)-1)).txt
