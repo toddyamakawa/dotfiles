@@ -1,10 +1,6 @@
 
 local here=${0:h}
 
-# --- Module Load ---
-mload gnu/tmux/2.5
-
-
 # --- Aliases ---
 
 # Force 256 color support

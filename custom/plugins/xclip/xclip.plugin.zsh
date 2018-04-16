@@ -1,7 +1,4 @@
 
-# --- Module ---
-mload xclip/xclip/0.12
-
 # --- Copy/Paste ---
 function copy() { eval "$@" | _xclip; }
 function _xclip() {

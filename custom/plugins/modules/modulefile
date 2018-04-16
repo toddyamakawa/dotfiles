@@ -42,16 +42,19 @@ initSet
 	load-once arm/cluster
 	load-once arm/license/production
 
-	# Useful modules
+	# Tools
 	load-once gnu/gawk/4.1.1
 	load-once gnu/htop/1.0.1
+	load-once gnu/tmux/2.5
 	load-once greer/silversearcher/1.0.2
 	load-once mosh/mosh/1.2.4
+	load-once vim/vim/8.0.5
+	load-once xclip/xclip/0.12
 
-	# Tools
+	# Version Control
 	load-once git/git/2.16.1
 	load-once python/git-review_py2.7.8/1.25.0
-	load-once vim/vim/8.0.5
+	load-once apache/subversion/1.9.4'
 
 	# Scripting Modules
 	load-once perl/perl/5.12.3

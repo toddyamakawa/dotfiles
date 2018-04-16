@@ -6,9 +6,6 @@ alias svnload173='mload apache/subversion/1.7.3'
 alias svnload1811='mload apache/subversion/1.8.11'
 alias svnload194='mload apache/subversion/1.9.4'
 
-# --- Default SVN ---
-svnload194
-
 # --- Find SVN Version ---
 function svnver() {
 	local version prev_version versions
