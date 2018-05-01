@@ -8,9 +8,10 @@ set -e
 
 # Always run when script finishes
 function finish() {
-	echo Cleaning up...
+	local RETVAL=$?
+	echo "exit $RETVAL: $@"
 }
-trap finish EXIT
+trap "finish $0 $@" EXIT
 
 # Parse arguments
 declare -A ARGV
