@@ -13,6 +13,10 @@ alias cdtemp='cd $(mktemp -d)'
 alias cdl='cd $(command ls -t | head -n 1)'
 alias cdgit='cd $(git rev-parse --show-toplevel)'
 
+# --- Functions ---
+function cdd() {
+	cd $(dirname $1)
+}
 
 # --- cup ---
 # cd 'up'
