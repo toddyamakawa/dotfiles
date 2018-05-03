@@ -69,10 +69,14 @@ bindkey -M viins '^F' vi-cmd-mode
 #bindkey -M viins '^K' up-line-or-search
 #bindkey -M viins '^J' down-line-or-history
 #bindkey -M viins '^K' up-line-or-history
-bindkey -M viins '^J' history-search-forward
-bindkey -M viins '^K' history-search-backward
 #bindkey -M viins '^J' history-incremental-search-forward
 #bindkey -M viins '^K' history-incremental-search-backward
+#bindkey -M viins '^J' history-search-forward
+#bindkey -M viins '^K' history-search-backward
+
+# Ctrl-j and Ctrl-k to search history using history-substring-search plugin
+bindkey -M viins "^J" history-substring-search-down
+bindkey -M viins "^K" history-substring-search-up
 
 # [Alt-p] to paste
 bindkey -M viins '^[p' vi-xclip-paste

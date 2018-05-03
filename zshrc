@@ -25,6 +25,7 @@ else
 fi
 plugins+=(bin modules my-zsh magic-enter cd vim xclip tmux vi-mode regex setup vcs)
 [[ -f ~/.fzf.zsh ]] && plugins+=(fzf)
+plugins+=(history-substring-search)
 
 # --- Source Files ---
 function source_files() {
