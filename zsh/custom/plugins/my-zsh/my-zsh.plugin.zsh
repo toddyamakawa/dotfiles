@@ -46,6 +46,7 @@ alias find='find -O3'
 alias findn='find . -name'
 
 alias sortn='sort -n'
+alias usort='sort | uniq -c | sort -n'
 
 alias hostname='hostname --long'
 
