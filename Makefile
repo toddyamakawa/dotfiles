@@ -10,10 +10,11 @@ dirs := $(dirs:%/=%)
 files = $(filter-out $(dirs), $(wildcard *))
 links = $(addprefix $(HOME)/., $(filter-out $(ignore), $(wildcard *)))
 
-# --- oh-my-zsh ---
-.ZSH = $(HOME)/.oh-my-zsh
-.TMUX = $(HOME)/.tmux
-.VIM = $(HOME)/.vim
+# --- Directories ---
+.FISH := $(HOME)/.config/fish
+.TMUX := $(HOME)/.tmux
+.VIM := $(HOME)/.vim
+.ZSH := $(HOME)/.oh-my-zsh
 
 # --- powerline ---
 temp := $(shell mktemp -d)
@@ -21,7 +22,7 @@ fonts := $(HOME)/.fonts
 fontconfig := $(HOME)/.config/fontconfig/conf.d
 
 # --- All ---
-all: links bindir zshrc vim-plug
+all: links bindir zshrc fish vim-plug
 
 # --- Symbolic Links ---
 links: $(links)
@@ -32,9 +33,16 @@ bindir:
 	make -C bin all
 
 # --- oh-my-zsh ---
+# zsh plugin manager
 zshrc: $(.ZSH)/oh-my-zsh.sh
 $(.ZSH)/oh-my-zsh.sh:
 	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+# --- fisherman ---
+# fish plugin manager
+fish: $(.FISH)/functions/fisher.fish
+$(.FISH)/functions/fisher.fish:
+	curl -fLo $@ https://git.io/fisher
 
 # --- vim-plug ---
 # vim plugin manager
