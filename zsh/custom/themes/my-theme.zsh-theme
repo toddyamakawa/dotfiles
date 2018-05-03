@@ -8,20 +8,18 @@ alias nor="function _rprompt-git(){}"
 #    $PROMPT
 # =============
 
-# Status:
-# - was there an error
-# - am I root
-# - are there background jobs?
+# --- Prompt Status ---
+# Status: Error?, Root?, Background Jobs?
 function _prompt-status() {
 	local symbols
 	if [[ -n $POWERLINE ]]; then
-		[[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘"
-		[[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡"
-		[[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
+		(( $RETVAL == 0 )) && symbols+="${green}✔" || symbols+="${red}✘"
+		[[ $UID -eq 0 ]] && symbols+="${yellow}⚡"
+		[[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="${cyan}⚙"
 	else
-		[[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}X"
-		[[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}Z"
-		[[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}B"
+		(( $RETVAL == 0 )) && symbols+="${green}0" || symbols+="${red}X"
+		[[ $UID -eq 0 ]] && symbols+="${yellow}Z"
+		[[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="${cyan}B"
 	fi
 	_prompt-bg-fg black default "$symbols"
 }
@@ -42,6 +40,7 @@ build_prompt() {
 #    $RPROMPT
 # =============
 
+# --- Git Status ---
 function _rprompt-git() {
 	_git-check || return
 	_git-blacklist && return
