@@ -60,8 +60,11 @@
 
 	# --- diff ---
 	diffn = diff --numstat
+	diffnw = diff --numstat --ignore-all-space --ignore-blank-lines
 	diffs = diff --staged
 	diffsn = diff --staged --numstat
+	diffsw = diff --staged --ignore-all-space --ignore-blank-lines
+	diffw = diff --ignore-all-space --ignore-blank-lines
 	meld = difftool --tool=meld --no-prompt
 	melda = !git meld --dir-diff
 	melds = !git melda --staged
@@ -132,18 +135,17 @@
 	newvarys = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/varys
 	newyak = clone ssh://git@git.research.arm.com/svos/yak
 
+	newambaviz = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/ambaviz
 	neweda = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/eda
 	newgem = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/gem
 	newwrappers = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/wrappers
 	newruby = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/ruby
-	newambaviz = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/ambaviz
+	newunischeduler = clone ssh://ds-gerrit.euhpc.arm.com:29418/toef/unischeduler
 
 	newares = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
 	newdeimos = clone -b deimos/dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
 	newporter = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter
 	newzeus = clone -b zeus/dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
-
-	newunischeduler = clone ssh://ds-gerrit.euhpc.arm.com:29418/toef/unischeduler
 
 	# --- My GitHub Repositories ---
 	newblog = clone https://github.com/toddyamakawa/blog
