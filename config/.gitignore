@@ -1,3 +1,4 @@
 *
-!.gitignore
-!terminator
+!/.gitignore
+!/fish
+!/terminator
