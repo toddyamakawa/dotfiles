@@ -4,6 +4,10 @@ require 'optparse'
 
 $here = File.dirname(__FILE__)
 
+at_exit {
+	puts 'done'
+}
+
 if __FILE__ == $0
 	options = Hash.new
 	parser = OptionParser.new "Usage: #{$0} [options] [FILE]" do |opts|
@@ -11,7 +15,7 @@ if __FILE__ == $0
 			puts opts
 			exit
 		end
-		opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+		opts.on('-v', '--[no-]verbose', 'Run verbosely') do |v|
 			options[:verbose] = v
 		end
 	end
