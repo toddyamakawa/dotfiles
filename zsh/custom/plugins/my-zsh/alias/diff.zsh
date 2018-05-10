@@ -1,7 +1,4 @@
 
-# --- meld ---
-meld() { mrun +meld/meld meld $@; }
-
 # --- tkdiff ---
 tkdiff() { mrun +tkdiff/tkdiff tkdiff -w $@; }
 
