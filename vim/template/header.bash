@@ -2,6 +2,7 @@
 script=$(readlink -f $BASH_SOURCE)
 here=$(dirname $script)
 top=$(git -C $here rev-parse --show-toplevel 2>/dev/null)
+now=$(date +%y%m%d-%H%M%S-Week%U-%a-%T)
 
 # Immediately exit on failure
 set -e
