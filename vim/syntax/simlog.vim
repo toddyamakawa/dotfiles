@@ -7,6 +7,10 @@ if exists("b:current_syntax")
 endif
 
 
+" --- Clear ColorColumn ---
+highlight clear ColorColumn
+
+
 " --- Hexadecimal ---
 hi def link simlog_number Number
 " TODO: Figure out how to underline parts of numbers without ruining color
@@ -41,11 +45,11 @@ syn match simlog_function /\vID_CT:.*/
 syn match simlog_function /\vID_RN:.*/
 
 " RN to IS
-syn match simlog_function /\vRN_IS:.*/
+syn match simlog_function /\vRN_IS( \(RD\))?:.*/
 
 " Testbench handles rename
 syn match simlog_function /\vhandling rename.*/
-syn match simlog_function /\vgetting uniq_id.*/
+"syn match simlog_function /\vgetting uniq_id.*/
 
 " IS to EX
 syn match simlog_function /\vIS_[0-9A-Z]+:.*/
@@ -63,6 +67,7 @@ syn match simlog_function /\v<[0-9A-Z]+_IS:.*/
 " --- Errors ---
 hi def link simlog_error Error
 syn match simlog_error /\v.*FATAL.*/
+syn match simlog_error /\v# \zs\*\* Error[^:]*/
 
 
 " --- Comment ---
