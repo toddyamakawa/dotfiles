@@ -177,6 +177,9 @@ nnoremap <S-Tab> :call TabQuickFix('prev')<Enter>
 " Backspace anything
 set backspace=start,indent,eol
 
+" TODO: Figure out how to unmap Shift-Backspace
+"inoremap <S-BS> <nop>
+
 " --- Save/Quit Shortcuts ---
 nnoremap <F5> :edit<Enter>
 nnoremap <S-F5> :edit!<Enter>
@@ -206,6 +209,7 @@ nnoremap <Leader>vs :source $MYVIMRC<Enter>
 "set visualbell
 "set noerrorbells
 
+
 " =================
 "    VISUAL MODE
 " =================
@@ -223,6 +227,7 @@ vnoremap q <Esc>
 
 " Update
 nnoremap du :diffupdate<Enter>
+
 
 " =============
 "    PLUGINS
@@ -245,6 +250,7 @@ nnoremap <Leader>gs :Gstatus<Enter>
 
 " --- GitGutter ---
 nnoremap <Leader>gg :GitGutterToggle<Enter>
+
 
 " ===============
 "    CLIPBOARD
@@ -340,6 +346,10 @@ noremap K <nop>
 "imap <Down> <nop>
 "imap <Left> <nop>
 "imap <Right> <nop>
+
+" Completion with C-j and C-k
+inoremap <C-j> <C-n>
+inoremap <C-k> <C-p>
 
 
 " --- Exit Insert Mode ---
