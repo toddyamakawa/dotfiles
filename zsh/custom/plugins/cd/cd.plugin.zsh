@@ -1,7 +1,4 @@
 
-# --- CDPATH ---
-export CDPATH=".:..:../..:$HOME/.links:$HOME"
-
 # --- Directory Stat ---
 alias d='dirs -v'
 function c() { cd -$1; }
@@ -23,5 +20,15 @@ function cdd() {
 function cup() {
 	cd ${PWD%$1/*}/$1
 	pwd
+}
+
+# --- chpwd ---
+# Automatically generate $CDPATH whenever the directory is changed
+function chpwd() {
+	local up up2
+	up=$(dirname $PWD)
+	up2=$(dirname $up)
+	cdpath=('.' $(git rev-parse --show-toplevel 2>/dev/null))
+	cdpath+=(${up%/} ${up2%/} $HOME/.links $HOME)
 }
 
