@@ -25,7 +25,7 @@ function ps_mail() {
 	body+="Please end this process at your earliest convenience.\n\n"
 	body+="Thanks,\n-Todd\n\n"
 	body+="This message was generated from a script."
-	echo -e "$body" | mail -s "$subject" -r $(whoami)@arm.com $user@arm.com
+	echo -e "$body" | mail -s "$subject" -r $(whoami)@arm.com -b $(whoami)@arm.com $user@arm.com
 }
 
 function ps_notify() {
