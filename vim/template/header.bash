@@ -12,7 +12,7 @@ function finish() {
 	local RETVAL=$?
 	echo "exit $RETVAL: $@"
 }
-trap "finish $0 $@" EXIT
+eval trap "'finish $0 $@'" EXIT
 
 # Parse arguments
 declare -A ARGV
