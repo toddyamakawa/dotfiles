@@ -99,7 +99,9 @@ let g:indentLine_char = '|'
 
 " Change background color beyond column 80
 let &colorcolumn=join(range(81,999),",")
-highlight ColorColumn guibg=#000000 ctermbg=16
+highlight clear ColorColumn
+au InsertEnter * highlight ColorColumn guibg=#000000 ctermbg=16
+au InsertLeave * highlight clear ColorColumn
 
 
 " --- autocmd Group for All Files ---

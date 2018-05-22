@@ -7,10 +7,6 @@ if exists("b:current_syntax")
 endif
 
 
-" --- Clear ColorColumn ---
-highlight clear ColorColumn
-
-
 " --- Hexadecimal ---
 hi def link simlog_number Number
 " TODO: Figure out how to underline parts of numbers without ruining color
@@ -66,8 +62,9 @@ syn match simlog_function /\v<[0-9A-Z]+_IS:.*/
 
 " --- Errors ---
 hi def link simlog_error Error
-syn match simlog_error /\v.*FATAL.*/
-syn match simlog_error /\v# \zs\*\* Error[^:]*/
+syn match simlog_error /\v.*FATAL.*/ containedin=simlog_comment
+syn match simlog_error /\v# \zs\*\* Error[^:]*/ containedin=simlog_comment
+syn match simlog_error /\v\[ARM_FAILMSG\].*/ containedin=simlog_comment
 
 
 " --- Comment ---
