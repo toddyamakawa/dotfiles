@@ -15,6 +15,11 @@ Plug 'yggdroot/indentline'
 " Reset IndentLines when tabstop changes
 autocmd OptionSet tabstop IndentLinesReset
 
+" --- Rainbow Indentation ---
+"Plug 'thiagoalessio/rainbow_levels.vim', { 'on': 'RainbowLevelsToggle' }
+Plug 'thiagoalessio/rainbow_levels.vim'
+cabbrev rain RainbowLevelsToggle
+
 "Plug 'nathanaelkane/vim-indent-guides.git'
 "Plug 'tpope/vim-sleuth'
 
