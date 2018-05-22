@@ -1,5 +1,6 @@
 
 " --- User-Definend Colors ---
+
 " White on Black
 hi User1 ctermfg=7 ctermbg=0
 
@@ -20,6 +21,10 @@ hi User5 ctermfg=6 ctermbg=0
 hi User9 ctermfg=7 ctermbg=0
 au InsertEnter * hi User9 ctermfg=7 ctermbg=6
 au InsertLeave * hi User9 ctermfg=7 ctermbg=0
+if v:version > 800
+	au CmdlineEnter * hi User9 ctermfg=7 ctermbg=5
+	au CmdlineLeave * hi User9 ctermfg=7 ctermbg=0
+endif
 
 
 " --- Left Status Line ---
