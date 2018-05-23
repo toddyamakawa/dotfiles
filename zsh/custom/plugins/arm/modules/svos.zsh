@@ -91,6 +91,3 @@ function newweek() {
 	cp $lastweek $thisweek
 }
 
-
-alias ares_disasm='/arm/devsys-tools/warehouse/PerformanceModeling/EBM/master/$(/arm/devsys-tools/abs/detag PerformanceModeling:EBM:master::trunk)/Linux/x86_64/gcc-4.9.2/rel_int/bin/ares_disasm'
-
