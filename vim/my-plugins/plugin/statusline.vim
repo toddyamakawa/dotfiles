@@ -16,25 +16,29 @@ hi User4 ctermfg=1 ctermbg=0
 " Blue on Black
 hi User5 ctermfg=6 ctermbg=0
 
+" Purple on Black if ExpandTab
+" Blue on Black if NoExpandTab
+if &expandtab | hi User8 ctermfg=13 ctermbg=0 | else | hi User8 ctermfg=12 ctermbg=0 | endif
+autocmd OptionSet expandtab if &expandtab | hi User8 ctermfg=13 ctermbg=0 | else | hi User8 ctermfg=12 ctermbg=0 | endif
+
 " White on Blue if Insert Mode
 " White on Black if not Insert Mode
 hi User9 ctermfg=7 ctermbg=0
-au InsertEnter * hi User9 ctermfg=7 ctermbg=6
-au InsertLeave * hi User9 ctermfg=7 ctermbg=0
+autocmd InsertEnter * hi User9 ctermfg=7 ctermbg=6
+autocmd InsertLeave * hi User9 ctermfg=7 ctermbg=0
 if v:version > 800
-	au CmdlineEnter * hi User9 ctermfg=7 ctermbg=5
-	au CmdlineLeave * hi User9 ctermfg=7 ctermbg=0
+	autocmd CmdlineEnter * hi User9 ctermfg=7 ctermbg=5
+	autocmd CmdlineLeave * hi User9 ctermfg=7 ctermbg=0
 endif
-
 
 " --- Left Status Line ---
 set statusline=
 
-" FileName
-set statusline+=%9*%f
-
 " ModifiedFlag
 set statusline+=%4*%m
+
+" FileName
+set statusline+=%9*%f
 
 
 " --- Right Status Line ---
@@ -51,4 +55,7 @@ set statusline+=\ %3p%%
 
 " FileType
 set statusline+=\ %3*%y
+
+" IndentStatus
+set statusline+=%8*[%{&tabstop.&softtabstop.&shiftwidth}]
 
