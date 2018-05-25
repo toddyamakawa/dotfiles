@@ -32,17 +32,16 @@
 	top = rev-parse --show-toplevel
 	url = remote get-url origin
 
-	# --- log ---
-	l = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --no-merges
-	ls = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\"
-	ll = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --numstat
-	graph = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --graph
-
 	# --- add ---
 	au = add -u
 	ap = add --patch
 	ours = "!f() { git co --ours $@ && git add $@; }; f"
 	theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+
+	# --- cherry-pick ---
+	cp = cherry-pick
+	cpa = cherry-pick --abort
+	cpc = cherry-pick --continue
 
 	# --- commit ---
 	amend = commit --amend
@@ -79,15 +78,18 @@
 	cop = checkout --patch
 	cot = checkout --track
 
-	# --- tag ---
-	tagn = tag -n
-	tags = log --tags --no-walk --decorate --oneline
+	# --- log ---
+	l = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --no-merges
+	ls = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\"
+	ll = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --numstat
+	graph = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --graph
 
 	# --- lock ---
 	unlock = !rm $(git rev-parse --git-dir)/index.lock
 
 	# --- merge ---
 	ma = merge --abort
+	msquash = merge --squash --no-commit
 
 	# --- review ---
 	r = review
@@ -105,23 +107,26 @@
 	rs = rebase --skip
 	pullr = pull --rebase
 
-	# --- cherry-pick ---
-	cp = cherry-pick
-	cpa = cherry-pick --abort
-	cpc = cherry-pick --continue
+	# --- reset ---
+	undo-merge = reset --hard ORIG_HEAD
+	hard-reset = reset --hard origin/master
+
+	# --- stash ---
+	pop = stash pop
+	save = stash save
+	stashl = stash list
+
+	# --- tag ---
+	tagn = tag -n
+	tags = log --tags --no-walk --decorate --oneline
 
 	format-patch-1 = format-patch HEAD~1
 	hub = "!f() { git clone https://github.com/$1/$2; }; f"
-	msquash = merge --squash --no-commit
-	pop = stash pop
-	save = stash save
 	publish = push origin master:refs/publish/master
 	pull-theirs = pull -s recursive -X theirs
 	file = "!f() { git difftool $1{,^} -- $2; }; f"
 	sha = "!f() { git diff --numstat $1{^,}; }; f"
 	unstage = reset HEAD
-	undo-merge = reset --hard ORIG_HEAD
-	hard-reset = reset --hard origin/master
 
 	ignore = update-index --assume-unchanged *
 
