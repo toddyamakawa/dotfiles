@@ -46,12 +46,13 @@ initSet
 	load-once fish/fish-shell/2.7.0
 	load-once gnu/gawk/4.1.1
 	load-once gnu/htop/1.0.1
-	load-once gnu/tmux/2.5
+	load-once gnu/tmux/2.7
 	load-once greer/silversearcher/1.0.2
 	load-once meld/meld/3.14.0
 	load-once mosh/mosh/1.2.4
 	load-once vim/vim/8.0.5
 	load-once xclip/xclip/0.12
+	load-once fish/fish-shell/2.7.0
 
 	# Version Control
 	load-once git/git/2.16.1
