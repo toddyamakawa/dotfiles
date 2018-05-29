@@ -1,4 +1,7 @@
 
+" --- Always Display Status Line ---
+set laststatus=2
+
 " --- User-Definend Colors ---
 
 " White on Black

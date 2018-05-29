@@ -23,7 +23,6 @@ filetype indent plugin on
 "    GENERAL SETTINGS
 " ======================
 set history=50     " Save 50 command lines of history
-set laststatus=2   " Always display status line
 
 " --- Set <Leader> to Space ---
 let mapleader="\<space>"
