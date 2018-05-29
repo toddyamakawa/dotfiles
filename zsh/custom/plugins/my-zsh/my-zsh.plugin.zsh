@@ -31,7 +31,7 @@ alias -g 2out='2>&1'
 alias -g P='|&'
 
 # --- Time ---
-alias now='date +%y%m%d-%H%M%S'
+alias now='date +%y%m%d-%H%M%S-Week%U-%a-%T'
 alias week="date +%U"
 
 # --- General ---
@@ -109,8 +109,6 @@ alias suu='su $(whoami)'
 alias less='less -r'
 
 alias weather='curl "wttr.in/austin?u"'
-
-function calc() { bc -l <<< "$@"; }
 
 function blank() { dd if=/dev/zero of=blank"$1"M.bin bs=1M count=$1; }
 
