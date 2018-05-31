@@ -30,6 +30,7 @@ let g:mapleader="\<space>"
 
 " --- Command Line ---
 nnoremap <Enter> :
+vnoremap <Enter> :
 autocmd CmdwinEnter * nnoremap <buffer> <Enter> <Enter>
 autocmd CmdwinEnter * nnoremap <buffer> q :q<Enter>
 
@@ -53,6 +54,7 @@ set termencoding=utf-8
 set fileencoding=utf-8
 scriptencoding utf-8           " Specify script character encoding to UTF-8
 set guifont=consolas           " Favorite font
+set virtualedit=block
 
 
 " --- Color Schemes - --
@@ -230,29 +232,6 @@ vnoremap q <Esc>
 nnoremap du :diffupdate<Enter>
 
 
-" =============
-"    PLUGINS
-" =============
-
-" --- NERDTree ---
-let g:NERDTreeDirArrows=0
-nnoremap <Leader>f :NERDTreeToggle<CR>
-
-" --- TagBar ---
-nnoremap <Leader>t :TagbarToggle<CR>
-
-" --- Fugitive ---
-nnoremap <Leader>gb :Gblame<Enter>
-nnoremap <Leader>gd :Gvdiff<Enter>
-nnoremap <Leader>gh :help fugitive<Enter>
-nnoremap <Leader>gl :Glog
-nnoremap <Leader>gp :Gpull
-nnoremap <Leader>gs :Gstatus<Enter>
-
-" --- GitGutter ---
-nnoremap <Leader>gg :GitGutterToggle<Enter>
-
-
 " ===============
 "    CLIPBOARD
 " ===============
@@ -260,17 +239,6 @@ nnoremap <Leader>gg :GitGutterToggle<Enter>
 " --- Set Clipboard ---
 "set clipboard=xterm_clipboard
 set clipboard=unnamed
-
-" --- System Clipboard ---
-" <Space>p to paste system clipboard
-"nnoremap <Leader>p "*p
-" <Space>y to copy to system clipboard
-"vnoremap <Leader>y "+y
-
-
-"nnoremap <silent> p p`]
-"vnoremap <silent> p p`]
-"vnoremap <silent> y y`]
 
 " Higlight last inserted text
 nmap gV `[v`]
