@@ -18,7 +18,6 @@
 	git = !exec git
 
 	# --- config ---
-	a = !git config --list | sed -n 's/^alias.//p' | sort
 	alias = !git config --list | sed -n 's/^alias.//p' | sort
 	vi = config --global -e
 
@@ -33,6 +32,7 @@
 	url = remote get-url origin
 
 	# --- add ---
+	a = add
 	au = add -u
 	ap = add --patch
 	ours = "!f() { git co --ours $@ && git add $@; }; f"
