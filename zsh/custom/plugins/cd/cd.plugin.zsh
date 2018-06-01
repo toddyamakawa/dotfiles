@@ -31,4 +31,5 @@ function chpwd() {
 	cdpath=('.' $(git rev-parse --show-toplevel 2>/dev/null))
 	cdpath+=(${up%/} ${up2%/} $HOME/.links $HOME)
 }
+chpwd
 
