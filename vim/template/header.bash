@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
+here=$(readlink -f $PWD)
 script=$(readlink -f $BASH_SOURCE)
-here=$(dirname $script)
-top=$(git -C $here rev-parse --show-toplevel 2>/dev/null)
+script_dir=$(dirname $script)
+top=$(git -C $script_dir rev-parse --show-toplevel 2>/dev/null)
 now=$(date +%y%m%d-%H%M%S-Week%U-%a-%T)
 
 # Immediately exit on failure
@@ -10,7 +11,7 @@ set -e
 # Always run when script finishes
 function finish() {
 	local RETVAL=$?
-	echo "exit $RETVAL: $@"
+	echo -e "path: $here\ncommand: $@\nexit: $RETVAL"
 }
 eval trap "'finish $0 $@'" EXIT
 
