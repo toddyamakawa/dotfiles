@@ -109,6 +109,7 @@
 
 	# --- reset ---
 	undo-merge = reset --hard ORIG_HEAD
+	undo-commit = reset --soft HEAD~1
 	hard-reset = reset --hard origin/master
 
 	# --- stash ---
