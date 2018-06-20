@@ -66,3 +66,7 @@ alias bmod_appn='bmod -appn'
 alias bmod_highmem='bmod -app RF-SSG-1'
 #alias bmod_highmem='bmod -app RF-SSG-2'
 
+# TODO: Figure out how to use this super useful bsub option
+# -ti
+# Enables automatic orphan job termination at the job level for a job with a dependency expression (set using -w).
+
