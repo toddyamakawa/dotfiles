@@ -19,3 +19,12 @@ alias ares_disasm='/arm/devsys-tools/warehouse/PerformanceModeling/EBM/master/$E
 alias deimos_disasm='/arm/devsys-tools/warehouse/PerformanceModeling/EBM/master/$EBM_VERSION/Linux/x86_64/gcc-4.9.2/rel_int/bin/deimos_disasm'
 alias zeus_disasm='/arm/devsys-tools/warehouse/PerformanceModeling/EBM/master/$EBM_VERSION/Linux/x86_64/gcc-4.9.2/rel_int/bin/zeus_disasm'
 
+
+# --- compdef ---
+
+# Completion for simulation *.log files
+function _simlog() {
+	_arguments "*:files:(($(ls *.@*.log)))"
+}
+compdef _simlog rerun.bash parse.bash
+
