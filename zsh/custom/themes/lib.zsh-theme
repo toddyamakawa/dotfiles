@@ -8,6 +8,7 @@ source $here/host.zsh
 source $here/pre.zsh
 source $here/prompt.zsh
 source $here/time.zsh
+source $here/tmux.zsh
 
 # --- Prompt Performance ---
 function pperf() {
