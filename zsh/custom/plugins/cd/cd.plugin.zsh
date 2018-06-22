@@ -12,7 +12,7 @@ alias cdgit='cd $(git rev-parse --show-toplevel)'
 
 # --- Functions ---
 function cdd() {
-	cd $(dirname $1)
+	cd $(dirname $(readlink -f $1))
 }
 
 # --- cup ---
@@ -23,13 +23,14 @@ function cup() {
 }
 
 # --- chpwd ---
-# Automatically generate $CDPATH whenever the directory is changed
+# Automatically generate $CDPATH and $GIT_TOP whenever the directory is changed
+export GIT_TOP
 function chpwd() {
 	local up up2
 	up=$(dirname $PWD)
 	up2=$(dirname $up)
-	cdpath=('.' $(git rev-parse --show-toplevel 2>/dev/null))
-	cdpath+=(${up%/} ${up2%/} $HOME/.links $HOME)
+	export GIT_TOP=$(git rev-parse --show-toplevel 2>/dev/null)
+	cdpath=('.' $GIT_TOP ${up%/} ${up2%/} $HOME/.links $HOME)
 }
 chpwd
 
