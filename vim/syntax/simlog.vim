@@ -12,17 +12,24 @@ hi def link simlog_number Number
 " TODO: Figure out how to underline parts of numbers without ruining color
 "hi simlog_number ctermbg=NONE ctermfg=NONE cterm=underline guibg=NONE guifg=NONE gui=underline
 syn match simlog_number /\v<0x[_0-9a-fA-F]+>/ containedin=simlog_keyword
+syn match simlog_number /\v<[0-9]{3,}>/ containedin=simlog_keyword
 
 
 " --- Macros ---
 hi def link simlog_macro Macro
 syn match simlog_macro /\v<ISSCMP>/ containedin=simlog_keyword
+syn match simlog_macro /\v<instr_cnt>/ containedin=simlog_keyword
 
 
 " --- Keywords ---
 hi def link simlog_keyword Keyword
 syn match simlog_keyword /\v.*instr_cnt.*/
 syn match simlog_keyword /\v.*Call Stack.*/
+
+
+" --- Underlined ---
+hi def link simlog_special Special
+syn match simlog_special /\v.*FORCE PASS.*/ containedin=simlog_comment
 
 
 " --- Functions ---
@@ -63,8 +70,10 @@ syn match simlog_function /\v<[0-9A-Z]+_IS:.*/
 " --- Errors ---
 hi def link simlog_error Error
 syn match simlog_error /\v.*FATAL.*/ containedin=simlog_comment
-syn match simlog_error /\v# \zs\*\* Error[^:]*/ containedin=simlog_comment
+syn match simlog_error /\v\*\* Fatal.*/ containedin=simlog_comment
+syn match simlog_error /\v\*\* Error.*/ containedin=simlog_comment
 syn match simlog_error /\v\[ARM_FAILMSG\].*/ containedin=simlog_comment
+syn match simlog_error /\v\[CHECK_FOR_X\].*/ containedin=simlog_comment
 
 
 " --- Comment ---
