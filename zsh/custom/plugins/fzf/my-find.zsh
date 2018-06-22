@@ -1,35 +1,36 @@
 #!/usr/bin/env zsh
 
-# TODO: Finish writing this file
-
-# Git
-if git rev-parse --is-inside-work-tree &> /dev/null; then
-	#git -C $(git rev-parse --show-toplevel) ls-files | sed -e 's/^/$(git rev-parse --show-toplevel)\//'
-	git ls-files
-fi
+# Git files
+function fzf-gitfiles() {
+	if [[ -d $GIT_TOP ]]; then
+		git -C $GIT_TOP ls-files | sed -e 's/^/$GIT_TOP\//'
+	fi
+}
 
 # List files
-function zsh-files() {
-	echo $1*(.) | xargs -n 1
+function fzf-files() {
+	local dir=${1-.}
+	find $dir -maxdepth 1 -type f
 }
 
-# List directories
-function zsh-dirs() {
-	echo $1*(/) 2>/dev/null
-}
-
-function zsh-find() {
+# Recrusively list files, shallow first
+function fzf-find() {
+	local dir file here=${1-.}
 	local -U dirs
-	zsh-files $1
-	echo
-	dirs=($(zsh-dirs $1))
-	for d in $dirs; do
-		zsh-files $d/
-		echo
-		dirs+=($(zsh-dirs $d/))
+
+	dirs=($here)
+
+	while (( ${#dirs} != 0 )); do
+		dir=$dirs[1]
+		dirs[1]=()
+		for file in $(ls $dir); do
+			entry=$dir/$file
+			[[ -f $entry ]] && echo $entry
+			[[ -d $entry ]] && dirs+=($entry)
+		done
 	done
 }
 
-echo
-zsh-find
+fzf-gitfiles
+fzf-find
 
