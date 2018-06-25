@@ -1,8 +1,11 @@
+#!/usr/bin/env bash
+exec /arm/tools/setup/bin/mrun +ruby/ruby/2.5.1 ruby $0 $@
 #!/usr/bin/env ruby
 
 require 'optparse'
+require 'pathname'
 
-$here = File.dirname(__FILE__)
+$here = File.dirname(File.expand_path($0))
 
 at_exit {
 	puts 'done'
