@@ -129,6 +129,12 @@ function rmrf() {
 	done
 }
 
+# Delete current directory
+function rmrf.() {
+	local d=${PWD##*/}
+	cd .. && rmrf $d
+}
+
 function cp1() {
 	local dir=$1
 	mkdir $(basename $dir)
