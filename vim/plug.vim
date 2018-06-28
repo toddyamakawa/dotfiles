@@ -9,6 +9,11 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'tomasr/molokai'
 Plug 'antlypls/vim-colors-codeschool'
 
+" --- Clipboard ---
+" TODO: Figure out this plugin
+" https://github.com/kana/vim-fakeclip
+" Plug 'kana/vim-fakeclip'
+
 " --- Indentation ---
 Plug 'yggdroot/indentline'
 
@@ -25,6 +30,10 @@ cabbrev rain RainbowLevelsToggle
 
 " --- .tmux.conf Syntax ---
 Plug 'keith/tmux.vim'
+
+" --- fzf ---
+Plug 'junegunn/fzf.vim'
+"Plug '~/bin/fzf'
 
 " --- ANSI Escape Syntax ---
 Plug 'vim-scripts/AnsiEsc.vim', { 'on': 'AnsiEsc' }
