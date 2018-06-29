@@ -9,14 +9,24 @@ source $fzfpath/shell/key-bindings.zsh
 
 # --- Key Bindings ---
 
-bindkey -M vicmd '^K' fzf-magic-history
-bindkey -M viins '^K' fzf-magic-history
+# History search
+bindkey -M viins "^J" history-substring-search-down
+bindkey -M viins "^K" history-substring-search-up
 
-bindkey -M vicmd '^R' fzf-history-widget
-bindkey -M viins '^R' fzf-history-widget
+# History search
+bindkey -M vicmd '^R' my-fzf-history
+bindkey -M viins '^R' my-fzf-history
 
+# History search with default fzf widget
+#bindkey -M vicmd '^R' fzf-history-widget
+#bindkey -M viins '^R' fzf-history-widget
+
+# Shift-Tab to search files/directories
 bindkey -M viins '^[[Z' fzf-magic-complete
 bindkey -M viins '^[[Z' fzf-magic-complete
+
+bindkey -M vicmd '^F' my-fzf-search
+bindkey -M viins '^F' my-fzf-search
 
 
 # --- Functions ---
@@ -104,19 +114,49 @@ function fzf-magic-complete() {
 }
 
 
-# Create fzf-magic-history widget
-zle -N fzf-magic-history
-function fzf-magic-history() {
+# Create my-fzf-history widget
+zle -N my-fzf-history
+function my-fzf-history() {
 	setopt localoptions pipefail 2> /dev/null
 
 	# Search history
 	local result
-	result=($(fc -rl 1 | fzf --height 40% --reverse --tiebreak=index --query="$BUFFER"))
+	result=($(fc -rl 1 | fzf --height 40% --reverse --bind=space:accept --tiebreak=index --query="$BUFFER"))
+	#fzf --bind "enter:execute(less {})"
 	local ret=$?
 
 	# Apply search result
 	if [[ -n "$result" ]]; then
 		zle vi-fetch-history -n $result[1]
+	fi
+
+	# TODO: Is this stuff needed?
+	# Redraw display
+	zle redisplay
+	typeset -f zle-line-init >/dev/null && zle zle-line-init
+	return $ret
+}
+
+
+# Create my-fzf-search widget
+zle -N my-fzf-search
+function my-fzf-search() {
+	setopt localoptions pipefail 2> /dev/null
+
+	# Search history
+	local result
+	result=($(ag --nogroup '\w' | fzf --height 40% --reverse))
+	local ret=$?
+
+	# Apply search result
+	if [[ -n "$result" ]]; then
+		local line file
+		echo "'$result'"
+		file="${result%%:*}"
+		result="${result#$file:}"
+		line=${result%%:*}
+		BUFFER="vi +$line $file"
+		zle accept-line
 	fi
 
 	# TODO: Is this stuff needed?
