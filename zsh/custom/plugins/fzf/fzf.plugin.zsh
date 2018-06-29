@@ -9,8 +9,8 @@ source $fzfpath/shell/key-bindings.zsh
 
 # --- Key Bindings ---
 
-bindkey -M vicmd '^K' fzf-history-widget
-bindkey -M viins '^K' fzf-history-widget
+bindkey -M vicmd '^K' fzf-magic-history
+bindkey -M viins '^K' fzf-magic-history
 
 bindkey -M vicmd '^R' fzf-history-widget
 bindkey -M viins '^R' fzf-history-widget
@@ -80,6 +80,7 @@ function my-fzf-complete() {
 
 
 # --- Widget ---
+
 # Create fzf-magic-complete widget
 zle -N fzf-magic-complete
 function fzf-magic-complete() {
@@ -97,6 +98,29 @@ function fzf-magic-complete() {
 	# TODO: Is this stuff needed?
 	# Redraw display
 	local ret=$?
+	zle redisplay
+	typeset -f zle-line-init >/dev/null && zle zle-line-init
+	return $ret
+}
+
+
+# Create fzf-magic-history widget
+zle -N fzf-magic-history
+function fzf-magic-history() {
+	setopt localoptions pipefail 2> /dev/null
+
+	# Search history
+	local result
+	result=($(fc -rl 1 | fzf --height 40% --reverse --tiebreak=index --query="$BUFFER"))
+	local ret=$?
+
+	# Apply search result
+	if [[ -n "$result" ]]; then
+		zle vi-fetch-history -n $result[1]
+	fi
+
+	# TODO: Is this stuff needed?
+	# Redraw display
 	zle redisplay
 	typeset -f zle-line-init >/dev/null && zle zle-line-init
 	return $ret
