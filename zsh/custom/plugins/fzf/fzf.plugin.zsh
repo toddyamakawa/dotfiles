@@ -9,7 +9,8 @@ source $fzfpath/shell/key-bindings.zsh
 
 # --- Key Bindings ---
 
-#bindkey -M vicmd '^[c' fzf-cd-widget
+bindkey -M vicmd '^K' fzf-history-widget
+bindkey -M viins '^K' fzf-history-widget
 
 bindkey -M vicmd '^R' fzf-history-widget
 bindkey -M viins '^R' fzf-history-widget
@@ -85,7 +86,7 @@ function fzf-magic-complete() {
 	setopt localoptions pipefail 2> /dev/null
 
 	# Directory completion for `cd`
-	if [[ $LBUFFER =~ '^cd\b' ]]; then
+	if [[ $LBUFFER =~ '^\s*cd\b' ]]; then
 		LBUFFER="${LBUFFER% *} $({fzf-gitdirs; fzf-dirs} | my-fzf-complete)"
 
 	# File completion
@@ -100,8 +101,4 @@ function fzf-magic-complete() {
 	typeset -f zle-line-init >/dev/null && zle zle-line-init
 	return $ret
 }
-
-
-# --- Aliases ---
-alias vif='vi $(fzf)'
 
