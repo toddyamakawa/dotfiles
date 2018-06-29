@@ -22,9 +22,14 @@ bindkey -M viins '^[[Z' fzf-magic-complete
 
 # List Git files
 function fzf-gitfiles() {
-	if [[ -d $GIT_TOP ]]; then
-		git -C $GIT_TOP ls-files | sed -e 's/^/$GIT_TOP\//'
-	fi
+	[[ -d $GIT_TOP ]] || return 0
+	git -C $GIT_TOP ls-files | sed -e 's/^/$GIT_TOP\//'
+}
+
+# List Git directories
+function fzf-gitdirs() {
+	[[ -d $GIT_TOP ]] || return 0
+	fzf-gitfiles | xargs -n 1 dirname | uniq
 }
 
 # Recrusively list files, shallow first
@@ -68,7 +73,8 @@ function fzf-dirs() {
 }
 
 function my-fzf-complete() {
-	fzf --height 40% --reverse
+	local query=${LBUFFER##* }
+	fzf --height 40% --reverse --query=$query
 }
 
 
@@ -80,11 +86,11 @@ function fzf-magic-complete() {
 
 	# Directory completion for `cd`
 	if [[ $LBUFFER =~ '^cd\b' ]]; then
-		LBUFFER="${LBUFFER}$(fzf-dirs | my-fzf-complete)"
+		LBUFFER="${LBUFFER% *} $({fzf-gitdirs; fzf-dirs} | my-fzf-complete)"
 
 	# File completion
 	else
-		LBUFFER="${LBUFFER}$({fzf-gitfiles; fzf-files} | my-fzf-complete)"
+		LBUFFER="${LBUFFER% *} $({fzf-gitfiles; fzf-files} | my-fzf-complete)"
 	fi
 
 	# TODO: Is this stuff needed?
