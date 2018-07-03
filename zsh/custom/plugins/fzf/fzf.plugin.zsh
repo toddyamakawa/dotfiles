@@ -154,12 +154,7 @@ function my-fzf-search() {
 
 	# Apply search result
 	if [[ -n "$result" ]]; then
-		local line file
-		echo "'$result'"
-		file="${result%%:*}"
-		result="${result#$file:}"
-		line=${result%%:*}
-		BUFFER="vi +$line $file"
+		BUFFER=$(_vimline $result)
 		zle accept-line
 	fi
 
@@ -168,5 +163,25 @@ function my-fzf-search() {
 	zle redisplay
 	typeset -f zle-line-init >/dev/null && zle zle-line-init
 	return $ret
+}
+
+# Return command that opens result in vim
+# This will fail if the file has a semicolon or space in the name
+function _vimline() {
+	local result file line
+	result="$@"
+	file=${result%%:*}
+	result=${result#$file:}
+	line=$(echo $result | sed -n 's/\([0-9]\+\):.*/\1/p')
+	echo "vim ${line:++$line }$file"
+}
+
+# Run ag/fzf, open result in vim
+function agf() {
+	local args cmd
+	args="${@:-\w}"
+	cmd=$(_vimline $(ag --nogroup $args | fzf))
+	print -s $cmd
+	eval $cmd
 }
 
