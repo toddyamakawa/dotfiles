@@ -5,6 +5,7 @@ local here=${0:h}
 source ~/.fzf.zsh
 local fzfpath=$(git -C $(dirname $(which fzf)) rev-parse --show-toplevel)
 source $fzfpath/shell/key-bindings.zsh
+export MANPATH=$fzfpath/man:$MANPATH
 
 
 # --- Key Bindings ---
@@ -40,7 +41,9 @@ function fzf-gitfiles() {
 # List Git directories
 function fzf-gitdirs() {
 	[[ -d $GIT_TOP ]] || return 0
-	fzf-gitfiles | xargs -n 1 dirname | uniq
+	# This is too slow for large directories
+	#fzf-gitfiles | xargs -n 1 dirname | uniq
+	git -C $GIT_TOP ls-files | sed -e 's/^/$GIT_TOP\//' -e 's/\/[^/]*$//' | uniq
 }
 
 # Recrusively list files, shallow first
@@ -121,7 +124,8 @@ function my-fzf-history() {
 
 	# Search history
 	local result
-	result=($(fc -rl 1 | fzf --height 40% --reverse --bind=space:accept --tiebreak=index --query="$BUFFER"))
+	#result=($(fc -rl 1 | fzf --height 40% --reverse --bind=space:accept --tiebreak=index --query="$BUFFER"))
+	result=($(fc -rl 1 | fzf --height 40% --reverse --tiebreak=index --query="$BUFFER"))
 	#fzf --bind "enter:execute(less {})"
 	local ret=$?
 
@@ -143,7 +147,7 @@ zle -N my-fzf-search
 function my-fzf-search() {
 	setopt localoptions pipefail 2> /dev/null
 
-	# Search history
+	# Search in all files
 	local result
 	result=($(ag --nogroup '\w' | fzf --height 40% --reverse))
 	local ret=$?
