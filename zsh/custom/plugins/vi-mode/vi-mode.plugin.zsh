@@ -47,6 +47,12 @@ function clear-on-empty-buffer() {
 	[[ -z $BUFFER ]] && zle clear-screen || zle accept-line
 }
 
+zle -N vi-my-backward-kill-word
+function vi-my-backward-kill-word() {
+	# Tabs might break this
+	LBUFFER=$(echo $LBUFFER | sed 's:/\?[^ /]\+\s*$::')
+}
+
 
 # =========================
 #    COMMAND/INSERT MODE
@@ -64,19 +70,12 @@ bindkey -M vicmd "^M" clear-on-empty-buffer
 # Ctrl-f to enter vicmd mode
 bindkey -M viins '^F' vi-cmd-mode
 
-# Ctrl-j and Ctrl-k to search history
-#bindkey -M viins '^J' down-line-or-search
-#bindkey -M viins '^K' up-line-or-search
-#bindkey -M viins '^J' down-line-or-history
-#bindkey -M viins '^K' up-line-or-history
-#bindkey -M viins '^J' history-incremental-search-forward
-#bindkey -M viins '^K' history-incremental-search-backward
-#bindkey -M viins '^J' history-search-forward
-#bindkey -M viins '^K' history-search-backward
-
 # Ctrl-j and Ctrl-k to search history using history-substring-search plugin
 bindkey -M viins "^J" history-substring-search-down
 bindkey -M viins "^K" history-substring-search-up
+
+# Ctrl-h to delete words
+bindkey -M viins "^H" vi-my-backward-kill-word
 
 # [Alt-p] to paste
 bindkey -M viins '^[p' vi-xclip-paste
