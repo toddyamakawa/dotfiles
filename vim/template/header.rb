@@ -3,9 +3,10 @@ exec /arm/tools/setup/bin/mrun +ruby/ruby/2.5.1 ruby $0 "$@"
 #!/usr/bin/env ruby
 
 require 'optparse'
-require 'pathname'
 
-$here = File.dirname(File.expand_path($0))
+$script = File.realpath($0)
+$script_dir = File.dirname($script)
+$LOAD_PATH.unshift("#{$script_dir}/../path/to/lib")
 
 at_exit {
 	puts 'done'
