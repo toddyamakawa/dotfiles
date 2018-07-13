@@ -10,7 +10,8 @@ function _dir-permission() {
 	permission=$(_permission-ugo)
 	[[ -n $permission ]] || bg=red
 	[[ $KEYMAP == vicmd ]] && bg=magenta
-	_prompt-bg-fg $bg white $permission ${p##*/}
+	p=$(basename ${p:gs/%/%%})
+	_prompt-bg-fg $bg white $permission $p
 }
 
 # --- Permission ---
