@@ -140,6 +140,7 @@
 	newmsys = clone ssh://git@git.research.arm.com/svos/msys
 	newscp = clone ssh://git@git.research.arm.com/svos/scp_boot
 	newvarys = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/varys
+	newvarys2 = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/varys2
 	newyak = clone ssh://git@git.research.arm.com/svos/yak
 
 	newambaviz = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/ambaviz
