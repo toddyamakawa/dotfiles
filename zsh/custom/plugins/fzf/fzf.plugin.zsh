@@ -101,11 +101,11 @@ function fzf-magic-complete() {
 
 	# Directory completion for `cd`
 	if [[ $LBUFFER =~ '^\s*cd\b' ]]; then
-		LBUFFER="${LBUFFER% *} $({fzf-gitdirs; fzf-dirs} | my-fzf-complete)"
+		LBUFFER="${LBUFFER% *} $({fzf-gitdirs & fzf-dirs} | my-fzf-complete)"
 
 	# File completion
 	else
-		LBUFFER="${LBUFFER% *} $({fzf-gitfiles; fzf-files} | my-fzf-complete)"
+		LBUFFER="${LBUFFER% *} $({fzf-gitfiles & fzf-files} | my-fzf-complete)"
 	fi
 
 	# TODO: Is this stuff needed?
@@ -171,9 +171,11 @@ function _vimline() {
 	local result file line
 	result="$@"
 	file=${result%%:*}
-	result=${result#$file:}
-	line=$(echo $result | sed -n 's/\([0-9]\+\):.*/\1/p')
-	echo "vim ${line:++$line }$file"
+	if [[ -f $file ]]; then
+		result=${result#$file:}
+		line=$(echo $result | sed -n 's/\([0-9]\+\):.*/\1/p')
+		echo "vim ${line:++$line }$file"
+	fi
 }
 
 # Run ag/fzf, open result in vim
@@ -181,7 +183,18 @@ function agf() {
 	local args cmd
 	args="${@:-\w}"
 	cmd=$(_vimline $(ag --nogroup $args | fzf))
+	[[ -z "$cmd" ]] && return 0
 	print -s $cmd
 	eval $cmd
+}
+
+# Create message to display while fzf is running
+function _fzf-running-msg() {
+	while :; do
+		for c in \\ \| / -; do
+			echo -n "\r$c fzf is running"
+			sleep 0.2
+		done;
+	done
 }
 
