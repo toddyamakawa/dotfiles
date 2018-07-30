@@ -73,5 +73,8 @@ if args.verbose != None:
 	print('python ' + platform.python_version())
 
 # Run subcommand
-args.func(**vars(args))
+try:
+	args.func(**vars(args))
+except AttributeError:
+	parser.print_help()
 
