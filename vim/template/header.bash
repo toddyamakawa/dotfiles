@@ -2,8 +2,9 @@
 here=$(readlink -f $PWD)
 script=$(readlink -f $BASH_SOURCE)
 script_dir=$(dirname $script)
-top=$(git -C $script_dir rev-parse --show-toplevel 2>/dev/null)
 now=$(date +%y%m%d-%H%M%S-Week%U-%a-%T)
+function _git() { git -C $script_dir $@; }
+top=$(_git rev-parse --show-toplevel 2>/dev/null)
 
 # Immediately exit on failure
 set -e
@@ -39,6 +40,7 @@ done
 # Source setup scripts if available
 if [[ -d /arm/tools/ ]]; then
 	source /arm/tools/setup/init/bash
+	umask 002
 	module load core eda swdev util arm/cluster/2.0
 	mrun=/arm/tools/setup/bin/mrun
 fi
