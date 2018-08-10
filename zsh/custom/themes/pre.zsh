@@ -27,6 +27,9 @@ function precmd() {
 	# Record elapsed time
 	elapsed_ms=${elapsed_ms-$(($(date +%s%3N)-$start_ms))}
 
+	# Print elapsed time
+	echo -e "\e[2mExecution time: $(_elapsed-time)s\e[0m"
+
 	# Disable tmux monitor
 	_tmux-monitor off
 

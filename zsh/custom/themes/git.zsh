@@ -33,10 +33,13 @@ function _git-blacklist() {
 }
 
 # --- Git Branch ---
-function _git-branch() {
+function _git-detailed-branch() {
 	local fg=green branch=$(git rev-parse --abbrev-ref HEAD)
 	git rev-parse @{u} &>/dev/null || fg=cyan
 	git diff-index --quiet HEAD 2>/dev/null || fg=red
 	_rprompt-fg $fg $branch
+}
+function _git-short-branch() {
+	_rprompt-fg white $(git rev-parse --abbrev-ref HEAD)
 }
 

@@ -2,7 +2,7 @@
 local here=${0:h}
 source $here/lib.zsh-theme
 
-alias nor="function _rprompt-git(){}"
+alias nor="function _rprompt-git(){}; function _prompt-git(){};"
 
 # =============
 #    $PROMPT
@@ -24,6 +24,19 @@ function _prompt-status() {
 	_prompt-bg-fg black default "$symbols"
 }
 
+# --- Git Status ---
+function _prompt-git() {
+	_git-check || return
+	_prompt-bg-fg black white ' '
+	if _git-blacklist; then
+		_git-short-branch
+	else
+		_git-detailed-branch
+		_git-commits
+	fi
+}
+
+
 # --- Build Prompt ---
 build_prompt() {
 	_prompt-start
@@ -31,23 +44,14 @@ build_prompt() {
 	_prompt-bg black
 	_prompt-status
 	_hostinfo
+	_prompt-git
 	_dir-permission
 	_prompt-end
 }
 
-
 # =============
 #    $RPROMPT
 # =============
-
-# --- Git Status ---
-function _rprompt-git() {
-	_git-check || return
-	_git-blacklist && return
-	_rprompt-bg black
-	_git-branch
-	_git-commits
-}
 
 # --- Right Prompt Elapsed Time ---
 function _rprompt-time() {
@@ -56,8 +60,8 @@ function _rprompt-time() {
 
 # --- Build Right Prompt ---
 build_rprompt() {
-	_rprompt-start
-	_rprompt-git
-	_rprompt-time
+	#_rprompt-start
+	#_rprompt-git
+	#_rprompt-time
 }
 
