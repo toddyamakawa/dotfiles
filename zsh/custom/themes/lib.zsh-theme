@@ -19,9 +19,9 @@ function pperf() {
 }
 
 function _perf() {
-	local start_ms=$(date +%s%3N)
+	local _start_ms=$(date +%s%3N)
 	$@ > /dev/null
-	echo "$1: $(($(date +%s%3N)-$start_ms))"
+	echo "$1: $(($(date +%s%3N)-$_start_ms))"
 }
 
 # --- Set Title ---
