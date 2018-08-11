@@ -1,7 +1,7 @@
 
 # --- Current Time (ms) ---
-function _current-ms() { date +%s%3N; }
-[[ -z $_start_ms ]] && _start_ms=$(_current-ms)
+function _get-ms() { date +%s%3N; }
+[[ -z $_start_ms ]] && _start_ms=$(_get-ms)
 
 # --- Elapsed Time (ms) ---
 function _elapsed-time() { printf "%0.3f" $(($_elapsed_ms/1000.0)); }
