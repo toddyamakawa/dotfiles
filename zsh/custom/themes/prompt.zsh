@@ -3,6 +3,9 @@
 #    PROMPT SETTINGS
 # =====================
 
+# TODO: Investigate vim=mode:
+# https://dustri.org/b/my-zsh-configuration.html#show-vim-mode-in-you-prompt
+
 # --- Redraw on Resize ---
 function TRAPWINCH() {
 	zle && zle reset-prompt
