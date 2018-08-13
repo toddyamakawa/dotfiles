@@ -1,6 +1,9 @@
 
 # `man zshoptions`
 
+# --- Miscellaneous ---
+unsetopt BEEP
+
 # --- Permissions ---
 # rw-rw-r-- files
 # rwxrwxr-x directories
