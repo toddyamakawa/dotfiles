@@ -2,7 +2,10 @@
 # `man zshoptions`
 
 # --- Miscellaneous ---
+# Disable annoying beeps
 unsetopt BEEP
+# Print red [stderr] for stderr
+exec 2> >(while read line; do echo "\e[31m[stderr]\e[0m $line"; done )
 
 # --- Permissions ---
 # rw-rw-r-- files
