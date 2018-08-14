@@ -6,12 +6,20 @@ now=$(date +%y%m%d-%H%M%S-Week%U-%a-%T)
 function _git() { git -C $script_dir $@; }
 top=$(_git rev-parse --show-toplevel 2>/dev/null)
 
+# Print stderr in red
+exec 2> >(while read line; do echo -e "\e[31m$line\e[0m"; done)
+
+# Print custom pipe in blue
+exec 5> >(while read line; do echo -e "\e[32m$line\e[0m"; done)
+
 # Immediately exit on failure
 set -e
 
 # Always run when script finishes
 function finish() {
 	local RETVAL=$?
+	# Redirect stdout to custom pipe
+	exec 1>&5
 	echo -e "path: $here\ncommand: $@\nexit: $RETVAL"
 }
 eval trap "'finish $0 $@'" EXIT
