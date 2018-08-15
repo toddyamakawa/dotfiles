@@ -24,6 +24,13 @@ function ucdb_view() {
 	bs8 -app FG -Is -XF vsim -gui -viewcov $@
 }
 
+# Dump pdb into log file
+function pdb_report() {
+	which vsim || return 1
+	local pdb=$1
+	vsim -c -do "profile open $pdb; profile report -file $pdb.log; quit -f"
+}
+
 
 # --- compdef ---
 
@@ -32,4 +39,10 @@ function _ucdb_file() {
 	_arguments "*:files:(($(ls *.ucdb)))"
 }
 compdef _ucdb_file ucdb_dump ucdb_view
+
+# Completion for *.ucdb files
+function _pdb_file() {
+	_arguments "*:files:(($(ls *.pdb)))"
+}
+compdef _pdb_file pdb_report
 
