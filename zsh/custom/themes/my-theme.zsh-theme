@@ -13,11 +13,11 @@ alias nor="function _rprompt-git(){}; function _prompt-git(){};"
 function _prompt-status() {
 	local symbols
 	if [[ -n $POWERLINE ]]; then
-		(( $RETVAL == 0 )) && symbols+="${green}✔" || symbols+="${red}✘"
+		#(( $RETVAL == 0 )) && symbols+="${green}✔" || symbols+="${red}✘"
 		[[ $UID -eq 0 ]] && symbols+="${yellow}⚡"
 		[[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="${cyan}⚙"
 	else
-		(( $RETVAL == 0 )) && symbols+="${green}0" || symbols+="${red}X"
+		#(( $RETVAL == 0 )) && symbols+="${green}0" || symbols+="${red}X"
 		[[ $UID -eq 0 ]] && symbols+="${yellow}Z"
 		[[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="${cyan}B"
 	fi

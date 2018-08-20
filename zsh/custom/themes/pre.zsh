@@ -25,10 +25,13 @@ function preexec() {
 
 function precmd() {
 	# Record elapsed time
-	local _current_ms=$(_get-ms)
-	_elapsed_ms=${_elapsed_ms-$(($_current_ms-$_start_ms))}
+	local RETVAL=$? _current_ms=$(_get-ms)
+
+	# Print non-zero exit code
+	(( $RETVAL == 0 )) || echo "\e[31mExit code: $RETVAL\e[0m"
 
 	# Print elapsed time
+	_elapsed_ms=${_elapsed_ms-$(($_current_ms-$_start_ms))}
 	echo -e "\x1b[38;5;8mExecution time: $(_elapsed-time)s\e[0m"
 
 	# Disable tmux monitor
