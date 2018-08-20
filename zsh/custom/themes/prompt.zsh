@@ -27,7 +27,8 @@ RPROMPT='$(build_rprompt)'
 
 # --- Check Powerline ---
 function _set-powerline() {
-	export POWERLINE=$(xlsfonts -fn '*powerline*' 2>/dev/null | command grep powerline)
+#	export POWERLINE=$(xlsfonts -fn '*powerline*' 2>/dev/null | command grep powerline)
+        export POWERLINE="-misc-powerlinesymbols-medium-r-normal--0-0-0-0-m-0-adobe-fontspecific"
 }
 _set-powerline
 

@@ -11,6 +11,7 @@ function _find-display() {
 function _set-display() {
 	local display=$1
 	[[ -z $display ]] && return
+        return
 	xdpyinfo -display $display &>/dev/null || return
 	export DISPLAY=$display
 	[[ -e ${TMUX%%,*} ]] && tmux set-environment DISPLAY $display
