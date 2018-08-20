@@ -13,6 +13,7 @@ alias veljobs='emu veljobs -user all'
 alias zs3jobs='emu zs3jobs -user all'
 alias velstat='emu velstat'
 alias zs3stat='emu zs3stat'
+alias strstat='emu strstat'
 alias velft='emu velfasttrack'
 alias zs3ft='emu zs3fasttrack'
 
