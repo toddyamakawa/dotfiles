@@ -1,5 +1,9 @@
 
+# --- Source Files ---
 local here=${0:h}
+source $here/my-options.zsh
+source $here/my-builtins.zsh
+source_files $here/alias/*.zsh
 
 # --- Path ---
 function addpath() { export PATH=$PATH:$1; }
@@ -25,30 +29,24 @@ function zsh-theme() {
 	fi
 }
 
+
 # --- stderr ---
 alias -g 2null='2>/dev/null'
 alias -g 2out='2>&1'
 alias -g P='|&'
 
 # --- Time ---
-alias now='date +%y%m%d-%H%M%S-Week%U-%a-%T'
+function now() { date +%y%m%d-%H%M%S-Week%U-%a-%T; }
 alias week="date +%U"
 
 # --- General ---
-alias which='whence -c'
 alias func='print -l ${(ok)functions}'
 alias funcg='print -l ${(ok)functions} | grep'
 
-alias pwd='pwd -P'
-alias mkdir='mkdir -pv'
-
-alias find='find -O3'
 alias findn='find . -name'
 
 alias sortn='sort -n'
 alias usort='sort | uniq -c | sort -n'
-
-alias hostname='hostname --long'
 
 # --- General ---
 alias wrap="printf '\033[?7h'"
@@ -62,11 +60,10 @@ alias xterm='xterm -fg white -bg black -fa consolas -fs 10'
 alias lns='ln -s'
 alias lnsf='ln -sf'
 
+alias mkts='mkdir -v $(now)'
+
 alias catn='cat -n'
 alias tailf='tail -n 100 -F'
-
-# --- echo ---
-alias echo='echo -e'
 
 function powerline_check() {
 	echo "Symbols: \ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699"
@@ -79,7 +76,6 @@ alias .tar.bz2='tar xjf'
 alias .tar.gz='tar xzf'
 
 
-alias ls='ls -h --color'
 alias ll='ls -lrth'
 alias lll='ll | grep "\->"'
 alias lsd='ls -dl */'
@@ -98,15 +94,11 @@ alias find4='ls4 | grep -i'
 alias find5='ls5 | grep -i'
 alias find6='ls6 | grep -i'
 
-alias df='df -h'
-alias du='du -ch'
 alias du1='du --max-depth=1'
 alias du2='du --max-depth=2'
 alias du3='du --max-depth=3'
 
 alias suu='su $(whoami)'
-
-alias less='less -r'
 
 alias weather='curl "wttr.in/austin?u"'
 
@@ -147,8 +139,4 @@ function zsh_colors() {
 		echo "$fg_bold[${(L)color}]BOLD $fg_no_bold[${(L)color}]$color"
 	done
 }
-
-# --- Source Files ---
-source $here/my-options.zsh
-source_files $here/alias/*.zsh
 
