@@ -12,12 +12,11 @@ syn match uart_number /\v<[-.:0-9]+>/
 syn match uart_number /\v<0x[0-9a-fA-F]+>/
 
 " --- Keywords ---
-hi def link uart_keywords Keyword
-syn match uart_keywords /\v.*SVOS.*/
-syn match uart_keywords /\v.*CPU\d+.*/
-syn match uart_keywords /\v.*Kiwi+.*/
-syn match uart_keywords /\v<Payload>.*<launched>/
-syn match uart_keywords /\v<Payload>.*<terminated>/
+hi def link uart_keyword Keyword
+syn match uart_keyword /\v.*SVOS.*/
+syn match uart_keyword /\v.*CPU\d+.*/
+syn match uart_keyword /\v.*Kiwi+.*/
+syn match uart_keyword /\v<Payload>.*<(launched|terminated)>( normally)?/
 
 " --- Errors ---
 hi def link uart_error Error

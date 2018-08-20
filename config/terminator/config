@@ -1,0 +1,60 @@
+[global_config]
+  title_transmit_bg_color = "#245de1"
+[keybindings]
+  cycle_prev = None
+  close_window = None
+  group_tab = None
+  move_tab_right = None
+  resize_left = None
+  reset_clear = None
+  go_right = None
+  new_tab = None
+  resize_right = None
+  resize_down = None
+  toggle_zoom = None
+  scaled_zoom = None
+  zoom_in = <Primary>equal
+  group_all = None
+  full_screen = None
+  prev_tab = <Primary><Shift>Tab
+  split_vert = None
+  ungroup_all = None
+  ungroup_tab = None
+  paste = None
+  cycle_next = None
+  zoom_out = <Primary>minus
+  go_prev = None
+  close_term = None
+  new_terminator = None
+  go_next = None
+  go_left = None
+  copy = None
+  hide_window = None
+  reset = None
+  search = None
+  go_up = None
+  resize_up = None
+  next_tab = <Primary>Tab
+  split_horiz = None
+  zoom_normal = <Primary>0
+  go_down = None
+  new_window = None
+  move_tab_left = None
+  toggle_scrollbar = None
+[profiles]
+  [[default]]
+    scrollbar_position = hidden
+    alternate_screen_scroll = False
+    scroll_on_output = False
+    icon_bell = False
+    show_titlebar = False
+    scroll_on_keystroke = False
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]

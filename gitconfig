@@ -18,14 +18,15 @@
 	git = !exec git
 
 	# --- config ---
-	a = !git config --list | sed -n 's/^alias.//p' | sort
 	alias = !git config --list | sed -n 's/^alias.//p' | sort
 	vi = config --global -e
 
 	# --- info ---
+	s = status
 	stat = status
 	sb = status -sb -uno
 	shown = show --numstat
+	showw = show --ignore-all-space --ignore-blank-lines
 	info = remote show origin
 	top = rev-parse --show-toplevel
 	url = remote get-url origin
@@ -36,10 +37,16 @@
 	graph = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --graph
         olog = log --oneline --decorate --graph --all
 	# --- add ---
+	a = add
 	au = add -u
 	ap = add --patch
 	ours = "!f() { git co --ours $@ && git add $@; }; f"
 	theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+
+	# --- cherry-pick ---
+	cp = cherry-pick
+	cpa = cherry-pick --abort
+	cpc = cherry-pick --continue
 
 	# --- commit ---
 	amend = commit --amend
@@ -55,9 +62,15 @@
 	bname = rev-parse --abbrev-ref HEAD
 	bpush = !git push --set-upstream origin $(git bname)
 
+	bdpush = !git push origin --delete
+
 	# --- diff ---
 	diffn = diff --numstat
+	diffnw = diff --numstat --ignore-all-space --ignore-blank-lines
 	diffs = diff --staged
+	diffsn = diff --staged --numstat
+	diffsw = diff --staged --ignore-all-space --ignore-blank-lines
+	diffw = diff --ignore-all-space --ignore-blank-lines
 	meld = difftool --tool=meld --no-prompt
 	melda = !git meld --dir-diff
 	melds = !git melda --staged
@@ -71,21 +84,25 @@
 	cop = checkout --patch
 	cot = checkout --track
 
-	# --- tag ---
-	tagn = tag -n
-	tags = log --tags --no-walk --decorate --oneline
+	# --- log ---
+	l = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --no-merges
+	ls = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\"
+	ll = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --numstat
+	graph = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --graph
 
 	# --- lock ---
 	unlock = !rm $(git rev-parse --git-dir)/index.lock
 
 	# --- merge ---
 	ma = merge --abort
+	msquash = merge --squash --no-commit
 
 	# --- review ---
 	r = review
 	rl = review --list
 	rd = review --download
 	rx = review --cherrypick
+	ry = review --yes
 	draft = review --draft
 
 	# --- rebase ---
@@ -96,16 +113,29 @@
 	rs = rebase --skip
 	pullr = pull --rebase
 
+	# --- reset ---
+	undo-merge = reset --hard ORIG_HEAD
+	undo-commit = reset --soft HEAD~1
+	hard-reset = reset --hard origin/master
+
+	# --- stash ---
+	pop = stash pop
+	save = stash save
+	stashl = stash list
+
+	# --- tag ---
+	tagn = tag -n
+	tags = log --tags --no-walk --decorate --oneline
+
 	format-patch-1 = format-patch HEAD~1
 	hub = "!f() { git clone https://github.com/$1/$2; }; f"
-	msquash = merge --squash --no-commit
-	pop = stash pop
 	publish = push origin master:refs/publish/master
 	pull-theirs = pull -s recursive -X theirs
 	file = "!f() { git difftool $1{,^} -- $2; }; f"
 	sha = "!f() { git diff --numstat $1{^,}; }; f"
 	unstage = reset HEAD
-	undo-merge = reset --hard ORIG_HEAD
+
+	ignore = update-index --assume-unchanged *
 
         # -- Fix permissions
         permission-reset = !git diff -p -R --no-color | grep -E '^(diff|(old|new) mode)' --color=never | git apply
@@ -113,18 +143,28 @@
 
         # --- Git Repositories ---
 	newasp = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/asp
+	newcputools = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/auscpgval
 	newiris = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/iris
 	newkiwi = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/kiwi
 	newkvs = clone login8.nahpc.arm.com:/projects/pd/svos/git/kvs
+	newmsys = clone ssh://git@git.research.arm.com/svos/msys
+	newscp = clone ssh://git@git.research.arm.com/svos/scp_boot
+	newvarys = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/varys
+	newvarys2 = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/varys2
+	newyak = clone ssh://git@git.research.arm.com/svos/yak
 
+	newambaviz = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/ambaviz
 	neweda = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/eda
 	newgem = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/gem
 	newwrappers = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/wrappers
 	newruby = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/ruby
-	newambaviz = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/ambaviz
+	newtriton = ssh://git@git.research.arm.com/triton/tritondb-scripts/tritondb-scripts-utils
+	newunischeduler = clone ssh://ds-gerrit.euhpc.arm.com:29418/toef/unischeduler
 
-	newporter = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter
 	newares = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
+	newdeimos = clone -b deimos/dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
+	newporter = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter
+	newzeus = clone -b zeus/dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
 
 	newunischeduler = clone ssh://ds-gerrit.euhpc.arm.com:29418/toef/unischeduler
 

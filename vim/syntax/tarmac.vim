@@ -9,7 +9,11 @@ endif
 " --- Timestamps ---
 " Display timestamps as comments
 hi def link tarmac_ts Comment
-syn region tarmac_ts start=/\v^\s*\d/ end=/tic ES/
+syn region tarmac_ts start=/\v^\s*\d/ end=/\v(tic ES|clk)/
+
+" --- Instruction Trace Line ---
+hi def link tarmac_it Operator
+syn match tarmac_it /\vcpu\d* IT.*/
 
 " --- Opcode ---
 "hi def link tarmac_opcode Function

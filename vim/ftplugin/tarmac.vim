@@ -10,3 +10,4 @@ function! s:TSearch()
 	let @/ = l:search
 	set hlsearch
 endfunction
+

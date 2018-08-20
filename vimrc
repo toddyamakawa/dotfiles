@@ -1,14 +1,28 @@
 
-" ============
-"    VUNDLE
-" ============
-runtime vundle.vim
+" ==============
+"    VIM-PLUG
+" ==============
+
+" --- Install ---
+" :PlugInstall
+
+" --- Setup ---
+set nocompatible
+filetype off
+
+" --- Vim Plugins ---
+call plug#begin('~/.vim/vim-plug')
+	source ~/.vim/plug.vim
+call plug#end()
+
+" --- Enable Plugins ---
+filetype indent plugin on
+
 
 " ======================
 "    GENERAL SETTINGS
 " ======================
 set history=50     " Save 50 command lines of history
-set laststatus=2   " Always display status line
 
 " --- Set <Leader> to Space ---
 let mapleader="\<space>"
@@ -16,6 +30,7 @@ let g:mapleader="\<space>"
 
 " --- Command Line ---
 nnoremap <Enter> :
+vnoremap <Enter> :
 autocmd CmdwinEnter * nnoremap <buffer> <Enter> <Enter>
 autocmd CmdwinEnter * nnoremap <buffer> q :q<Enter>
 
@@ -24,9 +39,8 @@ set nobackup                " No backup file (defaults to .filename~)
 set directory=~/.vim/.swp// " Swap file directory
 
 " --- Undo ---
-set undofile               " Enable undo file
-set undodir=~/.vim/.undo// " Undo file directory
-
+"set undofile               " Enable undo file
+"set undodir=~/.vim/.undo// " Undo file directory
 
 " ====================
 "    BEAUTIFICATION
@@ -39,6 +53,7 @@ set termencoding=utf-8
 set fileencoding=utf-8
 scriptencoding utf-8           " Specify script character encoding to UTF-8
 set guifont=consolas           " Favorite font
+set virtualedit=block
 
 
 " --- Color Schemes - --
@@ -53,7 +68,6 @@ silent! colorscheme jellybeans " Favorite colorscheme
 "map <Leader>cn <Plug>ColorstepNext
 "map <Leader>cs <Plug>ColorstepReload
 
-
 "let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 "let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
@@ -66,23 +80,59 @@ set list           " Enable list mode
 set number         " Show line number
 set relativenumber " Show relative line number
 set showmatch      " Show matching parantheses
-set cursorline     " Highlight current line
+set foldcolumn=3   " Show columns for folds
+
+
+" Highlight current line
+"TODO: Make CursorLine change color for insert mode
+set cursorline
+"autocmd InsertEnter * highlight CursorLine guifg=something
+"autocmd InsertLeave * highlight CursorLine guifg=something
 
 " Show tab characters and off-screen text indicator
 set listchars=tab:▸-,precedes:<,extends:>
 
+set nrformats-=octal
+
 " Show spaces for indentation
 let g:indentLine_char = '|'
 
-" Highlight most significant digits of large numbers
-" 1 12 123 1234 12345 123456 1234567 12345678 123456789 1234567890
-autocmd BufRead * match Delimiter /\v<\zs\d{1,3}\ze(\d{3}){2,}>/
+" Change background color beyond column 80
+let &colorcolumn=join(range(81,999),",")
+highlight clear ColorColumn
+au InsertEnter * highlight ColorColumn guibg=#000000 ctermbg=16
+au InsertLeave * highlight clear ColorColumn
 
-" Highlight column 81 and trailing whitespace
-autocmd BufRead * 2match SpellBad /\%81v.\|\s\+$/
 
-" Disable comment formatting
-autocmd BufNewFile,BufRead * set formatoptions-=cro
+" --- autocmd Group for All Files ---
+augroup ALL
+
+	" Highlight most significant digits of large numbers
+	" 1 12 123 1234 12345 123456 1234567 12345678 123456789 1234567890
+	"hi def link big_num Delimiter
+	"syn match big_num /\v<\zs\d{1,3}\ze(\d{3}){2,}>/
+	autocmd BufRead * match Delimiter /\v<\zs\d{1,3}\ze(\d{3}){2,}>/
+
+	" Highlight column 81 and trailing whitespace
+	"autocmd BufRead * 2match SpellBad /\v\%81v.\|\s\+$/
+
+	" Highlight trailing whitespace
+	autocmd BufRead * 2match SpellBad /\v\s+$/
+
+	" Disable comment formatting
+	autocmd BufNewFile,BufRead * set formatoptions-=cro
+
+	" Automatically remove trailing whitespace
+	autocmd BufWritePre * %s/\s\+$//e
+
+	" Automatically add +x permissions
+	autocmd BufWritePost * if getline(1) =~ "^#!.*/bin/" | silent execute "!chmod +x %" | endif
+
+	" Disable syntax for large files
+	"autocmd BufReadPre * if getfsize(expand("%")) > 10000000 | syntax off | endif
+
+augroup END
+
 
 " Automatically add +x permissions
 autocmd BufWritePost * if getline(1) =~ "^#!.*/bin/" | silent execute "!chmod +x %" | endif
@@ -132,6 +182,9 @@ nnoremap <S-Tab> :call TabQuickFix('prev')<Enter>
 " Backspace anything
 set backspace=start,indent,eol
 
+" TODO: Figure out how to unmap Shift-Backspace
+"inoremap <S-BS> <nop>
+
 " --- Save/Quit Shortcuts ---
 nnoremap <F5> :edit<Enter>
 nnoremap <S-F5> :edit!<Enter>
@@ -161,12 +214,16 @@ nnoremap <Leader>vs :source $MYVIMRC<Enter>
 "set visualbell
 "set noerrorbells
 
+
 " =================
 "    VISUAL MODE
 " =================
 
 " Enter block visual mode with 'vv'
 nnoremap vv <C-v>
+
+" Exit visual mode with 'q'
+vnoremap q <Esc>
 
 
 " =============
@@ -176,27 +233,6 @@ nnoremap vv <C-v>
 " Update
 nnoremap du :diffupdate<Enter>
 
-" =============
-"    PLUGINS
-" =============
-
-" --- NERDTree ---
-let g:NERDTreeDirArrows=0
-nnoremap <Leader>f :NERDTreeToggle<CR>
-
-" --- TagBar ---
-nnoremap <Leader>t :TagbarToggle<CR>
-
-" --- Fugitive ---
-nnoremap <Leader>gb :Gblame<Enter>
-nnoremap <Leader>gd :Gvdiff<Enter>
-nnoremap <Leader>gh :help fugitive<Enter>
-nnoremap <Leader>gl :Glog
-nnoremap <Leader>gp :Gpull
-nnoremap <Leader>gs :Gstatus<Enter>
-
-" --- GitGutter ---
-nnoremap <Leader>gg :GitGutterToggle<Enter>
 
 " ===============
 "    CLIPBOARD
@@ -206,17 +242,6 @@ nnoremap <Leader>gg :GitGutterToggle<Enter>
 "set clipboard=xterm_clipboard
 set clipboard=unnamed
 
-" --- System Clipboard ---
-" <Space>p to paste system clipboard
-"nnoremap <Leader>p "*p
-" <Space>y to copy to system clipboard
-"vnoremap <Leader>y "+y
-
-
-"nnoremap <silent> p p`]
-"vnoremap <silent> p p`]
-"vnoremap <silent> y y`]
-
 " Higlight last inserted text
 nmap gV `[v`]
 
@@ -224,6 +249,12 @@ nmap gV `[v`]
 " ================
 "    NAVIGATION
 " ================
+
+" --- Screen Shortcuts ---
+nnoremap <silent> <Leader>h <C-w>h
+nnoremap <silent> <Leader>j <C-w>j
+nnoremap <silent> <Leader>k <C-w>k
+nnoremap <silent> <Leader>l <C-w>l
 
 " --- Buffer Shortcuts ---
 nnoremap > :bnext<Enter>
@@ -247,31 +278,6 @@ function TabQuickFix(dir)
 	endif
 endfunction
 
-" --- Screen Shortcuts ---
-" vim-tmux-navigator shortcuts
-let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <Leader>h :TmuxNavigateLeft<cr>
-nnoremap <silent> <Leader>j :TmuxNavigateDown<cr>
-nnoremap <silent> <Leader>k :TmuxNavigateUp<cr>
-nnoremap <silent> <Leader>l :TmuxNavigateRight<cr>
-nnoremap <silent> <Leader>- :TmuxNavigatePrevious<cr>
-
-execute "set <M-h>=\<Esc>h"
-execute "set <M-j>=\<Esc>j"
-execute "set <M-k>=\<Esc>k"
-execute "set <M-l>=\<Esc>l"
-execute "set <M-->=\<Esc>-"
-noremap <silent> <M-h> :TmuxNavigateLeft<cr>
-noremap <silent> <M-j> :TmuxNavigateDown<cr>
-noremap <silent> <M-k> :TmuxNavigateUp<cr>
-noremap <silent> <M-l> :TmuxNavigateRight<cr>
-noremap <silent> <M--> :TmuxNavigatePrevious<cr>
-inoremap <silent> <M-h> <Esc>:TmuxNavigateLeft<cr>a
-inoremap <silent> <M-j> <Esc>:TmuxNavigateDown<cr>a
-inoremap <silent> <M-k> <Esc>:TmuxNavigateUp<cr>a
-inoremap <silent> <M-l> <Esc>:TmuxNavigateRight<cr>a
-inoremap <silent> <M--> <Esc>:TmuxNavigatePrevious<cr>a
-
 " Resize windows evenly
 nnoremap <Leader>= <C-w>=
 
@@ -279,22 +285,6 @@ nnoremap <Leader>= <C-w>=
 " ==============
 "    MOVEMENT
 " ==============
-
-" --- CamelCaseMotion Plugin ---
-"map <silent> w <Plug>CamelCaseMotion_w
-"map <silent> b <Plug>CamelCaseMotion_b
-"map <silent> e <Plug>CamelCaseMotion_e
-"map <silent> ge <Plug>CamelCaseMotion_ge
-"sunmap w
-"sunmap b
-"sunmap e
-"sunmap ge
-"omap <silent> iw <Plug>CamelCaseMotion_iw
-"xmap <silent> iw <Plug>CamelCaseMotion_iw
-"omap <silent> ib <Plug>CamelCaseMotion_ib
-"xmap <silent> ib <Plug>CamelCaseMotion_ib
-"omap <silent> ie <Plug>CamelCaseMotion_ie
-"xmap <silent> ie <Plug>CamelCaseMotion_ie
 
 " Start of line
 noremap H ^
@@ -328,6 +318,10 @@ noremap K <nop>
 "imap <Left> <nop>
 "imap <Right> <nop>
 
+" Completion with C-j and C-k
+inoremap <C-j> <C-n>
+inoremap <C-k> <C-p>
+
 
 " --- Exit Insert Mode ---
 inoremap jj <Esc>
@@ -335,20 +329,21 @@ inoremap kk <Esc>
 
 " --- Search/Replace/Delete ---
 
+let g:indexed_search_mappings = 0
 " Default case-insensitive search
-nnoremap / :set ignorecase<Enter>/
-vnoremap / :set ignorecase<Enter>/
+"nnoremap / :set ignorecase<Enter>/
+"vnoremap / :set ignorecase<Enter>/
 
 " Case-sensitive search
-nnoremap // :set noignorecase<Enter>/
-vnoremap // :set noignorecase<Enter>/
-"set ignorecase " Ignore case for searching
+"nnoremap // :set noignorecase<Enter>/
+"vnoremap // :set noignorecase<Enter>/
+set ignorecase " Ignore case for searching
 "set smartcase  " Ignore case if all lowercase, case-sensitive otherwise
 "set hlsearch   " Highlight search matches (handled by vim-slash plugin)
 set incsearch   " Show matches while typing
 
 " Turn off search highlighting
-nnoremap <Leader>/ :nohlsearch<CR>
+"nnoremap <Leader>/ :nohlsearch<CR>
 
 " Search for higlighted text
 vnoremap * y/<C-R>"<CR>
@@ -359,8 +354,8 @@ nnoremap d/ :g//d<Enter>
 " Replace matching words
 nnoremap c/ :%s///g<Left><Left>
 
-" Search for errors
-nnoremap ge /\<error\>\\|\<fatal\><Enter>
+" Split up shell command into multiple lines
+nnoremap <Leader>\ :s/\v\s+-/ \\\r\t-/g<Enter>
 
 " --- Delete Patterns ---
 " Delete trailing whitespace
@@ -372,4 +367,3 @@ nnoremap <Leader>d<Enter> :%s/\r//g<Enter>
 
 " --- Help ---
 cabbrev help vert help
-

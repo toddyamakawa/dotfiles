@@ -1,8 +1,12 @@
 
+# TODO: Investigate antibody: https://github.com/getantibody/antibody
+
 # --- oh-my-zsh ---
 export ZSH=$HOME/.oh-my-zsh
 export EDITOR=emacs
 export SHELL=$(builtin which zsh)
+export ZSH_CUSTOM=$HOME/.zsh/custom
+
 DISABLE_AUTO_TITLE=true
 COMPLETION_WAITING_DOTS="true"
 
@@ -13,8 +17,6 @@ ZSH_COMPDUMP=$ZSH_COMPDIR/$(hostname --long)
 
 # --- Setup Theme ---
 ZSH_THEME_DEFAULT="my-theme"
-#fc-list | grep -qi powerline && ZSH_THEME_DEFAULT="my-powerline-theme"
-xlsfonts | grep -q powerline && ZSH_THEME_DEFAULT="my-powerline-theme"
 [[ -z $ZSH_THEME ]] && ZSH_THEME=$ZSH_THEME_DEFAULT
 
 if [[ $(hostname --long) =~ arm.com$ ]]; then
@@ -23,7 +25,10 @@ else
     function module(){}
 fi
 
-plugins+=(modules my-zsh magic-enter cd vim xclip tmux regex setup)
+#plugins+=(bin modules my-zsh cd vim xclip tmux regex math setup vcs)
+plugins+=(bin modules my-zsh cd vim xclip tmux math setup vcs)
+[[ -f ~/.fzf.zsh ]] && plugins+=(fzf)
+plugins+=(history-substring-search)
 
 # --- Source Files ---
 function source_files() {
@@ -62,7 +67,7 @@ alias -g -- '-zs3conf'="-conf /home/lsf/scheduler_prod/configs/NAHPCPRODZS3/NAHP
 
 alias emacs='emacs -nw'
 
-set-display
+_set-display
 
 alias build-sched-fast='/arm/devsys-tools/abs/pbuild --perform build,collect'
 alias build-sched='/arm/devsys-tools/abs/pbuild TOEF:scheduler:0.1 --update-xml --set-state spotless --use-tool=go:go:MODULES:google/golang/1.6'

@@ -1,0 +1,68 @@
+#%Module
+# vi: syntax=tcl
+
+module-whatis "modulefile to setup ARM environment"
+
+# --- Packages ---
+package require arm
+package require arm::modules::tool
+
+# --- Module Parameters ---
+set Vendor_Tag  ARM
+set Tool_Tag    ARM
+set Version_Tag 1.0.0
+set ModulesCurrentModulefile [info script]
+
+# --- Load Once Function ---
+proc load-once {module} {
+	global env
+	set loaded 0
+	set module_base [regsub {(.*/.*)/.*} $module {\1}]
+
+	foreach mod [split $env(LOADEDMODULES) ":"] {
+		if { [regsub {(.*/.*)/.*} $mod {\1}] == $module_base } {
+			set loaded 1
+		}
+	}
+
+	if {!$loaded} { module load $module }
+}
+
+# --- Append Path ---
+append-path PATH $::env(HOME)/bin
+
+# --- ARM Modules ---
+load-once core
+load-once util
+load-once swdev
+load-once eda
+load-once arm/cluster
+load-once arm/license/production
+
+# --- Version Control ---
+load-once git/git/2.16.1
+load-once python/git-review_py2.7.8/1.25.0
+load-once apache/subversion/1.9.4
+
+# --- Scripting Modules ---
+load-once perl/perl/5.12.3
+load-once python/python/2.7.8
+load-once python/python/3.5.1
+load-once ruby/ruby/2.5.0
+load-once ruby/gems/2.6.11
+load-once tct/tcl/8.6.1
+load-once haxx/curl/7.48.0
+load-once google/golang/1.5.3
+
+# --- Tools ---
+load-once gnu/emacs/24.5
+load-once fish/fish-shell/2.7.0
+load-once gnu/gawk/4.1.1
+load-once gnu/htop/1.0.1
+load-once gnu/tmux/2.7
+load-once greer/silversearcher/1.0.2
+load-once meld/meld/3.14.0
+load-once mosh/mosh/1.2.4
+load-once vim/vim/8.0.5
+load-once xclip/xclip/0.12
+
