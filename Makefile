@@ -38,6 +38,11 @@ zshrc: $(.ZSH)/oh-my-zsh.sh
 $(.ZSH)/oh-my-zsh.sh:
 	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
+# --- bash ---
+bash: bash/downloads/git-completion.bash
+bash/downloads/git-completion.bash:
+	curl -fLo $@ https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+
 # --- fisherman ---
 # fish plugin manager
 fish: $(.FISH)/functions/fisher.fish
