@@ -2,6 +2,7 @@
 # --- Disassemble ---
 function disass() {
 	local file=$1
+	echo "TODO: use \`aarch64-linux-gnu-objdump -S $file\`"
 	bs1 -rn -app FG -K -oo $file.disass \
 		mrun +arm/rvct_aarch64 fromelf -a -c --text $file
 }
