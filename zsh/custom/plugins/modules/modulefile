@@ -45,6 +45,7 @@ load-once python/git-review_py2.7.8/1.25.0
 load-once apache/subversion/1.9.4
 
 # --- Scripting Modules ---
+load-once google/golang/1.5.3
 load-once perl/perl/5.12.3
 load-once python/python/2.7.8
 load-once python/python/3.5.1
@@ -54,10 +55,12 @@ load-once tct/tcl/8.6.1
 
 # --- Tools ---
 load-once fish/fish-shell/2.7.0
+load-once gnu/emacs/24.5
 load-once gnu/gawk/4.1.1
 load-once gnu/htop/1.0.1
 load-once gnu/tmux/2.7
 load-once greer/silversearcher/1.0.2
+load-once haxx/curl/7.48.0
 load-once meld/meld/3.14.0
 load-once mosh/mosh/1.2.4
 load-once vim/vim/8.0.5

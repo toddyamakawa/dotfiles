@@ -1,7 +1,7 @@
 
 # --- Modules ---
 
-# Veloce
+# Veloce/Strato
 alias velload3018='mload mentor/veloce/3.0.1.8'
 alias velload31611='mload mentor/veloce/3.16.1.1'
 alias velload31612='mload mentor/veloce/3.16.1.2'
@@ -11,20 +11,20 @@ alias velload31616='mload mentor/veloce/3.16.1.6'
 alias velload31617='mload mentor/veloce/3.16.1.7'
 alias velload31618='mload mentor/veloce/3.16.1.8'
 alias velload1800='mload mentor/veloce/18.0.0'
-alias velload='velload1800'
+alias velload1803='mload mentor/strato/18.0.3'
+alias velload='velload1803'
 
-alias tbxload='mload mentor/tbx/2.4.4.9'
-alias visload='mload mentor/questavdbg/10.6a'
-
-# Strato
 alias stratoload1800='mload mentor/strato/18.0.0'
 alias stratoload='stratoload1800'
 
+alias tbxload='mload mentor/tbx/2.4.4.9'
+alias visload='mload mentor/questavdbg/10.6a'
 
 # --- Information ---
 alias veluse='velec -usagestat'
 alias velavail='velec -availableres'
 alias veldesign='velec -getdesigninfo $(readlink -f .)'
+
 function velinfo() {
 	awk 'BEGIN {estimated_freq = 0}
 	/NUMBER OF CRYSTALS IN DESIGN/ {crystals = $NF}
