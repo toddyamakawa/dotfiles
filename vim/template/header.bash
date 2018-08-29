@@ -2,7 +2,7 @@
 here=$(readlink -f $PWD)
 script=$(readlink -f $BASH_SOURCE)
 script_dir=$(dirname $script)
-now=$(date +%y%m%d-%H%M%S-Week%U-%a-%T)
+now=$(date +%Y%m%d-%H%M%S-Week%U-%a-%T)
 function _git() { git -C $script_dir $@; }
 top=$(_git rev-parse --show-toplevel 2>/dev/null)
 
