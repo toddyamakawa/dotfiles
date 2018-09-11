@@ -6,7 +6,7 @@ DefaultEncoding=UTF-8
 
 [General]
 Icon=utilities-terminal
-LocalTabTitleFormat=%d : %n
+LocalTabTitleFormat=%n
 MenuIndex=1
 Name=Todd
 Parent=FALLBACK/

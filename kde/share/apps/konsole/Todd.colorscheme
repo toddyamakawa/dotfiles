@@ -3,11 +3,11 @@ Color=0,0,0
 Transparency=true
 
 [BackgroundIntense]
-Color=255,255,221
+Color=0,0,0
 Transparency=true
 
 [Color0]
-Color=19,19,19
+Color=48,48,48
 Transparency=false
 
 [Color0Intense]
@@ -55,7 +55,7 @@ Color=255,84,255
 Transparency=false
 
 [Color6]
-Color=31,234,234
+Color=24,178,178
 Transparency=false
 
 [Color6Intense]
@@ -63,7 +63,7 @@ Color=84,255,255
 Transparency=false
 
 [Color7]
-Color=251,251,251
+Color=178,178,178
 Transparency=false
 
 [Color7Intense]
@@ -76,9 +76,9 @@ Transparency=false
 
 [ForegroundIntense]
 Bold=true
-Color=0,0,0
+Color=255,255,255
 Transparency=false
 
 [General]
-Description=\sTodd Colors
+Description=Todd
 Opacity=1
