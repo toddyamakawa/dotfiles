@@ -102,11 +102,11 @@ function fzf-magic-complete() {
 	# Directory completion for `cd`
 	if [[ $LBUFFER =~ '^\s*cd\b' ]]; then
 		LBUFFER="${LBUFFER% *} $({fzf-gitdirs & fzf-dirs} | my-fzf-complete)"
+		[[ $? == 0 ]] && { zle redisplay; zle accept-line; return; }
+	fi
 
 	# File completion
-	else
-		LBUFFER="${LBUFFER% *} $({fzf-gitfiles & fzf-files} | my-fzf-complete)"
-	fi
+	LBUFFER="${LBUFFER% *} $({fzf-gitfiles & fzf-files} | my-fzf-complete)"
 
 	# TODO: Is this stuff needed?
 	# Redraw display
