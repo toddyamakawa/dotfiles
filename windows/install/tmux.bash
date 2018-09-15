@@ -22,6 +22,7 @@ sudo apt install -y \
 	libevent-dev \
 	libncurses5-dev
 
+# Install tmux
 git clone https://github.com/tmux/tmux.git $install_dir
 cd $install_dir
 git checkout $TMUX_VERSION
