@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-here=$(readlink -f $PWD)
-script=$(readlink -f $BASH_SOURCE)
-script_dir=$(dirname $script)
-now=$(date +%Y%m%d-%H%M%S-Week%U-%a-%T)
+declare -r here=$(readlink -f $PWD)
+declare -r script=$(readlink -f $BASH_SOURCE)
+declare -r script_dir=$(dirname $script)
+declare -r now=$(date +%Y%m%d-%H%M%S-Week%U-%a-%T)
 function _git() { git -C $script_dir $@; }
-top=$(_git rev-parse --show-toplevel 2>/dev/null)
+declare -r top=$(_git rev-parse --show-toplevel 2>/dev/null)
 
 # Print stderr in red
 exec 2> >(while read line; do echo -e "\e[31m$line\e[0m"; done)
