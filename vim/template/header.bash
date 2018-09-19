@@ -7,10 +7,10 @@ function _git() { git -C $script_dir $@; }
 declare -r top=$(_git rev-parse --show-toplevel 2>/dev/null)
 
 # Print stderr in red
-exec 2> >(while read line; do echo -e "\e[31m$line\e[0m"; done)
+exec 2> >(while read line; do echo -e "\e[31m[stderr]\e[0m $line"; done)
 
 # Print custom pipe in blue
-exec 5> >(while read line; do echo -e "\e[32m$line\e[0m"; done)
+exec 5> >(while read line; do echo -e "\e[34m$line\e[0m"; done)
 
 # Immediately exit on failure
 set -e
