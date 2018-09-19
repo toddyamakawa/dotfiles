@@ -1,6 +1,13 @@
 
+local here=${0:h}
+
 # --- Aliases ---
 alias detag=/arm/devsys-tools/abs/detag
+
+# Open tcsh with tcsh rtl_setup script sourced
+alias ares-sh="$here/cpg-sh.expect ares"
+alias deimos-sh="$here/cpg-sh.expect deimos"
+alias zeus-sh="$here/cpg-sh.expect zeus"
 
 # Zeus module
 alias -g zeusmodule='$(git rev-parse --show-toplevel)/tools/modules/zeus_trial'

@@ -1,0 +1,11 @@
+#!/usr/bin/env expect
+set top [exec git rev-parse --show-toplevel]
+set project [lindex $argv 0]
+spawn tcsh
+expect {
+	> {
+		send "setenv PROJ_HOME $top\n"
+		send "source \$PROJ_HOME/tools/bin/${project}_rtl_setup\n"
+	}
+}
+interact
