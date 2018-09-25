@@ -1,5 +1,5 @@
 #%Module
-# vi: syntax=tcl
+# vi: filetype=tcl
 
 module-whatis "modulefile to setup ARM environment"
 
@@ -27,9 +27,6 @@ proc load-once {module} {
 
 	if {!$loaded} { module load $module }
 }
-
-# --- Append Path ---
-append-path PATH $::env(HOME)/bin
 
 # --- ARM Modules ---
 load-once core
@@ -62,4 +59,10 @@ load-once meld/meld/3.14.0
 load-once mosh/mosh/1.2.4
 load-once vim/vim/8.0.5
 load-once xclip/xclip/0.12
+
+# --- Internal Tools ---
+load-once arm/varys2/0.1.0_alpha
+
+# --- Prepend $PATH ---
+prepend-path PATH $::env(HOME)/bin
 

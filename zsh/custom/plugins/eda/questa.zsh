@@ -28,7 +28,7 @@ function ucdb_view() {
 function pdb_report() {
 	which vsim || return 1
 	local pdb=$1
-	vsim -c -do "profile open $pdb; profile report -file $pdb.log; quit -f"
+	vsim -64 -c -do "profile open $pdb; profile report -file $pdb.log; quit -f"
 }
 
 
