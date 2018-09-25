@@ -38,6 +38,14 @@ autocmd CmdwinEnter * nnoremap <buffer> q :q<Enter>
 set nobackup                " No backup file (defaults to .filename~)
 set directory=~/.vim/.swp// " Swap file directory
 
+" --- View ---
+set viewdir=~/.vim/.view//
+augroup automatic_view
+	autocmd!
+	autocmd BufWinLeave * mkview
+	autocmd BufWinEnter * silent loadview
+augroup END
+
 " --- Undo ---
 "set undofile               " Enable undo file
 "set undodir=~/.vim/.undo// " Undo file directory
