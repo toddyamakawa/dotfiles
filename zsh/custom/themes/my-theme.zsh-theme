@@ -37,6 +37,13 @@ function _prompt-git() {
 }
 
 
+# --- SVN Status ---
+function _prompt-svn() {
+	_svn-check || return
+	_prompt-bg-fg black white ' .svn'
+}
+
+
 # --- Build Prompt ---
 build_prompt() {
 	_prompt-start
@@ -45,6 +52,7 @@ build_prompt() {
 	_prompt-status
 	_hostinfo
 	_prompt-git
+	_prompt-svn
 	_dir-permission
 	_prompt-end
 }

@@ -7,6 +7,7 @@ source $here/git.zsh
 source $here/host.zsh
 source $here/pre.zsh
 source $here/prompt.zsh
+source $here/svn.zsh
 source $here/time.zsh
 source $here/tmux.zsh
 
