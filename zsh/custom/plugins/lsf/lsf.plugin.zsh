@@ -4,8 +4,11 @@ source $here/alias.bjobs.zsh
 
 alias bfield="cat $here/fields.txt"
 
+export _LSF_RESOURCE='select[rhe6 && x86_64 && os64]'
+#export _LSF_RESOURCE='select[rhe7 && x86_64 && os64]'
+
 # --- bsub ---
-alias bs="bsub -Jd sysbench-2.x-run_veloce_tbx -R 'select[rhe6 && x86_64 && os64]' -W 96:00"
+alias bs='bsub -Jd sysbench-2.x-run_veloce_tbx -R "$_LSF_RESOURCE" -W 120:00'
 alias bs1='bs -M 1024000'
 alias bs2='bs -M 2048000'
 alias bs4='bs -M 4096000'
