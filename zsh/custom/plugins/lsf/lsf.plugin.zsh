@@ -30,7 +30,12 @@ alias bskill='awk '"'"'/^[0-9]/ {print $1}'"'"' | xargs bkill'
 
 # --- bhosts ---
 alias bavail='bhosts | awk '"'"'($2="ok"){print $4-$5, $1}'"'"' | sort -n'
-
+function butilization() {
+	local resources=${1+-R $1}
+	bhosts -noheader $resources | awk '
+		{count=count+1; max=max+$4; used=used+$5}
+		END {print "hosts="count, "total_slots="max, "used_slots="used, "utilization="100*used/max"%"}'
+}
 
 # Specific values
 alias -g uall='-u all'
