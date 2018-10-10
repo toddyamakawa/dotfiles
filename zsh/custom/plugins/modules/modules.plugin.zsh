@@ -9,6 +9,7 @@ local here=${0:h}
 alias interactive\?='[[ -n $PROMPT ]]'
 alias munload='module unload'
 alias mlist='module list'
+alias depot-recipe='mrun +sysadm +arm/depot-build/2.05 depot recipe'
 
 # --- Functions ---
 function mload() { interactive? && module load $@; }
