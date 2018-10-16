@@ -1,4 +1,3 @@
-"hi! RainbowLevel0 ctermfg=1
 hi! RainbowLevel0 ctermfg=255
 hi! RainbowLevel1 ctermfg=218
 hi! RainbowLevel2 ctermfg=215
