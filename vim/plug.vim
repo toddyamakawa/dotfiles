@@ -32,8 +32,8 @@ cabbrev rain RainbowLevelsToggle
 Plug 'keith/tmux.vim'
 
 " --- fzf ---
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-"Plug '~/bin/fzf'
 
 " --- ANSI Escape Syntax ---
 Plug 'vim-scripts/AnsiEsc.vim', { 'on': 'AnsiEsc' }
@@ -43,6 +43,8 @@ cabbrev ansi AnsiEsc
 " =================
 "    INTEGRATION
 " =================
+
+" TODO: QuickScope
 
 " --- NERDTree ---
 " Filesystem explorer
@@ -99,6 +101,11 @@ xunmap <Plug>(slash-after)
 " ==============
 "    COMMANDS
 " ==============
+
+" --- vim-easy-align ---
+Plug 'junegunn/vim-easy-align'
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " --- vim-surround ---
 " :help surround
