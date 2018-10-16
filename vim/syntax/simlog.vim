@@ -13,6 +13,7 @@ hi def link simlog_number Number
 "hi simlog_number ctermbg=NONE ctermfg=NONE cterm=underline guibg=NONE guifg=NONE gui=underline
 syn match simlog_number /\v<0x[_0-9a-fA-F]+>/ containedin=simlog_keyword
 syn match simlog_number /\v<[0-9]{3,}>/ containedin=simlog_keyword
+syn match simlog_number /\v\=\s*<\zs[0-9a-Fa-f]+>/ containedin=simlog_keyword
 
 
 " --- Macros ---
@@ -80,7 +81,12 @@ syn match simlog_error /\v\[CHECK_FOR_X\].*/ containedin=simlog_comment
 hi def link simlog_comment Comment
 syn match simlog_comment /\v^# \*[^*][^:]+:/
 syn match simlog_comment /\v^# \/\/.*/
+syn match simlog_comment /\v^# UVM_INFO[^\@]+\@ \ze\w+:/
 "syn region simlog_comment display oneline start='\v%(^|\s)#' end='$'
+
+
+" --- Conceal ---
+syn match filepath /\v^# UVM_INFO \zs.*\/\ze[^\/]+\(\d+\)/ conceal containedin=simlog_comment
 
 
 " --- End Syntax ---
