@@ -120,6 +120,16 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
 
 
+" ============
+"    SYNTAX
+" ============
+
+" --- Verilog/SystemVerilog ---
+Plug 'vhda/verilog_systemverilog.vim'
+"Plug 'verilog_systemverilog.vim'
+
+
+
 " ==========================
 "    EXPERIMENTAL PLUGINS
 " ==========================
@@ -131,7 +141,6 @@ Plug 'tpope/vim-repeat'
 "Plug 'vim-ctrlspace/vim-ctrlspace'
 
 "Plug 'Lokaltog/vim-powerline'
-"Plug 'verilog_systemverilog.vim'
 
 "Plug 'tpope/vim-dispatch'
 
