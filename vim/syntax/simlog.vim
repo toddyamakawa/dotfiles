@@ -20,6 +20,21 @@ syn match simlog_number /\v\=\s*<\zs[0-9a-Fa-f]+>/ containedin=simlog_keyword
 hi def link simlog_macro Macro
 syn match simlog_macro /\v<ISSCMP>/ containedin=simlog_keyword
 syn match simlog_macro /\v<instr_cnt>/ containedin=simlog_keyword
+syn match simlog_macro /\v^<sim_tb command>\ze:/
+syn match simlog_macro /\v^<using testbench>\ze:/
+syn match simlog_macro /\v^<using simbuild>\ze:/
+syn match simlog_macro /\v^<test_name>\ze:/
+syn match simlog_macro /\v^<run_cmd>\ze:/
+syn match simlog_macro /\v^<simulator>\ze:/
+syn match simlog_macro /\v^<host>\ze:/
+syn match simlog_macro /\v^<cluster>\ze:/
+syn match simlog_macro /\v^<date>\ze:/
+syn match simlog_macro /\v^<user>\ze:/
+syn match simlog_macro /\v^<PID>\ze:/
+syn match simlog_macro /\v^<run_dir>\ze:/
+syn match simlog_macro /\v^<ARM LSF Job tag>\ze:/
+syn match simlog_macro /\v^<PROJ_HOME>\ze:/
+syn match simlog_macro /\v^<WORK_DIR>\ze:/
 
 
 " --- Keywords ---
@@ -81,12 +96,12 @@ syn match simlog_error /\v\[CHECK_FOR_X\].*/ containedin=simlog_comment
 hi def link simlog_comment Comment
 syn match simlog_comment /\v^# \*[^*][^:]+:/
 syn match simlog_comment /\v^# \/\/.*/
-syn match simlog_comment /\v^# UVM_INFO[^\@]+\@ \ze\w+:/
+syn match simlog_comment /\v^# UVM_\w+[^\@]+\@ \ze\w+:/
 "syn region simlog_comment display oneline start='\v%(^|\s)#' end='$'
 
 
 " --- Conceal ---
-syn match filepath /\v^# UVM_INFO \zs.*\/\ze[^\/]+\(\d+\)/ conceal containedin=simlog_comment
+syn match filepath /\v^# UVM_\w+ \zs.*\/\ze[^\/]+\(\d+\)/ conceal containedin=simlog_comment
 
 
 " --- End Syntax ---
