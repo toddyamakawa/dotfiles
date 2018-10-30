@@ -107,6 +107,9 @@ Plug 'junegunn/vim-easy-align'
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
+" --- vim-JumpToVerticalOccurrence ---
+Plug 'inkarkat/vim-JumpToVerticalOccurrence'
+
 " --- vim-surround ---
 " :help surround
 Plug 'tpope/vim-surround'
@@ -128,6 +131,14 @@ Plug 'tpope/vim-repeat'
 Plug 'vhda/verilog_systemverilog.vim'
 "Plug 'verilog_systemverilog.vim'
 
+
+" ============
+"    SYNTAX
+" ============
+
+" --- vim-scripts ---
+Plug 'vim-scripts/CountJump'
+Plug 'vim-scripts/ingo-library'
 
 
 " ==========================
