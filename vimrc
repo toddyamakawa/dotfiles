@@ -42,8 +42,16 @@ set directory=~/.vim/.swp// " Swap file directory
 set viewdir=~/.vim/.view//
 augroup automatic_view
 	autocmd!
-	autocmd BufWinLeave * mkview
-	autocmd BufWinEnter * silent loadview
+	autocmd BufWinLeave * silent! mkview
+	autocmd BufWinEnter * silent! loadview
+augroup END
+
+" --- Large File ---
+augroup large_file
+	au BufReadPre *
+		\ if getfsize(expand("%")) > 10000000 |
+			\ set eventignore+=FileType |
+		\ endif
 augroup END
 
 " --- Undo ---
@@ -85,7 +93,6 @@ silent! colorscheme jellybeans " Favorite colorscheme
 "let &t_EI = "\<Esc>[2 q"
 
 " --- Display Settings ---
-set list           " Enable list mode
 set number         " Show line number
 set relativenumber " Show relative line number
 set showmatch      " Show matching parantheses
@@ -99,7 +106,9 @@ set cursorline
 "autocmd InsertLeave * highlight CursorLine guifg=something
 
 " Show tab characters and off-screen text indicator
-set listchars=tab:▸-,precedes:<,extends:>
+"set list listchars=tab:▸\ ,eol:¬,trail:·,precedes:←,extends:→
+set list listchars=tab:▸\ ,trail:·,precedes:←,extends:→
+
 
 set nrformats-=octal
 
@@ -136,9 +145,6 @@ augroup ALL
 
 	" Automatically add +x permissions
 	autocmd BufWritePost * if getline(1) =~ "^#!.*/bin/" | silent execute "!chmod +x %" | endif
-
-	" Disable syntax for large files
-	"autocmd BufReadPre * if getfsize(expand("%")) > 10000000 | syntax off | endif
 
 augroup END
 
@@ -286,6 +292,10 @@ endfunction
 
 " Resize windows evenly
 nnoremap <Leader>= <C-w>=
+
+" Jump forward/backward
+nnoremap <C-l> <C-i>
+nnoremap <C-h> <C-o>
 
 
 " ==============
