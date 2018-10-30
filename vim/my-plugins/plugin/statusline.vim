@@ -59,6 +59,20 @@ set statusline+=\ %3p%%
 " FileType
 set statusline+=\ %3*%y
 
+" File Size
+function! StatuslineFileSize()
+	let l:bytes = getfsize(expand("%"))
+	if l:bytes > 1073741824
+		return printf("%.1fG", l:bytes/1073741824.0)
+	elseif l:bytes > 1048576
+		return printf("%.1fM", l:bytes/1048576.0)
+	elseif bytes > 1024
+		return printf("%.1fk", l:bytes/1024.0)
+	endif
+	return l:bytes
+endfunction
+set statusline+=%5*[%{StatuslineFileSize()}]
+
 " IndentStatus
 set statusline+=%8*[%{&tabstop.&softtabstop.&shiftwidth}]
 
