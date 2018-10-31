@@ -21,6 +21,7 @@
 	vi = config --global -e
 
 	# --- info ---
+	blamew = blame --ignore-all-space --ignore-blank-lines
 	s = status
 	stat = status
 	sb = status -sb -uno
@@ -55,7 +56,7 @@
 	bl = branch -vv -a
 	bname = rev-parse --abbrev-ref HEAD
 	bpush = !git push --set-upstream origin $(git bname)
-	bdpush = !git push origin --delete
+	bdpush = push origin --delete
 
 	# --- diff ---
 	diffn = diff --numstat
@@ -89,6 +90,8 @@
 	# --- merge ---
 	ma = merge --abort
 	msquash = merge --squash --no-commit
+	vmerge = mergetool -t vimdiff
+
 
 	# --- review ---
 	r = review
