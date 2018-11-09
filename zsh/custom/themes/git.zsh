@@ -28,6 +28,7 @@ function _git-blacklist() {
 	blacklist+=(ssh://ds-gerrit.euhpc.arm.com:29418/svos/linux)
 	blacklist+=(ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares)
 	blacklist+=(ssh://hw-gerrit.euhpc.arm.com:29418/systems/amis)
+	blacklist+=(ssh://blr-gerrit-1.blr.arm.com:29418/avk/ETMCompare)
 	[[ -n ${blacklist[(r)$url]} ]] && return
 	return 1
 }
