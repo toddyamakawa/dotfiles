@@ -13,6 +13,7 @@ function preexec() {
 
 	# Start timer
 	unset _elapsed_ms
+	echo -e "\x1b[38;5;8m[$(date +%T)] Starting timer\e[0m"
 	_start_ms=$(_get-ms)
 }
 
@@ -32,7 +33,7 @@ function precmd() {
 
 	# Print elapsed time
 	_elapsed_ms=${_elapsed_ms-$(($_current_ms-$_start_ms))}
-	echo -e "\x1b[38;5;8mExecution time: $(_elapsed-time)s\e[0m"
+	echo -e "\x1b[38;5;8m[$(date +%T)] Execution time: $(_elapsed-time)s\e[0m"
 
 	# Disable tmux monitor
 	_tmux-monitor off
