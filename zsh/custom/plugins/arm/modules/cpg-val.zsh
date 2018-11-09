@@ -31,6 +31,14 @@ alias deimos_disasm='/arm/devsys-tools/warehouse/PerformanceModeling/EBM/master/
 alias zeus_disasm='/arm/devsys-tools/warehouse/PerformanceModeling/EBM/master/$(_detag_ebm)/Linux/x86_64/gcc-4.9.2/rel_int/bin/zeus_disasm'
 
 
+# Rerun build log with extra debug
+function vlog-debug() {
+	local logfile=$1 debuglog=${2-debug.log} cmd
+	cmd=$(head $logfile | grep vlog)
+	$cmd -Edebug $debuglog
+}
+
+
 # --- compdef ---
 
 # Completion for simulation *.log files
@@ -38,4 +46,10 @@ function _simlog() {
 	_arguments "*:files:(($(ls *.@*.log)))"
 }
 compdef _simlog rerun.bash parse.bash
+
+# Completion for *.fsdb files
+function _fsdb() {
+	_arguments "*:files:(($(ls *.fsdb)))"
+}
+compdef _fsdb fsdb
 
