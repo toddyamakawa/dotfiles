@@ -18,6 +18,10 @@ function armdisk() {
 		-e 's:\\ifs::g'
 }
 
+# --- `cd` Aliases ---
+alias cdscratch='cd ${PWD/\/projects/\/arm\/projectscratch}'
+alias cdprojects='cd ${PWD/\/arm\/projectscratch/\/projects}'
+
 # --- Environment Variables ---
 #euhpc && [[ -z $LSB_BATCH_JID ]] && export LSB_DEFAULTPROJECT=PJ01384
 #nahpc && [[ -z $LSB_BATCH_JID ]] && export LSB_DEFAULTPROJECT=PJ01384DEFAULT
