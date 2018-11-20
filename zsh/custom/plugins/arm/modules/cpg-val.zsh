@@ -40,14 +40,19 @@ function vlog-debug() {
 
 # Generate $WORK_DIR path
 function cpg-workdir() {
-	local work_dir
-	work_dir=$(readlink -f ${WORK_DIR-$PWD/work_dir})
+	local temp_dir work_dir
+	temp_dir=${WORK_DIR-$PWD/work_dir}
+	work_dir=$(readlink -f $temp_dir) || work_dir=$PWD/$temp_dir
 	echo ${work_dir/\/projects/\/arm\/projectscratch}
 }
 
 # Use $WORK_DIR for regress command
 function regress() {
-	local work_dir=$(cpg-workdir)
+	local now=$(date +%Y%m%d-%H%M%S-Week%U-%a-%T)
+	local args cmd work_dir
+	args=$@
+	cmd=regress${args:gs/ //}
+	work_dir=$(WORK_DIR=$cmd/$now cpg-workdir)
 	echo "Using WORK_DIR=$work_dir"
 	WORK_DIR=$work_dir command regress $@
 }
