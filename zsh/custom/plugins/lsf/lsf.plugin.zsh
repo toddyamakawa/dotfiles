@@ -4,10 +4,13 @@ source $here/alias.bjobs.zsh
 
 alias bfield="cat $here/fields.txt"
 
+# Default bsub variables
 export _LSF_RHE='(rhe7||rhe6)'
+export _LSF_RUNLIMIT='600:00'
+export _LSF_DESCRIPTION='sysbench-2.x-run_veloce_tbx'
 
 # --- bsub ---
-alias bs='bsub -Jd sysbench-2.x-run_veloce_tbx -R "select[$_LSF_RHE && x86_64 && os64]" -W 120:00'
+alias bs='bsub -Jd $_LSF_DESCRIPTION -R "select[$_LSF_RHE && x86_64 && os64]" -W $_LSF_RUNLIMIT'
 alias bs1='bs -M 1024000'
 alias bs2='bs -M 2048000'
 alias bs4='bs -M 4096000'
