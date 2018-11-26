@@ -50,8 +50,10 @@ augroup END
 augroup large_file
 	au BufReadPre *
 		\ if getfsize(expand("%")) > 10000000 |
-			\ set eventignore+=FileType |
+			\ setlocal noswapfile eventignore+=FileType |
 		\ endif
+	" Always turn on syntax highlighting
+	au BufReadPost * silent set syntax=on
 augroup END
 
 " --- Undo ---
@@ -144,7 +146,7 @@ augroup ALL
 	autocmd BufWritePre * %s/\s\+$//e
 
 	" Automatically add +x permissions
-	autocmd BufWritePost * if getline(1) =~ "^#!.*/bin/" | silent execute "!chmod +x %" | endif
+	autocmd BufWritePre * if filereadable(expand("%")) &&  getline(1) =~ "^#!.*/bin/" | silent execute "!chmod +x %" | endif
 
 augroup END
 
