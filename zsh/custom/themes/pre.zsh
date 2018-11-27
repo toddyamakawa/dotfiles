@@ -32,8 +32,10 @@ function precmd() {
 	(( $RETVAL == 0 )) || echo "\e[31mExit code: $RETVAL\e[0m"
 
 	# Print elapsed time
-	_elapsed_ms=${_elapsed_ms-$(($_current_ms-$_start_ms))}
-	echo -e "\x1b[38;5;8m[$(date +%T)] Execution time: $(_elapsed-time)s\e[0m"
+	if (( ! ${+_elapsed_ms} )); then
+		_elapsed_ms=$(($_current_ms-$_start_ms))
+		echo -e "\x1b[38;5;8m[$(date +%T)] Execution time: $(_elapsed-time)s\e[0m"
+	fi
 
 	# Disable tmux monitor
 	_tmux-monitor off
