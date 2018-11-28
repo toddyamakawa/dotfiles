@@ -97,22 +97,32 @@ function my-fzf-complete() {
 # Create fzf-magic-complete widget
 zle -N fzf-magic-complete
 function fzf-magic-complete() {
+	local ret query=${LBUFFER##* } accept
 	setopt localoptions pipefail 2> /dev/null
 
 	# Directory completion for `cd`
 	if [[ $LBUFFER =~ '^\s*cd\b' ]]; then
-		LBUFFER="${LBUFFER% *} $({fzf-gitdirs & fzf-dirs} | my-fzf-complete)"
-		[[ $? == 0 ]] && { zle redisplay; zle accept-line; return; }
-	fi
+		if [[ -n $query ]]; then
+			LBUFFER="${LBUFFER% *} $(fzf-dirs | my-fzf-complete)"
+		else
+			LBUFFER="${LBUFFER% *} $({fzf-gitdirs & fzf-dirs} | my-fzf-complete)"
+		fi
+		ret=$?
+		[[ $ret == 0 ]] && accept=1
 
 	# File completion
-	LBUFFER="${LBUFFER% *} $({fzf-gitfiles & fzf-files} | my-fzf-complete)"
+	else
+		if [[ -n $query ]]; then
+			LBUFFER="${LBUFFER% *} $(fzf-files | my-fzf-complete)"
+		else
+			LBUFFER="${LBUFFER% *} $({fzf-gitfiles & fzf-files} | my-fzf-complete)"
+		fi
+		ret=$?
+	fi
 
-	# TODO: Is this stuff needed?
-	# Redraw display
-	local ret=$?
 	zle redisplay
 	typeset -f zle-line-init >/dev/null && zle zle-line-init
+	[[ -n $accept ]] && zle accept-line
 	return $ret
 }
 
