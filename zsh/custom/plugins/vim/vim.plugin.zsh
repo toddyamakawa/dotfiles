@@ -1,6 +1,7 @@
 
 local here=${0:h}
 source $here/suffix.zsh
+source $here/server.zsh
 
 
 # --- Environment Variables ---
