@@ -13,6 +13,8 @@ function trestore() { echo tmux source-file $1; }
 # Print Information
 alias tprint='tmux display-message -p'
 alias tlayout="tprint '#{window_layout}'"
+alias twidth='tmux resize-pane -x'
+alias theight='tmux resize-pane -y'
 
 # List Information
 alias tls="tmux list-sessions -F '#{session_id} [#{session_windows} windows] #{session_name}'"
