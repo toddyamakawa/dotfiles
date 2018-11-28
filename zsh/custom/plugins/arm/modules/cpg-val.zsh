@@ -46,7 +46,7 @@ function cpg-workdir() {
 	echo ${work_dir/\/projects/\/arm\/projectscratch}
 }
 
-# Use $WORK_DIR for regress command
+# Automatic $WORK_DIR for regress command
 function regress() {
 	local now=$(date +%Y%m%d-%H%M%S-Week%U-%a-%T)
 	local args cmd work_dir
@@ -54,21 +54,41 @@ function regress() {
 	cmd=regress${args:gs/ //}
 	work_dir=$(WORK_DIR=$cmd/$now cpg-workdir)
 	echo "Using WORK_DIR=$work_dir"
-	WORK_DIR=$work_dir command regress $@
+	WORK_DIR=$work_dir command regress $args
 }
+
+# FIXME: This thing is garbage and doesn't work at all
+# Automatic $WORK_DIR for sim_tb command
+function _sim_tb() {
+	local now=$(date +%Y%m%d-%H%M%S-Week%U-%a-%T)
+	local args cmd work_dir usetemp
+	args=$@
+	if [[ -n $LSB_BATCH_JID && -n ${args[(r)-local]} && -n ${args[(r)-build_local]} ]]; then
+		usetemp=1
+		work_dir=${WORK_DIR-$(mktemp -d)}
+	else
+		${WORK_DIR?needs to be set}
+	fi
+	echo "Using WORK_DIR=$work_dir"
+	echo $args
+	echo WORK_DIR=$work_dir command sim_tb $args
+	WORK_DIR=$work_dir command sim_tb $args
+	[[ -n $usetemp ]] && cd $work_dir
+}
+
 
 
 # --- compdef ---
 
 # Completion for simulation *.log files
 function _simlog() {
-	_arguments "*:files:(($(ls *.@*.log)))"
+	_arguments "1:files:(($(ls *.@*.log)))"
 }
 compdef _simlog rerun.bash parse.bash
 
 # Completion for *.fsdb files
 function _fsdb() {
-	_arguments "*:files:(($(ls *.fsdb)))"
+	_arguments "1:files:(($(ls *.fsdb)))"
 }
 compdef _fsdb fsdb
 
