@@ -24,7 +24,7 @@ function vsend() {
 
 # Completion for vsend()
 function _vsend() {
-	_arguments -C \
+	_arguments \
 		"1:server:(($(vim --serverlist)))" \
 		"*:files:_files"
 }
