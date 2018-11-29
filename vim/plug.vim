@@ -35,6 +35,9 @@ Plug 'keith/tmux.vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
+" --- Fish Syntax ---
+Plug 'dag/vim-fish'
+
 " --- ANSI Escape Syntax ---
 Plug 'vim-scripts/AnsiEsc.vim', { 'on': 'AnsiEsc' }
 cabbrev ansi AnsiEsc
