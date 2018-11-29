@@ -1,5 +1,6 @@
 
 # --- Disassemble ---
+# TODO: Use nexus queue `bqueues | grep nexus`
 function disass() {
 	local file=$1
 	bs1 -rn -app FG -K -oo $file.disass \
@@ -8,7 +9,7 @@ function disass() {
 }
 function disass.old() {
 	local file=$1
-	bs1 -rn -app FG -K -oo $file.disass \
+	bs1 -q nexus -K -oo $file.disass \
 		mrun +arm/rvct_aarch64 fromelf -a -c --text $file
 }
 
