@@ -1,4 +1,7 @@
 
+local here=${0:h}
+alias hex.rb="$here/hex.rb"
+
 function calc() { bc -l <<< "$@"; }
 
 function hex2dec() {
