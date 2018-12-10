@@ -54,7 +54,7 @@ function regress() {
 	cmd=regress${args:gs/ //}
 	work_dir=$(WORK_DIR=$cmd/$now cpg-workdir)
 	echo "Using WORK_DIR=$work_dir"
-	WORK_DIR=$work_dir command regress $args
+	eval WORK_DIR=$work_dir command regress $args
 }
 
 # FIXME: This thing is garbage and doesn't work at all
