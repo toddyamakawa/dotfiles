@@ -53,7 +53,10 @@ function tsplit() {
 
 # New Session
 function tnew() {
-	local name="$1"
+	local name="${1?usage: $0 <session_name>}"
+	if [[ -n $TMUX && ! -e ${TMUX%%,*} ]]; then
+		unset TMUX TMUX_PANE
+	fi
 	tmux new-session -d -s "$name"
 	ts "$name"
 }
@@ -68,6 +71,9 @@ function tcmd() {
 # --- Open/Switch Session ---
 function ts() {
 	[[ -n $TMUX ]] && tmux switch-client -t $1 || tmux attach -t $1
+}
+function _ts-fzf() {
+	# TODO: Implement this
 }
 function _ts() {
 	session=$(tmux list-sessions -F "#{session_name}':#{session_id} [#{session_windows} windows]#{?session_attached, (attached),}'")
