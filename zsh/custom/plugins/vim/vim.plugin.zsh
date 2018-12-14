@@ -16,6 +16,7 @@ alias vman='vim -c MANPAGER -'
 alias vmin='vim --noplugin'
 alias vnone='vim -u NONE'
 alias vdiff='vimdiff'
+alias vsource='vim -S'
 
 
 # --- Functions ---

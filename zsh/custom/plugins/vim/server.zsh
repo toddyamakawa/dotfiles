@@ -3,7 +3,7 @@
 alias vls='vim --serverlist'
 
 # Open New Server
-function vnew() {
+function vstart() {
 	local servername
 	if [[ -e ${TMUX%%,*} ]]; then
 		servername=$(tmux display-message -p '#{session_name}.#{window_index}.#{pane_index}')
