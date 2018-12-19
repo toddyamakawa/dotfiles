@@ -274,6 +274,7 @@ nnoremap <silent> <Leader>l <C-w>l
 nnoremap > :bnext<Enter>
 nnoremap < :bprev<Enter>
 nnoremap <BS> <C-^>
+nnoremap <Leader>bd :bd<Enter>
 
 " --- QuickFix Shortcuts ---
 function TabQuickFix(dir)
@@ -298,6 +299,9 @@ nnoremap <Leader>= <C-w>=
 " Jump forward/backward
 nnoremap <C-l> <C-i>
 nnoremap <C-h> <C-o>
+
+" Jump to definition
+nnoremap <C-k> <C-]>
 
 
 " ==============
@@ -384,6 +388,11 @@ nnoremap <Leader>dx :%s/[^\x00-\x7F]//g<Enter>
 " Delete carriage returns
 nnoremap <Leader>d<Enter> :%s/\r//g<Enter>
 
-" --- Help ---
+" --- Abbreviations ---
+" Help
 cabbrev help vert help
+
+" Set filetypes
+cabbrev sfl setfiletype log
+cabbrev sfv setfiletype verilog_systemverilog
 
