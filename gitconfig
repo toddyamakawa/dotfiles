@@ -79,11 +79,11 @@
 	cot = checkout --track
 
 	# --- log ---
-	logf = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset:%C(auto)%d %Creset%s\"
-	l     = !git logf --no-merges
-	ls    = !git logf
-	ll    = !git logf --numstat
-	graph = !git logf --graph
+	# logf is defined in bin/git-logf
+	l     = logf --no-merges
+	ls    = logf
+	ll    = logf --numstat
+	graph = logf --graph
 
 	# --- lock ---
 	unlock = !rm $(git rev-parse --git-dir)/index.lock
