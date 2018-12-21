@@ -143,7 +143,7 @@ augroup ALL
 	autocmd BufNewFile,BufRead * set formatoptions-=cro
 
 	" Automatically remove trailing whitespace
-	autocmd BufWritePre * %s/\s\+$//e
+	autocmd BufWritePre * call StripTrailingWhitespace()
 
 	" Automatically add +x permissions
 	autocmd BufWritePre * if filereadable(expand("%")) &&  getline(1) =~ "^#!.*/bin/" | silent execute "!chmod +x %" | endif
