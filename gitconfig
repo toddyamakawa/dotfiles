@@ -79,10 +79,11 @@
 	cot = checkout --track
 
 	# --- log ---
-	l = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --no-merges
-	ls = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\"
-	ll = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --numstat
-	graph = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset: %s\" --graph
+	logf = log --pretty=format:\"%C(yellow)%h %C(blue)%<(14)[%ar] %C(green)%<(20)%an %Creset:%C(auto)%d %Creset%s\"
+	l     = !git logf --no-merges
+	ls    = !git logf
+	ll    = !git logf --numstat
+	graph = !git logf --graph
 
 	# --- lock ---
 	unlock = !rm $(git rev-parse --git-dir)/index.lock
@@ -137,6 +138,7 @@
 	# --- Git Repositories ---
 	newasp = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/asp
 	newcputools = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/auscpgval
+	newetm = clone ssh://blr-gerrit-1.blr.arm.com:29418/avk/ETMCompare
 	newiris = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/iris
 	newkiwi = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/kiwi
 	newkvs = clone login8.nahpc.arm.com:/projects/pd/svos/git/kvs
@@ -149,17 +151,18 @@
 	newambaviz = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/ambaviz
 	neweda = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/eda
 	newgem = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/gem
+	newgtest = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/gerrit_test
 	newldap = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/ldap
 	newwrappers = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/wrappers
 	newruby = clone login8.euhpc.arm.com:/arm/ref/pd/SVOS/tools/ruby
 	newtriton = ssh://git@git.research.arm.com/triton/tritondb-scripts/tritondb-scripts-utils
 	newunischeduler = clone ssh://ds-gerrit.euhpc.arm.com:29418/toef/unischeduler
 
+	newaravalli = clone -b scratch/dev/etb_tb ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/etm/aravalli
 	newares = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
 	newdeimos = clone -b deimos/dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
 	newporter = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter
 	newzeus = clone -b zeus/dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
-	newetmv9 = clone -b scratch/dev/etb_tb ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/etm/aravalli
 
 	# --- My GitHub Repositories ---
 	newblog = clone https://github.com/toddyamakawa/blog
