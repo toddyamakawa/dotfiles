@@ -6,8 +6,8 @@ alias bfield="cat $here/fields.txt"
 
 # Default bsub variables
 export _LSF_RHE='(rhe7||rhe6)'
-export _LSF_RUNLIMIT='600:00'
-export _LSF_DESCRIPTION='sysbench-2.x-run_veloce_tbx'
+export _LSF_RUNLIMIT='685:30'
+export _LSF_DESCRIPTION='regress_tb-EA-sim_mti'
 
 # --- bsub ---
 alias bs='bsub -Jd $_LSF_DESCRIPTION -R "select[$_LSF_RHE && x86_64 && os64]" -W $_LSF_RUNLIMIT'
