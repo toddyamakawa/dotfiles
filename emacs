@@ -1,6 +1,15 @@
 ;; -*- mode: lisp; -*-
 ;; vi: filetype=lisp
-;;
+
+
+;; =============================================================================
+;; INITIAL
+;; =============================================================================
+(menu-bar-mode     -1) ; hide menu bar
+(tool-bar-mode     -1) ; hide tool bar
+(toggle-scroll-bar -1) ; hide scroll bar
+
+
 ;; =============================================================================
 ;; AUTO-GENERATED STUFF
 ;; =============================================================================
@@ -10,7 +19,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
- '(package-selected-packages (quote (solarized-theme magit helm evil-visual-mark-mode))))
+ '(package-selected-packages
+   (quote
+    (whitespace-cleanup-mode solarized-theme magit helm evil-visual-mark-mode))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -105,12 +116,29 @@
 )
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(background-color . black))
+(add-to-list 'default-frame-alist '(foreground-color . gray))
 
 (defun kill-other-buffers()
-  "Kill all other buffers."
-  (interactive)
-  (mapc 'kill-buffer
-    (delq (current-buffer) (remove-if-not 'buffer-file-name (buffer-list)))
-  )
+	"Kill all other buffers."
+	(interactive)
+	(mapc 'kill-buffer
+		(delq (current-buffer) (remove-if-not 'buffer-file-name (buffer-list)))
+	)
 )
+
+(setq-default display-line-numbers 'visual)
+
+(require 'whitespace)
+(progn
+	(setq whitespace-style '(face trailing tabs tab-mark))
+	(setq whitespace-display-mappings '(
+		(space-mark 32 [183] [183])
+		(tab-mark 9 [9654 9] [92 9])
+	))
+	(set-face-foreground 'whitespace-tab "#303030")
+	(set-face-background 'whitespace-tab "#181818")
+)
+(global-whitespace-mode 1)
+
 
