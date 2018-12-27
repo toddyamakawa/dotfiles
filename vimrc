@@ -1,7 +1,7 @@
 
-" ==============
-"    VIM-PLUG
-" ==============
+" ==============================================================================
+" VIM-PLUG
+" ==============================================================================
 
 " --- Install ---
 " :PlugInstall
@@ -19,9 +19,9 @@ call plug#end()
 filetype indent plugin on
 
 
-" ======================
-"    GENERAL SETTINGS
-" ======================
+" ==============================================================================
+" GENERAL SETTINGS
+" ==============================================================================
 set history=50     " Save 50 command lines of history
 
 " --- Set <Leader> to Space ---
@@ -31,6 +31,9 @@ let g:mapleader="\<space>"
 " --- Command Line ---
 nnoremap <Enter> :
 vnoremap <Enter> :
+nnoremap <Leader><Enter> <Enter>
+vnoremap <Leader><Enter> <Enter>
+
 autocmd CmdwinEnter * nnoremap <buffer> <Enter> <Enter>
 autocmd CmdwinEnter * nnoremap <buffer> q :q<Enter>
 
@@ -61,9 +64,9 @@ augroup END
 "set undodir=~/.vim/.undo// " Undo file directory
 
 
-" ====================
-"    BEAUTIFICATION
-" ====================
+" ==============================================================================
+" BEAUTIFICATION
+" ==============================================================================
 runtime ~/.vim                 " Pointer to .vim directory
 syntax on                      " Enable syntax highlighting
 set t_Co=256                   " Terminal supports 256 colors
@@ -79,6 +82,7 @@ set virtualedit=block
 silent! colorscheme jellybeans " Favorite colorscheme
 "silent! colorscheme codeschool
 "silent! colorscheme molokai
+"silent colorscheme vim-monokai-tasty
 
 " Cycle through color schemes
 "nnoremap <F6> <Plug>ColorstepPrev
@@ -186,9 +190,9 @@ nnoremap <S-Tab> :call TabQuickFix('prev')<Enter>
 " Replace indentation spaces with tabs
 "nnoremap <Leader><Tab> :%s:^ \+:\=repeat("\t",strlen(submatch(0))/2):<Enter>
 
-" =======================
-"    GENERAL SHORTCUTS
-" =======================
+" ==============================================================================
+" GENERAL SHORTCUTS
+" ==============================================================================
 
 " Automatically reload file
 "set autoread
@@ -229,9 +233,9 @@ nnoremap <Leader>vs :source $MYVIMRC<Enter>
 "set noerrorbells
 
 
-" =================
-"    VISUAL MODE
-" =================
+" ==============================================================================
+" VISUAL MODE
+" ==============================================================================
 
 " Enter block visual mode with 'vv'
 nnoremap vv <C-v>
@@ -240,17 +244,18 @@ nnoremap vv <C-v>
 vnoremap q <Esc>
 
 
-" =============
-"    VIMDIFF
-" =============
+" ==============================================================================
+" VIMDIFF
+" ==============================================================================
 
 " Update
 nnoremap du :diffupdate<Enter>
 
 
-" ===============
-"    CLIPBOARD
-" ===============
+" ==============================================================================
+" CLIPBOARD
+" ==============================================================================
+
 
 " --- Set Clipboard ---
 "set clipboard=xterm_clipboard
@@ -260,21 +265,15 @@ set clipboard=unnamed
 nmap gV `[v`]
 
 
-" ================
-"    NAVIGATION
-" ================
+" ==============================================================================
+" NAVIGATION
+" ==============================================================================
 
 " --- Screen Shortcuts ---
 nnoremap <silent> <Leader>h <C-w>h
 nnoremap <silent> <Leader>j <C-w>j
 nnoremap <silent> <Leader>k <C-w>k
 nnoremap <silent> <Leader>l <C-w>l
-
-" --- Buffer Shortcuts ---
-nnoremap > :bnext<Enter>
-nnoremap < :bprev<Enter>
-nnoremap <BS> <C-^>
-nnoremap <Leader>bd :bd<Enter>
 
 " --- QuickFix Shortcuts ---
 function TabQuickFix(dir)
@@ -304,9 +303,9 @@ nnoremap <C-h> <C-o>
 nnoremap <C-k> <C-]>
 
 
-" ==============
-"    MOVEMENT
-" ==============
+" ==============================================================================
+" MOVEMENT
+" ==============================================================================
 
 " Start of line
 noremap H ^
@@ -387,6 +386,7 @@ nnoremap <Leader>d$ :%s/\s\+$//g<Enter>
 nnoremap <Leader>dx :%s/[^\x00-\x7F]//g<Enter>
 " Delete carriage returns
 nnoremap <Leader>d<Enter> :%s/\r//g<Enter>
+
 
 " --- Abbreviations ---
 " Help
