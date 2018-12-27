@@ -1,6 +1,6 @@
 ;; -*- mode: lisp; -*-
 ;; vi: filetype=lisp
-
+;;
 ;; =============================================================================
 ;; AUTO-GENERATED STUFF
 ;; =============================================================================
@@ -10,7 +10,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
- '(package-selected-packages (quote (magit helm evil-visual-mark-mode))))
+ '(package-selected-packages (quote (solarized-theme magit helm evil-visual-mark-mode))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -36,6 +36,9 @@
 ;; THEME
 ;; =============================================================================
 
+
+(add-hook 'magit-status-mode-hook (lambda () (load-theme 'solarized-dark t)))
+
 ; --- Monokai Theme ---
 ; M-x package-install monokai-theme
 (load-theme 'monokai t)
@@ -56,7 +59,12 @@
 
 ; M-x package-install evil
 (require 'evil)
+(require 'evil-magit)
 (evil-mode t)
+
+; M-x package-install key-chord
+(require 'key-chord)
+(key-chord-mode 1)
 
 ; <C-h b> to list all available bindings
 ; <C-h k> to get help on binding
@@ -70,8 +78,8 @@
 (define-key evil-normal-state-map (kbd "C-j") 'evil-scroll-down)
 
 ; --- Insert Mode ---
-(define-key evil-insert-state-map "jj" 'evil-normal-state)
-(define-key evil-insert-state-map "kk" 'evil-normal-state)
+(key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
+(key-chord-define evil-insert-state-map "kk" 'evil-normal-state)
 
 
 ;; =============================================================================
@@ -98,5 +106,11 @@
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-(require 'evil-magit)
+(defun kill-other-buffers()
+  "Kill all other buffers."
+  (interactive)
+  (mapc 'kill-buffer
+    (delq (current-buffer) (remove-if-not 'buffer-file-name (buffer-list)))
+  )
+)
 
