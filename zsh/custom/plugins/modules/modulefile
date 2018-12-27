@@ -50,6 +50,7 @@ load-once ruby/gems/2.6.11
 load-once tct/tcl/8.6.1
 
 # --- Tools ---
+load-once gnu/emacs/26.1
 load-once fish/fish-shell/2.7.0
 load-once gnu/gawk/4.1.1
 load-once gnu/htop/1.0.1
