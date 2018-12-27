@@ -1,4 +1,4 @@
-
+;; -*- mode: lisp; -*-
 ;; vi: filetype=lisp
 
 ;; =============================================================================
@@ -33,7 +33,7 @@
 
 
 ;; =============================================================================
-;; GENERAL SETTINGS
+;; THEME
 ;; =============================================================================
 
 ; --- Monokai Theme ---
@@ -48,6 +48,14 @@
 	monokai-height-plus-3 1.2
 	monokai-height-plus-4 1.3
 )
+
+
+;; =============================================================================
+;; GENERAL SETTINGS
+;; =============================================================================
+
+; <F5> to reload ~/.emacs
+(global-set-key (kbd "<f6>") '(lambda() (interactive) (load-file user-init-file)))
 
 
 ; --- Backup Directory ---
@@ -71,4 +79,6 @@
 (require 'evil)
 (evil-mode t)
 
+(define-key evil-normal-state-map "H" 'evil-beginning-of-line)
+(define-key evil-normal-state-map "L" 'evil-end-of-line)
 
