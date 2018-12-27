@@ -10,7 +10,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
- '(package-selected-packages (quote (helm evil-visual-mark-mode))))
+ '(package-selected-packages (quote (magit helm evil-visual-mark-mode))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -51,12 +51,38 @@
 
 
 ;; =============================================================================
+;; EVIL MODE
+;; =============================================================================
+
+; M-x package-install evil
+(require 'evil)
+(evil-mode t)
+
+; <C-h b> to list all available bindings
+; <C-h k> to get help on binding
+
+; --- Normal Mode ---
+(define-key evil-normal-state-map "H" 'evil-beginning-of-line)
+(define-key evil-normal-state-map "L" 'evil-end-of-line)
+(define-key evil-normal-state-map "U" 'redo)
+(define-key evil-normal-state-map (kbd "RET") 'evil-ex)
+(define-key evil-normal-state-map (kbd "C-k") 'evil-scroll-up)
+(define-key evil-normal-state-map (kbd "C-j") 'evil-scroll-down)
+
+; --- Insert Mode ---
+(define-key evil-insert-state-map "jj" 'evil-normal-state)
+(define-key evil-insert-state-map "kk" 'evil-normal-state)
+
+
+;; =============================================================================
 ;; GENERAL SETTINGS
 ;; =============================================================================
 
 ; <F5> to reload ~/.emacs
-(global-set-key (kbd "<f6>") '(lambda() (interactive) (load-file user-init-file)))
+(global-set-key (kbd "<f5>") '(lambda() (interactive) (load-file user-init-file)))
 
+; <M-Enter> to run command
+(global-set-key (kbd "M-RET") 'execute-extended-command)
 
 ; --- Backup Directory ---
 ; FIXME: I don't think this works
@@ -70,15 +96,7 @@
 	make-backup-files nil
 )
 
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-;; =============================================================================
-;; EVIL MODE
-;; =============================================================================
-
-; M-x package-install evil
-(require 'evil)
-(evil-mode t)
-
-(define-key evil-normal-state-map "H" 'evil-beginning-of-line)
-(define-key evil-normal-state-map "L" 'evil-end-of-line)
+(require 'evil-magit)
 
