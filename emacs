@@ -21,7 +21,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-	(evil-nerd-commenter airline-themes evil-leader powerline helm-describe-modes helm-descbinds whitespace-cleanup-mode solarized-theme magit helm evil-visual-mark-mode))))
+	(org-evil evil-org evil-nerd-commenter airline-themes evil-leader powerline helm-describe-modes helm-descbinds whitespace-cleanup-mode solarized-theme magit helm evil-visual-mark-mode))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -117,6 +117,25 @@
 (key-chord-define evil-insert-state-map  "kk" 'evil-normal-state)
 (key-chord-define evil-replace-state-map "kk" 'evil-normal-state)
 
+; --- Org-Mode ---
+(evil-define-key 'normal org-mode-map (kbd "TAB") #'org-cycle)
+(evil-define-key 'normal org-mode-map "gh" #'outline-up-heading)
+(evil-define-key 'normal org-mode-map "gj" #'org-forward-heading-same-level)
+(evil-define-key 'normal org-mode-map "gk" #'org-backward-heading-same-level)
+(evil-define-key 'normal org-mode-map "gl" #'outline-next-visible-heading)
+(evil-define-key 'normal org-mode-map "t" #'org-todo)
+(evil-define-key 'normal org-mode-map "<" #'org-metaleft)
+(evil-define-key 'normal org-mode-map ">" #'org-metaright)
+
+(evil-leader/set-key-for-mode 'org-mode
+	"a" 'org-agenda
+	"c" 'org-archive-subtree
+	"t" 'org-show-todo-tree
+)
+
+(setq x-select-enable-clipboard nil)
+
+
 
 ;; =============================================================================
 ;; GENERAL SETTINGS
@@ -125,14 +144,19 @@
 ; <F5> to reload ~/.emacs
 (global-set-key (kbd "<f5>") '(lambda() (interactive) (load-file user-init-file)))
 
+; --- Helm ---
 (require 'helm)
-(helm-mode 1)
-
 (require 'helm-descbinds)
-(helm-descbinds-mode)
-(global-set-key (kbd "<f6>") 'helm-descbinds)
-
 (require 'helm-describe-modes)
+
+(helm-mode 1)
+(define-key helm-map (kbd "C-j") 'helm-next-line)
+(define-key helm-map (kbd "C-k") 'helm-previous-line)
+
+; Must set helm-map before enabling helm-descbinds-mode
+(helm-descbinds-mode)
+
+(global-set-key (kbd "<f6>") 'helm-descbinds)
 (global-set-key [remap describe-mode] #'helm-describe-modes)
 
 ; <M-Enter> to run command
@@ -184,7 +208,12 @@
 ; --- Powerline ---
 (require 'powerline)
 
-; --- Helm ---
-(define-key helm-map (kbd "C-j") 'helm-next-line)
-(define-key helm-map (kbd "C-k") 'helm-previous-line)
+; --- Clipboard ---
+;; (setq x-select-enable-clipboard t)
+
+; --- Org-Mode ---
+; Setup indentation
+(with-eval-after-load 'org
+	(setq org-startup-indented t)
+)
 
