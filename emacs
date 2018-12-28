@@ -21,7 +21,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-	(airline-themes evil-leader powerline helm-describe-modes helm-descbinds whitespace-cleanup-mode solarized-theme magit helm evil-visual-mark-mode))))
+	(evil-nerd-commenter airline-themes evil-leader powerline helm-describe-modes helm-descbinds whitespace-cleanup-mode solarized-theme magit helm evil-visual-mark-mode))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -75,9 +75,11 @@
 (require 'evil)
 (require 'evil-magit)
 (require 'evil-leader)
+(require 'evil-nerd-commenter)
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
 (evil-mode t)
+(evilnc-default-hotkeys t t)
 
 (require 'key-chord)
 (key-chord-mode 1)
@@ -87,6 +89,8 @@
 (define-key evil-visual-state-map "H" 'evil-beginning-of-line)
 (define-key evil-normal-state-map "L" 'evil-end-of-line)
 (define-key evil-visual-state-map "L" 'evil-end-of-line)
+(define-key evil-normal-state-map "#" 'evilnc-comment-or-uncomment-lines)
+(define-key evil-visual-state-map "#" 'evilnc-comment-or-uncomment-lines)
 
 ; --- Normal Mode ---
 (define-key evil-normal-state-map "U" 'redo)
@@ -179,4 +183,8 @@
 
 ; --- Powerline ---
 (require 'powerline)
+
+; --- Helm ---
+(define-key helm-map (kbd "C-j") 'helm-next-line)
+(define-key helm-map (kbd "C-k") 'helm-previous-line)
 
