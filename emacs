@@ -21,7 +21,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-	(powerline helm-describe-modes helm-descbinds whitespace-cleanup-mode solarized-theme magit helm evil-visual-mark-mode))))
+	(evil-leader powerline helm-describe-modes helm-descbinds whitespace-cleanup-mode solarized-theme magit helm evil-visual-mark-mode))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -71,6 +71,9 @@
 ; M-x package-install evil
 (require 'evil)
 (require 'evil-magit)
+(require 'evil-leader)
+(global-evil-leader-mode)
+(evil-leader/set-leader "<SPC>")
 (evil-mode t)
 
 ; M-x package-install key-chord
@@ -87,14 +90,14 @@
 (define-key evil-normal-state-map (kbd "RET") 'evil-ex)
 (define-key evil-normal-state-map (kbd "C-k") 'evil-scroll-up)
 (define-key evil-normal-state-map (kbd "C-j") 'evil-scroll-down)
-
-;(eval-after-load "evil-maps" (progn
-	;(define-key evil-normal-state-map "q" nil)
-	;(define-key evil-normal-state-map "K" nil)
-;))
+; TODO: Figure out how to unbind q:
 (define-key evil-normal-state-map "q" nil)
-(define-key evil-motion-state-map "K" nil)
+(evil-leader/set-key
+ "q" 'kill-buffer
+)
 
+; --- "Motion" Mode ---
+(define-key evil-motion-state-map "K" nil)
 
 ; --- Insert Mode ---
 (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
@@ -107,6 +110,9 @@
 
 ; <F5> to reload ~/.emacs
 (global-set-key (kbd "<f5>") '(lambda() (interactive) (load-file user-init-file)))
+
+(require 'helm)
+(helm-mode 1)
 
 (require 'helm-descbinds)
 (helm-descbinds-mode)
@@ -158,8 +164,8 @@
 ))
 (global-whitespace-mode 1)
 
-
 (setq-default tab-width 4)
+(setq-default tab-stop-list (number-sequence 4 80 4))
 
 ; --- Powerline ---
 (require 'powerline)
