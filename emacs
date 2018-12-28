@@ -68,7 +68,6 @@
 ;; EVIL MODE
 ;; =============================================================================
 
-; M-x package-install evil
 (require 'evil)
 (require 'evil-magit)
 (require 'evil-leader)
@@ -76,16 +75,16 @@
 (evil-leader/set-leader "<SPC>")
 (evil-mode t)
 
-; M-x package-install key-chord
 (require 'key-chord)
 (key-chord-mode 1)
 
-; <C-h b> to list all available bindings
-; <C-h k> to get help on binding
+; --- Normal/Visual Mode ---
+(define-key evil-normal-state-map "H" 'evil-beginning-of-line)
+(define-key evil-visual-state-map "H" 'evil-beginning-of-line)
+(define-key evil-normal-state-map "L" 'evil-end-of-line)
+(define-key evil-visual-state-map "L" 'evil-end-of-line)
 
 ; --- Normal Mode ---
-(define-key evil-normal-state-map "H" 'evil-beginning-of-line)
-(define-key evil-normal-state-map "L" 'evil-end-of-line)
 (define-key evil-normal-state-map "U" 'redo)
 (define-key evil-normal-state-map (kbd "RET") 'evil-ex)
 (define-key evil-normal-state-map (kbd "C-k") 'evil-scroll-up)
@@ -93,15 +92,22 @@
 ; TODO: Figure out how to unbind q:
 (define-key evil-normal-state-map "q" nil)
 (evil-leader/set-key
- "q" 'kill-buffer
+	"q" 'evil-quit
+	"w" 'evil-write
+	"h" 'evil-window-left
+	"j" 'evil-window-down
+	"k" 'evil-window-up
+	"l" 'evil-window-right
 )
 
 ; --- "Motion" Mode ---
 (define-key evil-motion-state-map "K" nil)
 
-; --- Insert Mode ---
-(key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
-(key-chord-define evil-insert-state-map "kk" 'evil-normal-state)
+; --- Insert/Replace Mode ---
+(key-chord-define evil-insert-state-map  "jj" 'evil-normal-state)
+(key-chord-define evil-replace-state-map "jj" 'evil-normal-state)
+(key-chord-define evil-insert-state-map  "kk" 'evil-normal-state)
+(key-chord-define evil-replace-state-map "kk" 'evil-normal-state)
 
 
 ;; =============================================================================
