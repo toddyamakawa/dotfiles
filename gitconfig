@@ -62,6 +62,7 @@
 	bdpush = push origin --delete
 
 	# --- diff ---
+	diffbr = "!f() { git ls $(git bname) ^$1; }; f"
 	diffn = diff --numstat
 	diffnw = diff --numstat --ignore-all-space --ignore-blank-lines
 	diffs = diff --staged
