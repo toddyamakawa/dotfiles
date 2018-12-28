@@ -21,7 +21,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (whitespace-cleanup-mode solarized-theme magit helm evil-visual-mark-mode))))
+	(powerline helm-describe-modes helm-descbinds whitespace-cleanup-mode solarized-theme magit helm evil-visual-mark-mode))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -88,6 +88,14 @@
 (define-key evil-normal-state-map (kbd "C-k") 'evil-scroll-up)
 (define-key evil-normal-state-map (kbd "C-j") 'evil-scroll-down)
 
+;(eval-after-load "evil-maps" (progn
+	;(define-key evil-normal-state-map "q" nil)
+	;(define-key evil-normal-state-map "K" nil)
+;))
+(define-key evil-normal-state-map "q" nil)
+(define-key evil-motion-state-map "K" nil)
+
+
 ; --- Insert Mode ---
 (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
 (key-chord-define evil-insert-state-map "kk" 'evil-normal-state)
@@ -100,20 +108,28 @@
 ; <F5> to reload ~/.emacs
 (global-set-key (kbd "<f5>") '(lambda() (interactive) (load-file user-init-file)))
 
+(require 'helm-descbinds)
+(helm-descbinds-mode)
+(global-set-key (kbd "<f6>") 'helm-descbinds)
+
+(require 'helm-describe-modes)
+(global-set-key [remap describe-mode] #'helm-describe-modes)
+
 ; <M-Enter> to run command
 (global-set-key (kbd "M-RET") 'execute-extended-command)
 
 ; --- Backup Directory ---
 ; FIXME: I don't think this works
 (setq
-	backup-directory-alist `(("." . "~/.emacs.d/.backup"))
+	backup-directory-alist '(("." . "~/.emacs.d/.backup"))
 	backup-by-copying t
+	version-control t
 	delete-older-versions t
 	kept-new-versions 6
 	kept-old-versions 2
-	version-control t
 	make-backup-files nil
 )
+(setq create-lock-files nil)
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(background-color . black))
@@ -129,16 +145,24 @@
 
 (setq-default display-line-numbers 'visual)
 
+; --- Whitespace Mode ---
 (require 'whitespace)
-(progn
-	(setq whitespace-style '(face trailing tabs tab-mark))
-	(setq whitespace-display-mappings '(
-		(space-mark 32 [183] [183])
-		(tab-mark 9 [9654 9] [92 9])
-	))
+(setq whitespace-style '(face trailing tabs tab-mark))
+(setq whitespace-display-mappings '(
+	(space-mark 32 [183] [183])
+	(tab-mark 9 [9654 9] [92 9])
+))
+(if window-system nil (progn
 	(set-face-foreground 'whitespace-tab "#303030")
 	(set-face-background 'whitespace-tab "#181818")
-)
+))
 (global-whitespace-mode 1)
 
+
+(setq-default tab-width 4)
+
+; --- Powerline ---
+(require 'powerline)
+(require 'powerline-evil)
+(powerline-evil-center-color-theme)
 
