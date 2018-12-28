@@ -21,7 +21,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-	(evil-leader powerline helm-describe-modes helm-descbinds whitespace-cleanup-mode solarized-theme magit helm evil-visual-mark-mode))))
+	(airline-themes evil-leader powerline helm-describe-modes helm-descbinds whitespace-cleanup-mode solarized-theme magit helm evil-visual-mark-mode))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -47,11 +47,11 @@
 ;; THEME
 ;; =============================================================================
 
-
 (add-hook 'magit-status-mode-hook (lambda () (load-theme 'solarized-dark t)))
+(setq custom-safe-themes t)
 
 ; --- Monokai Theme ---
-; M-x package-install monokai-theme
+(require 'monokai-theme)
 (load-theme 'monokai t)
 
 ; org-mode font size
@@ -62,6 +62,10 @@
 	monokai-height-plus-3 1.2
 	monokai-height-plus-4 1.3
 )
+
+; --- Airline Theme ---
+(require 'airline-themes)
+(load-theme 'airline-molokai)
 
 
 ;; =============================================================================
@@ -175,6 +179,4 @@
 
 ; --- Powerline ---
 (require 'powerline)
-(require 'powerline-evil)
-(powerline-evil-center-color-theme)
 
