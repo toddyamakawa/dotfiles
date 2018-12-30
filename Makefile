@@ -2,7 +2,7 @@
 ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 # --- Ignore Files ---
-ignore = Makefile README.md bin windows
+ignore = Makefile README.md bin windows emacs.d
 
 # --- Get Files/Directories ---
 dirs = $(wildcard */)
@@ -55,6 +55,14 @@ vim-plug: $(HOME)/.vimrc $(.VIM)/autoload/plug.vim
 	vim +PlugInstall +qall
 $(.VIM)/autoload/plug.vim: $(.VIM)
 	curl -fLo $@ --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# --- emacs ---
+# vim plugin manager
+emacs: $(HOME)/.emacs.d
+$(HOME)/.emacs.d: emacs.d
+	ln -fs $(ROOT_DIR)/$< $@
+emacs.d:
+	git clone https://github.com/bulletme/emacs.d
 
 # --- tpm ---
 # tmux plugin manager
