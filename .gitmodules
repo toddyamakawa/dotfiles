@@ -1,0 +1,3 @@
+[submodule "repos/emacs.d"]
+	path = repos/emacs.d
+	url = https://github.com/bulletme/emacs.d
