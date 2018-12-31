@@ -36,6 +36,10 @@ syn match simlog_macro /\v^<run_dir>\ze:/
 syn match simlog_macro /\v^<ARM LSF Job tag>\ze:/
 syn match simlog_macro /\v^<PROJ_HOME>\ze:/
 syn match simlog_macro /\v^<WORK_DIR>\ze:/
+syn match simlog_macro /\v^<Linux>\ze:/
+
+" Trace testbench keywords
+syn match simlog_macro /\v<(WPTNO|CHECKNO)>\ze\=\d+/
 
 
 " --- Keywords ---
