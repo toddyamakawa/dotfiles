@@ -20,9 +20,6 @@
 	alias = !git config --list | sed -n 's/^alias.//p' | sort
 	vi = config --global -e
 
-	# --- magit ---
-	magit = !emacs -f magit-status -f delete-other-windows -f kill-other-buffers -nw
-
 	# --- info ---
 	blamew = blame --ignore-all-space --ignore-blank-lines
 	s = status
