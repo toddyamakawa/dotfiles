@@ -191,6 +191,7 @@
 	# --- My GitHub Repositories ---
 	newblog = clone https://github.com/toddyamakawa/blog
 	newdotfiles = clone https://github.com/toddyamakawa/dotfiles
+	newemacs = clone https://github.com/bulletme/emacs.d
 	newmicrobit = clone https://github.com/toddyamakawa/microbit
 	newpi = clone https://github.com/toddyamakawa/pi
 	newruby = clone https://github.com/toddyamakawa/my-ruby
