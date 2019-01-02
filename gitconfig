@@ -16,6 +16,22 @@
 	# --- git ---
 	git = !exec git
 
+	# --- magit ---
+	ms = magit status
+	ml = magit log-current
+	mll = magit log-popup
+
+	# --- help ---
+	h = help
+	hb = help branch
+	hcm = help commit
+	hco = help checkout
+	hcp = help cherry-pick
+	hm = help merge
+	hp = help push
+	hr = help rebase
+	hs = help status
+
 	# --- config ---
 	alias = !git config --list | sed -n 's/^alias.//p' | sort
 	vi = config --global -e
@@ -154,6 +170,7 @@
 	newgem = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/gem
 	newgerrit = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/gerrit_test
 	newldap = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/ldap
+	neworg = clone login3.nahpc2.arm.com:/arm/ref/pd/ares_val/todyam01/git-org
 	newtriton = ssh://git@git.research.arm.com/triton/tritondb-scripts/tritondb-scripts-utils
 	newunischeduler = clone ssh://ds-gerrit.euhpc.arm.com:29418/toef/unischeduler
 	newwrappers = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/wrappers
