@@ -27,6 +27,7 @@
 	hcm = help commit
 	hco = help checkout
 	hcp = help cherry-pick
+	hf = help fetch
 	hm = help merge
 	hp = help push
 	hr = help rebase
@@ -54,16 +55,6 @@
 	ours = "!f() { git co --ours $@ && git add $@; }; f"
 	theirs = "!f() { git co --theirs $@ && git add $@; }; f"
 
-	# --- cherry-pick ---
-	cp = cherry-pick
-	cpa = cherry-pick --abort
-	cpc = cherry-pick --continue
-
-	# --- commit ---
-	amend = commit --amend
-	cm = commit -m
-	#cm = "!f() { git commit -m \"$@\"; }; f"
-
 	# --- branch ---
 	br = branch
 	bco = "!f() { git checkout --track origin/$1 -b $1; }; f"
@@ -73,6 +64,24 @@
 	bname = rev-parse --abbrev-ref HEAD
 	bpush = !git push --set-upstream origin $(git bname)
 	bdpush = push origin --delete
+	pushb = "!f() { git push origin $(git bname):$1; }; f"
+
+	# --- checkout ---
+	co = checkout
+	cob = checkout -b
+	cobt = checkout -b --track
+	cop = checkout --patch
+	cot = checkout --track
+
+	# --- cherry-pick ---
+	cp = cherry-pick
+	cpa = cherry-pick --abort
+	cpc = cherry-pick --continue
+
+	# --- commit ---
+	amend = commit --amend
+	cm = commit -m
+	#cm = "!f() { git commit -m \"$@\"; }; f"
 
 	# --- diff ---
 	diffbr = "!f() { git ls $(git bname) ^$1; }; f"
@@ -88,12 +97,10 @@
 	vimdiff = difftool --tool=vimdiff
 	vimdiffs = !git vimdiff --staged
 
-	# --- checkout ---
-	co = checkout
-	cob = checkout -b
-	cobt = checkout -b --track
-	cop = checkout --patch
-	cot = checkout --track
+	# --- fetch ---
+	f = fetch
+	fo = fetch origin
+	fb = "!f() { git fetch origin $1:$1; }; f"
 
 	# --- log ---
 	# logf is defined in bin/git-logf
