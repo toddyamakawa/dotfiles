@@ -8,6 +8,7 @@
 Plug 'nanotech/jellybeans.vim'
 Plug 'tomasr/molokai'
 Plug 'antlypls/vim-colors-codeschool'
+Plug 'patstockwell/vim-monokai-tasty'
 
 " --- Clipboard ---
 " TODO: Figure out this plugin
@@ -47,7 +48,9 @@ cabbrev ansi AnsiEsc
 "    INTEGRATION
 " =================
 
-" TODO: QuickScope
+" --- Quick-Scope ---
+" Highlights characters that are good targets for F/f/T/t
+Plug 'unblevable/quick-scope'
 
 " --- NERDTree ---
 " Filesystem explorer
