@@ -1,7 +1,7 @@
 
-" ===============
-"    INTERFACE
-" ===============
+" ==============================================================================
+" INTERFACE
+" ==============================================================================
 
 " --- Color Schemes ---
 "Plug 'qualiabyte/vim-colorstepper'
@@ -44,9 +44,9 @@ Plug 'vim-scripts/AnsiEsc.vim', { 'on': 'AnsiEsc' }
 cabbrev ansi AnsiEsc
 
 
-" =================
-"    INTEGRATION
-" =================
+" ==============================================================================
+" INTEGRATION
+" ==============================================================================
 
 " --- Quick-Scope ---
 " Highlights characters that are good targets for F/f/T/t
@@ -91,6 +91,10 @@ Plug 'tmhedberg/matchit'
 " --- Comments ---
 Plug 'scrooloose/nerdcommenter'
 
+" --- tmux support ---
+Plug 'tpope/vim-tbone'
+
+
 " --- Search ---
 " Displays number of times pattern occurs
 "Plug 'google/vim-searchindex'
@@ -103,10 +107,14 @@ Plug 'junegunn/vim-slash'
 noremap <silent> <Plug>(slash-after) :<C-u>ShowSearchIndex<CR>
 xunmap <Plug>(slash-after)
 
+" Search for two characters
+"Plug 'justinmk/vim-sneak'
+"map s <Plug>sneak_s
 
-" ==============
-"    COMMANDS
-" ==============
+
+" ==============================================================================
+" COMMANDS
+" ==============================================================================
 
 " --- vim-easy-align ---
 Plug 'junegunn/vim-easy-align'
@@ -129,27 +137,25 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
 
 
-" ============
-"    SYNTAX
-" ============
+" ==============================================================================
+" SYNTAX
+" ==============================================================================
 
 " --- Verilog/SystemVerilog ---
 Plug 'vhda/verilog_systemverilog.vim'
 "Plug 'verilog_systemverilog.vim'
 
-
-" ============
-"    SYNTAX
-" ============
-
 " --- vim-scripts ---
 Plug 'vim-scripts/CountJump'
 Plug 'vim-scripts/ingo-library'
 
+" --- Miscenllaneous ---
+Plug 'guns/xterm-color-table.vim',  { 'on': 'XtermColorTable' }
 
-" ==========================
-"    EXPERIMENTAL PLUGINS
-" ==========================
+
+" ==============================================================================
+" EXPERIMENTAL PLUGINS
+" ==============================================================================
 
 " Plugins to experiment with
 " :help airline
@@ -162,8 +168,8 @@ Plug 'vim-scripts/ingo-library'
 "Plug 'tpope/vim-dispatch'
 
 
-" =====================
-"    TODD-ONLY STUFF
-" =====================
+" ==============================================================================
+" TODD-ONLY STUFF
+" ==============================================================================
 Plug '~/.vim/my-plugins'
 
