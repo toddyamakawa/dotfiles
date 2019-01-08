@@ -2,6 +2,7 @@
 " --- Always Display Status Line ---
 set laststatus=2
 
+
 " --- User-Definend Colors ---
 
 " White on Black
@@ -34,13 +35,17 @@ if v:version > 800
 	autocmd CmdlineLeave * hi User9 ctermfg=7 ctermbg=0
 endif
 
+
 " --- Left Status Line ---
 set statusline=
 
-" ModifiedFlag
+" Buffer number
+set statusline+=%3*[%n]
+
+" Modified?
 set statusline+=%4*%m
 
-" FileName
+" relative/path/to/file
 set statusline+=%9*%f
 
 
@@ -48,16 +53,16 @@ set statusline+=%9*%f
 set statusline+=%1*%=
 
 " CurrentLine/TotalLines
-set statusline+=%6l%1*/%L
+set statusline+=%3*%6l%1*/%L
 
 " ColumnNumber
-set statusline+=,%-3c
+set statusline+=,%3*%-3c
 
 " PercentFile
-set statusline+=\ %3p%%
+set statusline+=%1*[%3p%%]
 
 " FileType
-set statusline+=\ %3*%y
+set statusline+=%2*%y
 
 " File Size
 function! StatuslineFileSize()
