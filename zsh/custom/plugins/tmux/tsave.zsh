@@ -2,7 +2,7 @@
 
 # --- Backup File ---
 timestamp=$(date +%Y%m%d-%H%M%S-Week%U-%a-%T)
-backup_dir=$HOME/.tmux/backup
+backup_dir=$HOME/.tmux/backup/$(hostname --long)
 backup_file=$backup_dir/$timestamp.tmux
 mkdir -p $backup_dir
 exec > >(tee -i $backup_file)
