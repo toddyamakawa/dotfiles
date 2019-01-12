@@ -16,6 +16,12 @@ function zle-keymap-select() { zle reset-prompt; }
 zle -N zle-keymap-select
 zle -N edit-command-line
 
+# --- Redraw Every Minute ---
+function TRAPALRM() {
+	zle reset-prompt
+}
+TMOUT=60
+
 # --- Set $PROMPT and $RPROMPT ---
 PROMPT='$(build_prompt)'
 RPROMPT='$(build_rprompt)'
