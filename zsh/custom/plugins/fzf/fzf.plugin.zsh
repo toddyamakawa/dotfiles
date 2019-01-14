@@ -104,7 +104,7 @@ function fzf-hosts() {
 
 function my-fzf-complete() {
 	local query=${LBUFFER##* }
-	fzf --height 40% --reverse --query=$query
+	fzf --height 40% --tiebreak=length --reverse --query=$query
 }
 
 
