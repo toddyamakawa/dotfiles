@@ -147,7 +147,7 @@ augroup ALL
 	autocmd BufNewFile,BufRead * set formatoptions-=cro
 
 	" Automatically remove trailing whitespace
-	autocmd BufWritePre * call StripTrailingWhitespace()
+	autocmd BufWritePre * silent call StripTrailingWhitespace()
 
 	" Automatically add +x permissions
 	autocmd BufWritePre * if filereadable(expand("%")) &&  getline(1) =~ "^#!.*/bin/" | silent execute "!chmod +x %" | endif
@@ -203,13 +203,8 @@ set backspace=start,indent,eol
 " TODO: Figure out how to unmap Shift-Backspace
 "inoremap <S-BS> <nop>
 
-" --- Save/Quit Shortcuts ---
 nnoremap <F5> :edit<Enter>
 nnoremap <S-F5> :edit!<Enter>
-nnoremap <Leader>w :w!<Enter>
-nnoremap <Leader>q :q!<Enter>
-nnoremap <Leader>x :x!<Enter>
-nnoremap <Leader>z :x!<Enter>
 
 " Remap 'Undo' to 'U'
 nnoremap U <C-r>
@@ -223,14 +218,9 @@ set ruler            " show the cursor position all the time
 " Automatically source .vimrc on save
 "autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
-" --- .vimrc ---
-" Edit .vimrc
-nnoremap <Leader>vi :e $MYVIMRC<Enter>
-" Source .vimrc
-nnoremap <Leader>vs :source $MYVIMRC<Enter>
-
-"set visualbell
+"set novisualbell
 "set noerrorbells
+set belloff=all
 
 
 " ==============================================================================
@@ -390,7 +380,7 @@ nnoremap <Leader>d<Enter> :%s/\r//g<Enter>
 
 " --- Abbreviations ---
 " Help
-cabbrev help vert help
+cnoreabbrev help vert help
 
 " Set filetypes
 cabbrev sfl setfiletype log
