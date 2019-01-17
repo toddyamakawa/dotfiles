@@ -19,14 +19,14 @@ call plug#end()
 filetype indent plugin on
 
 
+" --- .vim Directory ---
+runtime ~/.vim
+
+
 " ==============================================================================
 " GENERAL SETTINGS
 " ==============================================================================
 set history=50     " Save 50 command lines of history
-
-" --- Set <Leader> to Space ---
-let mapleader="\<space>"
-let g:mapleader="\<space>"
 
 " --- Command Line ---
 nnoremap <Enter> :
@@ -49,16 +49,6 @@ augroup automatic_view
 	autocmd BufWinEnter * silent! loadview
 augroup END
 
-" --- Large File ---
-augroup large_file
-	au BufReadPre *
-		\ if getfsize(expand("%")) > 10000000 |
-			\ setlocal noswapfile eventignore+=FileType |
-		\ endif
-	" Always turn on syntax highlighting
-	au BufReadPost * silent set syntax=on
-augroup END
-
 " --- Undo ---
 "set undofile               " Enable undo file
 "set undodir=~/.vim/.undo// " Undo file directory
@@ -67,16 +57,6 @@ augroup END
 " ==============================================================================
 " BEAUTIFICATION
 " ==============================================================================
-runtime ~/.vim                 " Pointer to .vim directory
-syntax on                      " Enable syntax highlighting
-set t_Co=256                   " Terminal supports 256 colors
-set encoding=utf-8             " Set Vim character encoding to UTF-8
-set termencoding=utf-8
-set fileencoding=utf-8
-scriptencoding utf-8           " Specify script character encoding to UTF-8
-set guifont=consolas           " Favorite font
-set virtualedit=block
-
 
 " --- Color Schemes - --
 silent! colorscheme jellybeans " Favorite colorscheme
@@ -98,25 +78,7 @@ silent! colorscheme jellybeans " Favorite colorscheme
 "let &t_SR = "\<Esc>[4 q"
 "let &t_EI = "\<Esc>[2 q"
 
-" --- Display Settings ---
-set number         " Show line number
-set relativenumber " Show relative line number
-set showmatch      " Show matching parantheses
-set foldcolumn=3   " Show columns for folds
-
-
-" Highlight current line
-"TODO: Make CursorLine change color for insert mode
-set cursorline
-"autocmd InsertEnter * highlight CursorLine guifg=something
-"autocmd InsertLeave * highlight CursorLine guifg=something
-
-" Show tab characters and off-screen text indicator
-"set list listchars=tab:▸\ ,eol:¬,trail:·,precedes:←,extends:→
-set list listchars=tab:▸\ ,trail:·,precedes:←,extends:→
-
-
-set nrformats-=octal
+set nrformats-=octal " Numbers starting in 0 will not be treated as octal
 
 " Show spaces for indentation
 let g:indentLine_char = '|'
@@ -126,34 +88,6 @@ let &colorcolumn=join(range(81,999),",")
 highlight clear ColorColumn
 au InsertEnter * highlight ColorColumn guibg=#000000 ctermbg=16
 au InsertLeave * highlight clear ColorColumn
-
-
-" --- autocmd Group for All Files ---
-augroup ALL
-
-	" Highlight most significant digits of large numbers
-	" 1 12 123 1234 12345 123456 1234567 12345678 123456789 1234567890
-	"hi def link big_num Delimiter
-	"syn match big_num /\v<\zs\d{1,3}\ze(\d{3}){2,}>/
-	autocmd BufRead * match Delimiter /\v<\zs\d{1,3}\ze(\d{3}){2,}>/
-
-	" Highlight column 81 and trailing whitespace
-	"autocmd BufRead * 2match SpellBad /\v\%81v.\|\s\+$/
-
-	" Highlight trailing whitespace
-	autocmd BufRead * 2match SpellBad /\v\s+$/
-
-	" Disable comment formatting
-	autocmd BufNewFile,BufRead * set formatoptions-=cro
-
-	" Automatically remove trailing whitespace
-	autocmd BufWritePre * silent call StripTrailingWhitespace()
-
-	" Automatically add +x permissions
-	autocmd BufWritePre * if filereadable(expand("%")) &&  getline(1) =~ "^#!.*/bin/" | silent execute "!chmod +x %" | endif
-
-augroup END
-
 
 " Toggle list/number with <Leader>n
 nnoremap <Leader>n :set number! relativenumber! list!<CR>

@@ -5,7 +5,7 @@
 " LINE TEXT OBJECT
 " ==============================================================================
 
-" --- Inner-Line ---
+" --- In-Line ---
 " <c-u> clears command line
 " normal! executes command
 " g_ goes to last non-whitespace character

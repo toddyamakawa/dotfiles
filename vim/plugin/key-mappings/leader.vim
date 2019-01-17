@@ -1,4 +1,8 @@
 
+" --- Set <Leader> to Space ---
+let mapleader="\<space>"
+let g:mapleader="\<space>"
+
 " --- Save/Quit ---
 nnoremap <Leader>w :w!<Enter>
 nnoremap <Leader>q :q!<Enter>
