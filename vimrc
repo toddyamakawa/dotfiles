@@ -193,12 +193,6 @@ nmap gV `[v`]
 " NAVIGATION
 " ==============================================================================
 
-" --- Screen Shortcuts ---
-nnoremap <silent> <Leader>h <C-w>h
-nnoremap <silent> <Leader>j <C-w>j
-nnoremap <silent> <Leader>k <C-w>k
-nnoremap <silent> <Leader>l <C-w>l
-
 " --- QuickFix Shortcuts ---
 function TabQuickFix(dir)
 	if bufname("%") =~ '^fugitive://'
@@ -215,9 +209,6 @@ function TabQuickFix(dir)
 		endif
 	endif
 endfunction
-
-" Resize windows evenly
-nnoremap <Leader>= <C-w>=
 
 " Jump forward/backward
 nnoremap <C-l> <C-i>
