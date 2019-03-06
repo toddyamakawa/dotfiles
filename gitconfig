@@ -9,6 +9,19 @@
 	#pager = vim -
 	#pager = col -b | vim -c 'set ft=man ts=8 nomod nonu nolist noma' -
 
+[pager]
+	#show = vim -
+	show = less -R
+
+[merge]
+	tool = vimdiff
+
+[mergetool "vimdiff"]
+	trustExitCode = true
+
+[mergetool "fugitive"]
+	cmd = vim -f -c "Gdiff" "$MERGED"
+
 [sendemail]
 	suppress-cc = all
 
@@ -79,8 +92,9 @@
 	cpc = cherry-pick --continue
 
 	# --- commit ---
-	amend = commit --amend
 	cm = commit -m
+	amend = commit --amend
+	extend = commit --amend --no-edit
 	#cm = "!f() { git commit -m \"$@\"; }; f"
 
 	# --- diff ---
@@ -133,6 +147,9 @@
 	ri = rebase --interactive
 	rs = rebase --skip
 	pullr = pull --rebase
+
+	# --- remote ---
+	rv = remote -v
 
 	# --- reset ---
 	undo-merge = reset --hard ORIG_HEAD
