@@ -2,6 +2,7 @@
 declare -r here=$(readlink -f $PWD)
 declare -r script=$(readlink -f $BASH_SOURCE)
 declare -r script_dir=$(dirname $script)
+declare -r temp_dir=$(mktemp -d)
 declare -r now=$(date +%Y%m%d-%H%M%S-Week%U-%a-%T)
 function _git() { git -C $script_dir $@; }
 declare -r top=$(_git rev-parse --show-toplevel 2>/dev/null)
@@ -18,6 +19,7 @@ set -e
 # Always run when script finishes
 function finish() {
 	local RETVAL=$?
+	rm -rf $temp_dir
 	# Redirect stdout to custom pipe
 	exec 1>&5
 	echo -e "path: $here\ncommand: $@\nexit: $RETVAL"
