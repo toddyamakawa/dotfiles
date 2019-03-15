@@ -50,6 +50,7 @@ load-once ruby/gems/2.6.11
 load-once tct/tcl/8.6.1
 
 # --- Tools ---
+load-once colordiff/colordiff
 load-once gnu/emacs/26.1
 load-once fish/fish-shell/2.7.0
 load-once gnu/gawk/4.1.1
@@ -58,6 +59,7 @@ load-once gnu/tmux/2.7
 load-once greer/silversearcher/1.0.2
 load-once meld/meld/3.14.0
 load-once mosh/mosh/1.2.4
+load-once tkdiff/tkdiff
 load-once vim/vim/8.0.5
 load-once xclip/xclip/0.12
 
