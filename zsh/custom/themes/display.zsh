@@ -16,3 +16,15 @@ function _set-display() {
 	[[ -e ${TMUX%%,*} ]] && tmux set-environment DISPLAY $display
 }
 
+# --- Check ~/.DISPLAY File ---
+function _check-display-file() {
+	local display
+	while read -r display; do
+		if ( xdpyinfo -display $display &>/dev/null ); then
+			echo "\e[32mPASS\e[0m $display"
+		else
+			echo "\e[31mFAIL\e[0m $display"
+		fi
+	done < ~/.DISPLAY
+}
+
