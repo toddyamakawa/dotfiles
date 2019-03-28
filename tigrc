@@ -1,0 +1,28 @@
+
+# vi: ft=conf
+
+# ==============================================================================
+# SETTINGS
+# ==============================================================================
+
+# --- Git Settings ---
+set ignore-space = yes
+
+
+# --- Miscellaneous Settings ---
+
+# Ignore case for search
+set ignore-case = yes
+
+# Disable mouse support
+set mouse = no
+
+set tab-size = 8
+
+
+# ==============================================================================
+# COLORS
+# ==============================================================================
+
+color cursor white yellow bold
+
