@@ -1,11 +1,17 @@
 
-# =============
-#    PREEXEC
-# =============
+# ==============================================================================
+# PREEXEC
+# ==============================================================================
 # Executed just after a command has been read and is about to be executed.
 
 function preexec() {
+
+	# Set $DISPLAY
+	local old_display=$DISPLAY
 	_set-display $(_find-display)
+	[[ $DISPLAY != $old_display ]] && echo -e "\x1b[38;5;8m\$DISPLAY=$DISPLAY\e[0m"
+
+	# Set powerline
 	_set-powerline
 
 	# Enable tmux monitor
@@ -18,9 +24,9 @@ function preexec() {
 }
 
 
-# ============
-#    PRECMD
-# ============
+# ==============================================================================
+# PRECMD
+# ==============================================================================
 # Executed before each prompt. Note that precommand functions are not re-executed simply because the command line is redrawn.
 # e.g. when a notification about an exiting job is displayed.
 
