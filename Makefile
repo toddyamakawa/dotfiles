@@ -12,7 +12,6 @@ links = $(addprefix $(HOME)/., $(filter-out $(ignore), $(wildcard *)))
 
 # --- Directories ---
 .FISH := $(HOME)/.config/fish
-.TMUX := $(HOME)/.tmux
 .VIM := $(HOME)/.vim
 .ZSH := $(HOME)/.oh-my-zsh
 
@@ -63,15 +62,6 @@ $(HOME)/.emacs.d: emacs.d
 	ln -fs $(ROOT_DIR)/$< $@
 emacs.d:
 	git clone https://github.com/bulletme/emacs.d
-
-# --- tpm ---
-# tmux plugin manager
-tpm: $(.TMUX) $(.TMUX)/plugins/tpm
-	tmux run-shell $(.TMUX)/plugins/tpm/bin/clean_plugins
-	tmux run-shell $(.TMUX)/plugins/tpm/bin/install_plugins
-	tmux run-shell '$(.TMUX)/plugins/tpm/bin/update_plugins all'
-$(.TMUX)/plugins/tpm:
-	git clone https://github.com/tmux-plugins/tpm $(.TMUX)/plugins/tpm
 
 # --- Powerline Font ---
 fonts: $(fonts)/fonts.dir $(fonts)/fonts.scale $(fontconfig)/10-powerline-symbols.conf
