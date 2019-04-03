@@ -60,6 +60,7 @@
 	info = remote show origin
 	top = rev-parse --show-toplevel
 	ts = log -1 --format=%cd --date=format:'%Y%m%d-%H%M%S-Week%U-%a-%T'
+	untracked = !git status --porcelain | awk '($1==\"??\") {print $2}'
 	url = remote get-url origin
 
 	# --- add ---
