@@ -18,6 +18,12 @@ function ucdb_dump() {
 	vcover report -details $@ | ucdb_report_parse
 }
 
+# UCDB file summary
+function ucdb_summary() {
+	which vcover || return 1
+	vcover report -totals $@
+}
+
 # View UCDB in GUI
 function ucdb_view() {
 	which vsim || return 1
@@ -38,9 +44,9 @@ function pdb_report() {
 function _ucdb_file() {
 	_arguments "*:files:(($(ls *.ucdb)))"
 }
-compdef _ucdb_file ucdb_dump ucdb_view
+compdef _ucdb_file ucdb_dump ucdb_view ucdb_summary
 
-# Completion for *.ucdb files
+# Completion for *.pdb files
 function _pdb_file() {
 	_arguments "*:files:(($(ls *.pdb)))"
 }
