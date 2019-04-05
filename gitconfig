@@ -169,7 +169,6 @@
 	tags = log --tags --no-walk --decorate --oneline
 
 	format-patch-1 = format-patch HEAD~1
-	hub = "!f() { git clone https://github.com/$1/$2; }; f"
 	publish = push origin master:refs/publish/master
 	pull-theirs = pull -s recursive -X theirs
 	file = "!f() { git difftool $1{,^} -- $2; }; f"
@@ -179,42 +178,45 @@
 	ignore = update-index --assume-unchanged *
 
 	# --- Git Repositories ---
-	newasp = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/asp
+	newasp      = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/asp
 	newcputools = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/auscpgval
-	newetm = clone ssh://blr-gerrit-1.blr.arm.com:29418/avk/ETMCompare
-	newiris = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/iris
-	newkiwi = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/kiwi
-	newkvs = clone login8.nahpc.arm.com:/projects/pd/svos/git/kvs
-	newmsys = clone ssh://git@git.research.arm.com/svos/msys
-	newscp = clone ssh://git@git.research.arm.com/svos/scp_boot
-	newvarys = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/varys
-	newvarys2 = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/varys2
-	newyak = clone ssh://git@git.research.arm.com/svos/yak
+	newetm      = clone ssh://blr-gerrit-1.blr.arm.com:29418/avk/ETMCompare
+	newiris     = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/iris
+	newkiwi     = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/kiwi
+	newkvs      = clone login8.nahpc.arm.com:/projects/pd/svos/git/kvs
+	newmsys     = clone ssh://git@git.research.arm.com/svos/msys
+	newscp      = clone ssh://git@git.research.arm.com/svos/scp_boot
+	newvarys    = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/varys
+	newvarys2   = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/varys2
+	newyak      = clone ssh://git@git.research.arm.com/svos/yak
 
-	newambaviz = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/ambaviz
-	neweda = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/eda
-	newgem = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/gem
-	newgerrit = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/gerrit_test
-	newldap = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/ldap
-	neworg = clone login3.nahpc2.arm.com:/arm/ref/pd/ares_val/todyam01/git-org
-	newtriton = ssh://git@git.research.arm.com/triton/tritondb-scripts/tritondb-scripts-utils
+	newambaviz      = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/ambaviz
+	neweda          = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/eda
+	newgem          = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/gem
+	newgerrit       = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/gerrit_test
+	newldap         = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/ldap
+	neworg          = clone login3.nahpc2.arm.com:/arm/ref/pd/ares_val/todyam01/git-org
+	newtriton       = ssh://git@git.research.arm.com/triton/tritondb-scripts/tritondb-scripts-utils
 	newunischeduler = clone ssh://ds-gerrit.euhpc.arm.com:29418/toef/unischeduler
-	newwrappers = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/wrappers
+	newwrappers     = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/wrappers
 
 	newaravalli = clone -b scratch/dev/etb_tb ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/etm/aravalli
-	newares = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
-	newdeimos = clone -b deimos/dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
-	newporter = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter
-	newzeus = clone -b zeus/dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
+	newares     = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
+	newdeimos   = clone -b deimos/dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
+	newporter   = clone -b dev ssh://hw-gerrit.nahpc.arm.com:29418/systems/porter
+	newzeus     = clone -b zeus/dev ssh://hw-gerrit.nahpc.arm.com:29418/cores/ares
 
 	# --- My GitHub Repositories ---
-	newblog = clone https://github.com/toddyamakawa/blog
-	newdotfiles = clone https://github.com/toddyamakawa/dotfiles
-	newemacs = clone https://github.com/bulletme/emacs.d
-	newmicrobit = clone https://github.com/toddyamakawa/microbit
-	newpi = clone https://github.com/toddyamakawa/pi
-	newruby = clone https://github.com/toddyamakawa/my-ruby
+	newblog     = clone-hub toddyamakawa/blog
+	newdotfiles = clone-hub toddyamakawa/dotfiles
+	newemacs    = clone-hub bulletme/emacs.d
+	newmicrobit = clone-hub toddyamakawa/microbit
+	newpi       = clone-hub toddyamakawa/pi
+	newrecipes  = clone-hub tayphormade/recipes
+	newresume   = clone-hub toddyamakawa/resume
+	newruby     = clone-hub toddyamakawa/my-ruby
+	newsetup    = clone-hub bulletme/setup-scripts
 
 	# --- Other GitHub Repositories ---
-	newsedtris = clone https://github.com/uuner/sedtris
+	newsedtris = clone-hub uuner/sedtris
 
