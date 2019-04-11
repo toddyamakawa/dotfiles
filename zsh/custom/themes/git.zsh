@@ -44,3 +44,11 @@ function _git-short-branch() {
 	_rprompt-fg white $(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 }
 
+# --- Relative Git Directory ---
+function _git-dir() {
+	local gitdir=$(git rev-parse --git-dir 2>/dev/null)
+	gitdir=$(readlink -f $gitdir 2>/dev/null)
+	local githead=$(dirname ${gitdir%.git} 2>/dev/null)
+	echo ${PWD##$githead/}
+}
+

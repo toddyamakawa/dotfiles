@@ -1,6 +1,6 @@
 
 local here=${0:h}
-source $here/colors.zsh-theme
+source $here/colors.zsh
 source $here/directory.zsh
 source $here/display.zsh
 source $here/git.zsh

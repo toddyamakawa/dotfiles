@@ -32,11 +32,3 @@ function _permission-ugo() {
 	_prompt-fg $world "$access[-1]"
 }
 
-# --- Relative Git Directory ---
-function _dir-git() {
-	local gitdir=$(git rev-parse --git-dir 2>/dev/null)
-	gitdir=$(readlink -f $gitdir 2>/dev/null)
-	local githead=$(dirname ${gitdir%.git} 2>/dev/null)
-	echo ${PWD##$githead/}
-}
-

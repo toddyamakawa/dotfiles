@@ -22,6 +22,12 @@ function TRAPALRM() {
 }
 TMOUT=60
 
+# Alternative way to redraw every minute
+#function periodic() {
+#	zle reset-prompt
+#}
+#PERIODIC=60
+
 # --- Set $PROMPT and $RPROMPT ---
 PROMPT='$(build_prompt)'
 RPROMPT='$(build_rprompt)'
