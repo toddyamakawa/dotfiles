@@ -1,6 +1,7 @@
 
 # --- Modules ---
-alias questaload='mload mentor/questasim/10.7_1'
+alias questaloadold='mload mentor/questasim/10.7_1'
+alias questaload='mload mentor/questasim/2019.1_1'
 
 
 # --- Aliases ---
