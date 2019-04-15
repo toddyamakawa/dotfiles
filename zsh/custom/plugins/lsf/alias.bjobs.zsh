@@ -13,6 +13,7 @@ alias bcmd='bprint cmd'
 alias bpwd='bprint sub_cwd'
 alias bapp='bprint app'
 alias bdepend='bprint dependency'
+alias bremain='bprint time_left'
 alias bjobsf='bprint "user:8 project:9 run_time:-20 cmd"'
 alias bemu='bjobsf -q emulation -u all'
 
