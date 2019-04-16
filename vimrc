@@ -26,13 +26,15 @@ runtime ~/.vim
 " ==============================================================================
 " GENERAL SETTINGS
 " ==============================================================================
-set history=50     " Save 50 command lines of history
+
+" --- History ---
+" Save 1000 command lines of history
+set history=1000
 
 " --- Command Line ---
+" Use <Enter> for commmand mode
 nnoremap <Enter> :
 vnoremap <Enter> :
-nnoremap <Leader><Enter> <Enter>
-vnoremap <Leader><Enter> <Enter>
 
 autocmd CmdwinEnter * nnoremap <buffer> <Enter> <Enter>
 autocmd CmdwinEnter * nnoremap <buffer> q :q<Enter>
@@ -42,12 +44,20 @@ set nobackup                " No backup file (defaults to .filename~)
 set directory=~/.vim/.swp// " Swap file directory
 
 " --- View ---
+set viewoptions=cursor,folds,options
 set viewdir=~/.vim/.view//
 augroup automatic_view
 	autocmd!
 	autocmd BufWinLeave * silent! mkview
 	autocmd BufWinEnter * silent! loadview
 augroup END
+
+" --- Path ---
+" Add subfolders to path
+set path+=**
+
+" Tab complete all matching files
+set wildmenu
 
 " --- Undo ---
 "set undofile               " Enable undo file
@@ -63,13 +73,6 @@ silent! colorscheme jellybeans " Favorite colorscheme
 "silent! colorscheme codeschool
 "silent! colorscheme molokai
 "silent colorscheme vim-monokai-tasty
-
-" Cycle through color schemes
-"nnoremap <F6> <Plug>ColorstepPrev
-"nnoremap <F7> <Plug>ColorstepNext
-"map <Leader>cp <Plug>ColorstepPrev
-"map <Leader>cn <Plug>ColorstepNext
-"map <Leader>cs <Plug>ColorstepReload
 
 "let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 "let &t_EI = "\<Esc>]50;CursorShape=0\x7"
@@ -88,13 +91,6 @@ let &colorcolumn=join(range(81,999),",")
 highlight clear ColorColumn
 au InsertEnter * highlight ColorColumn guibg=#000000 ctermbg=16
 au InsertLeave * highlight clear ColorColumn
-
-" Toggle list/number with <Leader>n
-nnoremap <Leader>n :set number! relativenumber! list!<CR>
-" Toggle expand tab
-nnoremap <Leader><Tab> :set expandtab!<CR>
-" Toggle wrap
-nnoremap <Leader>sw :set wrap!<CR>
 
 " --- Indentation Settings ---
 set noexpandtab     " Use tabs instead of spaces
@@ -121,8 +117,6 @@ nnoremap <Tab> :call TabQuickFix('next')<Enter>
 " <Shift-Tab> in normal mode to unindent
 nnoremap <S-Tab> :call TabQuickFix('prev')<Enter>
 
-" Replace indentation spaces with tabs
-"nnoremap <Leader><Tab> :%s:^ \+:\=repeat("\t",strlen(submatch(0))/2):<Enter>
 
 " ==============================================================================
 " GENERAL SHORTCUTS
@@ -215,7 +209,7 @@ nnoremap <C-l> <C-i>
 nnoremap <C-h> <C-o>
 
 " Jump to definition
-nnoremap <C-k> <C-]>
+"nnoremap <C-k> <C-]>
 
 
 " ==============================================================================
@@ -278,10 +272,6 @@ set ignorecase " Ignore case for searching
 "set hlsearch   " Highlight search matches (handled by vim-slash plugin)
 set incsearch   " Show matches while typing
 
-" TODO: Delete this
-" Turn off search highlighting
-"nnoremap <Leader>/ :nohlsearch<CR>
-
 " Search for higlighted text
 vnoremap * y/<C-R>"<CR>
 
@@ -291,23 +281,13 @@ nnoremap d/ :g//d<Enter>
 " Replace matching words
 nnoremap c/ :%s///g<Left><Left>
 
-" Split up shell command into multiple lines
-nnoremap <Leader>\ :s/\v\s+-/ \\\r\t-/g<Enter>
-
-" --- Delete Patterns ---
-" Delete trailing whitespace
-nnoremap <Leader>d$ :%s/\s\+$//g<Enter>
-" Delete non-ASCII characters
-nnoremap <Leader>dx :%s/[^\x00-\x7F]//g<Enter>
-" Delete carriage returns
-nnoremap <Leader>d<Enter> :%s/\r//g<Enter>
-
-
 " --- Abbreviations ---
 " Help
 cnoreabbrev help vert help
 
 " Set filetypes
-cabbrev sfl setfiletype log
-cabbrev sfv setfiletype verilog_systemverilog
+cnoreabbrev sfl setfiletype log
+cnoreabbrev sfv setfiletype verilog_systemverilog
+
+
 
