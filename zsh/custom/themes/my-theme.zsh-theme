@@ -50,6 +50,7 @@ build_prompt() {
 	PROMPT_BG='NONE'
 	_prompt-bg black
 	_prompt-status
+	_projects-status
 	_hostinfo
 	_prompt-git
 	_prompt-svn
