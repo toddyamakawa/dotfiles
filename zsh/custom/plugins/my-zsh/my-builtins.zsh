@@ -9,5 +9,5 @@ alias ls='ls -h --color'
 alias less='less -r'
 alias mkdir='mkdir -pv'
 alias pwd='pwd -P'
-alias which='whence -c'
+alias which='whence -c -a'
 
