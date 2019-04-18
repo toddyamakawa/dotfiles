@@ -1,6 +1,8 @@
 
 local here=${0:h}
 source $here/colors.zsh
+source $here/symbols.zsh
+
 source $here/directory.zsh
 source $here/display.zsh
 source $here/git.zsh
