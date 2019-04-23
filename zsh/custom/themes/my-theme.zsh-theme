@@ -2,6 +2,10 @@
 local here=${0:h}
 source $here/lib.zsh-theme
 
+# Get prompt version
+_prompt_version=$(git -C $here log -1 --format=%H)
+
+# Disable right prompt
 alias nor="function _rprompt-git(){}; function _prompt-git(){};"
 
 # =============
@@ -52,6 +56,7 @@ build_prompt() {
 	_prompt-status
 	_projects-status
 	_hostinfo
+	[[ $_prompt_version == $(git -C $here log -1 --format=%H) ]] || echo -n $_ZSH_DEGREE
 	_prompt-git
 	_prompt-svn
 	_dir-permission
