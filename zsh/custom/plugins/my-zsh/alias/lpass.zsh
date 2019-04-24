@@ -46,12 +46,12 @@ alias lpshow='lpass show'
 
 # --- Search for LastPass Info ---
 function _lpfzf() {
-	lpass status --quiet || return 1
+	lpass status --quiet || return $?
 	local ret selected id
 
 	# Select site with fzf
 	selected=$(
-		lp ls --long | \
+		lpass ls --long | \
 			awk '/username: \w/{$1="";$2="";print}' | \
 			sed -e 's/\(.*\)\[id:\s*\(\w\+\).*username:\s*\(.*\)\]/\2,\3,\1/' | \
 			column -t -s ',' | \
@@ -86,10 +86,10 @@ function lpf() {
 	# Print site information and copy password
 	if (( $? == 0 )); then
 		id=$selected[1]
-		lp show --url $id
+		lpass show --url $id
 		echo "Username: $selected[2]"
-		lp show --password $id | xclip
-		#lp show --clip --password $id
+		lpass show --password $id | xclip
+		#lpass show --clip --password $id
 		echo "Password copied to clipboard"
 	else
 		return $ret
