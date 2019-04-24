@@ -19,6 +19,13 @@ function ucdb_dump() {
 	vcover report -details $@ | ucdb_report_parse
 }
 
+# UCDB rank
+function ucdb_rank() {
+	which vcover || return 1
+	vcover ranktest $@
+}
+
+
 # UCDB file summary
 function ucdb_summary() {
 	which vcover || return 1
@@ -45,7 +52,7 @@ function pdb_report() {
 function _ucdb_file() {
 	_arguments "*:files:(($(ls *.ucdb)))"
 }
-compdef _ucdb_file ucdb_dump ucdb_view ucdb_summary
+compdef _ucdb_file ucdb_dump ucdb_rank ucdb_summary ucdb_view
 
 # Completion for *.pdb files
 function _pdb_file() {
