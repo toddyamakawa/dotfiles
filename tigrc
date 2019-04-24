@@ -7,7 +7,8 @@
 
 # --- Git Settings ---
 set ignore-space = yes
-
+set status-show-untracked-files = yes
+set status-show-untracked-dirs = no
 
 # --- Miscellaneous Settings ---
 
