@@ -47,11 +47,13 @@
 	hs = help status
 
 	# --- config ---
+	a = !git config --list | sed -n 's/^alias.//p' | sort
 	alias = !git config --list | sed -n 's/^alias.//p' | sort
 	vi = config --global -e
 
 	# --- info ---
 	blamew = blame --ignore-all-space --ignore-blank-lines
+	lsf = ls-files
 	s = status
 	stat = status
 	sb = status -sb -uno
@@ -64,7 +66,6 @@
 	url = remote get-url origin
 
 	# --- add ---
-	a = add
 	au = add -u
 	ap = add --patch
 	ours = "!f() { git co --ours $@ && git add $@; }; f"
@@ -132,7 +133,6 @@
 	ma = merge --abort
 	msquash = merge --squash --no-commit
 	vmerge = mergetool -t vimdiff
-
 
 	# --- review ---
 	r = review
