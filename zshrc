@@ -23,7 +23,7 @@ if [[ $(hostname --long) =~ arm.com$ ]]; then
 else
 	function module(){}
 fi
-plugins+=(bin modules my-zsh cd vim xclip tmux vi-mode regex math setup vcs emacs)
+plugins+=(bin modules my-zsh cd vim xclip tmux vi-mode regex math setup git svn emacs)
 [[ -f ~/.fzf.zsh ]] && plugins+=(fzf)
 plugins+=(history-substring-search)
 
