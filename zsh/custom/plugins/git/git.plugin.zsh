@@ -1,4 +1,7 @@
 
+local here=${0:h}
+export PATH=$here/bin:$PATH
+
 # --- Aliases ---
 alias g='git'
 
