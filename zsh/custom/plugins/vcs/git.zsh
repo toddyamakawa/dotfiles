@@ -1,4 +1,7 @@
 
+# --- Aliases ---
+alias g='git'
+
 # --- Silver Searcher ---
 function git-ag() {
 	local pattern="$1"
