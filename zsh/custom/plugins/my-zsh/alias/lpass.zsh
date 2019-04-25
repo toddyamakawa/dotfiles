@@ -41,7 +41,7 @@ alias lastpass='lpass'
 
 alias lpstat='lpass status'
 alias lplogin='lpass login'
-alias lplogin='lpass logout'
+alias lplogout='lpass logout'
 alias lpshow='lpass show'
 
 # --- Search for LastPass Info ---
