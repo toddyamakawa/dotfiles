@@ -1,0 +1,39 @@
+
+# ==============================================================================
+# XPDFRC
+# ==============================================================================
+# Manual: https://www.xpdfreader.com/xpdf-man.html
+
+
+# ==============================================================================
+# VIM KEY BINDINGS
+# ==============================================================================
+
+# --- Scroll ---
+bind h any scrollLeft(16)
+bind j any scrollDown(64)
+bind k any scrollUp(64)
+bind l any scrollRight(16)
+bind J any scrollDown(512)
+bind K any scrollUp(512)
+
+bind ctrl-u any prevPage
+bind ctrl-d any nextPage
+
+# --- Navigate ---
+bind < any prevTab
+bind > any nextTab
+
+# --- Search ---
+bind / any find
+bind ? any find
+bind n any findNext
+bind N any findPrevious
+
+# --- History ---
+bind ctrl-h any goBackward
+bind ctrl-l any goForward
+
+# --- View ---
+bind t any toggleSidebar
+
