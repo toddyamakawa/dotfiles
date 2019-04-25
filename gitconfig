@@ -95,7 +95,6 @@
 	cpc = cherry-pick --continue
 
 	# --- commit ---
-	cm = commit -m
 	amend = commit --amend
 	extend = commit --amend --no-edit
 	#cm = "!f() { git commit -m \"$@\"; }; f"
