@@ -1,8 +1,8 @@
 
 local here=${0:h}
 
-alias awkvar="cat $here/awk.variables.txt"
-alias awk.ts="$here/timestamp.awk"
+alias awkvars="cat $here/awk.variables.txt"
+alias awk.ts="$here/bin/timestamp.awk"
 
 # --- awk columns ---
 function awkc() {

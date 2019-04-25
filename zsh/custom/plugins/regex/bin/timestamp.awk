@@ -3,7 +3,7 @@
 BEGIN {
 	format = "%H:%M:%S"
 	start = systime()
-	if(file == "") file = "name"
+	if(file == "") file = "unnamed"
 	filename = file"-"strftime("%Y%m%d-%H%M%S",start)".log"
 }
 {
