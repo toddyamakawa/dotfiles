@@ -99,6 +99,9 @@ bindkey -M vicmd 'L' vi-end-of-line
 autoload -Uz edit-command-line
 bindkey -M vicmd 'v' edit-command-line
 
+# Find char in reverse direction
+bindkey -M vicmd ':' vi-rev-repeat-find
+
 
 # =====================
 #    MENU SELCT MODE

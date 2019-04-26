@@ -24,7 +24,7 @@ autocmd OptionSet tabstop IndentLinesReset
 " --- Rainbow Indentation ---
 "Plug 'thiagoalessio/rainbow_levels.vim', { 'on': 'RainbowLevelsToggle' }
 Plug 'thiagoalessio/rainbow_levels.vim'
-cabbrev rain RainbowLevelsToggle
+cnoreabbrev rain RainbowLevelsToggle
 
 "Plug 'nathanaelkane/vim-indent-guides.git'
 "Plug 'tpope/vim-sleuth'
@@ -41,12 +41,27 @@ Plug 'dag/vim-fish'
 
 " --- ANSI Escape Syntax ---
 Plug 'vim-scripts/AnsiEsc.vim', { 'on': 'AnsiEsc' }
-cabbrev ansi AnsiEsc
+cnoreabbrev ansi AnsiEsc
 
 
 " ==============================================================================
 " INTEGRATION
 " ==============================================================================
+
+" --- UltiSnips ---
+Plug 'SirVer/ultisnips'
+cnoreabbrev ultie UltiSnipsEdit
+cnoreabbrev ultif UltiSnipsAddFiletypes
+
+" Trigger configuration
+" Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe
+let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" Directory configuration
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+
 
 " --- Quick-Scope ---
 " Highlights characters that are good targets for F/f/T/t
@@ -94,6 +109,9 @@ Plug 'scrooloose/nerdcommenter'
 " --- tmux support ---
 Plug 'tpope/vim-tbone'
 
+" --- Text Objects ---
+" Text object based on indentation level
+Plug 'michaeljsmith/vim-indent-object'
 
 " --- Search ---
 " Displays number of times pattern occurs
