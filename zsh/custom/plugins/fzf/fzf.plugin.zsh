@@ -50,7 +50,7 @@ function fzf-gitdirs() {
 	[[ -d $GIT_TOP ]] || return 0
 	# This is too slow for large directories
 	#fzf-gitfiles | xargs -n 1 dirname | uniq
-	git -C $GIT_TOP ls-files | sed -e 's/^/$GIT_TOP\//' -e 's/\/[^/]*$//' | uniq
+	git -C $GIT_TOP ls-files | sed -e 's/^/$GIT_TOP\//' -e 's/\/[^/]*$//' | awk '!count[$0]++'
 }
 
 
