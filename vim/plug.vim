@@ -49,18 +49,23 @@ cnoreabbrev ansi AnsiEsc
 " ==============================================================================
 
 " --- UltiSnips ---
+" :help snippet
 Plug 'SirVer/ultisnips'
 cnoreabbrev ultie UltiSnipsEdit
 cnoreabbrev ultif UltiSnipsAddFiletypes
 
 " Trigger configuration
 " Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsListSnippets="<F2>"
 "let g:UltiSnipsJumpForwardTrigger="<c-b>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Directory configuration
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+
+" Recommended snippets
+Plug 'honza/vim-snippets'
 
 
 " --- Quick-Scope ---
