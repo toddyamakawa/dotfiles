@@ -50,7 +50,7 @@ $(.FISH)/functions/fisher.fish:
 
 # --- vim-plug ---
 # vim plugin manager
-vim-plug: $(HOME)/.vimrc $(.VIM)/autoload/plug.vim
+vim-plug: $(HOME)/.vim $(.VIM)/autoload/plug.vim
 	vim +PlugInstall +qall
 $(.VIM)/autoload/plug.vim: $(.VIM)
 	curl -fLo $@ --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
