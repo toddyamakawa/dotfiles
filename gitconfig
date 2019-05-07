@@ -47,13 +47,15 @@
 	hs = help status
 
 	# --- config ---
-	a = !git config --list | sed -n 's/^alias.//p' | sort
+	a = !git alias
+	agrep = !git alias | grep
 	alias = !git config --list | sed -n 's/^alias.//p' | sort
 	vi = config --global -e
 
 	# --- info ---
 	blamew = blame --ignore-all-space --ignore-blank-lines
 	lsf = ls-files
+	;lsfg = !git ls-files | grep
 	s = status
 	stat = status
 	sb = status -sb -uno
@@ -167,8 +169,10 @@
 	tagn = tag -n
 	tags = log --tags --no-walk --decorate --oneline
 
+	# --- Miscellaneous ---
 	format-patch-1 = format-patch HEAD~1
 	publish = push origin master:refs/publish/master
+	pullo = pull origin
 	pull-theirs = pull -s recursive -X theirs
 	file = "!f() { git difftool $1{,^} -- $2; }; f"
 	sha = "!f() { git diff --numstat $1{^,}; }; f"
