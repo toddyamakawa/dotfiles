@@ -1,2 +1,0 @@
-syntax off
-set readonly

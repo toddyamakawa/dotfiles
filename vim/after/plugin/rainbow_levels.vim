@@ -1,9 +1,0 @@
-hi! RainbowLevel0 ctermfg=255
-hi! RainbowLevel1 ctermfg=218
-hi! RainbowLevel2 ctermfg=215
-hi! RainbowLevel3 ctermfg=228
-hi! RainbowLevel4 ctermfg=119
-hi! RainbowLevel5 ctermfg=123
-hi! RainbowLevel6 ctermfg=183
-hi! RainbowLevel7 ctermfg=141
-hi! RainbowLevel8 ctermfg=247
