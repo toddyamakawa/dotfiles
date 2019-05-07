@@ -14,7 +14,10 @@ exec 2> >(while read line; do echo -e "\e[31m[stderr]\e[0m $line"; done)
 exec 5> >(while read line; do echo -e "\e[34m$line\e[0m"; done)
 
 # Immediately exit on failure
-set -e
+set -eo pipefail
+#set -euo pipefail
+
+IFS=$'\n\t'
 
 # Always run when script finishes
 function finish() {
