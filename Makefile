@@ -12,7 +12,6 @@ links = $(addprefix $(HOME)/., $(filter-out $(ignore), $(wildcard *)))
 
 # --- Directories ---
 .FISH := $(HOME)/.config/fish
-.VIM := $(HOME)/.vim
 .ZSH := $(HOME)/.oh-my-zsh
 
 # --- powerline ---
@@ -21,7 +20,7 @@ fonts := $(HOME)/.fonts
 fontconfig := $(HOME)/.config/fontconfig/conf.d
 
 # --- All ---
-all: links bindir zshrc fish vim-plug
+all: links bindir zshrc fish
 
 # --- Symbolic Links ---
 links: $(links)
@@ -47,21 +46,6 @@ bash/downloads/git-completion.bash:
 fish: $(.FISH)/functions/fisher.fish
 $(.FISH)/functions/fisher.fish:
 	curl -fLo $@ https://git.io/fisher
-
-# --- vim-plug ---
-# vim plugin manager
-vim-plug: $(HOME)/.vim $(.VIM)/autoload/plug.vim
-	vim +PlugInstall +qall
-$(.VIM)/autoload/plug.vim: $(.VIM)
-	curl -fLo $@ --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-# --- emacs ---
-# vim plugin manager
-emacs: $(HOME)/.emacs.d
-$(HOME)/.emacs.d: emacs.d
-	ln -fs $(ROOT_DIR)/$< $@
-emacs.d:
-	git clone https://github.com/bulletme/emacs.d
 
 # --- Powerline Font ---
 fonts: $(fonts)/fonts.dir $(fonts)/fonts.scale $(fontconfig)/10-powerline-symbols.conf
