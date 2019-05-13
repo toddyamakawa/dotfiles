@@ -6,7 +6,7 @@ query="$@"
 [[ -z $query ]] && { echo $usage; exit 2; }
 
 # Run git grep
-result=$(git grep -n "$query" | \
+result=$(git grep -i -n "$query" | \
 	fzf --height 40% --tiebreak=length --reverse --exact --query="$query ")
 
 # Check exit code
