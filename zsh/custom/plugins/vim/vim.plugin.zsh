@@ -47,3 +47,9 @@ function vtfind() {
 	#echo $session
 }
 
+# Stolen from here:
+# https://vi.stackexchange.com/questions/8835/how-to-output-result-of-vim-commands-to-shell
+function vimscripts() {
+	vim -c ':set t_ti= t_te= nomore' -c scriptnames -c q
+}
+
