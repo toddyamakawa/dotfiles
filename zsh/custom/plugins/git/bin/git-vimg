@@ -15,5 +15,6 @@ ret=$?
 
 # Open result with vim
 read -r file line <<<$(echo $result | awk -v FS=: '{print $1, $2}')
-vim +$line $file
+echo vim +$line $file
+exec vim +$line $file
 
