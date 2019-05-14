@@ -7,7 +7,7 @@ query="$@"
 
 # Run git grep
 result=$(git grep -n "$query" | \
-	fzf --height 40% --tiebreak=length --reverse --exact --query="$query")
+	fzf --height 40% --tiebreak=length --reverse --exact --query="$query ")
 
 # Check exit code
 ret=$?
