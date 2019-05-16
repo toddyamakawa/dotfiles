@@ -5,21 +5,27 @@ cmd=${args[1]}
 
 # List all commands
 if [[ -z $cmd ]]; then
-	result=$({
+	result=($({
 		printf "%s\n" $(git help --all | grep '^ \+\w')
 		git config --list | sed -n 's/^alias\.\([^=]\+\)=\(.*\)/\1 (alias for \2)/p'
-	} | my-fzf-40)
+	} | my-fzf-40))
 	ret=$?
 	[[ $ret -ne 0 ]] && exit $ret
-	echo $@ $result
+	echo $@ ${result[0]}
+	exit 0
 fi
 
 if [[ $cmd == 'add' ]]; then
 	result=$({
 		git ls-files --modified
 		git ls-files --exclude-standard --others
-	} | my-fzf-40)
+	} | my-fzf-git-diff)
 	ret=$?
+
+elif [[ $cmd == 'diff' ]]; then
+	result=$(git ls-files --modified | my-fzf-40)
+	ret=$?
+
 else
 	result=$({
 		my-fzf-helper-files-shallow-first

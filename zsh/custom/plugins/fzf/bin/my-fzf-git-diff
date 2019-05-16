@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+eval exec fzf --height 100% --tiebreak=length --reverse --preview-window down:80% --preview "'git diff --color=always {}'" --query="'$@ '"

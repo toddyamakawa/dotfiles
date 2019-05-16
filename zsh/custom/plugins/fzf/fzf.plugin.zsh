@@ -112,8 +112,8 @@ function fzf-magic-complete() {
 	local cmd ret query=${LBUFFER##* } accept
 	setopt localoptions pipefail 2> /dev/null
 
+	# Check if command matches completion directory
 	cmd=$(echo $LBUFFER | awk '{print $1}')
-
 	if [[ -x $FZF_COMPLETION_DIR/$cmd ]]; then
 		result=$($FZF_COMPLETION_DIR/$cmd $LBUFFER)
 		ret=$?
