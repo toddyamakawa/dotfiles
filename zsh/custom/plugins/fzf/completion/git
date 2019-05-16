@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# List all commands
+if [[ -z $2 ]]; then
+	result=($({
+		printf "%s\n" $(git help --all | grep '^ \+\w')
+		git config --list | sed -n 's/^alias\.\([^=]\+\)=\(.*\)/\1 (alias for \2)/p'
+	} | my-fzf-40))
+	ret=$?
+	echo $@ $result
+	exit $ret
+fi
+
