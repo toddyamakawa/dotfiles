@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
+
 args=($(printf "%s\n" $@))
 cmd=${args[1]}
 
-# List all commands
+# ==============================================================================
+# LIST ALL COMMANDS
+# ==============================================================================
 if [[ -z $cmd ]]; then
 	result=($({
 		printf "%s\n" $(git help --all | grep '^ \+\w')
@@ -15,10 +18,19 @@ if [[ -z $cmd ]]; then
 	exit 0
 fi
 
+
+# ==============================================================================
+# SPECIFIC COMMANDS
+# ==============================================================================
+git_top=$(git rev-parse --show-toplevel)
+git_relative=$(python -c "import os.path; print os.path.relpath('$git_top', '$PWD')")
+
 if [[ $cmd == 'add' ]]; then
 	result=$({
 		git ls-files --modified
+		git ls-files --modified $git_relative
 		git ls-files --exclude-standard --others
+		git ls-files --exclude-standard --others $git_relative
 	} | my-fzf-git-diff)
 	ret=$?
 
@@ -33,6 +45,7 @@ else
 	ret=$?
 fi
 
+# Return result
 [[ $ret -ne 0 ]] && exit $ret
 echo $@ $result
 
