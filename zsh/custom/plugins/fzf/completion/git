@@ -1,13 +1,32 @@
 #!/usr/bin/env bash
 
+args=($(printf "%s\n" $@))
+cmd=${args[1]}
+
 # List all commands
-if [[ -z $2 ]]; then
-	result=($({
+if [[ -z $cmd ]]; then
+	result=$({
 		printf "%s\n" $(git help --all | grep '^ \+\w')
 		git config --list | sed -n 's/^alias\.\([^=]\+\)=\(.*\)/\1 (alias for \2)/p'
-	} | my-fzf-40))
+	} | my-fzf-40)
 	ret=$?
+	[[ $ret -ne 0 ]] && exit $ret
 	echo $@ $result
-	exit $ret
 fi
+
+if [[ $cmd == 'add' ]]; then
+	result=$({
+		git ls-files --modified
+		git ls-files --exclude-standard --others
+	} | my-fzf-40)
+	ret=$?
+else
+	result=$({
+		my-fzf-helper-files-shallow-first
+	} | my-fzf-40)
+	ret=$?
+fi
+
+[[ $ret -ne 0 ]] && exit $ret
+echo $@ $result
 

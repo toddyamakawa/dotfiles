@@ -109,11 +109,18 @@ function fzf-hosts() {
 # Create fzf-magic-complete widget
 zle -N fzf-magic-complete
 function fzf-magic-complete() {
-	local ret query=${LBUFFER##* } accept
+	local cmd ret query=${LBUFFER##* } accept
 	setopt localoptions pipefail 2> /dev/null
 
+	cmd=$(echo $LBUFFER | awk '{print $1}')
+
+	if [[ -x $FZF_COMPLETION_DIR/$cmd ]]; then
+		result=$($FZF_COMPLETION_DIR/$cmd $LBUFFER)
+		ret=$?
+		[[ $ret == 0 ]] && LBUFFER=$result
+
 	# Directory completion for `cd`
-	if [[ $LBUFFER =~ '^\s*cd\b' ]]; then
+	elif [[ $LBUFFER =~ '^\s*cd\b' ]]; then
 		if [[ -n $query ]]; then
 			LBUFFER="${LBUFFER% *} $(fzf-dirs | my-fzf-exact-40)"
 		else

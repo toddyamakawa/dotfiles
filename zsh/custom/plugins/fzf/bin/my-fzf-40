@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+eval exec fzf --height 40% --tiebreak=length --reverse --query="'$@ '"

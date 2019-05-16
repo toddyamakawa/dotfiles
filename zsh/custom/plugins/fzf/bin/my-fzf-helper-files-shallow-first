@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# Initialize directory array
+declare -a dirs
+init_dir=${1-$PWD}
+[[ -d $init_dir ]] || exit 0
+dirs=($init_dir)
+
+# While directories array not empty
+while [[ ${#dirs[@]} -gt 0 ]]; do
+
+	# Pop directory
+	dir=${dirs[0]}
+	unset dirs[0]
+	dirs=(${dirs[@]})
+	echo ${dir#$init_dir/}/
+
+	# For each file
+	for file in $(\ls $dir); do
+		entry=$dir/$file
+		[[ -f $entry ]] && echo ${entry#$init_dir/}
+		[[ -d $entry ]] && dirs+=($entry)
+	done
+done
+exit 0
+
