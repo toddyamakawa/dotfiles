@@ -27,11 +27,9 @@ git_relative=$(python -c "import os.path; print os.path.relpath('$git_top', '$PW
 
 if [[ $cmd == 'add' ]]; then
 	result=$({
-		git ls-files --modified
-		git ls-files --modified $git_relative
-		git ls-files --exclude-standard --others
-		git ls-files --exclude-standard --others $git_relative
+		my-fzf-helper-git-files
 	} | my-fzf-git-diff)
+	#} | my-fzf-git-diff '!ignore')
 	ret=$?
 
 elif [[ $cmd == 'diff' ]]; then
