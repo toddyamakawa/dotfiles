@@ -1,5 +1,7 @@
 
 local here=${0:h}
+export PATH=$here/bin:$PATH
+export FZF_COMPLETION_DIR=$here/completion
 
 # ==============================================================================
 # SETUP
@@ -102,12 +104,6 @@ function fzf-hosts() {
 }
 
 
-function my-fzf-complete() {
-	local query=${LBUFFER##* }
-	fzf --height 40% --tiebreak=length --reverse --exact --query="$query"
-}
-
-
 # --- Widget ---
 
 # Create fzf-magic-complete widget
@@ -119,24 +115,24 @@ function fzf-magic-complete() {
 	# Directory completion for `cd`
 	if [[ $LBUFFER =~ '^\s*cd\b' ]]; then
 		if [[ -n $query ]]; then
-			LBUFFER="${LBUFFER% *} $(fzf-dirs | my-fzf-complete)"
+			LBUFFER="${LBUFFER% *} $(fzf-dirs | my-fzf-exact-40)"
 		else
-			LBUFFER="${LBUFFER% *} $({fzf-gitdirs & fzf-dirs} | my-fzf-complete)"
+			LBUFFER="${LBUFFER% *} $({fzf-gitdirs & fzf-dirs} | my-fzf-exact-40)"
 		fi
 		ret=$?
 		[[ $ret == 0 ]] && accept=1
 
 	# SSH completion
 	elif [[ $LBUFFER =~ '^\s*ssh\b' ]]; then
-		LBUFFER="${LBUFFER% *} $(fzf-hosts | my-fzf-complete)"
+		LBUFFER="${LBUFFER% *} $(fzf-hosts | my-fzf-exact-40)"
 		ret=$?
 
 	# File completion
 	else
 		if [[ -n $query ]]; then
-			LBUFFER="${LBUFFER% *} $(fzf-files | my-fzf-complete)"
+			LBUFFER="${LBUFFER% *} $(fzf-files | my-fzf-exact-40)"
 		else
-			LBUFFER="${LBUFFER% *} $({fzf-gitfiles & fzf-files} | my-fzf-complete)"
+			LBUFFER="${LBUFFER% *} $({fzf-gitfiles & fzf-files} | my-fzf-exact-40)"
 		fi
 		ret=$?
 	fi
