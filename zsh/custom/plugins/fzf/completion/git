@@ -38,25 +38,27 @@ fi
 git_top=$(git rev-parse --show-toplevel)
 git_relative=$(python -c "import os.path; print os.path.relpath('$git_top', '$PWD')")
 
-if [[ $cmd == 'add' ]]; then
-	result=$({
+if [[ $cmd =~ add|diff ]]; then
+	result=($({
 		my-fzf-helper-git-files
-	} | my-fzf-git-diff)
-	#} | my-fzf-git-diff '!ignore')
+	} | my-fzf-git-diff '!ignore'))
 	ret=$?
+	args+=(${result[1]})
 
 elif [[ $cmd == 'diff' ]]; then
 	result=$(git ls-files --modified | my-fzf-40)
 	ret=$?
+	args+=($result)
 
 else
 	result=$({
 		my-fzf-helper-files-shallow-first
 	} | my-fzf-40)
 	ret=$?
+	args+=(${result[0]})
 fi
 
 # Return result
 [[ $ret -ne 0 ]] && exit $ret
-echo "${args[@]} $result "
+echo "${args[@]} "
 
