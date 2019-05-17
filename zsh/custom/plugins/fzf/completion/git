@@ -55,7 +55,7 @@ else
 		my-fzf-helper-files-shallow-first
 	} | my-fzf-40)
 	ret=$?
-	args+=(${result[0]})
+	args+=(${result[1]})
 fi
 
 # Return result

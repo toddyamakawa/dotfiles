@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+args=($(printf "%s\n" $@))
+cmd=${args[0]}
+[[ "$@" != "${@% }" ]] && trail=1
+
+result=($({
+	my-fzf-helper-files-shallow-first
+	my-fzf-helper-git-files
+} | my-fzf-40 '!(directory)'))
+ret=$?
+
+[[ $ret -ne 0 ]] && exit $ret
+args+=(${result[1]})
+echo "${args[@]} "
+

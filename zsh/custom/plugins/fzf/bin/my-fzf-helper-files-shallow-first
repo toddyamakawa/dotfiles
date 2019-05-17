@@ -13,12 +13,12 @@ while [[ ${#dirs[@]} -gt 0 ]]; do
 	dir=${dirs[0]}
 	unset dirs[0]
 	dirs=(${dirs[@]})
-	echo ${dir#$init_dir/}/
+	echo "(directory) ${dir#$init_dir/}/"
 
 	# For each file
 	for file in $(\ls $dir); do
 		entry=$dir/$file
-		[[ -f $entry ]] && echo ${entry#$init_dir/}
+		[[ -f $entry ]] && echo "(file) ${entry#$init_dir/}"
 		[[ -d $entry ]] && dirs+=($entry)
 	done
 done
