@@ -12,7 +12,6 @@ links = $(addprefix $(HOME)/., $(filter-out $(ignore), $(wildcard *)))
 
 # --- Directories ---
 .FISH := $(HOME)/.config/fish
-.ZSH := $(HOME)/.oh-my-zsh
 
 # --- powerline ---
 temp := $(shell mktemp -d)
@@ -20,7 +19,7 @@ fonts := $(HOME)/.fonts
 fontconfig := $(HOME)/.config/fontconfig/conf.d
 
 # --- All ---
-all: links bindir zshrc fish
+all: links bindir fish
 
 # --- Symbolic Links ---
 links: $(links)
@@ -29,12 +28,6 @@ $(HOME)/.%: $(ROOT_DIR)/%; ln -fs $< $@
 # --- bin Directory ---
 bindir:
 	make -C bin all
-
-# --- oh-my-zsh ---
-# zsh plugin manager
-zshrc: $(.ZSH)/oh-my-zsh.sh
-$(.ZSH)/oh-my-zsh.sh:
-	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # --- bash ---
 bash: bash/downloads/git-completion.bash
