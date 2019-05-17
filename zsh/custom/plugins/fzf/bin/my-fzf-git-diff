@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-eval exec fzf \
-	--height 100% \
-	--tiebreak=index \
-	--reverse \
-	--preview-window down:80% \
-	--preview "'my-fzf-helper-git-diff {}'" \
-	--query="'$@ '"

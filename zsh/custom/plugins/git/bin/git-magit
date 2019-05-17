@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-cmd=${1?cmd not specifed} && shift
-exec emacs -f magit-$cmd -f delete-other-windows -nw $@
