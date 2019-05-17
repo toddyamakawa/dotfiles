@@ -1,20 +1,33 @@
 #!/usr/bin/env bash
 
-
 args=($(printf "%s\n" $@))
+args[0]=git
 cmd=${args[1]}
+[[ "$@" != "${@% }" ]] && trail=1
 
 # ==============================================================================
 # LIST ALL COMMANDS
 # ==============================================================================
+function all_commands() {
+	printf "%s\n" $(git help --all | grep '^ \+\w')
+	git config --list | sed -n 's/^alias\.\([^=]\+\)=\(.*\)/\1 (alias for \2)/p'
+}
+
+# Check if command empty
 if [[ -z $cmd ]]; then
-	result=($({
-		printf "%s\n" $(git help --all | grep '^ \+\w')
-		git config --list | sed -n 's/^alias\.\([^=]\+\)=\(.*\)/\1 (alias for \2)/p'
-	} | my-fzf-40))
+	result=($(all_commands | my-fzf-40))
 	ret=$?
+
+# Check for command tab complete
+elif [[ -z ${args[2]} && -z $trail ]]; then
+	result=($(all_commands | my-fzf-40 $cmd))
+	ret=$?
+fi
+
+# Return results (if available)
+if [[ -n $ret ]]; then
 	[[ $ret -ne 0 ]] && exit $ret
-	echo $@ ${result[0]}
+	echo "git ${result[0]} "
 	exit 0
 fi
 
@@ -45,5 +58,5 @@ fi
 
 # Return result
 [[ $ret -ne 0 ]] && exit $ret
-echo $@ $result
+echo "${args[@]} $result "
 
