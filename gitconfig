@@ -2,7 +2,7 @@
 # vi: filetype=gitconfig
 [user]
 	name = Todd Yamakawa
-	email = todd.yamakawa@arm.com
+	email = todd.yamakawa@gmail.com
 
 [core]
 	editor = vim
