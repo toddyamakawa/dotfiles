@@ -18,7 +18,45 @@ set ignore-case = yes
 # Disable mouse support
 set mouse = no
 
-set tab-size = 8
+set tab-size = 4
+
+
+# ==============================================================================
+# KEY BINDINGS
+# ==============================================================================
+
+# Page up/down
+bind generic <C-k> move-page-up
+bind generic <C-j> move-page-down
+
+# Go to first/last line
+bind generic g  none
+bind generic gg move-first-line
+bind main    G  move-last-line
+bind generic G  move-last-line
+
+# Next/previous
+bind generic gj next
+bind generic gk previous
+
+# Switch modes
+bind generic m  none
+bind generic mm view-main
+bind generic md view-diff
+bind generic ml view-log
+bind generic mt view-tree
+bind generic mf view-blob
+bind generic mb view-blame
+bind generic mr view-refs
+bind generic ms view-status
+bind generic mc view-stage
+bind generic my view-stash
+bind generic mg view-grep
+bind generic mp view-pager
+bind generic mh view-help
+
+# TODO: Grab some fancy bindings from here
+# https://github.com/jonas/tig/blob/master/contrib/vim.tigrc
 
 
 # ==============================================================================
