@@ -55,7 +55,6 @@
 	# --- info ---
 	blamew = blame --ignore-all-space --ignore-blank-lines
 	lsf = ls-files
-	;lsfg = !git ls-files | grep
 	s = status
 	stat = status
 	sb = status -sb -uno
@@ -123,8 +122,10 @@
 	# --- log ---
 	# logf is defined in bin/git-logf
 	l     = logf --no-merges
+	lf    = logf --follow
 	ls    = logf
 	ll    = logf --numstat
+	ls-local = !git logf origin/$(git bname)..HEAD
 	graph = logf --graph
 
 	# --- lock ---
@@ -133,6 +134,7 @@
 	# --- merge ---
 	ma = merge --abort
 	msquash = merge --squash --no-commit
+	mt = mergetool
 	vmerge = mergetool -t vimdiff
 
 	# --- review ---
@@ -174,6 +176,7 @@
 	publish = push origin master:refs/publish/master
 	pullo = pull origin
 	pull-theirs = pull -s recursive -X theirs
+	pusho = push origin
 	file = "!f() { git difftool $1{,^} -- $2; }; f"
 	sha = "!f() { git diff --numstat $1{^,}; }; f"
 	unstage = reset HEAD
@@ -181,19 +184,22 @@
 	ignore = update-index --assume-unchanged *
 
 	# --- Git Repositories ---
-	newasp      = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/asp
-	newcputools = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/auscpgval
-	newetm      = clone ssh://blr-gerrit-1.blr.arm.com:29418/avk/ETMCompare
-	newiris     = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/iris
-	newkiwi     = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/kiwi
-	newkvs      = clone login8.nahpc.arm.com:/projects/pd/svos/git/kvs
-	newmsys     = clone ssh://git@git.research.arm.com/svos/msys
-	newscp      = clone ssh://git@git.research.arm.com/svos/scp_boot
-	newvarys    = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/varys
-	newvarys2   = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/varys2
-	newyak      = clone ssh://git@git.research.arm.com/svos/yak
+	newasp        = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/asp
+	newburst      = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/burst
+	newbursttools = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/burst/tools
+	newcputools   = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/auscpgval
+	newetm        = clone ssh://blr-gerrit-1.blr.arm.com:29418/avk/ETMCompare
+	newiris       = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/iris
+	newkiwi       = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/kiwi
+	newkvs        = clone login8.nahpc.arm.com:/projects/pd/svos/git/kvs
+	newmsys       = clone ssh://git@git.research.arm.com/svos/msys
+	newscp        = clone ssh://git@git.research.arm.com/svos/scp_boot
+	newvarys      = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/varys
+	newvarys2     = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/varys2
+	newyak        = clone ssh://git@git.research.arm.com/svos/yak
 
 	newambaviz      = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/ambaviz
+	newdiskhole     = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/diskhole
 	neweda          = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/eda
 	newgem          = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/gem
 	newgerrit       = clone ssh://ds-gerrit.euhpc.arm.com:29418/emutools/gerrit_test
