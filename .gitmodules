@@ -10,3 +10,6 @@
 [submodule "zsh"]
 	path = zsh
 	url = https://github.com/toddyamakawa/zsh
+[submodule "bin"]
+	path = bin
+	url = https://github.com/toddyamakawa/bin
