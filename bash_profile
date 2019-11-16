@@ -23,3 +23,10 @@ export HISTCONTROL=ignoreboth:erasedups
 # --- Display ---
 export DISPLAY_orig="$DISPLAY"
 
+# Check if WSL
+if (grep -qE 'Microsoft|WSL' /proc/version); then
+	export DISPLAY=':0.0'
+	cd ~
+	exec zsh
+fi
+
