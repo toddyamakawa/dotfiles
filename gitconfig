@@ -3,6 +3,9 @@
 	name = Todd Yamakawa
 	email = todd.yamakawa@gmail.com
 
+# ==============================================================================
+# SETTINGS
+# ==============================================================================
 [core]
 	editor = vim
 	#pager = vim -
@@ -24,6 +27,34 @@
 [sendemail]
 	suppress-cc = all
 
+
+# ==============================================================================
+# COLORS
+# ==============================================================================
+[color]
+	all = true
+	ui = true
+	branch = auto
+	diff = auto
+	status = auto
+[color "branch"]
+	current = green bold
+	local = blue bold
+	remote = yellow
+[color "diff"]
+	meta = yellow
+	frag = cyan
+	old = red
+	new = green
+[color "status"]
+	added = green
+	changed = red
+	untracked = magenta
+
+
+# ==============================================================================
+# ALIASES
+# ==============================================================================
 [alias]
 	# --- git ---
 	git = !exec git
@@ -95,6 +126,7 @@
 	cp = cherry-pick
 	cpa = cherry-pick --abort
 	cpc = cherry-pick --continue
+	cpn = cherry-pick --no-commit
 
 	# --- commit ---
 	amend = commit --amend
@@ -172,12 +204,17 @@
 	tagn = tag -n
 	tags = log --tags --no-walk --decorate --oneline
 
+	# --- worktree ---
+	w = worktree
+	wl = worktree list
+
 	# --- Miscellaneous ---
 	format-patch-1 = format-patch HEAD~1
 	publish = push origin master:refs/publish/master
 	pullo = pull origin
 	pull-theirs = pull -s recursive -X theirs
 	pusho = push origin
+	pushu = push upstream
 	file = "!f() { git difftool $1{,^} -- $2; }; f"
 	sha = "!f() { git diff --numstat $1{^,}; }; f"
 	unstage = reset HEAD
@@ -191,7 +228,7 @@
 # GIT REPOSITORIES
 # ==============================================================================
 	newasp        = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/asp
-	newburst      = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/burst
+	newburst      = clone -b dev ssh://ds-gerrit.euhpc.arm.com:29418/svos/burst
 	newbursttools = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/burst/tools
 	newburstfails = clone ssh://ds-gerrit.euhpc.arm.com:29418/svos/burst/fails
 	newcputools   = clone ssh://eu-gerrit-2.euhpc.arm.com:29418/cpu/tools/auscpgval
@@ -241,5 +278,7 @@
 # EXAMPLES
 # ==============================================================================
 # https://github.com/fcsonline/dotfiles/blob/master/git/gitconfig
+# https://gist.github.com/jeaye/950300ff8120950814879a46b796b3c7
+# https://gist.github.com/rab/4067067
 
 # vi: filetype=gitconfig
