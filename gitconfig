@@ -15,6 +15,9 @@
 	#show = vim -
 	show = less -R
 
+[apply]
+	whitespace = nowarn
+
 [merge]
 	tool = vimdiff
 
@@ -210,7 +213,6 @@
 
 	# --- Miscellaneous ---
 	format-patch-1 = format-patch HEAD~1
-	publish = push origin master:refs/publish/master
 	pullo = pull origin
 	pull-theirs = pull -s recursive -X theirs
 	pusho = push origin
