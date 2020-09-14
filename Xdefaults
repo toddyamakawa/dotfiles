@@ -1,0 +1,26 @@
+
+XTerm*Background: rgb:10/10/10
+XTerm*Foreground: rgb:f0/f0/f0
+XTerm*faceName: DejaVu Sans Mono Book:size=12:antialias=true
+XTerm*scrollBar: off
+
+XTerm*color0:  rgb:40/40/40
+XTerm*color1:  rgb:d0/40/40
+XTerm*color2:  rgb:40/d0/40
+XTerm*color3:  rgb:d0/d0/40
+XTerm*color4:  rgb:40/40/d0
+XTerm*color5:  rgb:d0/40/d0
+XTerm*color6:  rgb:40/d0/d0
+XTerm*color7:  rgb:d0/d0/d0
+
+XTerm*color8:  rgb:80/80/80
+XTerm*color9:  rgb:ff/80/80
+XTerm*color10: rgb:80/ff/80
+XTerm*color11: rgb:ff/ff/80
+XTerm*color12: rgb:80/ff/ff
+XTerm*color13: rgb:ff/80/ff
+XTerm*color14: rgb:80/ff/ff
+XTerm*color15: rgb:ff/ff/ff
+
+# vim: ft=xdefaults
+
