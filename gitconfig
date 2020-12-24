@@ -1,7 +1,7 @@
 
 [user]
 	name = Todd Yamakawa
-	email = todd.yamakawa@gmail.com
+	email = todd@yamakawa.dev
 
 # ==============================================================================
 # SETTINGS
@@ -20,6 +20,7 @@
 
 [merge]
 	tool = vimdiff
+	conflictstyle = diff3
 
 [mergetool "vimdiff"]
 	trustExitCode = true
@@ -101,6 +102,7 @@
 	url = remote get-url origin
 
 	# --- add ---
+	a = add
 	au = add -u
 	ap = add --patch
 	ours = "!f() { git co --ours $@ && git add $@; }; f"
@@ -137,13 +139,15 @@
 	#cm = "!f() { git commit -m \"$@\"; }; f"
 
 	# --- diff ---
-	diffbr = "!f() { git ls $(git bname) ^$1; }; f"
-	diffn = diff --numstat
-	diffnw = diff --numstat --ignore-all-space --ignore-blank-lines
-	diffs = diff --staged
-	diffsn = diff --staged --numstat
-	diffsw = diff --staged --ignore-all-space --ignore-blank-lines
-	diffw = diff --ignore-all-space --ignore-blank-lines
+	d    = diff
+	dn   = diff --numstat
+	ds   = diff --staged
+	dw   = diff --ignore-all-space --ignore-blank-lines
+	dnw  = diff --numstat --ignore-all-space --ignore-blank-lines
+	dsn  = diff --staged --numstat
+	dsw  = diff --staged --ignore-all-space --ignore-blank-lines
+	dnsw = diff --staged --numstat --ignore-all-space --ignore-blank-lines
+	dbr = "!f() { git ls $(git bname) ^$1; }; f"
 	meld = difftool --tool=meld --no-prompt
 	melda = !git meld --dir-diff
 	melds = !git melda --staged
