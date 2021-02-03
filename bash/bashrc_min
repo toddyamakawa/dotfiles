@@ -1,0 +1,84 @@
+# vi: syntax=sh
+
+# ==============================================================================
+# ARM SETUP
+# ==============================================================================
+source /arm/tools/setup/init/bash
+module load \
+	core util swdev eda arm/cluster \
+	vim/vim/8.2 xclip/xclip/0.12
+umask 002
+
+
+# ==============================================================================
+# OPTIONS
+# ==============================================================================
+shopt -s autocd
+shopt -s cdspell
+shopt -s dirspell
+shopt -s expand_aliases
+shopt -s histappend
+#hopt -s failglob
+shopt -s checkwinsize
+
+export LANGUAGE='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
+export LANG='en_US.UTF-8'
+export TERM=xterm-256color
+export EDITOR=vim
+export PAGER='less -r'
+export HISTCONTROL=ignoreboth:erasedups
+
+
+# ==============================================================================
+# PROMPT
+# ==============================================================================
+set_prompt() {
+	local last_command=$?
+	local dir=${PWD%/*/*}
+	local dir2=${PWD#$dir/}
+	local permission=$(stat -c %a .)
+	local white="\[\e[0m\]"
+	local red='\[\e[1;31m\]'
+	local yellow='\[\e[1;93m\]'
+	local green='\[\e[1;32m\]'
+	local blue='\[\e[1;94m\]'
+
+	PS1="$blue[\u"
+
+	# Check LSF
+	[[ -n $LSB_BATCH_JID ]] && local lsf=1 || local lsf=0
+	[[ $lsf == 1 ]] && PS1+=":$yellow$LSB_BATCH_JID$blue" || PS1+="@\h"
+
+	# Check PWD for user
+	#pwd | grep -q $(whoami) && PS1+=" \W" || PS1+=" $yellow\W$blue "
+	pwd | grep -q $(whoami) && PS1+=" \W " || PS1+=" $yellow\W "
+
+	#[[ $(whoami) == $(stat -c %U .) ]]      && PS1+=" $green${permission:0:1}" || PS1+=" $red${permission:0:1}"
+	#groups | grep -q $(stat -c %G .)        && PS1+="$green${permission:1:1}"  || PS1+="$red${permission:1:1}"
+	#[[ $(( ${permission:2:1} & 2 )) == 2 ]] && PS1+="$green${permission:2:1}"  || PS1+="$blue${permission:2:1}"
+
+	[[ $(whoami) == $(stat -c %U .) ]] && PS1+="$blue${permission:(-3):1}" || PS1+="$red${permission:(-3):1}"
+	groups | grep -q $(stat -c %G .)   && PS1+="$blue${permission:(-2):1}" || PS1+="$red${permission:(-2):1}"
+	PS1+="$blue${permission:(-1):1}"
+
+	# Check last command
+	[[ $last_command == 0 ]] && PS1+=" $green:)" || PS1+=" $red:("
+
+	PS1+="$blue]\$$white "
+}
+PROMPT_COMMAND='set_prompt'
+
+
+# ==============================================================================
+# ALIASES
+# ==============================================================================
+alias ls='ls -h --color'
+alias ll='ls -lrth'
+
+alias pwdc='pwd | xclip && echop'
+alias cdp='cd `paste`'
+clip(){ echo -n $(readlink -f $1) | xclip; echop; }
+
+alias vi=vim
+
