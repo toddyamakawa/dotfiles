@@ -81,9 +81,6 @@
 	hs = help status
 
 	# --- config ---
-	a = !git alias
-	agrep = !git alias | grep
-	alias = !git config --list | sed -n 's/^alias.//p' | sort
 	vi = config --global -e
 
 	# --- info ---
