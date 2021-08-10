@@ -157,9 +157,6 @@
 	ls-local = !git logf origin/$(git bname)..HEAD
 	graph = logf --graph
 
-	# --- lock ---
-	unlock = !rm $(git rev-parse --git-dir)/index.lock
-
 	# --- merge ---
 	ma = merge --abort
 	msquash = merge --squash --no-commit
