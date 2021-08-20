@@ -27,6 +27,6 @@ export DISPLAY_orig="$DISPLAY"
 if (grep -qE 'Microsoft|WSL' /proc/version); then
 	export DISPLAY=':0.0'
 	cd ~
-	exec zsh
+	which zsh &> /dev/null && exec zsh
 fi
 
