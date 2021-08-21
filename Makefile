@@ -19,15 +19,11 @@ fonts := $(HOME)/.fonts
 fontconfig := $(HOME)/.config/fontconfig/conf.d
 
 # --- All ---
-all: links bindir fish
+all: links fish .vim
 
 # --- Symbolic Links ---
 links: $(links)
 $(HOME)/.%: $(ROOT_DIR)/%; ln -fs $< $@
-
-# --- bin Directory ---
-bindir:
-	make -C bin all
 
 # --- bash ---
 bash: bash/downloads/git-completion.bash
@@ -55,6 +51,13 @@ $(fonts)/PowerlineSymbols.otf:
 $(fontconfig)/10-powerline-symbols.conf:
 	@mkdir -p $(@D)
 	@wget -O $@ https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+
+# --- vim ---
+.vim: vim/autoload/plug.vim
+vim/autoload/plug.vim: vim/setup.sh
+	vim/setup.sh
+vim/setup.sh:
+	git submodule update vim
 
 # --- Clean ---
 clean:
