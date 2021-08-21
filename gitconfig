@@ -200,7 +200,6 @@
 
 	# --- tag ---
 	tagn = tag -n
-	tags = log --tags --no-walk --decorate --oneline
 
 	# --- worktree ---
 	w = worktree
