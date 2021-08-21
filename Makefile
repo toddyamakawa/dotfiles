@@ -61,7 +61,7 @@ $(HOME)/.ssh/id_rsa:
 # --- Vim ---
 .vim: vim/autoload/plug.vim
 vim/setup.sh:
-	git submodule update vim
+	git submodule update --init vim
 vim/autoload/plug.vim: vim/setup.sh
 	vim/setup.sh
 
