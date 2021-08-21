@@ -1,15 +1,15 @@
-[submodule "repos/emacs.d"]
-	path = repos/emacs.d
-	url = https://github.com/bulletme/emacs.d
+[submodule "emacs.d"]
+	path = emacs.d
+	url = git@github.com:bulletme/emacs.d
 [submodule "tmux"]
 	path = tmux
-	url = https://github.com/toddyamakawa/tmux
+	url = git@github.com:toddyamakawa/tmux
 [submodule "vim"]
 	path = vim
-	url = https://github.com/toddyamakawa/vim
+	url = git@github.com:toddyamakawa/vim
 [submodule "zsh"]
 	path = zsh
-	url = https://github.com/toddyamakawa/zsh
+	url = git@github.com:toddyamakawa/zsh
 [submodule "bin"]
 	path = bin
-	url = https://github.com/toddyamakawa/bin
+	url = git@github.com:toddyamakawa/bin
