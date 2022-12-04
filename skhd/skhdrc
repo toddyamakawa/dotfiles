@@ -1,0 +1,24 @@
+
+# Examples:
+# - https://github.com/bashbunni/dotfiles/blob/main/.config/skhd/skhdrc
+# - https://github.com/arunvelsriram/dotfiles/blob/master/skhdrc
+
+
+# ==============================================================================
+# NAVIGATION
+# ==============================================================================
+hyper - h : yabai -m window --focus west
+hyper - j : yabai -m window --focus south
+hyper - k : yabai -m window --focus north
+hyper - l : yabai -m window --focus east
+
+# Toggle fullscreen
+hyper - f : yabai -m window --toggle zoom-fullscreen
+
+# Start/Stop
+hyper - q : brew services stop yabai
+hyper - u : brew services start yabai
+
+# Kitty
+hyper - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
+
